@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingPrefix"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.tongdada.library_login.ui.LoginActivity">
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@mipmap/login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_248"
+        android:id="@+id/imageView" />
+
+        <EditText
+            android:text="18932341238"
+            android:layout_marginTop="@dimen/dp_20"
+            android:inputType="numberDecimal"
+            android:drawablePadding="@dimen/dp_17"
+            android:hint="@string/input_account"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/dp_17"
+            android:drawableLeft="@drawable/select_login_account"
+            android:background="@drawable/select_login"
+            android:layout_width="@dimen/dp_328"
+            android:layout_height="@dimen/dp_44"
+            android:id="@+id/rt_phone_login" />
+
+        <EditText
+            android:text="999999"
+            android:drawablePadding="@dimen/dp_17"
+            android:paddingLeft="@dimen/dp_17"
+            android:drawableLeft="@drawable/select_login_password"
+            android:hint="@string/input_password"
+            android:layout_marginTop="@dimen/dp_21"
+            android:layout_gravity="center"
+            android:background="@drawable/select_login"
+            android:layout_width="@dimen/dp_328"
+            android:layout_height="@dimen/dp_44"
+            android:id="@+id/et_password_login" />
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_9"
+        android:layout_gravity="right"
+        android:text="@string/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textColor="@color/FFFFFF"
+        android:id="@+id/bt_login"
+        android:layout_marginTop="@dimen/dp_71"
+        android:layout_width="@dimen/dp_302"
+        android:layout_height="@dimen/dp_42"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_login"
+        android:text="@string/login"
+        android:textSize="@dimen/sp_18" />
+    <Button
+        android:textColor="@color/_ffe06e38"
+        android:id="@+id/bt_register"
+        android:layout_marginTop="@dimen/dp_21"
+        android:layout_width="@dimen/dp_302"
+        android:layout_height="@dimen/dp_42"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_register"
+        android:text="@string/register"
+        android:textSize="@dimen/sp_18" />
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/sp_12"
+            android:layout_gravity="center"
+            android:text="@string/register_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="@dimen/sp_12"
+            android:id="@+id/tv_login_register"
+            android:textColor="@color/_2698E3"
+            android:layout_gravity="center"
+            android:text="@string/dada_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

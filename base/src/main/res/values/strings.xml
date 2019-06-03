@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">base</string>
+    <string name="state_nodata">暂无数据</string>
+    <string name="state_loading">正在加载...</string>
+    <string name="state_reload">重新加载</string>
+    <string name="state_errornet">加载失败，点击重新加载</string>
+    <string name="reload">重新加载</string>
+    <string name="back">返回</string>
+</resources>

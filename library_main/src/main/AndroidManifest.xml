@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.library_main">
+
+    <application>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".MainActivity" />
+        <activity android:name="com.tongdada.library_main.home.ui.IssueOrderActivity"></activity>
+        <activity android:name="com.tongdada.library_main.home.ui.SearchCarActivity"></activity>
+        <activity android:name="com.tongdada.library_main.order.ui.OrderDetailActivity"></activity>
+        <activity android:name="com.tongdada.library_main.home.ui.TransportCarActivity"></activity>
+        <activity android:name="com.tongdada.library_main.user.ui.UserManagerActivity"></activity>
+        <activity android:name="com.tongdada.library_main.user.ui.ChangePasswordActivity"></activity>
+        <activity android:name="com.tongdada.library_main.user.ui.UserInfoActivity"></activity>
+        <activity android:name="com.tongdada.library_main.user.ui.InformationActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.MessageActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.SettingActivity"></activity>
+        <activity android:name="com.tongdada.library_main.home.ui.InformManagementActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.finance.ui.FinaceOrderActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.order.ui.SearchOrderActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.web.WebAcitivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.OrderSettingActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.MaintenancePlantActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.AddUserActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.AboutActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.AddUserDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.home.ui.MessageDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.order.ui.AcceptOrderDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.order.ui.AcceptDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.finance.ui.SearchFinaceActivity">
+
+        </activity>
+    </application>
+
+</manifest>

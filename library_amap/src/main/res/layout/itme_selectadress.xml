@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_select_cl"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/_333333"
+        android:layout_marginLeft="@dimen/dp_16"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp_11"
+        android:id="@+id/adree_name"
+        android:text="南京市顾客"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="@dimen/dp_6"
+        android:text="江山路9号"
+        app:layout_constraintLeft_toLeftOf="@id/adree_name"
+        app:layout_constraintTop_toBottomOf="@id/adree_name"
+        android:id="@+id/adree_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:clickable="false"
+        android:enabled="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:id="@+id/btn_select"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginRight="@dimen/dp_20"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:button="@drawable/selector_order_home"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20" />
+    <View
+        android:layout_marginTop="@dimen/dp_11"
+        app:layout_constraintTop_toBottomOf="@id/adree_number"
+        android:background="@color/EAEAEA"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </View>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/back_iv"
+        android:scaleType="fitStart"
+        android:background="@color/FFFFFF"
+        android:src="@drawable/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v4.widget.NestedScrollView
+        android:minHeight="@dimen/dp_50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="#00000000"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center"
+                android:id="@+id/issueorder_route_cl"
+                android:background="@drawable/shape_wihte_8"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+                <ImageView
+                    android:id="@+id/issueorder_start_iv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/dp_18"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:src="@mipmap/start"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20" />
+                <TextView
+                    android:id="@+id/issueorder_start_tv"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/_333333"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_19"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/issueorder_start_iv"
+                    android:text="@string/start_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:hint="请选择出发地"
+                    android:gravity="right"
+                    app:layout_constraintRight_toLeftOf="@id/issue_go_start_iv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/dp_19"
+                    android:layout_marginRight="@dimen/dp_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/issue_go_start_iv"
+                    android:layout_marginRight="@dimen/dp_13"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="@dimen/dp_22"
+                    android:src="@mipmap/go"
+                    android:layout_width="@dimen/dp_6"
+                    android:layout_height="@dimen/dp_11" />
+                <View
+                    android:id="@+id/start_view"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/issueorder_start_iv"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="@dimen/dp_297"
+                    android:layout_height="@dimen/dp_1">
+
+                </View>
+                <ImageView
+                    android:id="@+id/issueorder_end_iv"
+                    app:layout_constraintTop_toBottomOf="@id/start_view"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:src="@mipmap/end"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:id="@+id/issueorder_end_tv"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/_333333"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/start_view"
+                    app:layout_constraintLeft_toRightOf="@id/issueorder_end_iv"
+                    android:text="@string/end_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:hint="请选择目的地"
+                    android:gravity="right"
+                    app:layout_constraintRight_toLeftOf="@id/issue_go_end_iv"
+                    app:layout_constraintTop_toBottomOf="@id/start_view"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/issue_go_end_iv"
+                    android:layout_marginRight="@dimen/dp_13"
+                    app:layout_constraintTop_toBottomOf="@id/start_view"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:src="@mipmap/go"
+                    android:layout_width="@dimen/dp_6"
+                    android:layout_height="@dimen/dp_11" />
+                <View
+                    android:id="@+id/end_view"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/issueorder_end_iv"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="@dimen/dp_297"
+                    android:layout_height="@dimen/dp_1">
+
+                </View>
+                <ImageView
+                    android:id="@+id/issueorder_issue_iv"
+                    app:layout_constraintTop_toBottomOf="@id/end_view"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:src="@mipmap/distance"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:id="@+id/issueorder_distance_tv"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/_333333"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/end_view"
+                    app:layout_constraintLeft_toRightOf="@id/issueorder_end_iv"
+                    android:text="@string/route"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:hint="请选择路线"
+                    android:gravity="right"
+                    app:layout_constraintRight_toLeftOf="@id/issue_go_distance_iv"
+                    app:layout_constraintTop_toBottomOf="@id/end_view"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/issue_go_distance_iv"
+                    android:layout_marginRight="@dimen/dp_13"
+                    app:layout_constraintTop_toBottomOf="@id/end_view"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:src="@mipmap/go"
+                    android:layout_width="@dimen/dp_6"
+                    android:layout_height="@dimen/dp_11" />
+                <View
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/issueorder_distance_tv"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="@dimen/dp_297"
+                    android:layout_height="@dimen/dp_1">
+
+                </View>
+
+            </android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/shape_wihte_8"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/order_number"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/order_name"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/order_start_time"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/total_amount"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/vehicle_type"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="车辆型号"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="1224511054"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:text="@string/note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginLeft="@dimen/dp_24"
+                    android:layout_marginRight="@dimen/dp_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_104" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginLeft="@dimen/dp_24"
+                    android:text="@string/orders_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginLeft="@dimen/dp_24"
+                    android:layout_marginRight="@dimen/dp_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="@dimen/dp_302"
+                    android:layout_height="@dimen/dp_42"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@drawable/shape_login"
+
+                    android:gravity="center"
+                    android:text="@string/modify_order"
+                    android:textColor="@color/FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

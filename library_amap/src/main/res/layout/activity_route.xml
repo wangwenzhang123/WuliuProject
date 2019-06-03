@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.amap.api.maps.MapView
+
+        android:id="@+id/route_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.amap.api.maps.MapView>
+    <LinearLayout
+        android:id="@+id/ll_back"
+        android:background="@color/FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44">
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_gravity="center"
+            android:src="@drawable/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+
+            android:text="@string/route_selete"
+            android:id="@+id/route_selete"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/issueorder_route_cl"
+        android:background="@drawable/shape_wihte_8"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:layout_marginTop="@dimen/dp_60"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/dp_344"
+        android:layout_height="@dimen/dp_104">
+        <ImageView
+            android:id="@+id/issueorder_start_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:src="@mipmap/start"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:id="@+id/issueorder_start_tv"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/_333333"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_19"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/issueorder_start_iv"
+            android:text="@string/start_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/_333333"
+            android:id="@+id/route_start"
+            android:hint="请选择出发地"
+            android:gravity="right"
+            app:layout_constraintRight_toLeftOf="@id/issue_go_start_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/dp_19"
+            android:layout_marginRight="@dimen/dp_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/issue_go_start_iv"
+            android:layout_marginRight="@dimen/dp_13"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/dp_22"
+            android:src="@mipmap/go"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_11" />
+        <View
+            android:id="@+id/start_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layout_constraintTop_toBottomOf="@id/issueorder_start_iv"
+            android:background="@color/_E0E0E0"
+            android:layout_width="@dimen/dp_297"
+            android:layout_height="@dimen/dp_1">
+
+        </View>
+        <ImageView
+            android:id="@+id/issueorder_end_iv"
+            app:layout_constraintTop_toBottomOf="@id/start_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:src="@mipmap/end"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:layout_marginTop="@dimen/dp_13"
+            android:id="@+id/issueorder_end_tv"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/_333333"
+            android:layout_marginLeft="@dimen/dp_12"
+            app:layout_constraintTop_toBottomOf="@id/start_view"
+            app:layout_constraintLeft_toRightOf="@id/issueorder_end_iv"
+            android:text="@string/end_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/_333333"
+            android:id="@+id/route_end"
+            android:hint="请选择目的地"
+            android:gravity="right"
+            app:layout_constraintRight_toLeftOf="@id/issue_go_end_iv"
+            app:layout_constraintTop_toBottomOf="@id/start_view"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/issue_go_end_iv"
+            android:layout_marginRight="@dimen/dp_13"
+            app:layout_constraintTop_toBottomOf="@id/start_view"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/dp_15"
+            android:src="@mipmap/go"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_11" />
+        <View
+            android:id="@+id/end_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layout_constraintTop_toBottomOf="@id/issueorder_end_iv"
+            android:background="@color/_E0E0E0"
+            android:layout_width="@dimen/dp_297"
+            android:layout_height="@dimen/dp_1">
+
+        </View>
+
+    </android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:background="@color/FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/ll_sure"
+        app:layout_constraintBottom_toBottomOf="@id/ll_sure"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_115">
+        <LinearLayout
+            android:id="@+id/plan_one_ll"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_100">
+            <TextView
+                android:textColor="@color/_999999"
+                android:id="@+id/plan_one_tv"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_gravity="center"
+                android:text="方案一"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_one_distance"
+                android:textColor="@color/_333333"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_gravity="center"
+                android:text="60KM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_one_time"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_gravity="center"
+                android:text="40分钟"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_gravity="center"
+                android:textColor="#E06E38"
+                android:text="推荐"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/plan_two_ll"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_100">
+            <TextView
+                android:id="@+id/plan_two_tv"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_gravity="center"
+                android:text="方案二"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_two_distance"
+                android:textColor="@color/_333333"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_gravity="center"
+                android:text="60KM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_two_time"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_gravity="center"
+                android:text="40分钟"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/plan_three_ll"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_100">
+            <TextView
+                android:id="@+id/plan_three_tv"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_gravity="center"
+                android:text="方案三"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_three_distance"
+                android:textColor="@color/_333333"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_gravity="center"
+                android:text="60KM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/plan_three_time"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_gravity="center"
+                android:text="40分钟"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/ll_sure"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/sure_tv"
+            android:gravity="center"
+            android:textColor="@color/FFFFFF"
+            android:text="确定"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_login"
+            android:layout_width="@dimen/dp_302"
+            android:layout_height="@dimen/dp_42" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

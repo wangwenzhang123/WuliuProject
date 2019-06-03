@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.library_amap">
+
+    <application>
+        <activity android:name=".ui.SelectAdressActivity" />
+        <activity android:name=".ui.SearchAdressActivity"></activity>
+        <activity android:name=".ui.MapOrderDetailActivity">
+
+        </activity>
+        <activity android:name=".ui.MapCarDetailActivity">
+
+        </activity>
+        <activity android:name=".ui.RouteActivity"></activity>
+        <service android:name="com.amap.api.location.APSService">
+
+        </service>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="0157df6a95cccc3c5db7fb492dfd486d">
+        </meta-data>
+    </application>
+
+</manifest>

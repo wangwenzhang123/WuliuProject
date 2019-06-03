@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    defaultConfig {
+        applicationId "com.tongdada.jiaoban"
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'key0'
+            keyPassword 'wo937804220'
+            storeFile file('../wangwenzhang.jks')
+            storePassword 'wo937804220'
+        }
+        release {
+            keyAlias 'key0'
+            keyPassword 'wo937804220'
+            storeFile file('../wangwenzhang.jks')
+            storePassword 'wo937804220'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':library_login')
+    compile project(':library_main')
+    compile project(':library_amap')
+    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+}

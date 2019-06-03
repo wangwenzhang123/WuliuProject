@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/ll"
+        android:background="@color/_ffe06e38"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44">
+        <ImageView
+            android:id="@+id/iv_order_search"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_gravity="center"
+            android:src="@drawable/back"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18" />
+        <TextView
+            android:textColor="@color/FFFFFF"
+            android:gravity="center"
+            android:text="@string/orders_car"
+            android:textSize="@dimen/sp_16"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_home_message"
+            android:layout_marginRight="@dimen/dp_11"
+            android:layout_gravity="center"
+            android:src="@mipmap/message"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20" />
+    </LinearLayout>
+    <android.support.design.widget.TabLayout
+        app:tabIndicatorColor="@color/_ffe06e38"
+        app:tabSelectedTextColor="@color/_ffe06e38"
+        android:id="@+id/transport_tab"
+        android:layout_width="match_parent"
+        android:layout_height="47dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

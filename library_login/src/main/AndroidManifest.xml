@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tongdada.library_login">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application>
+        <activity android:name="com.tongdada.library_login.ui.RegisterActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name="com.tongdada.library_login.ui.LoginActivity"
+            />
+        <activity android:name="com.tongdada.library_login.ui.SplashActivity" />
+        <activity android:name="com.tongdada.library_login.ui.GuideActivity" />
+        <activity android:name="com.tongdada.library_login.ui.SubmitAuditActivity" />
+        <activity
+            android:name="com.tongdada.library_login.ui.ForgotPasswordActivity"
+            android:label="@string/title_activity_forgot_password"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <service android:name="com.tongdada.library_login.service.LocationService">
+
+        </service>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.winfo.photoselector.ImageSelectorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.winfo.photoselector.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name="com.winfo.photoselector.RvPreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme" />
+    </application>
+
+</manifest>
