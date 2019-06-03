@@ -46,10 +46,63 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/_000000"
+                android:layout_gravity="center"
+                android:id="@+id/issue_vehicle_type_tv"
+                android:text="@string/belongs_to"
+               android:layout_weight="1"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_44">
+
+                <RadioButton
+                    android:id="@+id/rb_tong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/dp_24"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/selector_order_home"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:text="@string/logistics" />
+                <RadioButton
+                    android:id="@+id/rb_beng"
+                    android:layout_marginRight="@dimen/dp_22"
+                    android:layout_gravity="center"
+                    android:text="@string/user_one"
+                    android:button="@null"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:drawableLeft="@drawable/selector_order_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+        </LinearLayout>
+        <View
+
+            android:id="@+id/order_type_view"
+
+            android:layout_marginLeft="@dimen/dp_17"
+
+            android:background="@color/_E0E0E0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1">
+        </View>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"
-            android:layout_marginTop="@dimen/dp_10"
+
             android:orientation="horizontal">
 
             <TextView
@@ -154,25 +207,13 @@
 
         </View>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"
 
             android:orientation="horizontal">
-
-            <EditText
-                android:inputType="numberDecimal"
-                android:id="@+id/et_contact_phone"
-                android:layout_width="@dimen/dp_290"
-                android:layout_height="@dimen/dp_30"
-                android:layout_gravity="right|center"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@null"
-                android:gravity="right|center"
-                android:hint="@string/input_contact_phone"
-                android:textSize="@dimen/sp_14" />
-
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
@@ -180,7 +221,27 @@
                 android:text="@string/contact_phone"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/sp_14" />
-        </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_weight="1"
+                android:text="(登录账号)"
+                android:textSize="@dimen/sp_14" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:id="@+id/et_contact_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@null"
+                android:gravity="right|center"
+                android:hint="@string/input_contact_phone"
+                android:textSize="@dimen/sp_14" />
+
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -262,7 +323,41 @@
             android:background="@color/_333333">
 
         </View>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
 
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_enterprise_number"
+                android:layout_width="@dimen/dp_290"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@null"
+                android:gravity="right|center"
+                android:hint="@string/enterprise_number"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:text="@string/enterprise_number"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/sp_14" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/_333333">
+
+        </View>
         <TextView
             android:textColor="@color/_000000"
             android:layout_marginTop="@dimen/dp_11"
@@ -349,42 +444,85 @@
 
             </FrameLayout>
         </LinearLayout>
-        <FrameLayout
-            android:layout_marginLeft="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_30"
+        <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="@dimen/dp_168"
-            android:layout_height="@dimen/dp_88">
-            <LinearLayout
-                android:id="@+id/ll_business_license"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_width="@dimen/dp_118"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_dotted_line">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_30"
+                android:orientation="horizontal"
+                android:layout_width="@dimen/dp_168"
+                android:layout_height="@dimen/dp_88">
+                <LinearLayout
+                    android:id="@+id/ll_legal_positive1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/dp_118"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_dotted_line">
+                    <ImageView
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:id="@+id/iv_add1"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/registeradd"
+                        android:layout_width="@dimen/dp_26"
+                        android:layout_height="@dimen/dp_26" />
+                    <TextView
+                        android:textSize="@dimen/sp_12"
+                        android:text="法人身份证正面上传"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
                 <ImageView
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:id="@+id/iv_legal_positive1"
+                    android:layout_width="@dimen/dp_118"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/registeradd"
-                    android:layout_width="@dimen/dp_26"
-                    android:layout_height="@dimen/dp_26" />
-                <TextView
-                    android:textSize="@dimen/sp_12"
-                    android:text="营业执照上传"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:background="@drawable/shape_dotted_line"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_30"
+                android:orientation="horizontal"
+                android:layout_width="@dimen/dp_168"
+                android:layout_height="@dimen/dp_88">
+                <LinearLayout
+                    android:id="@+id/ll_legal_reverse1"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <ImageView
-                android:scaleType="fitXY"
-                android:id="@+id/iv_business_license"
-                android:layout_gravity="center"
-                android:layout_width="@dimen/dp_118"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_dotted_line"
-                />
-        </FrameLayout>
+                    android:layout_width="@dimen/dp_118"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_dotted_line">
+                    <ImageView
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/registeradd"
+                        android:layout_width="@dimen/dp_26"
+                        android:layout_height="@dimen/dp_26" />
+                    <TextView
+                        android:textSize="@dimen/sp_12"
+                        android:text="法人身份证反面上传"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/iv_legal_reverse1"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/dp_118"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_dotted_line"
+                    />
+
+
+            </FrameLayout>
+        </LinearLayout>
         <Button
             android:id="@+id/register_register_bt"
             android:layout_width="@dimen/dp_302"
