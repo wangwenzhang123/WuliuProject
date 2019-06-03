@@ -28,8 +28,11 @@ public interface LoginApi {
     @POST("/interface/uploadAttach.action")
     Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
     @FormUrlEncoded
-    @POST("/interface/mixUserRegister.action")
-    Observable<BaseAppEntity<UserBean>> regist(@FieldMap Map<String,Object> params);
+    @POST("/interface/driverRegister.action")
+    Observable<BaseAppEntity<UserBean>> driverRegister(@FieldMap Map<String,Object> params);
+    @FormUrlEncoded
+    @POST("/interface/logiUserRegister.action")
+    Observable<BaseAppEntity<UserBean>> logiUserRegister(@FieldMap Map<String,Object> params);
     @FormUrlEncoded
     @POST("/interface/forgetPassword.action")
     Observable<BaseAppEntity<UserBean>> forgetPassword(@Field("psAppUsers.userContacts") String phone);

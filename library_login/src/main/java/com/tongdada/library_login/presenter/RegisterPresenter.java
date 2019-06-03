@@ -1,6 +1,8 @@
 package com.tongdada.library_login.presenter;
 
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.UserBean;
 import com.example.library_commen.utils.UserMapUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
@@ -37,12 +39,12 @@ public class RegisterPresenter extends BasePresenter<RegisterContact.View> imple
     }
 
     @Override
-    public void register(RequestRegisterBean requestRegisterBean) {
-        loginApi.regist(UserMapUtils.getMixingStationsMap(requestRegisterBean))
-                .compose(RegisterPresenter.this.<BaseAppEntity<UserBean>>handleEverythingResult())
+    public void registerUser(DriverRequest requestRegisterBean) {
+        loginApi.driverRegister(UserMapUtils.getDriverRegisterMap(requestRegisterBean))
+                .compose(this.handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<UserBean>>() {
                     @Override
-                    public void accept(BaseAppEntity<UserBean> requestRegisterBean) throws Exception {
+                    public void accept(BaseAppEntity<UserBean> userBeanBaseAppEntity) throws Exception {
                         getView().routerIntent(ArouterKey.LOGIN_SUBMITAUDITACTIVITY,null);
                     }
                 }, new Consumer<Throwable>() {
@@ -51,8 +53,25 @@ public class RegisterPresenter extends BasePresenter<RegisterContact.View> imple
 
                     }
                 });
-
     }
+
+    @Override
+    public void registerLogistics(LogisticsRequestBean requestRegisterBean) {
+        loginApi.logiUserRegister(UserMapUtils.getLogiUserRegisterMap(requestRegisterBean))
+                .compose(this.handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<UserBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<UserBean> userBeanBaseAppEntity) throws Exception {
+                        getView().routerIntent(ArouterKey.LOGIN_SUBMITAUDITACTIVITY,null);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+    }
+
     @Override
     public void upload(String path,int dex) {
     Observable.create(new ObservableOnSubscribe<RequestBody>() {

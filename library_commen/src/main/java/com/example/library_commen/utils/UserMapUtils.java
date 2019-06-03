@@ -1,5 +1,7 @@
 package com.example.library_commen.utils;
 
+import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UserBean;
@@ -90,6 +92,32 @@ public class UserMapUtils {
             map.put("psTotalOrders.updateTime",new Gson().toJson(requestRegisterBean.getUpdateTime()));
         }
 
+        return map;
+    }
+    public static Map<String,Object> getLogiUserRegisterMap(LogisticsRequestBean requestRegisterBean){
+        Map<String,Object> map=new HashMap<>();
+        map.put("psLogisticsCompanys.companyName",requestRegisterBean.getCompanyName());
+        map.put("psLogisticsCompanys.companyAddress",requestRegisterBean.getCompanyAddress());
+        map.put("psLogisticsCompanys.companyContacts",requestRegisterBean.getCompanyContacts());
+        map.put("psLogisticsCompanys.legalPersion",requestRegisterBean.getLegalPersion());
+        map.put("psLogisticsCompanys.contactsPhone",requestRegisterBean.getContactsPhone());
+        map.put("psLogisticsCompanys.registerCapital",requestRegisterBean.getRegisterCapital());
+        map.put("psLogisticsCompanys.stationRemarks",requestRegisterBean.getStationRemarks());
+        map.put("psLogisticsCompanys.licensePath",requestRegisterBean.getLicensePath());
+        map.put("psLogisticsCompanys.roadLicensePath",requestRegisterBean.getRoadLicensePath());
+        return map;
+    }
+    public static Map<String,Object> getDriverRegisterMap(DriverRequest requestRegisterBean){
+        Map<String,Object> map=new HashMap<>();
+        map.put("psDrivers.driverName",requestRegisterBean.getDriverName());
+        map.put("psDrivers.driverMobile",requestRegisterBean.getDriverMobile());
+        map.put("psDrivers.driverIdNo",requestRegisterBean.getDriverIdNo());
+        map.put("psDrivers.driverAddress",requestRegisterBean.getDriverAddress());
+        map.put("psDrivers.idFront",requestRegisterBean.getIdFront());
+        map.put("psDrivers.idBack",requestRegisterBean.getIdBack());
+        map.put("psDrivers.driverLicense",requestRegisterBean.getDriverLicense());
+        map.put("psDrivers.driveringAge",requestRegisterBean.getDriveringAge());
+        map.put("psDrivers.driverStatus",requestRegisterBean.getDriverStatus());
         return map;
     }
 }

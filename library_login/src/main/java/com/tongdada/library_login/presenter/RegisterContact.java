@@ -1,5 +1,7 @@
 package com.tongdada.library_login.presenter;
 
+import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
 import com.example.library_commen.model.RequestRegisterBean;
 
@@ -12,7 +14,8 @@ import com.example.library_commen.model.RequestRegisterBean;
  */
 public class RegisterContact {
    public interface Presnter{
-      void register(RequestRegisterBean requestRegisterBean);
+      void registerUser(DriverRequest requestRegisterBean);
+      void registerLogistics(LogisticsRequestBean requestRegisterBean);
       void upload(String path,int dex);
    }
    public interface View extends BaseView{

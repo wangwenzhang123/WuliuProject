@@ -4,4 +4,6 @@
     <string name="logistics">物流公司</string>
     <string name="user_one">个人用户</string>
     <string name="enterprise_number">企业编号</string>
+    <string name="load">载重</string>
+    <string name="car_no">车牌号</string>
 </resources>
