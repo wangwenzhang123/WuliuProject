@@ -121,6 +121,40 @@
             android:background="@color/_333333">
 
         </View>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_driver_age"
+                android:layout_width="@dimen/dp_290"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@null"
+                android:gravity="right|center"
+                android:hint="请输入驾龄"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:text="@string/driver_age"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/sp_14" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/_333333">
+
+        </View>
 
         <FrameLayout
             android:layout_width="match_parent"

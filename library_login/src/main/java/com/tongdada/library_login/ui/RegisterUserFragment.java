@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.library_commen.model.DriverRequest;
-import com.example.library_commen.model.LogisticsRequestBean;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.utils.CheckUtils;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.library_login.R;
@@ -70,10 +67,13 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
     @BindView(R2.id.register_register_bt)
     Button registerRegisterBt;
     Unbinder unbinder;
-    private static final int IVLEGALPOSITIVE_CODE=1;
-    private static final int IVLEGALREVERSE_CODE=2;
-    private static final int IVBUSINESSLICENSE_CODE=3;
-    private DriverRequest requestRegisterBean=new DriverRequest();
+    private static final int IVLEGALPOSITIVE_CODE = 1;
+    private static final int IVLEGALREVERSE_CODE = 2;
+    private static final int IVBUSINESSLICENSE_CODE = 3;
+    @BindView(R2.id.et_driver_age)
+    EditText etDriverAge;
+    private DriverRequest requestRegisterBean = new DriverRequest();
+
     @Override
     public void selectPic(int code) {
         PhotoSelector.builder()
@@ -83,7 +83,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
 
     @Override
     public void uploadSuccess(String path, String url, int dex) {
-        switch (dex){
+        switch (dex) {
             case IVLEGALPOSITIVE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalPositive);
                 //requestRegisterBean.setBackPic(url);
@@ -98,6 +98,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
                 break;
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -107,22 +108,23 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
                     //单选的话 images就只有一条数据直接get(0)即可
                     List<String> images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     Glide.with(mContext).load(images.get(0)).into(ivLegalPositive);
-                    presenter.upload(images.get(0),IVLEGALPOSITIVE_CODE);
+                    presenter.upload(images.get(0), IVLEGALPOSITIVE_CODE);
                     break;
                 case IVLEGALREVERSE_CODE:
                     //images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     List<String> images2 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     Glide.with(mContext).load(images2.get(0)).into(ivLegalReverse);
-                    presenter.upload(images2.get(0),IVLEGALREVERSE_CODE);
+                    presenter.upload(images2.get(0), IVLEGALREVERSE_CODE);
                     break;
                 case IVBUSINESSLICENSE_CODE:
                     List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     //Glide.with(mContext).load(images3.get(0)).into(ivBusinessLicense);
-                    presenter.upload(images3.get(0),IVBUSINESSLICENSE_CODE);
+                    presenter.upload(images3.get(0), IVBUSINESSLICENSE_CODE);
                     break;
             }
         }
     }
+
     @Override
     public RegisterPresenter getPresenter() {
         return new RegisterPresenter();
@@ -184,28 +186,28 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
 
     @OnClick(R2.id.register_register_bt)
     public void onRegisterRegisterBtClicked() {
-        String contact=etContact.getText().toString().trim();
-        String contactPhone=etContactPhone.getText().toString().trim();
-        String address=etAddress.getText().toString().trim();
-        String registeredCapital=etRegisteredCapital.getText().toString().trim();
-
-        if (TextUtils.isEmpty(contact)){
+        String contact = etContact.getText().toString().trim();
+        String contactPhone = etContactPhone.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
+        String registeredCapital = etRegisteredCapital.getText().toString().trim();
+        String age=etDriverAge.getText().toString().trim();
+        if (TextUtils.isEmpty(contact)) {
             showToast("请输入联系人！");
             return;
         }
-        if (TextUtils.isEmpty(contactPhone)){
+        if (TextUtils.isEmpty(contactPhone)) {
             showToast("请输入联系人电话！");
             return;
         }
-        if (TextUtils.isEmpty(address)){
+        if (TextUtils.isEmpty(address)) {
             showToast("请输入地址！");
             return;
         }
-        if (TextUtils.isEmpty(registeredCapital)){
+        if (TextUtils.isEmpty(registeredCapital)) {
             showToast("请输入车牌号1");
             return;
         }
-        if (!CheckUtils.isChinaPhoneLegal(contactPhone)){
+        if (!CheckUtils.isChinaPhoneLegal(contactPhone)) {
             showToast("请输入正确的手机号！");
             return;
         }
@@ -213,7 +215,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
         requestRegisterBean.setDriverMobile(contactPhone);
         requestRegisterBean.setDriverIdNo(registeredCapital);
         requestRegisterBean.setDriverAddress(address);
-       // requestRegisterBean.setDriveringAge();
+        requestRegisterBean.setDriveringAge(age);
         presenter.registerUser(requestRegisterBean);
     }
 }

@@ -47,20 +47,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     EditText etAddress;
     @BindView(R2.id.et_registered_capital)
     EditText etRegisteredCapital;
-    @BindView(R2.id.et_enterprise_number)
-    EditText etEnterpriseNumber;
-    @BindView(R2.id.iv_add)
-    ImageView ivAdd;
-    @BindView(R2.id.ll_legal_positive)
-    LinearLayout llLegalPositive;
-    @BindView(R2.id.iv_legal_positive)
-    ImageView ivLegalPositive;
-    @BindView(R2.id.ll_legal_reverse)
-    LinearLayout llLegalReverse;
-    @BindView(R2.id.iv_legal_reverse)
-    ImageView ivLegalReverse;
-    @BindView(R2.id.iv_add1)
-    ImageView ivAdd1;
     @BindView(R2.id.ll_legal_positive1)
     LinearLayout llLegalPositive1;
     @BindView(R2.id.iv_legal_positive1)
@@ -72,8 +58,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     @BindView(R2.id.register_register_bt)
     Button registerRegisterBt;
     Unbinder unbinder;
-    private static final int IVLEGALPOSITIVE_CODE=1;
-    private static final int IVLEGALREVERSE_CODE=2;
     private static final int IVBUSINESSLICENSE_CODE=3;
     private static final int ROADRUNNING_CODE=4;
     private LogisticsRequestBean requestRegisterBean=new LogisticsRequestBean();
@@ -87,14 +71,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     @Override
     public void uploadSuccess(String path, String url, int dex) {
         switch (dex){
-            case IVLEGALPOSITIVE_CODE:
-                Glide.with(mContext).load(path).into(ivLegalPositive);
-                //requestRegisterBean.setBackPic(url);
-                break;
-            case IVLEGALREVERSE_CODE:
-                Glide.with(mContext).load(path).into(ivLegalReverse);
-                //requestRegisterBean.setFrontPic(url);
-                break;
             case IVBUSINESSLICENSE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalPositive1);
                 requestRegisterBean.setLicensePath(url);
@@ -110,17 +86,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {
             switch (requestCode) {
-                case IVLEGALPOSITIVE_CODE:
-                    //单选的话 images就只有一条数据直接get(0)即可
-                    List<String> images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
-                    Glide.with(mContext).load(images.get(0)).into(ivLegalPositive);
-                    presenter.upload(images.get(0),IVLEGALPOSITIVE_CODE);
-                    break;
-                case IVLEGALREVERSE_CODE:
-                    List<String> images2 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
-                    Glide.with(mContext).load(images2.get(0)).into(ivLegalReverse);
-                    presenter.upload(images2.get(0),IVLEGALREVERSE_CODE);
-                    break;
                 case IVBUSINESSLICENSE_CODE:
                     List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     Glide.with(mContext).load(images3.get(0)).into(ivLegalPositive1);
@@ -171,16 +136,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @OnClick(R2.id.ll_legal_positive)
-    public void onLlLegalPositiveClicked() {
-        selectPic(IVLEGALPOSITIVE_CODE);
-    }
-
-    @OnClick(R2.id.ll_legal_reverse)
-    public void onLlLegalReverseClicked() {
-        selectPic(IVLEGALREVERSE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_positive1)
