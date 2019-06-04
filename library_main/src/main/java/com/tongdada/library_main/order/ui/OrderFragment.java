@@ -20,6 +20,7 @@ import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.base.util.ToastUtils;
+import com.tongdada.library_main.home.ui.TransportCarFragment;
 import com.tongdada.library_main.utils.TalUtils;
 
 import java.util.ArrayList;
@@ -78,18 +79,18 @@ public class OrderFragment extends BaseMvpFragment{
 
     @Override
     public void initView() {
-        list.add("发布中");
-        list.add("已完成");
+        list.add("已接单");
+        list.add("已装货");
+        list.add("已卸货");
         list.add("已核算");
-        list.add("已取消");
         pager.setOffscreenPageLimit(3);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
-                fragments.add(new OrderListFragment("F"));
-                fragments.add(new OrderListFragment("E"));
-                fragments.add(new OrderListFragment("Z"));
-                fragments.add(new OrderListFragment("A"));
+                fragments.add(new TransportCarFragment("A"));
+                fragments.add(new TransportCarFragment("Z"));
+                fragments.add(new TransportCarFragment("S"));
+                fragments.add(new TransportCarFragment("E"));
                 e.onNext(fragments);
             }
         }).subscribeOn(Schedulers.io())

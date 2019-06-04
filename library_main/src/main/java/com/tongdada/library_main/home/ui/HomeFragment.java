@@ -59,13 +59,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     LinearLayout ll;
     @BindView(R2.id.banner)
     MZBannerView banner;
-    @BindView(R2.id.home_order)
-    TextView homeOrder;
     @BindView(R2.id.home_view)
     View homeView;
     Unbinder unbinder;
-    @BindView(R2.id.home_car)
-    TextView homeCar;
     @BindView(R2.id.home_order_rv)
     FrameLayout homeOrderRv;
     private OrderAdapter orderAdapter;
@@ -150,16 +146,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     @OnClick(R2.id.iv_home_message)
     public void onIvHomeMessageClicked() {
         routerIntent(ArouterKey.HOME_INFORMMANAGEMENTACTIVITY, null);
-    }
-
-    @OnClick(R2.id.home_order)
-    public void onHomeOrderClicked() {
-        ARouter.getInstance().build(ArouterKey.MAIN_ISSUEORDERACTIVITY).navigation(mContext);
-    }
-
-    @OnClick(R2.id.home_car)
-    public void onViewClicked() {
-        ARouter.getInstance().build(ArouterKey.HOME_TRANSPORTCARACTIVITY).navigation(mContext);
     }
     private List<BannerBean.RowsBean> rowsBeanList=new ArrayList<>();
     @Override

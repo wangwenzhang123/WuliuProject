@@ -5,15 +5,15 @@ package com.example.library_commen.model;
  */
 
 public class LogisticsRequestBean {
-    private String companyName;
-    private String companyAddress;
-    private String companyContacts;
-    private String legalPersion;
-    private String contactsPhone;
-    private String registerCapital;
-    private String stationRemarks;
-    private String licensePath;
-    private String roadLicensePath;
+    private String companyName="";
+    private String companyAddress="";
+    private String companyContacts="";
+    private String legalPersion="";
+    private String contactsPhone="";
+    private String registerCapital="";
+    private String stationRemarks="";
+    private String licensePath="";
+    private String roadLicensePath="";
 
     public String getCompanyName() {
         return companyName;

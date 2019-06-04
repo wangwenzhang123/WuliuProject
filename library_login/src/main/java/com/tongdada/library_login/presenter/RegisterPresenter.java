@@ -41,16 +41,17 @@ public class RegisterPresenter extends BasePresenter<RegisterContact.View> imple
     @Override
     public void registerUser(DriverRequest requestRegisterBean) {
         loginApi.driverRegister(UserMapUtils.getDriverRegisterMap(requestRegisterBean))
-                .compose(this.handleEverythingResult())
+                .compose(this.<BaseAppEntity<UserBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<UserBean>>() {
                     @Override
                     public void accept(BaseAppEntity<UserBean> userBeanBaseAppEntity) throws Exception {
                         getView().routerIntent(ArouterKey.LOGIN_SUBMITAUDITACTIVITY,null);
+                        getView().finishActivity();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }
@@ -58,16 +59,17 @@ public class RegisterPresenter extends BasePresenter<RegisterContact.View> imple
     @Override
     public void registerLogistics(LogisticsRequestBean requestRegisterBean) {
         loginApi.logiUserRegister(UserMapUtils.getLogiUserRegisterMap(requestRegisterBean))
-                .compose(this.handleEverythingResult())
+                .compose(this.<BaseAppEntity<UserBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<UserBean>>() {
                     @Override
                     public void accept(BaseAppEntity<UserBean> userBeanBaseAppEntity) throws Exception {
                         getView().routerIntent(ArouterKey.LOGIN_SUBMITAUDITACTIVITY,null);
+                        getView().finishActivity();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }

@@ -75,7 +75,8 @@ public abstract class BaseMvpFragment <P extends BasePresenter> extends BaseFrag
 
     @Override
     public void finishActivity() {
-
+        if (getActivity() != null)
+        getActivity().finish();
     }
 
     @Override

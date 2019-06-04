@@ -37,4 +37,8 @@ public class ArouterKey {
     public static final String ORDER_ACCEPTDETAILACTIVITY="/order/AcceptDetailActivity";
     public static final String MESSAGE_MESSAGEDETAILACTIVITY="/message/MessageDetailActivity";
     public static final String ORDER_SEARCHFINACEACTIVITY="/finace/SearchFinaceActivity";
+    public static final String USER_ADDCARACTIVITY="/user/AddCarActivity";
+    public static final String USER_ADDDRIVERACTIVITY="/user/AddDriverActivity";
+    public static final String USER_CARMANAGERACTIVITY="/user/CarManagerActivity";
+    public static final String USER_DRIVERMANAGERACTIVITY="/user/DriverManagerActivity";
 }

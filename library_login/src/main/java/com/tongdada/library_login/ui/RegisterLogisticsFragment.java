@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.utils.CheckUtils;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
@@ -74,7 +75,8 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     private static final int IVLEGALPOSITIVE_CODE=1;
     private static final int IVLEGALREVERSE_CODE=2;
     private static final int IVBUSINESSLICENSE_CODE=3;
-    private RequestRegisterBean requestRegisterBean;
+    private static final int ROADRUNNING_CODE=4;
+    private LogisticsRequestBean requestRegisterBean=new LogisticsRequestBean();
     @Override
     public void selectPic(int code) {
         PhotoSelector.builder()
@@ -87,15 +89,19 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         switch (dex){
             case IVLEGALPOSITIVE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalPositive);
-                requestRegisterBean.setBackPic(url);
+                //requestRegisterBean.setBackPic(url);
                 break;
             case IVLEGALREVERSE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalReverse);
-                requestRegisterBean.setFrontPic(url);
+                //requestRegisterBean.setFrontPic(url);
                 break;
             case IVBUSINESSLICENSE_CODE:
-                //Glide.with(mContext).load(path).into(ivBusinessLicense);
-                requestRegisterBean.setLicensePic(url);
+                Glide.with(mContext).load(path).into(ivLegalPositive1);
+                requestRegisterBean.setLicensePath(url);
+                break;
+            case ROADRUNNING_CODE:
+                Glide.with(mContext).load(path).into(ivLegalReverse1);
+                requestRegisterBean.setRoadLicensePath(url);
                 break;
         }
     }
@@ -111,15 +117,19 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
                     presenter.upload(images.get(0),IVLEGALPOSITIVE_CODE);
                     break;
                 case IVLEGALREVERSE_CODE:
-                    //images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     List<String> images2 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
                     Glide.with(mContext).load(images2.get(0)).into(ivLegalReverse);
                     presenter.upload(images2.get(0),IVLEGALREVERSE_CODE);
                     break;
                 case IVBUSINESSLICENSE_CODE:
                     List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
-                    //Glide.with(mContext).load(images3.get(0)).into(ivBusinessLicense);
+                    Glide.with(mContext).load(images3.get(0)).into(ivLegalPositive1);
                     presenter.upload(images3.get(0),IVBUSINESSLICENSE_CODE);
+                    break;
+                case ROADRUNNING_CODE:
+                    List<String> images4 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Glide.with(mContext).load(images4.get(0)).into(ivLegalReverse1);
+                    presenter.upload(images4.get(0),ROADRUNNING_CODE);
                     break;
             }
         }
@@ -165,22 +175,22 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
 
     @OnClick(R2.id.ll_legal_positive)
     public void onLlLegalPositiveClicked() {
-
+        selectPic(IVLEGALPOSITIVE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_reverse)
     public void onLlLegalReverseClicked() {
-
+        selectPic(IVLEGALREVERSE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_positive1)
     public void onLlLegalPositive1Clicked() {
-
+        selectPic(IVBUSINESSLICENSE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_reverse1)
     public void onLlLegalReverse1Clicked() {
-
+        selectPic(ROADRUNNING_CODE);
     }
 
     @OnClick(R2.id.register_register_bt)
@@ -189,7 +199,8 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         String contactPhone=etContactPhone.getText().toString().trim();
         String address=etAddress.getText().toString().trim();
         String registeredCapital=etRegisteredCapital.getText().toString().trim();
-
+        String name=etUnitName.getText().toString().trim();
+        String legalPersion=etLegalPerson.getText().toString().trim();
         if (TextUtils.isEmpty(contact)){
             showToast("请输入联系人！");
             return;
@@ -211,9 +222,12 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
             return;
         }
         requestRegisterBean.setContactsPhone(contactPhone);
-        requestRegisterBean.setRegisterCapita(registeredCapital);
-        requestRegisterBean.setStationAddress(address);
-        requestRegisterBean.setStationContacts(contact);
-        presenter.registerLogistics(null);
+        requestRegisterBean.setCompanyName(name);
+        requestRegisterBean.setCompanyContacts(contact);
+        requestRegisterBean.setCompanyAddress(address);
+        requestRegisterBean.setContactsPhone(contactPhone);
+        requestRegisterBean.setLegalPersion(legalPersion);
+        requestRegisterBean.setRegisterCapital(registeredCapital);
+        presenter.registerLogistics(requestRegisterBean);
     }
 }

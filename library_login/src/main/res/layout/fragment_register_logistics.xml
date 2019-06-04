@@ -341,7 +341,13 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_dotted_line"
                     />
-
+                <TextView
+                    android:textSize="@dimen/sp_12"
+                    android:text="法人身份证反面"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </FrameLayout>
         </LinearLayout>

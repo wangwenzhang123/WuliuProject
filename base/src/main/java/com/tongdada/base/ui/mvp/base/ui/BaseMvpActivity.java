@@ -111,7 +111,7 @@ public abstract class BaseMvpActivity <P extends BasePresenter> extends BaseActi
 
     @Override
     public void finishActivity() {
-
+        finish();
     }
 
     @Override

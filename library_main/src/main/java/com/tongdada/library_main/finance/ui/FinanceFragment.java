@@ -77,14 +77,14 @@ public class FinanceFragment extends BaseMvpFragment<FinancePresenter> {
 
     @Override
     public void initView() {
-        list.add("待卸货");
+        //list.add("待卸货");
         list.add("未核算");
         list.add("已核算");
         pager.setOffscreenPageLimit(2);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
-                fragments.add(new FinanceOrderFragment("R"));
+               // fragments.add(new FinanceOrderFragment("R"));
                 fragments.add(new FinanceOrderFragment("H"));
                 fragments.add(new FinanceCompleteFragment());
                 e.onNext(fragments);

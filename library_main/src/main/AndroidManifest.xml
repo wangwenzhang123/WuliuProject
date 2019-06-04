@@ -59,6 +59,18 @@
         <activity android:name="com.tongdada.library_main.finance.ui.SearchFinaceActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.AddCarActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.AddDriverActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.CarManagerActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.DriverManagerActivity">
+
+        </activity>
     </application>
 
 </manifest>

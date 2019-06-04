@@ -1,6 +1,7 @@
 package com.tongdada.library_login.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -90,6 +91,15 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
         selectPic(IVBUSINESSLICENSE_CODE);
     }*/
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (rbLogistics.isChecked()){
+            registerLogisticsFragment.onActivityResult(requestCode,resultCode,data);
+        }else {
+            registerUserFragment.onActivityResult(requestCode,resultCode,data);
+        }
+    }
 
     @OnClick(R2.id.rb_logistics)
     public void onRbLogisticsClicked() {

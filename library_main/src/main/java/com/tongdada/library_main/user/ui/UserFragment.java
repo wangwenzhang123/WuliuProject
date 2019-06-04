@@ -69,6 +69,10 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     LinearLayout aboutApp;
     @BindView(R2.id.out_login)
     LinearLayout outLogin;
+    @BindView(R2.id.car_manager)
+    LinearLayout carManager;
+    @BindView(R2.id.driver_manager)
+    LinearLayout driverManager;
 
     @Override
     public BasePresenter getPresenter() {
@@ -177,8 +181,16 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     @OnClick(R2.id.out_login)
     public void onViewOutClicked() {
         ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
-        if (getActivity() != null){
+        if (getActivity() != null) {
             getActivity().finish();
         }
+    }
+
+    @OnClick(R2.id.car_manager)
+    public void onCarManagerClicked() {
+    }
+
+    @OnClick(R2.id.driver_manager)
+    public void onDriverManagerClicked() {
     }
 }

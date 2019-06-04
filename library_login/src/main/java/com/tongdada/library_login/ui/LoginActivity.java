@@ -71,7 +71,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void routerIntent(String path, Bundle bundle) {
         super.routerIntent(path,bundle);
-        finish();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
