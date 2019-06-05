@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/_ffe06e38">
+
+        <ImageView
+            android:id="@+id/register_back"
+            android:layout_width="@dimen/dp_9"
+            android:layout_height="@dimen/dp_18"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/back_tv"
+            android:textColor="@color/FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_7"
+            android:layout_marginTop="@dimen/dp_11"
+            android:layout_toEndOf="@+id/register_back"
+            android:layout_toRightOf="@+id/register_back"
+            android:text="@string/back"
+            android:textSize="@dimen/sp_18" />
+
+        <TextView
+            android:textColor="@color/FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/select_car"
+            android:textSize="@dimen/sp_18" />
+    </RelativeLayout>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+      android:layout_marginRight="@dimen/dp_10"
+        android:id="@+id/car_recycle"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/select_car_tv"
+            android:textColor="@color/_333333"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:text="可选砼车"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/_333333"
+            android:id="@+id/check_all"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:text="全选"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/settlement_bt"
+        android:layout_width="@dimen/dp_302"
+        android:layout_height="@dimen/dp_42"
+        android:layout_below="@+id/view4"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_42"
+        android:background="@drawable/shape_login"
+        android:text="@string/submit_add"
+        android:textColor="@color/FFFFFF"
+        android:textSize="@dimen/sp_14" />
+</LinearLayout>

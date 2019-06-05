@@ -57,4 +57,7 @@
     <string name="driving_years">驾龄</string>
     <string name="driver_age">年龄</string>
     <string name="driver_address">地址</string>
+    <string name="confirm_submit">确认提交</string>
+    <string name="select_car">选择车辆</string>
+    <string name="submit_add">确认添加</string>
 </resources>

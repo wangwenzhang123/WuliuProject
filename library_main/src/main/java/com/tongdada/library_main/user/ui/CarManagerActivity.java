@@ -3,10 +3,12 @@ package com.tongdada.library_main.user.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_main.R;
 import com.example.library_main.R2;
@@ -59,6 +61,18 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
         carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<String>());
         carManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         carManagerRecycle.setAdapter(carManagerAdapter);
+    }
+
+    @Override
+    public void initLinsenterner() {
+        carManagerAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (view .getId() == R.id.item_slide){
+
+                }
+            }
+        });
     }
 
     @OnClick(R2.id.register_back)

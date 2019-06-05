@@ -1,17 +1,23 @@
 package com.tongdada.library_main.user.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
+import com.tongdada.library_main.user.adapter.DriverManagerAdapter;
 import com.tongdada.library_main.user.presenter.DriverManagerContract;
 import com.tongdada.library_main.user.presenter.DriverManagerPresenter;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +38,7 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     TextView addDriverTv;
     @BindView(R2.id.driver_manager_recycle)
     RecyclerView driverManagerRecycle;
-
+    DriverManagerAdapter driverManagerAdapter;
     @Override
     public int getView() {
         return R.layout.activity_driver_manager;
@@ -41,6 +47,25 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     @Override
     public DriverManagerPresenter getPresenter() {
         return new DriverManagerPresenter();
+    }
+
+    @Override
+    public void initView() {
+        driverManagerAdapter=new DriverManagerAdapter(R.layout.item_driver,new ArrayList<String>());
+        driverManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
+        driverManagerRecycle.setAdapter(driverManagerAdapter);
+    }
+
+    @Override
+    public void initLinsenterner() {
+        driverManagerAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (view .getId() == R.id.item_slide){
+                    presenter.deleteDriver("");
+                }
+            }
+        });
     }
 
     @Override

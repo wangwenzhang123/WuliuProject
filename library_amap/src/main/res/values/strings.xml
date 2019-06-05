@@ -1,6 +1,8 @@
 <resources>
 
 
-    <string name="accept_orders_detail">接单详情</string>
+    <string name="accept_orders_detail">+添加车辆</string>
     <string name="cancle_order">取消订单</string>
+    <string name="accept_car">接单车辆</string>
+    <string name="confirm_accept_order">确认接单</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.tongdada.library_main.user.presenter;
+package com.tongdada.library_main.home.presenter;
 
 import com.tongdada.base.ui.mvp.base.view.BaseView;
 
@@ -6,15 +6,14 @@ import com.tongdada.base.ui.mvp.base.view.BaseView;
  * @name WuliuProject
  * @class describe
  * @anthor 王文章
- * @time 2019/6/4 15:15
+ * @time 2019/6/5 15:02
  * @change
  */
-public class DriverManagerContract {
+public class SelectCarContract {
     public interface View extends BaseView{
 
     }
     public interface Presenter{
-        void driverList();
-        void deleteDriver(String id);
+
     }
 }

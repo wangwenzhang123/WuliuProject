@@ -188,6 +188,7 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.car_manager)
     public void onCarManagerClicked() {
+        routerIntent(ArouterKey.HONE_SELECTCARACTIVITY,null);
     }
 
     @OnClick(R2.id.driver_manager)

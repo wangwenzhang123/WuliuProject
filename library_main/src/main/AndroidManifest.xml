@@ -71,6 +71,9 @@
         <activity android:name="com.tongdada.library_main.user.ui.DriverManagerActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.home.ui.SelectCarActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void getMixStationById() {
-        MainApiUtils.getMainApi().getMixStationById(CommenUtils.getIncetance().getUserBean().getStationId())
+        MainApiUtils.getMainApi().getLogiById(CommenUtils.getIncetance().getUserBean().getStationId())
                 .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
                     @Override

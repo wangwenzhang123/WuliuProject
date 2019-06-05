@@ -101,7 +101,7 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/userList.action")
-    Observable<UserListBean> userList(@Field("psAppUsers.stationId") String id);
+    Observable<UserListBean> userList(@Field("psAppUsers.companyId") String id);
     /**
      * 删除人员
      * @return
@@ -125,7 +125,7 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/addStationUser.action")
+    @POST("/interface/addLogiUser.action")
     Observable<BaseAppEntity<UserBean>> addStationUser(@FieldMap Map<String,Object> requestBody);
     /**
      * 获取消息列表
@@ -156,12 +156,12 @@ public interface MainApi {
     @POST("/interface/sysSet.action")
     Observable<BaseAppEntity<Object>> sysSet(@Field("psMixingStations.id") String id,@Field("psMixingStations.tongPrice") String tongPrice,@Field("psMixingStations.bengPrice") String bengPrice);
     /**
-     * 获取搅拌站信息
+     * 获取物流公司信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/getMixStationById.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> getMixStationById(@Field("psMixingStations.id") String id);
+    @POST("/interface/getLogiById.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> getLogiById(@Field("psLogisticsCompanys.id") String id);
     /**
      * 更新搅拌站信息
      * @return
@@ -187,5 +187,18 @@ public interface MainApi {
             , @Field("psDetailOrders.orderRemark") String orderRemark,
                                                              @Field("page") String pageNumber, @Field("psDetailOrders.orderId") String orderId
     );
-
+    /**
+     * 获取司机列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/driverList.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> driverList(@Field("psDrivers.companyId") String id);
+    /**
+     * 获取司机列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/deleteDriver.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> deleteDriver(@Field("psDrivers.id") String id);
 }

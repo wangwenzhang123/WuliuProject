@@ -90,7 +90,7 @@ public class MaintencancePlanPresenter extends BasePresenter<MaintencancePlanCon
 
     @Override
     public void getMixStationById() {
-        MainApiUtils.getMainApi().getMixStationById(CommenUtils.getIncetance().getUserBean().getStationId())
+        MainApiUtils.getMainApi().getLogiById(CommenUtils.getIncetance().getUserBean().getStationId())
                 .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
                     @Override

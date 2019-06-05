@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.library_main.R;
 import com.tongdada.library_main.widget.CarSlidingMenu;
 import com.tongdada.library_main.widget.MessageSlidingMenu;
 
@@ -23,7 +24,7 @@ public class CarManagerAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-
+        helper.addOnClickListener(R.id.item_slide);
     }
     private CarSlidingMenu mOpenMenu;
 

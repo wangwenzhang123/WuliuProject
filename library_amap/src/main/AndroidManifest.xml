@@ -11,6 +11,9 @@
         <activity android:name=".ui.MapCarDetailActivity">
 
         </activity>
+        <activity android:name=".ui.MapAcceptOrderDetailActivity">
+
+        </activity>
         <activity android:name=".ui.RouteActivity"></activity>
         <service android:name="com.amap.api.location.APSService">
 
