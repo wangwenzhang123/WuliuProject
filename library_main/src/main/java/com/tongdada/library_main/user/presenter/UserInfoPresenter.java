@@ -1,7 +1,7 @@
 package com.tongdada.library_main.user.presenter;
 
 import com.example.library_commen.event.EventUpdateUser;
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.model.UserBean;
 import com.example.library_commen.utils.UserMapUtils;

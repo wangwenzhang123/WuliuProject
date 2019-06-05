@@ -1,14 +1,13 @@
 package com.tongdada.library_login.ui;
 
 import android.Manifest;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.ShareKey;
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.UserBean;
 import com.google.gson.Gson;
 import com.tongdada.base.dialog.base.BaseDialog;

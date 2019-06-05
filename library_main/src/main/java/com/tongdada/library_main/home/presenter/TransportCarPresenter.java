@@ -2,12 +2,11 @@ package com.tongdada.library_main.home.presenter;
 
 import android.os.Handler;
 
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.tongdada.base.ui.mvp.base.refresh.BaseRecyclerRefreshPresenter;
 import com.tongdada.base.ui.mvp.base.refresh.RequestCallback;
 import com.tongdada.library_main.finance.net.respose.FinaceBean;
 import com.tongdada.library_main.home.net.CarOrderBean;
-import com.example.library_commen.model.TransportCarBean;
 import com.tongdada.library_main.net.MainApiUtils;
 import com.example.library_commen.model.PagenationBase;
 

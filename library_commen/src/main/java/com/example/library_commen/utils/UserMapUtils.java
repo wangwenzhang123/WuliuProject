@@ -105,6 +105,15 @@ public class UserMapUtils {
         map.put("psLogisticsCompanys.stationRemarks",requestRegisterBean.getStationRemarks());
         map.put("psLogisticsCompanys.licensePath",requestRegisterBean.getLicensePath());
         map.put("psLogisticsCompanys.roadLicensePath",requestRegisterBean.getRoadLicensePath());
+        map.put("psLogisticsCompanys.createTime",new Gson().toJson(requestRegisterBean.getCreateTime()));
+        map.put("psLogisticsCompanys.createUserID",requestRegisterBean.getCreateUserID());
+        map.put("psLogisticsCompanys.delFlag",requestRegisterBean.getDelFlag());
+        map.put("psLogisticsCompanys.deptId",requestRegisterBean.getDeptId());
+        map.put("psLogisticsCompanys.id",requestRegisterBean.getId());
+        map.put("psLogisticsCompanys.updateTime",new Gson().toJson(requestRegisterBean.getUpdateTime()));
+        map.put("psLogisticsCompanys.updateUserID",requestRegisterBean.getUpdateUserID());
+        map.put("psLogisticsCompanys.verifyStatus",requestRegisterBean.getVerifyStatus());
+
         return map;
     }
     public static Map<String,Object> getDriverRegisterMap(DriverRequest requestRegisterBean){
@@ -118,6 +127,16 @@ public class UserMapUtils {
         map.put("psDrivers.driverLicense",requestRegisterBean.getDriverLicense());
         map.put("psDrivers.driveringAge",requestRegisterBean.getDriveringAge());
         map.put("psDrivers.driverStatus",requestRegisterBean.getDriverStatus());
+        map.put("psDrivers.companyId",requestRegisterBean.getCompanyId());
+        map.put("psDrivers.companyName",requestRegisterBean.getCompanyName());
+        map.put("psDrivers.driAge",requestRegisterBean.getDriAge());
+        map.put("psDrivers.createTime",new Gson().toJson(requestRegisterBean.getCreateTime()));
+        map.put("psDrivers.createUserID",requestRegisterBean.getCreateUserID());
+        map.put("psDrivers.delFlag",requestRegisterBean.getDelFlag());
+        map.put("psDrivers.deptId",requestRegisterBean.getDeptId());
+        map.put("psDrivers.id",requestRegisterBean.getId());
+        map.put("psDrivers.updateTime",new Gson().toJson(requestRegisterBean.getUpdateTime()));
+        map.put("psDrivers.updateUserID",requestRegisterBean.getUpdateUserID());
         return map;
     }
 }

@@ -1,6 +1,7 @@
 package com.tongdada.library_main.home.presenter;
 
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.model.LogisticsRequestBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
@@ -20,13 +21,13 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void getMixStationById() {
-        MainApiUtils.getMainApi().getLogiById(CommenUtils.getIncetance().getUserBean().getStationId())
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+        MainApiUtils.getMainApi().getLogiById(CommenUtils.getIncetance().getUserBean().getCompanyId())
+                .compose(this.<BaseAppEntity<LogisticsRequestBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<LogisticsRequestBean>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> objectBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<LogisticsRequestBean> objectBaseAppEntity) throws Exception {
                         if (objectBaseAppEntity != null && objectBaseAppEntity.getContent() != null){
-                            CommenUtils.getIncetance().setRequestRegisterBean(objectBaseAppEntity.getContent());
+                            CommenUtils.getIncetance().setRequestBean(objectBaseAppEntity.getContent());
                         }
                     }
                 }, new Consumer<Throwable>() {

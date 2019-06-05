@@ -1,6 +1,6 @@
 package com.tongdada.library_main.user.presenter;
 
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_main.net.MainApiUtils;

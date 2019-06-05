@@ -100,6 +100,11 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
     }
 
     @Override
+    public void updateUi() {
+
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {

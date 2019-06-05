@@ -1,10 +1,9 @@
 package com.tongdada.library_main.user.presenter;
 
-import com.example.library_commen.model.CommenUtils;
-import com.example.library_commen.model.MixStationBean;
+import com.example.library_commen.model.LogisticsRequestBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
-import com.example.library_commen.model.UserBean;
 import com.example.library_commen.utils.UserMapUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
@@ -91,13 +90,13 @@ public class MaintencancePlanPresenter extends BasePresenter<MaintencancePlanCon
     @Override
     public void getMixStationById() {
         MainApiUtils.getMainApi().getLogiById(CommenUtils.getIncetance().getUserBean().getStationId())
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                .compose(this.<BaseAppEntity<LogisticsRequestBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<LogisticsRequestBean>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> objectBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<LogisticsRequestBean> objectBaseAppEntity) throws Exception {
                         if (objectBaseAppEntity != null && objectBaseAppEntity.getContent() != null){
-                            CommenUtils.getIncetance().setRequestRegisterBean(objectBaseAppEntity.getContent());
-                            getView().setMixStationData(objectBaseAppEntity.getContent());
+                            CommenUtils.getIncetance().setRequestBean(objectBaseAppEntity.getContent());
+                            //getView().setMixStationData(objectBaseAppEntity.getContent());
                         }
                     }
                 }, new Consumer<Throwable>() {

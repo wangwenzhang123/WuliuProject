@@ -21,5 +21,6 @@ public class RegisterContact {
    public interface View extends BaseView{
       void selectPic(int  code);
       void uploadSuccess(String path,String url,int dex);
+      void updateUi();
    }
 }

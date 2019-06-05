@@ -44,4 +44,6 @@ public class ArouterKey {
     public static final String ORDER_LOGICORDERDETAILACTIVITY="/order/LogicOrderDetailActivity";
     public static final String MAP_MAPACCEPTORDERDETAILACTIVITY="/map/MapAcceptOrderDetailActivity";
     public static final String HONE_SELECTCARACTIVITY="/home/SelectCarActivity";
+    public static final String LOGIN_LOGICREGISTERFRAGMENT="/login/RegisterLogisticsFragment";
+    public static final String USER_MAINTENANCELOGICACTIVITY="/user/MaintenanceLogicActivity";
 }

@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.net.CommenApi;
+import com.example.library_commen.utils.CheckUtils;
+import com.example.library_commen.utils.CommenUtils;
+import com.example.library_commen.model.DriverRequest;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -45,7 +49,7 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     @BindView(R2.id.et_driver_age)
     EditText etDriverAge;
     @BindView(R2.id.driver_address)
-    TextView driverAddress;
+    EditText driverAddress;
     @BindView(R2.id.iv_add)
     ImageView ivAdd;
     @BindView(R2.id.ll_legal_positive)
@@ -58,7 +62,7 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     ImageView ivLegalReverse;
     @BindView(R2.id.register_register_bt)
     Button registerRegisterBt;
-
+    DriverRequest request=new DriverRequest();
     @Override
     public int getView() {
         return R.layout.activity_add_driver;
@@ -78,25 +82,45 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
 
     @OnClick(R2.id.register_back)
     public void onRegisterBackClicked() {
+
     }
 
     @OnClick(R2.id.back_tv)
     public void onBackTvClicked() {
+
     }
 
     @OnClick(R2.id.user_logo)
     public void onUserLogoClicked() {
+
     }
 
     @OnClick(R2.id.ll_legal_positive)
     public void onLlLegalPositiveClicked() {
+
     }
 
     @OnClick(R2.id.ll_legal_reverse)
     public void onLlLegalReverseClicked() {
+
     }
 
     @OnClick(R2.id.register_register_bt)
     public void onRegisterRegisterBtClicked() {
+        String name=etUserName.getText().toString().trim();
+        String address=driverAddress.getText().toString();
+        String age=etDriverAge.getText().toString().trim();
+        String phone=etDriverPhone.getText().toString().trim();
+        String driverYear=etDrivingYears.getText().toString();
+        String card=etIdentityCard.getText().toString().trim();
+        request.setDriveringAge(driverYear);
+        request.setDriverName(name);
+        request.setDriverMobile(phone);
+        request.setDriverIdNo(card);
+        request.setDriverAddress(address);
+        request.setDriAge(age);
+        request.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
+        request.setCompanyName(CommenUtils.getIncetance().getRequestBean().getCompanyName());
+        presenter.addDriver(request);
     }
 }

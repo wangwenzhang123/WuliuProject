@@ -41,6 +41,21 @@ public abstract class BaseMvpFragment <P extends BasePresenter> extends BaseFrag
     }
 
     @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initLinsenterner() {
+
+    }
+
+    @Override
+    public void getData() {
+
+    }
+
+    @Override
     public BaseDialog getDialog() {
         return null;
     }

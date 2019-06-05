@@ -16,12 +16,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.UserBean;
 import com.example.library_commen.utils.CheckUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
-import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.presenter.AddUserConstract;
 import com.tongdada.library_main.user.presenter.AddUserPresenter;
@@ -125,7 +124,8 @@ public class AddUserActivity extends BaseMvpActivity<AddUserPresenter> implement
         requestBean.setUserName(userName.getText().toString().trim());
         requestBean.setUserContacts(userPhone.getText().toString().trim());
         requestBean.setUserDuty(userPosition.getText().toString().trim());
-        requestBean.setStationId(CommenUtils.getIncetance().getUserBean().getStationId());
+        //requestBean.setStationId(CommenUtils.getIncetance().getUserBean().getStationId());
+        requestBean.setCompanyId(CommenUtils.getIncetance().getUserBean().getCompanyId());
         presenter.addStationUser(requestBean);
     }
 

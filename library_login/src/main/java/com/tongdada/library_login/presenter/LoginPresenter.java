@@ -3,14 +3,11 @@ package com.tongdada.library_login.presenter;
 import android.text.TextUtils;
 
 import com.example.library_commen.appkey.ArouterKey;
-import com.example.library_commen.appkey.ShareKey;
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.UserBean;
-import com.google.gson.Gson;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
-import com.tongdada.base.util.SharedPreferencesUtil;
 import com.tongdada.library_login.net.LoginApi;
 
 import io.reactivex.functions.Consumer;

@@ -1,5 +1,6 @@
 package com.tongdada.library_main.user.presenter;
 
+import com.example.library_commen.model.DriverRequest;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
 
 /**
@@ -14,6 +15,6 @@ public class AddDriverContract {
 
     }
     public interface Presenter{
-
+        void addDriver(DriverRequest request);
     }
 }

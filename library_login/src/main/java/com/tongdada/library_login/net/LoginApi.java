@@ -21,19 +21,57 @@ import retrofit2.http.POST;
  */
 
 public interface LoginApi {
+    /**
+     * 登录
+     * @param phone
+     * @param password
+     * @return
+     */
     @FormUrlEncoded
     @POST("/interface/userLogin.action")
     Observable<BaseAppEntity<UserBean>> login(@Field("phoneNo") String phone, @Field("password") String password);
 
+    /**
+     * 上传图片
+     * @param requestBody
+     * @return
+     */
     @POST("/interface/uploadAttach.action")
     Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
+
+    /**
+     * 司机注册
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @POST("/interface/driverRegister.action")
     Observable<BaseAppEntity<UserBean>> driverRegister(@FieldMap Map<String,Object> params);
+
+    /**
+     * 物流公司注册
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @POST("/interface/logiUserRegister.action")
     Observable<BaseAppEntity<UserBean>> logiUserRegister(@FieldMap Map<String,Object> params);
+
+    /**
+     * 忘记密码
+     * @param phone
+     * @return
+     */
     @FormUrlEncoded
     @POST("/interface/forgetPassword.action")
     Observable<BaseAppEntity<UserBean>> forgetPassword(@Field("psAppUsers.userContacts") String phone);
+
+    /**
+     * 维护物流公司信息
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/logiUserRegister.action")
+    Observable<BaseAppEntity<UserBean>> upDatelogiUserRegister(@FieldMap Map<String,Object> params);
 }

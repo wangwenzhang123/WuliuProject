@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.event.EventUpdateUser;
-import com.example.library_commen.model.CommenUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.config.BaseUrl;
@@ -157,7 +157,7 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.plant_maintenace)
     public void onViewClicked() {
-        routerIntent(ArouterKey.USER_MAINTENANCEPLANTACTIVITY, null);
+        routerIntent(ArouterKey.USER_MAINTENANCELOGICACTIVITY, null);
     }
 
     @Override
@@ -193,5 +193,6 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.driver_manager)
     public void onDriverManagerClicked() {
+        routerIntent(ArouterKey.USER_DRIVERMANAGERACTIVITY,null);
     }
 }

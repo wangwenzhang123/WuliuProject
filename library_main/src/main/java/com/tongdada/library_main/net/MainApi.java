@@ -1,5 +1,7 @@
 package com.tongdada.library_main.net;
 
+import com.example.library_commen.model.DriverBean;
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.PagenationBase;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
@@ -161,7 +163,7 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/getLogiById.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> getLogiById(@Field("psLogisticsCompanys.id") String id);
+    Observable<BaseAppEntity<LogisticsRequestBean>> getLogiById(@Field("psLogisticsCompanys.id") String id);
     /**
      * 更新搅拌站信息
      * @return
@@ -193,12 +195,19 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/driverList.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> driverList(@Field("psDrivers.companyId") String id);
+    Observable<PagenationBase<DriverBean>> driverList(@Field("psDrivers.companyId") String id);
     /**
-     * 获取司机列表
+     * 删除司机
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/deleteDriver.action")
     Observable<BaseAppEntity<RequestRegisterBean>> deleteDriver(@Field("psDrivers.id") String id);
+    /**
+     * 删除司机
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/addDriver.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> addDriver(@FieldMap Map<String,Object> params);
 }

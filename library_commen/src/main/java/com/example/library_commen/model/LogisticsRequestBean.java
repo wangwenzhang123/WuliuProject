@@ -14,6 +14,25 @@ public class LogisticsRequestBean {
     private String stationRemarks="";
     private String licensePath="";
     private String roadLicensePath="";
+    /**
+     * createTime : {"date":5,"day":3,"hours":20,"minutes":45,"month":5,"nanos":0,"seconds":6,"time":1559738706000,"timezoneOffset":-480,"year":119}
+     * createUserID :
+     * delFlag : 0
+     * deptId :
+     * id : 2c91808c6b226cf6016b27abe989001b
+     * updateTime : {"date":5,"day":3,"hours":20,"minutes":45,"month":5,"nanos":0,"seconds":6,"time":1559738706000,"timezoneOffset":-480,"year":119}
+     * updateUserID :
+     * verifyStatus : N
+     */
+
+    private CreateTimeBean createTime=new CreateTimeBean();
+    private String createUserID="";
+    private int delFlag;
+    private String deptId="";
+    private String id="";
+    private UpdateTimeBean updateTime=new UpdateTimeBean();
+    private String updateUserID="";
+    private String verifyStatus="";
 
     public String getCompanyName() {
         return companyName;
@@ -85,5 +104,281 @@ public class LogisticsRequestBean {
 
     public void setRoadLicensePath(String roadLicensePath) {
         this.roadLicensePath = roadLicensePath;
+    }
+
+    public CreateTimeBean getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(CreateTimeBean createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateUserID() {
+        return createUserID;
+    }
+
+    public void setCreateUserID(String createUserID) {
+        this.createUserID = createUserID;
+    }
+
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public UpdateTimeBean getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(UpdateTimeBean updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateUserID() {
+        return updateUserID;
+    }
+
+    public void setUpdateUserID(String updateUserID) {
+        this.updateUserID = updateUserID;
+    }
+
+    public String getVerifyStatus() {
+        return verifyStatus;
+    }
+
+    public void setVerifyStatus(String verifyStatus) {
+        this.verifyStatus = verifyStatus;
+    }
+
+    public static class CreateTimeBean {
+        /**
+         * date : 5
+         * day : 3
+         * hours : 20
+         * minutes : 45
+         * month : 5
+         * nanos : 0
+         * seconds : 6
+         * time : 1559738706000
+         * timezoneOffset : -480
+         * year : 119
+         */
+
+        private int date;
+        private int day;
+        private int hours;
+        private int minutes;
+        private int month;
+        private int nanos;
+        private int seconds;
+        private long time;
+        private int timezoneOffset;
+        private int year;
+
+        public int getDate() {
+            return date;
+        }
+
+        public void setDate(int date) {
+            this.date = date;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public void setDay(int day) {
+            this.day = day;
+        }
+
+        public int getHours() {
+            return hours;
+        }
+
+        public void setHours(int hours) {
+            this.hours = hours;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
+
+        public void setMinutes(int minutes) {
+            this.minutes = minutes;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
+        }
+
+        public int getNanos() {
+            return nanos;
+        }
+
+        public void setNanos(int nanos) {
+            this.nanos = nanos;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        public void setSeconds(int seconds) {
+            this.seconds = seconds;
+        }
+
+        public long getTime() {
+            return time;
+        }
+
+        public void setTime(long time) {
+            this.time = time;
+        }
+
+        public int getTimezoneOffset() {
+            return timezoneOffset;
+        }
+
+        public void setTimezoneOffset(int timezoneOffset) {
+            this.timezoneOffset = timezoneOffset;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
+    }
+
+    public static class UpdateTimeBean {
+        /**
+         * date : 5
+         * day : 3
+         * hours : 20
+         * minutes : 45
+         * month : 5
+         * nanos : 0
+         * seconds : 6
+         * time : 1559738706000
+         * timezoneOffset : -480
+         * year : 119
+         */
+
+        private int date;
+        private int day;
+        private int hours;
+        private int minutes;
+        private int month;
+        private int nanos;
+        private int seconds;
+        private long time;
+        private int timezoneOffset;
+        private int year;
+
+        public int getDate() {
+            return date;
+        }
+
+        public void setDate(int date) {
+            this.date = date;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public void setDay(int day) {
+            this.day = day;
+        }
+
+        public int getHours() {
+            return hours;
+        }
+
+        public void setHours(int hours) {
+            this.hours = hours;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
+
+        public void setMinutes(int minutes) {
+            this.minutes = minutes;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
+        }
+
+        public int getNanos() {
+            return nanos;
+        }
+
+        public void setNanos(int nanos) {
+            this.nanos = nanos;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        public void setSeconds(int seconds) {
+            this.seconds = seconds;
+        }
+
+        public long getTime() {
+            return time;
+        }
+
+        public void setTime(long time) {
+            this.time = time;
+        }
+
+        public int getTimezoneOffset() {
+            return timezoneOffset;
+        }
+
+        public void setTimezoneOffset(int timezoneOffset) {
+            this.timezoneOffset = timezoneOffset;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
     }
 }

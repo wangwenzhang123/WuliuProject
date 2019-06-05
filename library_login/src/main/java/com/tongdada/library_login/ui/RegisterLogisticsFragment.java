@@ -12,16 +12,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
+import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.event.EventAddBean;
+import com.example.library_commen.event.EventModificationLogicBean;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.utils.CheckUtils;
+import com.example.library_commen.utils.CommenUtils;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.library_login.R;
 import com.tongdada.library_login.R2;
 import com.tongdada.library_login.presenter.RegisterContact;
 import com.tongdada.library_login.presenter.RegisterPresenter;
 import com.winfo.photoselector.PhotoSelector;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -33,7 +42,7 @@ import butterknife.Unbinder;
 /**
  * Created by wangshen on 2019/6/3.
  */
-
+@Route(path = ArouterKey.LOGIN_LOGICREGISTERFRAGMENT)
 public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter> implements RegisterContact.View {
     @BindView(R2.id.et_unit_name)
     EditText etUnitName;
@@ -81,6 +90,18 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
                 break;
         }
     }
+
+    @Override
+    public void updateUi() {
+        etAddress.setText(requestRegisterBean.getCompanyAddress());
+        etContact.setText(requestRegisterBean.getCompanyContacts());
+        etContactPhone.setText(requestRegisterBean.getContactsPhone());
+        etLegalPerson.setText(requestRegisterBean.getLegalPersion());
+        etUnitName.setText(requestRegisterBean.getCompanyName());
+        etRegisteredCapital.setText(requestRegisterBean.getRegisterCapital());
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,25 +131,11 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initLinsenterner() {
-
-    }
-
-    @Override
-    public void getData() {
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
@@ -137,7 +144,11 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         super.onDestroyView();
         unbinder.unbind();
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void addUser(EventModificationLogicBean eventAddBean){
+        requestRegisterBean= CommenUtils.getIncetance().getRequestBean();
+        updateUi();
+    }
     @OnClick(R2.id.ll_legal_positive1)
     public void onLlLegalPositive1Clicked() {
         selectPic(IVBUSINESSLICENSE_CODE);
@@ -176,7 +187,6 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
             showToast("请输入正确的手机号！");
             return;
         }
-        requestRegisterBean.setContactsPhone(contactPhone);
         requestRegisterBean.setCompanyName(name);
         requestRegisterBean.setCompanyContacts(contact);
         requestRegisterBean.setCompanyAddress(address);
