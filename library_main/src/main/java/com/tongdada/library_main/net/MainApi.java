@@ -1,5 +1,6 @@
 package com.tongdada.library_main.net;
 
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.DriverBean;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.PagenationBase;
@@ -10,6 +11,7 @@ import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.library_main.home.net.CarOrderBean;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.order.respose.OrderListBean;
+import com.tongdada.library_main.user.respose.CarListBean;
 import com.tongdada.library_main.user.respose.MessageBean;
 import com.tongdada.library_main.user.respose.UserListBean;
 
@@ -204,10 +206,31 @@ public interface MainApi {
     @POST("/interface/deleteDriver.action")
     Observable<BaseAppEntity<RequestRegisterBean>> deleteDriver(@Field("psDrivers.id") String id);
     /**
-     * 删除司机
+     * 添加司机
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/addDriver.action")
     Observable<BaseAppEntity<RequestRegisterBean>> addDriver(@FieldMap Map<String,Object> params);
+    /**
+     * 获取车辆列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/listCars.action")
+    Observable<PagenationBase<CarListBean>> listCars(@Field("psCars.companyId") String companyId, @Field("psCars.driverId") String driverId);
+    /**
+     * 删除车辆
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/deleteCar.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> deleteCar(@Field("psCars.id") String id);
+    /**
+     * 添加车辆
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/addCar.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> addCar(@FieldMap Map<String,Object> params);
 }

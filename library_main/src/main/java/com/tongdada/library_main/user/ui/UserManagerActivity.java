@@ -17,14 +17,10 @@ import com.example.library_commen.model.UserBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
-import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.adapter.UserManagerAdapter;
-import com.tongdada.library_main.user.presenter.UserInfoContract;
 import com.tongdada.library_main.user.presenter.UserManagerContract;
 import com.tongdada.library_main.user.presenter.UserManagerPresenter;
-import com.tongdada.library_main.user.respose.UserListBean;
-import com.tongdada.library_main.user.respose.UserManagerBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

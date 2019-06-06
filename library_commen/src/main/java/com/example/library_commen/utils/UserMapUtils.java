@@ -1,5 +1,6 @@
 package com.example.library_commen.utils;
 
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.OrderBean;
@@ -137,6 +138,23 @@ public class UserMapUtils {
         map.put("psDrivers.id",requestRegisterBean.getId());
         map.put("psDrivers.updateTime",new Gson().toJson(requestRegisterBean.getUpdateTime()));
         map.put("psDrivers.updateUserID",requestRegisterBean.getUpdateUserID());
+        return map;
+    }
+    public static Map<String,Object> getCarRequestMap(CarRequestBean requestRegisterBean){
+        Map<String,Object> map=new HashMap<>();
+        map.put("psCars.carName",requestRegisterBean.getCarName());
+        map.put("psCars.carNo",requestRegisterBean.getCarNo());
+        map.put("psCars.buyTime",requestRegisterBean.getBuyTime());
+        map.put("psCars.carType",requestRegisterBean.getCarType());
+        map.put("psCars.carLoad",requestRegisterBean.getCarLoad());
+        map.put("psCars.driveLicense",requestRegisterBean.getDriveLicense());
+        map.put("psCars.carRemarks",requestRegisterBean.getCarRemarks());
+        map.put("psCars.carLongitude",requestRegisterBean.getCarLongitude());
+        map.put("psCars.carLatitude",requestRegisterBean.getCarLatitude());
+        map.put("psCars.companyId",requestRegisterBean.getCompanyId());
+        map.put("psCars.driverId",requestRegisterBean.getDriverId());
+        map.put("psCars.id",requestRegisterBean.getId());
+
         return map;
     }
 }

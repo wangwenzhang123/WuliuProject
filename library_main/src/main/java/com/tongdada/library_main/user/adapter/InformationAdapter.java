@@ -1,7 +1,6 @@
 package com.tongdada.library_main.user.adapter;
 
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +12,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.library_main.R;
 import com.tongdada.base.config.BaseUrl;
 import com.tongdada.library_main.home.respose.BannerBean;
-import com.tongdada.library_main.user.respose.InformationBean;
-import com.tongdada.library_main.user.respose.UserManagerBean;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

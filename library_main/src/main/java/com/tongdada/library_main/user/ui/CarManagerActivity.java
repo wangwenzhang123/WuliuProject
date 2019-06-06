@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -18,6 +19,7 @@ import com.tongdada.library_main.user.presenter.CarManagerContract;
 import com.tongdada.library_main.user.presenter.CarManagerPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,9 +60,10 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
 
     @Override
     public void initView() {
-        carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<String>());
+        carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<CarRequestBean>());
         carManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         carManagerRecycle.setAdapter(carManagerAdapter);
+        presenter.getCarList();
     }
 
     @Override
@@ -69,7 +72,7 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view .getId() == R.id.item_slide){
-
+                    presenter.deleteCar(carManagerAdapter.getData().get(position).getId());
                 }
             }
         });
@@ -82,6 +85,11 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
 
     @OnClick(R2.id.add_car_tv)
     public void onAddCarTvClicked() {
-        routerIntent(ArouterKey.USER_ADDUSERDETAILACTIVITY,null);
+        routerIntent(ArouterKey.USER_ADDCARACTIVITY,null);
+    }
+
+    @Override
+    public void setCarList(List<CarRequestBean> list) {
+        carManagerAdapter.setNewData(list);
     }
 }

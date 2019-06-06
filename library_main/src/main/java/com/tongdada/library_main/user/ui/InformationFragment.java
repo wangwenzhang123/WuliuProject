@@ -14,15 +14,12 @@ import com.example.library_commen.appkey.IntentKey;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
-import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
-import com.tongdada.base.ui.mvp.base.view.BaseView;
 import com.tongdada.library_main.home.presenter.HomeContract;
 import com.tongdada.library_main.home.presenter.HomePresenter;
 import com.tongdada.library_main.home.request.MessageIntentBean;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.user.adapter.InformationAdapter;
-import com.tongdada.library_main.user.respose.InformationBean;
 
 import java.util.ArrayList;
 import java.util.List;

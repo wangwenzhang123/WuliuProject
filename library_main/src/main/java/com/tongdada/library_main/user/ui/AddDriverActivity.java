@@ -1,6 +1,9 @@
 package com.tongdada.library_main.user.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -8,16 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
 import com.example.library_commen.appkey.ArouterKey;
-import com.example.library_commen.net.CommenApi;
-import com.example.library_commen.utils.CheckUtils;
-import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.presenter.AddDriverContract;
 import com.tongdada.library_main.user.presenter.AddDriverPresenter;
+import com.winfo.photoselector.PhotoSelector;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +67,15 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     ImageView ivLegalReverse;
     @BindView(R2.id.register_register_bt)
     Button registerRegisterBt;
-    DriverRequest request=new DriverRequest();
+    DriverRequest request = new DriverRequest();
+    private static final int IVLEGALPOSITIVE_CODE = 1;
+    private static final int IVLEGALREVERSE_CODE = 2;
+    private static final int DRIVINGLICENSE_CODE = 3;
+    @BindView(R2.id.ll_driving_license)
+    LinearLayout llDrivingLicense;
+    @BindView(R2.id.iv_driving_license)
+    ImageView ivDrivingLicense;
+
     @Override
     public int getView() {
         return R.layout.activity_add_driver;
@@ -82,12 +95,12 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
 
     @OnClick(R2.id.register_back)
     public void onRegisterBackClicked() {
-
+        finish();
     }
 
     @OnClick(R2.id.back_tv)
     public void onBackTvClicked() {
-
+        finishActivity();
     }
 
     @OnClick(R2.id.user_logo)
@@ -97,22 +110,22 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
 
     @OnClick(R2.id.ll_legal_positive)
     public void onLlLegalPositiveClicked() {
-
+        selectPic(IVLEGALPOSITIVE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_reverse)
     public void onLlLegalReverseClicked() {
-
+        selectPic(IVLEGALREVERSE_CODE);
     }
 
     @OnClick(R2.id.register_register_bt)
     public void onRegisterRegisterBtClicked() {
-        String name=etUserName.getText().toString().trim();
-        String address=driverAddress.getText().toString();
-        String age=etDriverAge.getText().toString().trim();
-        String phone=etDriverPhone.getText().toString().trim();
-        String driverYear=etDrivingYears.getText().toString();
-        String card=etIdentityCard.getText().toString().trim();
+        String name = etUserName.getText().toString().trim();
+        String address = driverAddress.getText().toString();
+        String age = etDriverAge.getText().toString().trim();
+        String phone = etDriverPhone.getText().toString().trim();
+        String driverYear = etDrivingYears.getText().toString();
+        String card = etIdentityCard.getText().toString().trim();
         request.setDriveringAge(driverYear);
         request.setDriverName(name);
         request.setDriverMobile(phone);
@@ -122,5 +135,65 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         request.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         request.setCompanyName(CommenUtils.getIncetance().getRequestBean().getCompanyName());
         presenter.addDriver(request);
+    }
+
+    @Override
+    public void selectPic(int code) {
+        PhotoSelector.builder()
+                .setSingle(true)
+                .start(AddDriverActivity.this, code);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            switch (requestCode) {
+                case IVLEGALPOSITIVE_CODE:
+                    List<String> images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Log.e(TGA, "1=" + images.get(0));
+                    Glide.with(mContext).load(images.get(0)).into(ivLegalPositive);
+                    presenter.upload(images.get(0), IVLEGALPOSITIVE_CODE);
+                    break;
+                case IVLEGALREVERSE_CODE:
+                    //images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    List<String> images2 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Glide.with(mContext).load(images2.get(0)).into(ivLegalReverse);
+                    Log.e(TGA, "2=" + images2.get(0));
+                    presenter.upload(images2.get(0), IVLEGALREVERSE_CODE);
+                    break;
+                case DRIVINGLICENSE_CODE:
+                    //images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Glide.with(mContext).load(images3.get(0)).into(ivDrivingLicense);
+                    Log.e(TGA, "2=" + images3.get(0));
+                    presenter.upload(images3.get(0), DRIVINGLICENSE_CODE);
+                    break;
+            }
+        }
+    }
+
+
+    @Override
+    public void uploadSuccess(String path, String url, int dex) {
+        switch (dex) {
+            case IVLEGALPOSITIVE_CODE:
+                Glide.with(mContext).load(path).into(ivLegalPositive);
+                request.setIdFront(url);
+                break;
+            case IVLEGALREVERSE_CODE:
+                Glide.with(mContext).load(path).into(ivLegalReverse);
+                request.setIdBack(url);
+                break;
+            case DRIVINGLICENSE_CODE:
+                Glide.with(mContext).load(path).into(ivLegalReverse);
+                request.setDriverLicense(url);
+                break;
+        }
+    }
+
+    @OnClick(R2.id.ll_driving_license)
+    public void onViewClicked() {
+        selectPic(DRIVINGLICENSE_CODE);
     }
 }

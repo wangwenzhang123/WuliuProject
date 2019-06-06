@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/dp_13"
                 android:layout_width="match_parent"
@@ -67,6 +68,7 @@
                     android:layout_height="@dimen/dp_69" />
             </LinearLayout>
             <View
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dp_4"
                 android:background="@color/_E0E0E0"
                 android:layout_width="match_parent"
@@ -277,16 +279,44 @@
 
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_car_type"
-                    android:layout_width="@dimen/dp_290"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_gravity="right|center"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="@null"
-                    android:gravity="right|center"
-                    android:hint="请输入车辆型号"
-                    android:textSize="@dimen/sp_14" />
+                <RadioGroup
+                    android:id="@+id/rg_type"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_44">
+                    <RadioButton
+                        android:id="@+id/rg_16"
+                        android:checked="true"
+                        android:layout_marginRight="@dimen/dp_24"
+                        android:layout_gravity="center"
+                        android:text="@string/fang_16"
+                        android:button="@null"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:drawableLeft="@drawable/selector_order_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/rg_18"
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_gravity="center"
+                        android:text="@string/fang_18"
+                        android:button="@null"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:drawableLeft="@drawable/selector_order_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/rg_20"
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_gravity="center"
+                        android:text="@string/fang_20"
+                        android:button="@null"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:drawableLeft="@drawable/selector_order_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -12,9 +12,11 @@ import com.tongdada.base.ui.mvp.base.view.BaseView;
  */
 public class AddDriverContract {
     public interface View extends BaseView{
-
+        void selectPic(int  code);
+        void uploadSuccess(String path,String url,int dex);
     }
     public interface Presenter{
         void addDriver(DriverRequest request);
+        void upload(String path,int dex);
     }
 }

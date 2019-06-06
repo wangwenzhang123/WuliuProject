@@ -2,20 +2,12 @@ package com.tongdada.library_main.user.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.library_main.R;
-import com.tongdada.library_main.user.respose.InformationBean;
 import com.tongdada.library_main.user.respose.MessageBean;
 import com.tongdada.library_main.widget.MessageSlidingMenu;
-import com.tongdada.library_main.widget.slideswaphelper.SlideSwapAction;
 
 import java.util.List;
 
