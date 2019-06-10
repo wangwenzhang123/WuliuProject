@@ -20,7 +20,7 @@
         </service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="0157df6a95cccc3c5db7fb492dfd486d">
+            android:value="f28bda79641f056c5f9d5925a4133af0">
         </meta-data>
     </application>
 

@@ -4,7 +4,7 @@ package com.example.library_commen.model;
  * Created by wangshen on 2019/6/3.
  */
 
-public class LogisticsRequestBean {
+public class LogisticsRequestBean implements Cloneable{
     private String companyName="";
     private String companyAddress="";
     private String companyContacts="";
@@ -33,6 +33,11 @@ public class LogisticsRequestBean {
     private UpdateTimeBean updateTime=new UpdateTimeBean();
     private String updateUserID="";
     private String verifyStatus="";
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public String getCompanyName() {
         return companyName;

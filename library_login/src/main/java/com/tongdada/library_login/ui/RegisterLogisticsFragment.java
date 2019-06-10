@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.event.EventModificationLogicBean;
@@ -21,6 +23,7 @@ import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.CommenUtils;
+import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.library_login.R;
 import com.tongdada.library_login.R2;
@@ -67,6 +70,7 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     @BindView(R2.id.register_register_bt)
     Button registerRegisterBt;
     Unbinder unbinder;
+    private boolean isRegister=true;
     private static final int IVBUSINESSLICENSE_CODE=3;
     private static final int ROADRUNNING_CODE=4;
     private LogisticsRequestBean requestRegisterBean=new LogisticsRequestBean();
@@ -99,7 +103,16 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         etLegalPerson.setText(requestRegisterBean.getLegalPersion());
         etUnitName.setText(requestRegisterBean.getCompanyName());
         etRegisteredCapital.setText(requestRegisterBean.getRegisterCapital());
-
+        RequestOptions requestOptions = new RequestOptions()
+                .error(R.mipmap.defult)
+                .placeholder(R.mipmap.defult)
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        if (!TextUtils.isEmpty(requestRegisterBean.getLicensePath())){
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestRegisterBean.getLicensePath()).apply(requestOptions).into(ivLegalPositive1);
+        }
+        if (!TextUtils.isEmpty(requestRegisterBean.getRoadLicensePath())){
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestRegisterBean.getRoadLicensePath()).apply(requestOptions).into(ivLegalReverse1);
+        }
     }
 
     @Override
@@ -146,7 +159,12 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void addUser(EventModificationLogicBean eventAddBean){
-        requestRegisterBean= CommenUtils.getIncetance().getRequestBean();
+        isRegister=false;
+        try {
+            requestRegisterBean= (LogisticsRequestBean) CommenUtils.getIncetance().getRequestBean().clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         updateUi();
     }
     @OnClick(R2.id.ll_legal_positive1)
@@ -193,6 +211,10 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         requestRegisterBean.setContactsPhone(contactPhone);
         requestRegisterBean.setLegalPersion(legalPersion);
         requestRegisterBean.setRegisterCapital(registeredCapital);
-        presenter.registerLogistics(requestRegisterBean);
+        if (isRegister){
+            presenter.registerLogistics(requestRegisterBean);
+        }else {
+            presenter.updateLogi(requestRegisterBean);
+        }
     }
 }

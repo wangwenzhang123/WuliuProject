@@ -10,8 +10,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_main.R;
 import com.tongdada.base.config.BaseUrl;
-import com.tongdada.library_main.widget.CarSlidingMenu;
-import com.tongdada.library_main.widget.DriverSlidingMenu;
 
 import java.util.List;
 
@@ -38,16 +36,5 @@ public class DriverManagerAdapter extends BaseQuickAdapter<DriverRequest,BaseVie
                 .placeholder(R.mipmap.user_defut);
         ImageView imageView=helper.getView(R.id.user_pic);
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+item.getIdBack()).into(imageView);
-    }
-    private DriverSlidingMenu mOpenMenu;
-
-    public void holdOpenMenu(DriverSlidingMenu slidingMenu) {
-        mOpenMenu = slidingMenu;
-    }
-
-    public void closeOpenMenu() {
-        if (mOpenMenu != null && mOpenMenu.isOpen()) {
-            mOpenMenu.closeMenu();
-        }
     }
 }

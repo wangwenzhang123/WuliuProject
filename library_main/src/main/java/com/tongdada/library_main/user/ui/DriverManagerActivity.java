@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_main.R;
@@ -18,6 +20,7 @@ import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.adapter.DriverManagerAdapter;
 import com.tongdada.library_main.user.presenter.DriverManagerContract;
 import com.tongdada.library_main.user.presenter.DriverManagerPresenter;
+import com.tongdada.library_main.widget.SlideRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +47,7 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     @BindView(R2.id.add_driver_tv)
     TextView addDriverTv;
     @BindView(R2.id.driver_manager_recycle)
-    RecyclerView driverManagerRecycle;
+    SlideRecyclerView driverManagerRecycle;
     DriverManagerAdapter driverManagerAdapter;
     @Override
     public int getView() {
@@ -72,6 +75,12 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
                 if (view .getId() == R.id.item_slide){
                     presenter.deleteDriver(driverManagerAdapter.getData().get(position).getId());
                 }
+            }
+        });
+        driverManagerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build(ArouterKey.USER_ADDDRIVERACTIVITY).withSerializable(IntentKey.DRIVER_BEAN,driverManagerAdapter.getData().get(position)).navigation(mContext);
             }
         });
     }

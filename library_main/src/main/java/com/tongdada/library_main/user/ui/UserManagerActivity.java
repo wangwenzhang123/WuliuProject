@@ -21,6 +21,7 @@ import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.adapter.UserManagerAdapter;
 import com.tongdada.library_main.user.presenter.UserManagerContract;
 import com.tongdada.library_main.user.presenter.UserManagerPresenter;
+import com.tongdada.library_main.widget.SlideRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,7 +46,7 @@ public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> i
     @BindView(R2.id.register_back)
     ImageView registerBack;
     @BindView(R2.id.user_manager_recycle)
-    RecyclerView userManagerRecycle;
+    SlideRecyclerView userManagerRecycle;
     @BindView(R2.id.add_user_tv)
     TextView addUserTv;
     private List<UserBean> userManagerBeanList = new ArrayList<>();

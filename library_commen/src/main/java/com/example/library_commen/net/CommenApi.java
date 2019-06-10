@@ -5,12 +5,15 @@ import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.PagenationBase;
 import com.example.library_commen.model.TransportCarBean;
+import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.model.UserBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -42,4 +45,30 @@ public interface CommenApi {
     @FormUrlEncoded
     @POST("/interface/batchUpdateDetailOrders.action")
     Observable<BaseAppEntity<OrderBean>> batchUpdateDetailOrders(@Field("detailOrderIds") String id,@Field("orderStatus") String orderStatus);
+    /**
+     * 上传图片
+     * @param requestBody
+     * @return
+     */
+    @POST("/interface/uploadAttach.action")
+    Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
+
+    /**
+     * 物流端接单
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/acceptOrderOfLogi.action")
+    Observable<BaseAppEntity<OrderBean>> acceptOrderOfLogi(@Field("psDetailOrders.orderAmount") String orderAmount,
+                                                           @Field("psDetailOrders.orderId") String orderId,
+                                                           @Field("psDetailOrders.totalDistance") String totalDistance,
+                                                           @Field("psDetailOrders.orderRemark") String orderRemark,
+                                                           @Field("psDetailOrders.stationId") String stationId,
+                                                           @Field("psDetailOrders.stationName") String stationName,
+                                                           @Field("psDetailOrders.companyId") String companyId,
+                                                           @Field("carIds") String carIds,
+                                                           @Field("psDetailOrders.orderPrice") String orderPrice
+
+                                                           );
 }

@@ -1,5 +1,7 @@
 package com.example.library_commen.appkey;
 
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * Created by wangshen on 2019/5/13.
  */
@@ -46,4 +48,6 @@ public class ArouterKey {
     public static final String HONE_SELECTCARACTIVITY="/home/SelectCarActivity";
     public static final String LOGIN_LOGICREGISTERFRAGMENT="/login/RegisterLogisticsFragment";
     public static final String USER_MAINTENANCELOGICACTIVITY="/user/MaintenanceLogicActivity";
+    public static final String USER_SELECTDRIVER="/user/SelectDriverActivity";
+    public static final String HOME_MOREORDERACTIVITY="/home/MoreOrderActivity";
 }

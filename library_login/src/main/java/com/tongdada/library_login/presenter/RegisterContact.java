@@ -17,6 +17,7 @@ public class RegisterContact {
       void registerUser(DriverRequest requestRegisterBean);
       void registerLogistics(LogisticsRequestBean requestRegisterBean);
       void upload(String path,int dex);
+      void updateLogi(LogisticsRequestBean requestRegisterBean);
    }
    public interface View extends BaseView{
       void selectPic(int  code);

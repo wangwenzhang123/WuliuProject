@@ -1,5 +1,7 @@
 package com.example.library_commen.model;
 
+import java.io.Serializable;
+
 /**
  * @name WuliuProject
  * @class describe
@@ -7,7 +9,7 @@ package com.example.library_commen.model;
  * @time 2019/6/6 14:34
  * @change
  */
-public class CarRequestBean {
+public class CarRequestBean implements Serializable{
     private String carName="";
     private String carNo="";
     private String buyTime="";
@@ -22,6 +24,33 @@ public class CarRequestBean {
     private String id="";
     private String insuranceDate="";
     private String mileages="";
+    private String driverName="";
+    private boolean isCheck=false;
+    private String delFlag="";
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
 
     public String getInsuranceDate() {
         return insuranceDate;

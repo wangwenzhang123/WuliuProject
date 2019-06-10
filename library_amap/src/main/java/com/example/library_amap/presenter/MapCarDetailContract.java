@@ -14,10 +14,14 @@ public class MapCarDetailContract  {
     public interface View extends BaseView{
         void setDetailOrder(DriverOrderDetailBean detailOrder);
         void updateSuccess();
+        void selectPic(int  code);
+        void uploadSuccess(String path,String url,int dex);
     }
     public interface Presenter{
+        void upload(String path,int dex);
         void getDetailOrderById(String orderid);
         void updateDetailOrders(String id,String state);
         void batchUpdateDetailOrders(String id, String state);
+
     }
 }

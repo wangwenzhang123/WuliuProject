@@ -14,9 +14,11 @@ public class AddCarContract {
     public interface View extends BaseView{
         void selectPic(int  code);
         void uploadSuccess(String path,String url,int dex);
+        void upDateUi();
     }
     public interface Presenter{
         void addCar(CarRequestBean carRequestBean);
         void upload(String path,int dex);
+        void updateCar(CarRequestBean carRequestBean);
     }
 }

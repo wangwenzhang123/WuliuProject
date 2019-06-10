@@ -40,12 +40,12 @@ public class AddDriverPresenter extends BasePresenter<AddDriverContract.View> im
                     @Override
                     public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
-                        getView().finishActivity();
+                        getView().addSuccess();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }
@@ -81,6 +81,24 @@ public class AddDriverPresenter extends BasePresenter<AddDriverContract.View> im
                                         getView().showToast(throwable.getMessage());
                                     }
                                 });
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void updateDriver(DriverRequest request) {
+        MainApiUtils.getMainApi().updateDriver(UserMapUtils.getDriverRegisterMap(request))
+                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
+                        EventBus.getDefault().post(new EventAddBean());
+                        getView().addSuccess();
                     }
                 }, new Consumer<Throwable>() {
                     @Override

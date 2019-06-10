@@ -11,32 +11,34 @@
 
         <ImageView
             android:id="@+id/register_back"
-            android:layout_width="@dimen/dp_9"
-            android:layout_height="@dimen/dp_18"
-            android:layout_marginBottom="@dimen/dp_15"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/back_tv"
-            android:textColor="@color/FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_7"
-            android:layout_marginTop="@dimen/dp_11"
-            android:layout_toEndOf="@+id/register_back"
-            android:layout_toRightOf="@+id/register_back"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
             android:text="@string/back"
+            android:textColor="@color/FFFFFF"
             android:textSize="@dimen/sp_18" />
 
         <TextView
-            android:textColor="@color/FFFFFF"
+            android:id="@+id/add_car_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_10"
             android:text="@string/add_car"
+            android:textColor="@color/FFFFFF"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
 
@@ -117,7 +119,7 @@
 
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_weight="1"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -127,7 +129,8 @@
                     android:textSize="@dimen/sp_14" />
                 <TextView
                     android:id="@+id/driver_name"
-                    android:layout_width="@dimen/dp_290"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
                     android:layout_height="@dimen/dp_30"
                     android:layout_gravity="right|center"
                     android:background="@null"
@@ -244,7 +247,7 @@
 
                 <TextView
                     android:inputType="numberDecimal"
-                    android:id="@+id/et_contact_phone"
+                    android:id="@+id/et_shop_time"
                     android:layout_width="@dimen/dp_290"
                     android:layout_height="@dimen/dp_30"
                     android:layout_gravity="right|center"
@@ -340,7 +343,6 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_44"
-
                 android:orientation="horizontal">
 
                 <EditText

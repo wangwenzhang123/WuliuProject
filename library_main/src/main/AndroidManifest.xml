@@ -77,6 +77,12 @@
         <activity android:name="com.tongdada.library_main.user.ui.MaintenanceLogicActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.SelectDriverActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.home.ui.MoreOrderActivity">
+
+        </activity>
     </application>
 
 </manifest>

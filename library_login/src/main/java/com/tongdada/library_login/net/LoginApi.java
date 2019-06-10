@@ -1,5 +1,6 @@
 package com.tongdada.library_login.net;
 
+import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.UserBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.example.library_commen.model.RequestRegisterBean;
@@ -56,7 +57,14 @@ public interface LoginApi {
     @FormUrlEncoded
     @POST("/interface/logiUserRegister.action")
     Observable<BaseAppEntity<UserBean>> logiUserRegister(@FieldMap Map<String,Object> params);
-
+    /**
+     * 物流公司更新
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/updateLogi.action")
+    Observable<BaseAppEntity<LogisticsRequestBean>> updateLogi(@FieldMap Map<String,Object> params);
     /**
      * 忘记密码
      * @param phone

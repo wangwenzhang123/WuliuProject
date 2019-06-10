@@ -86,15 +86,15 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
         switch (dex) {
             case IVLEGALPOSITIVE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalPositive);
-                //requestRegisterBean.setBackPic(url);
+                requestRegisterBean.setIdFront(url);
                 break;
             case IVLEGALREVERSE_CODE:
                 Glide.with(mContext).load(path).into(ivLegalReverse);
-                //requestRegisterBean.setFrontPic(url);
+                requestRegisterBean.setIdBack(url);
                 break;
             case IVBUSINESSLICENSE_CODE:
-                //Glide.with(mContext).load(path).into(ivBusinessLicense);
-                //requestRegisterBean.setLicensePic(url);
+                Glide.with(mContext).load(path).into(ivLegalPositive1);
+                requestRegisterBean.setDriverLicense(url);
                 break;
         }
     }
@@ -123,7 +123,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
                     break;
                 case IVBUSINESSLICENSE_CODE:
                     List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
-                    //Glide.with(mContext).load(images3.get(0)).into(ivBusinessLicense);
+                    Glide.with(mContext).load(images3.get(0)).into(ivLegalPositive1);
                     presenter.upload(images3.get(0), IVBUSINESSLICENSE_CODE);
                     break;
             }
@@ -138,21 +138,6 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
     @Override
     public int getViewId() {
         return R.layout.fragment_register_user;
-    }
-
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initLinsenterner() {
-
-    }
-
-    @Override
-    public void getData() {
-
     }
 
     @Override
@@ -171,22 +156,17 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
 
     @OnClick(R2.id.ll_legal_positive)
     public void onLlLegalPositiveClicked() {
-
+        selectPic(IVLEGALPOSITIVE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_reverse)
     public void onLlLegalReverseClicked() {
-
+        selectPic(IVLEGALREVERSE_CODE);
     }
 
     @OnClick(R2.id.ll_legal_positive1)
     public void onLlLegalPositive1Clicked() {
-
-    }
-
-    @OnClick(R2.id.ll_legal_reverse1)
-    public void onLlLegalReverse1Clicked() {
-
+        selectPic(IVBUSINESSLICENSE_CODE);
     }
 
     @OnClick(R2.id.register_register_bt)

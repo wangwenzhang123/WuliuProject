@@ -154,7 +154,12 @@ public class UserMapUtils {
         map.put("psCars.companyId",requestRegisterBean.getCompanyId());
         map.put("psCars.driverId",requestRegisterBean.getDriverId());
         map.put("psCars.id",requestRegisterBean.getId());
-
+        map.put("psCars.id",requestRegisterBean.getId());
+        map.put("psCars.id",requestRegisterBean.getId());
+        map.put("psCars.insuranceDate",requestRegisterBean.getInsuranceDate());
+        map.put("psCars.mileages",requestRegisterBean.getMileages());
+        map.put("psCars.driverName",requestRegisterBean.getDriverName());
+        map.put("psCars.delFlag",requestRegisterBean.getDelFlag());
         return map;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.library_amap.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,20 +26,23 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library_amap.R;
 import com.example.library_amap.R2;
-import com.example.library_commen.event.EventUpdateOrderList;
-import com.example.library_commen.model.CarBean;
 import com.example.library_amap.model.MarkerBean;
 import com.example.library_amap.presenter.MapCarDetailContract;
 import com.example.library_amap.presenter.MapCarDetailPresenter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventUpdateOrderList;
+import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.utils.PhoneCallUtils;
 import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
+import com.winfo.photoselector.PhotoSelector;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,16 +86,18 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     ImageView loadingPic;
     @BindView(R2.id.unload_pic)
     ImageView unloadPic;
-    @BindView(R2.id.reject_tv)
-    TextView rejectTv;
     @BindView(R2.id.unload_accomplish_tv)
     TextView unloadAccomplishTv;
     @BindView(R2.id.bottom_ll)
     LinearLayout bottomLl;
+    @BindView(R2.id.ll_loading_pic)
+    LinearLayout llLoadingPic;
+    @BindView(R2.id.ll_unload_pic)
+    LinearLayout llUnloadPic;
     private AMap aMap;
-    private Marker selectMarker;
     private String id;
-
+    private static final int LOADING_CODE = 1;
+    private static final int UNLOADING_CODE = 2;
     @Override
     public int getView() {
         return R.layout.activity_map_cardetail;
@@ -126,38 +133,8 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     }
 
     @Override
-    public void initLinsenterner() {
-        aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-               /* if (selectMarker == null) {
-                    selectMarker = aMap.addMarker(new MarkerOptions().position(latLng)
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_pic))
-                            .anchor(0.5f, 0.5f));
-                    selectMarker.setTitle("王神");
-                    selectMarker.setSnippet("12345678");
-                    selectMarker.showInfoWindow();
-                    Marker marker = aMap.addMarker(new MarkerOptions().position(latLng)
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_pic))
-                            .anchor(0.5f, 0.5f));
-                    marker.setTitle("王先生");
-                    marker.setSnippet("18119946110");
-                    marker.showInfoWindow();
-                } else {
-                    selectMarker.setPosition(latLng);
-                }*/
-            }
-        });
-    }
-
-    @Override
     public MapCarDetailPresenter getPresenter() {
         return new MapCarDetailPresenter();
-    }
-
-    @Override
-    public void getData() {
-
     }
 
     @Override
@@ -255,7 +232,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         Observable.create(new ObservableOnSubscribe<MarkerBean>() {
             @Override
             public void subscribe(ObservableEmitter<MarkerBean> e) throws Exception {
-                CarBean carBean = new CarBean(detailOrder.getDriverName(),detailOrder.getCarNo(), detailOrder.getPsDriver().getDriverMobile(), Double.valueOf(detailOrder.getPsCar().getCarLatitude()), Double.valueOf(detailOrder.getPsCar().getCarLongitude()));
+                CarBean carBean = new CarBean(detailOrder.getDriverName(), detailOrder.getCarNo(), detailOrder.getPsDriver().getDriverMobile(), Double.valueOf(detailOrder.getPsCar().getCarLatitude()), Double.valueOf(detailOrder.getPsCar().getCarLongitude()));
                 Bitmap bitmap = getViewBitmap(carBean);
                 MarkerBean markerBean = new MarkerBean(carBean.getJing(), carBean.getWei(), carBean.getPhone(), bitmap);
                 e.onNext(markerBean);
@@ -281,11 +258,15 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
-        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getUnloadLicense()).apply(requestOptions).into(unloadPic);
-        if (detailOrder.getOrderStatus().equals("R")){
+        if (!TextUtils.isEmpty(detailOrder.getLoadLicense())){
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
+        }
+        if (!TextUtils.isEmpty(detailOrder.getUnloadLicense())){
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getUnloadLicense()).apply(requestOptions).into(unloadPic);
+        }
+        if (detailOrder.getOrderStatus().equals("R")) {
             bottomLl.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             bottomLl.setVisibility(View.GONE);
         }
     }
@@ -294,6 +275,47 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     public void updateSuccess() {
         EventBus.getDefault().post(new EventUpdateOrderList());
         finish();
+    }
+
+    @Override
+    public void selectPic(int code) {
+        PhotoSelector.builder()
+                .setSingle(true)
+                .start(this, code);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            switch (requestCode) {
+                case LOADING_CODE:
+                    //单选的话 images就只有一条数据直接get(0)即可
+                    List<String> images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Glide.with(mContext).load(images.get(0)).into(loadingPic);
+                    presenter.upload(images.get(0), LOADING_CODE);
+                    break;
+                case UNLOADING_CODE:
+                    //images = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    List<String> images2 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
+                    Glide.with(mContext).load(images2.get(0)).into(unloadPic);
+                    presenter.upload(images2.get(0), UNLOADING_CODE);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void uploadSuccess(String path, String url, int dex) {
+        switch (dex) {
+            case LOADING_CODE:
+                Glide.with(mContext).load(path).into(loadingPic);
+                //requestRegisterBean.setBackPic(url);
+                break;
+            case UNLOADING_CODE:
+                Glide.with(mContext).load(path).into(unloadPic);
+                //requestRegisterBean.setFrontPic(url);
+                break;
+        }
     }
 
     private Bitmap getViewBitmap(CarBean carBean) {
@@ -330,13 +352,18 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         return bitmap;
     }
 
-    @OnClick(R2.id.reject_tv)
-    public void onRejectTvClicked() {
-        presenter.updateDetailOrders(id, "Z");
-    }
-
     @OnClick(R2.id.unload_accomplish_tv)
     public void onUnloadAccomplishTvClicked() {
         presenter.batchUpdateDetailOrders(id, "X");
+    }
+
+    @OnClick(R2.id.ll_loading_pic)
+    public void onLlLoadingPicClicked() {
+
+    }
+
+    @OnClick(R2.id.ll_unload_pic)
+    public void onLlUnloadPicClicked() {
+
     }
 }

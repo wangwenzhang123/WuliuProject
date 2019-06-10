@@ -15,7 +15,7 @@ import io.reactivex.functions.Consumer;
 public class SearchOrderPresenter extends BasePresenter<SearchOrderContract.View> implements SearchOrderContract.Presenter {
     @Override
     public void getSearchOrder(String resul) {
-        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(), "0", resul, "")
+        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), "0", resul, "")
                 .compose(this.<PagenationBase<OrderListBean>>handleEverythingResult())
                 .subscribe(new Consumer<PagenationBase<OrderListBean>>() {
                     @Override

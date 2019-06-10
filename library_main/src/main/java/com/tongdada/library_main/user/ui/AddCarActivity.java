@@ -3,6 +3,7 @@ package com.tongdada.library_main.user.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,16 +15,27 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.CarRequestBean;
+import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
+import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.presenter.AddCarContract;
 import com.tongdada.library_main.user.presenter.AddCarPresenter;
+import com.tongdada.library_main.widget.datepicker.CustomDatePicker;
+import com.tongdada.library_main.widget.datepicker.DateFormatUtils;
 import com.winfo.photoselector.PhotoSelector;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -49,14 +61,10 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     ImageView userLogo;
     @BindView(R2.id.et_car_no)
     EditText etCarNo;
-    @BindView(R2.id.driver_name)
-    TextView driverName;
     @BindView(R2.id.issue_vehicle_type_tv)
     TextView issueVehicleTypeTv;
     @BindView(R2.id.et_car_brand)
     EditText etCarBrand;
-    @BindView(R2.id.et_contact_phone)
-    TextView etContactPhone;
     @BindView(R2.id.et_travlled_distance)
     EditText etTravlledDistance;
     @BindView(R2.id.et_car_load)
@@ -81,8 +89,17 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     RadioButton rg20;
     @BindView(R2.id.rg_type)
     RadioGroup rgType;
+    @BindView(R2.id.et_shop_time)
+    TextView etShopTime;
+    @BindView(R2.id.add_car_title)
+    TextView addCarTitle;
+    @BindView(R2.id.driver_name)
+    TextView driverName;
+    private boolean isAdd=true;
     private CarRequestBean requestBean = new CarRequestBean();
     private static final int DRIVINGLICENSE_CODE = 3;
+    private CustomDatePicker mTimerPicker;
+    private boolean isShopTime = false;
 
     @Override
     public int getView() {
@@ -95,10 +112,53 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     }
 
     @Override
+    public void getData() {
+        requestBean.setCarType("T16");
+        if (getIntent().getSerializableExtra(IntentKey.CAR_BEAN) != null) {
+            requestBean = (CarRequestBean) getIntent().getSerializableExtra(IntentKey.CAR_BEAN);
+            addCarTitle.setText("修改车辆");
+            registerRegisterBt.setText("确认修改");
+            upDateUi();
+            isAdd=false;
+        }
+
+    }
+
+    private void initTimerPicker() {
+        String beginTime = DateFormatUtils.long2Str(System.currentTimeMillis() - 315360000000L, true);
+        String endTime = DateFormatUtils.long2Str(System.currentTimeMillis() + 315360000000L, true);
+        carTime.setText(beginTime);
+        etShopTime.setText(beginTime);
+        mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
+            @Override
+            public void onTimeSelected(long timestamp) {
+                if (isShopTime) {
+                    etShopTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                } else {
+                    carTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                }
+            }
+        }, beginTime, endTime);
+        mTimerPicker.setCancelable(true);
+        mTimerPicker.setCanShowPreciseTime(true);
+        mTimerPicker.setScrollLoop(true);
+        mTimerPicker.setCanShowAnim(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+        initTimerPicker();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventDriver(DriverRequest driverRequest) {
+        driverName.setText(driverRequest.getDriverName());
+        requestBean.setDriverId(driverRequest.getId());
+        requestBean.setDriverName(driverRequest.getDriverName());
     }
 
     @OnClick(R2.id.register_back)
@@ -123,16 +183,25 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
 
     @OnClick(R2.id.register_register_bt)
     public void onRegisterRegisterBtClicked() {
-        String  carName=etCarBrand.getText().toString().trim();
-        String  carNo=etCarNo.getText().toString().trim();
-        String  mileages=etTravlledDistance.getText().toString().trim();
-        String  carLoad=etTravlledDistance.getText().toString().trim();
+        String carName = etCarBrand.getText().toString().trim();
+        String carNo = etCarNo.getText().toString().trim();
+        String mileages = etTravlledDistance.getText().toString().trim();
+        String carLoad = etCarLoad.getText().toString().trim();
+        String shopTime=etShopTime.getText().toString().trim();
+        String cartime=carTime.getText().toString().trim();
+        requestBean.setBuyTime(shopTime);
+        requestBean.setInsuranceDate(cartime);
         requestBean.setCarLoad(carLoad);
         requestBean.setCarNo(carNo);
         requestBean.setCarName(carName);
         requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         requestBean.setMileages(mileages);
-        presenter.addCar(requestBean);
+        if (isAdd){
+            presenter.addCar(requestBean);
+        }else {
+            requestBean.setDelFlag("0");
+            presenter.updateCar(requestBean);
+        }
     }
 
     @Override
@@ -168,6 +237,39 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         }
     }
 
+    @Override
+    public void upDateUi() {
+        etCarBrand.setText(requestBean.getCarName());
+        etCarLoad.setText(requestBean.getCarLoad());
+        etCarNo.setText(requestBean.getCarNo());
+        etTravlledDistance.setText(requestBean.getMileages());
+        carTime.setText(requestBean.getInsuranceDate());
+        etShopTime.setText(requestBean.getBuyTime());
+        driverName.setText(requestBean.getDriverName());
+        RequestOptions requestOptions=new RequestOptions().centerCrop()
+                .error(R.mipmap.defult)
+                .placeholder(R.mipmap.defult);
+        if (!TextUtils.isEmpty(requestBean.getDriveLicense())){
+            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+requestBean.getDriveLicense()).into(ivBusinessLicense);
+        }
+        if (requestBean.getCarType().equals("B")) {
+            rbBeng.setChecked(true);
+        } else {
+            rbTong.setChecked(true);
+            switch (requestBean.getCarType()) {
+                case "T16":
+                    rg16.setChecked(true);
+                    break;
+                case "T18":
+                    rg18.setChecked(true);
+                    break;
+                case "T20":
+                    rg20.setChecked(true);
+                    break;
+            }
+        }
+    }
+
     @OnClick(R2.id.rb_tong)
     public void onRbTongClicked() {
         rgType.setVisibility(View.VISIBLE);
@@ -200,5 +302,27 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     @OnClick(R2.id.rg_20)
     public void onRg20Clicked() {
         requestBean.setCarType("T20");
+    }
+
+    @OnClick(R2.id.et_shop_time)
+    public void onViewClicked() {
+
+    }
+
+    @OnClick(R2.id.driver_name)
+    public void onViewDriverClicked() {
+        ARouter.getInstance().build(ArouterKey.USER_SELECTDRIVER).navigation(mContext);
+    }
+
+    @OnClick(R2.id.et_shop_time)
+    public void onEtShopTimeClicked() {
+        mTimerPicker.show(etShopTime.getText().toString());
+        isShopTime=true;
+    }
+
+    @OnClick(R2.id.car_time)
+    public void onCarTimeClicked() {
+        mTimerPicker.show(carTime.getText().toString());
+        isShopTime=false;
     }
 }

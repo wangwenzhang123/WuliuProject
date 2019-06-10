@@ -28,7 +28,18 @@
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_2"
         app:layout_constraintLeft_toLeftOf="@id/order_v"
-        android:text="我是搅拌站"
+        android:text="我是搅拌站4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/order_v"
+        android:textColor="@color/_DE3030"
+        android:textSize="@dimen/sp_14"
+        android:id="@+id/order_accept_number"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_2"
+        app:layout_constraintLeft_toRightOf="@id/order_name"
+        android:text="30人已接单"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView

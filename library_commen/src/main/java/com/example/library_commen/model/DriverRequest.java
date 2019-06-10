@@ -1,10 +1,12 @@
 package com.example.library_commen.model;
 
+import java.io.Serializable;
+
 /**
  * Created by wangshen on 2019/6/3.
  */
 
-public class DriverRequest {
+public class DriverRequest implements Serializable{
     private String driverName="";
     private String driverMobile="";
     private String driverIdNo="";
@@ -187,7 +189,7 @@ public class DriverRequest {
         this.updateUserID = updateUserID;
     }
 
-    public static class CreateTimeBean {
+    public static class CreateTimeBean implements Serializable{
         /**
          * date : 3
          * day : 1
@@ -293,7 +295,7 @@ public class DriverRequest {
         }
     }
 
-    public static class UpdateTimeBean {
+    public static class UpdateTimeBean implements Serializable{
         /**
          * date : 3
          * day : 1

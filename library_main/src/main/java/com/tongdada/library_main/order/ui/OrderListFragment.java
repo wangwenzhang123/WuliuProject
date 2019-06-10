@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventAddBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
@@ -45,8 +46,12 @@ import butterknife.Unbinder;
  */
 @SuppressLint("ValidFragment")
 public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListContract.View,OrderListPresenter,OrderBean> implements OrderListContract.View {
-    private String type;
+    private String type="";
     private List<OrderBean> orderBeanList=new ArrayList<>();
+
+    public OrderListFragment() {
+    }
+
     @SuppressLint("ValidFragment")
     public OrderListFragment(String type) {
         this.type=type;
@@ -64,14 +69,20 @@ public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListCont
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EventBus.getDefault().register(this);
+        try {
+            if (!EventBus.getDefault().isRegistered(this)){
+                EventBus.getDefault().register(this);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         getRecyclerAdapter().setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
                 Bundle bundle=new Bundle();
                 bundle.putString(IntentKey.ORDER_ID,getRecyclerAdapter().getData().get(position).getId());
                 if (type .equals("F")){
-                    routerIntent(ArouterKey.MAP_MAPORDERDETAILACTIVITY,bundle);
+                    routerIntent(ArouterKey.MAP_MAPACCEPTORDERDETAILACTIVITY,bundle);
                 }else {
                     routerIntent(ArouterKey.ORDER_ORDERDETAILACTIVITY,bundle);
                 }

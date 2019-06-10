@@ -3,6 +3,7 @@ package com.tongdada.library_main.user.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +13,15 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
+import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.presenter.AddDriverContract;
 import com.tongdada.library_main.user.presenter.AddDriverPresenter;
@@ -75,7 +80,9 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     LinearLayout llDrivingLicense;
     @BindView(R2.id.iv_driving_license)
     ImageView ivDrivingLicense;
-
+    @BindView(R2.id.add_driver_title)
+    TextView addDriverTitle;
+    private boolean isAdd=true;
     @Override
     public int getView() {
         return R.layout.activity_add_driver;
@@ -84,6 +91,17 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     @Override
     public AddDriverPresenter getPresenter() {
         return new AddDriverPresenter();
+    }
+
+    @Override
+    public void getData() {
+        if (getIntent().getSerializableExtra(IntentKey.DRIVER_BEAN) != null) {
+            request = (DriverRequest) getIntent().getSerializableExtra(IntentKey.DRIVER_BEAN);
+            addDriverTitle.setText("修改司机");
+            registerRegisterBt.setText("确认修改");
+            upDateUi();
+            isAdd=false;
+        }
     }
 
     @Override
@@ -134,7 +152,12 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         request.setDriAge(age);
         request.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         request.setCompanyName(CommenUtils.getIncetance().getRequestBean().getCompanyName());
-        presenter.addDriver(request);
+        if (isAdd){
+            presenter.addDriver(request);
+        }else {
+            presenter.updateDriver(request);
+        }
+
     }
 
     @Override
@@ -186,10 +209,39 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
                 request.setIdBack(url);
                 break;
             case DRIVINGLICENSE_CODE:
-                Glide.with(mContext).load(path).into(ivLegalReverse);
+                Glide.with(mContext).load(path).into(ivDrivingLicense);
                 request.setDriverLicense(url);
                 break;
         }
+    }
+
+    @Override
+    public void upDateUi() {
+        etDriverAge.setText(request.getDriveringAge());
+        etDriverPhone.setText(request.getDriverMobile());
+        etDrivingYears.setText(request.getDriAge());
+        driverAddress.setText(request.getDriverAddress());
+        etUserName.setText(request.getDriverName());
+        etIdentityCard.setText(request.getDriverIdNo());
+        RequestOptions requestOptions=new RequestOptions()
+                .error(R.mipmap.defult)
+                .placeholder(R.mipmap.defult)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                ;
+        if (!TextUtils.isEmpty(request.getIdBack())){
+            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getIdBack()).apply(requestOptions).into(ivLegalReverse);
+        }
+        if (!TextUtils.isEmpty(request.getIdFront())){
+            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getIdFront()).apply(requestOptions).into(ivLegalPositive);
+        }
+        if (!TextUtils.isEmpty(request.getDriverIdNo())){
+            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getDriverIdNo()).apply(requestOptions).into(ivDrivingLicense);
+        }
+    }
+
+    @Override
+    public void addSuccess() {
+        finish();
     }
 
     @OnClick(R2.id.ll_driving_license)

@@ -353,6 +353,7 @@
                     android:scaleType="fitXY" />
             </FrameLayout>
             <FrameLayout
+                android:visibility="gone"
                 android:layout_marginLeft="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_30"
                 android:orientation="horizontal"

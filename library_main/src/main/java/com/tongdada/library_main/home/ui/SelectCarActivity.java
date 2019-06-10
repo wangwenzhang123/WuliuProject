@@ -11,15 +11,17 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
-import com.tongdada.library_main.finance.net.respose.FinaceBean;
 import com.tongdada.library_main.home.adapter.SelectCarAdapter;
-import com.tongdada.library_main.home.presenter.SelectCarContract;
-import com.tongdada.library_main.home.presenter.SelectCarPresenter;
-import com.tongdada.library_main.home.respose.SelectCarBean;
+import com.example.library_commen.model.SelectCarBean;
+import com.tongdada.library_main.user.presenter.CarManagerContract;
+import com.tongdada.library_main.user.presenter.CarManagerPresenter;
 import com.tongdada.library_main.widget.SpaceItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ import butterknife.OnClick;
  * @change
  */
 @Route(path = ArouterKey.HONE_SELECTCARACTIVITY)
-public class SelectCarActivity extends BaseMvpActivity<SelectCarPresenter> implements SelectCarContract.View {
+public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> implements CarManagerContract.View {
     @BindView(R2.id.register_back)
     ImageView registerBack;
     @BindView(R2.id.back_tv)
@@ -56,8 +58,8 @@ public class SelectCarActivity extends BaseMvpActivity<SelectCarPresenter> imple
     }
 
     @Override
-    public SelectCarPresenter getPresenter() {
-        return new SelectCarPresenter();
+    public CarManagerPresenter getPresenter() {
+        return new CarManagerPresenter();
     }
 
     @Override
@@ -69,18 +71,13 @@ public class SelectCarActivity extends BaseMvpActivity<SelectCarPresenter> imple
 
     @Override
     public void initView() {
-        List<SelectCarBean> list=new ArrayList<>();
-        list.add(new SelectCarBean());
-        list.add(new SelectCarBean());
-        list.add(new SelectCarBean());
-        list.add(new SelectCarBean());
-        list.add(new SelectCarBean());
-        list.add(new SelectCarBean());
+        List<CarRequestBean> list=new ArrayList<>();
         selectCarAdapter=new SelectCarAdapter(R.layout.item_select_car,list);
         carRecycle.setLayoutManager(new GridLayoutManager(mContext,2));
         carRecycle.setAdapter(selectCarAdapter);
         SpaceItemDecoration spaceItemDecoration=new SpaceItemDecoration(10,20);
         carRecycle.addItemDecoration(spaceItemDecoration);
+        presenter.getCarList();
     }
 
     @Override
@@ -88,7 +85,7 @@ public class SelectCarActivity extends BaseMvpActivity<SelectCarPresenter> imple
         selectCarAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                SelectCarBean finaceBean=selectCarAdapter.getData().get(position);
+                CarRequestBean finaceBean=selectCarAdapter.getData().get(position);
                 if (finaceBean.isCheck()){
                     finaceBean.setCheck(false);
                 }else {
@@ -108,14 +105,39 @@ public class SelectCarActivity extends BaseMvpActivity<SelectCarPresenter> imple
     public void onBackTvClicked() {
         finish();
     }
-
+    private boolean isCheckAll=false;
     @OnClick(R2.id.check_all)
     public void onCheckAllClicked() {
-
+        for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
+            if (!isCheckAll){
+                selectCarAdapter.getData().get(i).setCheck(true);
+            }else {
+                selectCarAdapter.getData().get(i).setCheck(false);
+            }
+        }
+        if (isCheckAll){
+            isCheckAll=false;
+        }else {
+            isCheckAll=true;
+        }
+        selectCarAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R2.id.settlement_bt)
     public void onSettlementBtClicked() {
+        List<SelectCarBean> list=new ArrayList<>();
+        for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
+            CarRequestBean requestBean=selectCarAdapter.getData().get(i);
+            if (requestBean.isCheck()){
+                list.add(new SelectCarBean(requestBean.getId(),requestBean.getCarNo()));
+            }
+        }
+        EventBus.getDefault().post(list);
+        finish();
+    }
 
+    @Override
+    public void setCarList(List<CarRequestBean> list) {
+        selectCarAdapter.setNewData(list);
     }
 }

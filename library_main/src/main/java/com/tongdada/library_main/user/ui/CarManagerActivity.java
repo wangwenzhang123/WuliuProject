@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
@@ -17,6 +20,11 @@ import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.user.adapter.CarManagerAdapter;
 import com.tongdada.library_main.user.presenter.CarManagerContract;
 import com.tongdada.library_main.user.presenter.CarManagerPresenter;
+import com.tongdada.library_main.widget.SlideRecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +47,7 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
     @BindView(R2.id.add_car_tv)
     TextView addCarTv;
     @BindView(R2.id.car_manager_recycle)
-    RecyclerView carManagerRecycle;
+    SlideRecyclerView carManagerRecycle;
     private CarManagerAdapter carManagerAdapter;
     @Override
     public int getView() {
@@ -56,8 +64,12 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventAdd(EventAddBean eventAddBean){
+        presenter.getCarList();
+    }
     @Override
     public void initView() {
         carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<CarRequestBean>());
@@ -71,9 +83,17 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
         carManagerAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                carManagerRecycle.closeMenu();
                 if (view .getId() == R.id.item_slide){
                     presenter.deleteCar(carManagerAdapter.getData().get(position).getId());
                 }
+            }
+        });
+        carManagerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                carManagerRecycle.closeMenu();
+                ARouter.getInstance().build(ArouterKey.USER_ADDCARACTIVITY).withSerializable(IntentKey.CAR_BEAN,carManagerAdapter.getData().get(position)).navigation(mContext);
             }
         });
     }

@@ -515,6 +515,38 @@
                 android:layout_marginRight="@dimen/dp_24"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_104" />
+            <View
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@color/_E0E0E0"
+                android:layout_width="match_parent"
+                android:layout_height="1dp">
+
+            </View>
+            <TextView
+                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:text="@string/loading_evidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/loading_pic"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_width="@dimen/dp_168"
+                android:layout_height="@dimen/dp_88" />
+            <TextView
+                android:layout_marginTop="@dimen/dp_26"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:text="@string/unloading_evidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/unload_pic"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_width="@dimen/dp_168"
+                android:layout_height="@dimen/dp_88" />
             <LinearLayout
                 android:id="@+id/bottom_ll"
                 android:layout_marginBottom="@dimen/dp_60"
@@ -525,6 +557,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/reject_tv"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
@@ -536,16 +569,15 @@
                     android:textColor="@color/_333333" />
                 <TextView
                     android:id="@+id/confirm_the_settlement"
-                    android:layout_marginLeft="@dimen/dp_41"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_42"
                     android:layout_gravity="center"
                     android:background="@drawable/shape_login"
                     android:gravity="center"
-                    android:text="@string/submit_settlement"
+                    android:text="@string/apply_settlement"
                     android:textColor="@color/FFFFFF"
-                    android:layout_marginStart="@dimen/dp_41" />
+                     />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

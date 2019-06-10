@@ -50,7 +50,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
     @BindView(R2.id.settlement_bt)
     Button settlementBt;
     Unbinder unbinder;
-    private String state;
+    private String state="";
     private String type="S";
     private FinaceOrderAdapter adapter;
     private List<FinaceBean> list=new ArrayList<>();
@@ -62,6 +62,9 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
 
     public FinanceOrderFragment(String state) {
         this.state = state;
+    }
+
+    public FinanceOrderFragment() {
     }
 
     @Override
@@ -76,10 +79,6 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
         adapter=new FinaceOrderAdapter(R.layout.item_finace,list);
         financeOrderRecycle.setAdapter(adapter);
         presenter.setType(state);
-        if (state.equals("R")){
-            settlementBt.setText("确认卸货");
-            type="X";
-        }
         presenter.detailOrderList();
     }
 

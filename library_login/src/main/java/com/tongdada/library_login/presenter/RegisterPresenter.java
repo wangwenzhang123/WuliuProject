@@ -4,6 +4,7 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.UserBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.utils.UserMapUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
@@ -113,5 +114,23 @@ public class RegisterPresenter extends BasePresenter<RegisterContact.View> imple
                 }
             });
 
+    }
+
+    @Override
+    public void updateLogi(LogisticsRequestBean requestRegisterBean) {
+        loginApi.updateLogi(UserMapUtils.getLogiUserRegisterMap(requestRegisterBean))
+                .compose(this.<BaseAppEntity<LogisticsRequestBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<LogisticsRequestBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<LogisticsRequestBean> userBeanBaseAppEntity) throws Exception {
+                        CommenUtils.getIncetance().setRequestBean(userBeanBaseAppEntity.getContent());
+                        getView().finishActivity();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
     }
 }

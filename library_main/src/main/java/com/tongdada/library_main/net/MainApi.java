@@ -71,6 +71,7 @@ public interface MainApi {
     @FormUrlEncoded
     @POST("/interface/orderList.action")
     Observable<PagenationBase<OrderListBean>> orderList(@Field("psTotalOrders.stationId") String stationId,
+                                                        @Field("psTotalOrders.companyId") String companyId,
                                                         @Field("page") String pageNumber,
                                                         @Field("psTotalOrders.orderName") String orderName,
                                                         @Field("psTotalOrders.orderStatus") String orderStatus);
@@ -187,7 +188,7 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/findDetailList.action")
-    Observable<PagenationBase<CarOrderBean>> detailOrderList(@Field("psDetailOrders.stationId") String id, @Field("psDetailOrders.orderStatus") String orderStatus
+    Observable<PagenationBase<CarOrderBean>> detailOrderList(@Field("psDetailOrders.companyId") String id, @Field("psDetailOrders.orderStatus") String orderStatus
             , @Field("psDetailOrders.orderRemark") String orderRemark,
                                                              @Field("page") String pageNumber, @Field("psDetailOrders.orderId") String orderId
     );
@@ -213,6 +214,13 @@ public interface MainApi {
     @POST("/interface/addDriver.action")
     Observable<BaseAppEntity<RequestRegisterBean>> addDriver(@FieldMap Map<String,Object> params);
     /**
+     * 更新司机信息
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/updateDriver.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> updateDriver(@FieldMap Map<String,Object> params);
+    /**
      * 获取车辆列表
      * @return
      */
@@ -233,4 +241,12 @@ public interface MainApi {
     @FormUrlEncoded
     @POST("/interface/addCar.action")
     Observable<BaseAppEntity<RequestRegisterBean>> addCar(@FieldMap Map<String,Object> params);
+    /**
+     * 更新车辆信息
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/updateCar.action")
+    Observable<BaseAppEntity<RequestRegisterBean>> updateCar(@FieldMap Map<String,Object> params);
+
 }

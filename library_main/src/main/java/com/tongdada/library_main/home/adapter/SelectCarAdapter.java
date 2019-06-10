@@ -6,8 +6,8 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_main.R;
-import com.tongdada.library_main.home.respose.SelectCarBean;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ import java.util.List;
  * @time 2019/6/5 16:11
  * @change
  */
-public class SelectCarAdapter extends BaseQuickAdapter<SelectCarBean,BaseViewHolder> {
-    public SelectCarAdapter(int layoutResId, @Nullable List<SelectCarBean> data) {
+public class SelectCarAdapter extends BaseQuickAdapter<CarRequestBean,BaseViewHolder> {
+    public SelectCarAdapter(int layoutResId, @Nullable List<CarRequestBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, SelectCarBean item) {
+    protected void convert(BaseViewHolder helper, CarRequestBean item) {
         ConstraintLayout ll=helper.getView(R.id.item_select_ll);
         ImageView imageView=helper.getView(R.id.car_pic);
         if (item.isCheck()){

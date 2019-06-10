@@ -32,7 +32,6 @@ import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
 
-import java.time.chrono.MinguoEra;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +63,8 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     Unbinder unbinder;
     @BindView(R2.id.home_order_rv)
     FrameLayout homeOrderRv;
+    @BindView(R2.id.more_order)
+    TextView moreOrder;
     private OrderAdapter orderAdapter;
     private List<OrderBean> orderBeanList = new ArrayList<>();
 
@@ -102,9 +103,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         banner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
             @Override
             public void onPageClick(View view, int position) {
-                BannerBean.RowsBean rowsBean=rowsBeanList.get(position);
-                MessageIntentBean  messageIntentBean=new MessageIntentBean(rowsBean.getNewsTitle(),rowsBean.getPriviewPic(),rowsBean.getNewsContent(),String.valueOf(rowsBean.getCreateTime().getTime()));
-                ARouter.getInstance().build(ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN,messageIntentBean)
+                BannerBean.RowsBean rowsBean = rowsBeanList.get(position);
+                MessageIntentBean messageIntentBean = new MessageIntentBean(rowsBean.getNewsTitle(), rowsBean.getPriviewPic(), rowsBean.getNewsContent(), String.valueOf(rowsBean.getCreateTime().getTime()));
+                ARouter.getInstance().build(ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN, messageIntentBean)
                         .navigation(mContext);
             }
         });
@@ -140,14 +141,16 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.iv_home_search)
     public void onIvHomeSearchClicked() {
-        routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY,null);
+        routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY, null);
     }
 
     @OnClick(R2.id.iv_home_message)
     public void onIvHomeMessageClicked() {
         routerIntent(ArouterKey.HOME_INFORMMANAGEMENTACTIVITY, null);
     }
-    private List<BannerBean.RowsBean> rowsBeanList=new ArrayList<>();
+
+    private List<BannerBean.RowsBean> rowsBeanList = new ArrayList<>();
+
     @Override
     public void setBannerData(List<BannerBean.RowsBean> bannerData) {
         List<String> list = new ArrayList<>();
@@ -162,6 +165,11 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
                 return new BannerViewHolder();
             }
         });
+    }
+
+    @OnClick(R2.id.more_order)
+    public void onViewClicked() {
+        routerIntent(ArouterKey.HOME_MOREORDERACTIVITY,null);
     }
 
     public static class BannerViewHolder implements MZViewHolder<String> {

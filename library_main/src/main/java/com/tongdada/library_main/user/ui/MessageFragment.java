@@ -18,6 +18,7 @@ import com.tongdada.library_main.user.adapter.MessageAdapter;
 import com.tongdada.library_main.user.presenter.MessageContract;
 import com.tongdada.library_main.user.presenter.MessagePresenter;
 import com.tongdada.library_main.user.respose.MessageBean;
+import com.tongdada.library_main.widget.SlideRecyclerView;
 import com.tongdada.library_main.widget.slideswaphelper.PlusItemSlideCallback;
 import com.tongdada.library_main.widget.slideswaphelper.WItemTouchHelperPlus;
 
@@ -34,7 +35,7 @@ import butterknife.Unbinder;
 
 public class MessageFragment extends BaseMvpFragment<MessagePresenter> implements MessageContract.View {
     @BindView(R2.id.message_recycle)
-    RecyclerView messageRecycle;
+    SlideRecyclerView messageRecycle;
     Unbinder unbinder;
     private List<MessageBean.PagenationBean.ListBean> messageBeans=new ArrayList<>();
     private MessageAdapter adapter;

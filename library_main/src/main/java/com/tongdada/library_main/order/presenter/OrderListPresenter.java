@@ -32,7 +32,7 @@ public class OrderListPresenter extends BaseRecyclerRefreshPresenter<OrderListCo
 
     @Override
     public void onRefresh(final RequestCallback<OrderBean> callback) {
-        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(), String.valueOf(getFirstPageIndex()),"",type)
+        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getFirstPageIndex()),"",type)
                 .compose(this.<PagenationBase<OrderListBean>>handleEverythingResult())
                 .subscribe(new Consumer<PagenationBase<OrderListBean>>() {
                     @Override
@@ -60,7 +60,7 @@ public class OrderListPresenter extends BaseRecyclerRefreshPresenter<OrderListCo
 
     @Override
     public void onLoadMore(final RequestCallback<OrderBean> callback) {
-        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(), String.valueOf(getCurrentPage()),"",type)
+        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getCurrentPage()),"",type)
                 .compose(this.<PagenationBase<OrderListBean>>handleEverythingResult())
                 .subscribe(new Consumer<PagenationBase<OrderListBean>>() {
                     @Override

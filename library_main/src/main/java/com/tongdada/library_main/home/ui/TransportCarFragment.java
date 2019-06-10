@@ -32,6 +32,9 @@ import java.util.ArrayList;
 public class TransportCarFragment extends BaseRecyclerRefreshFragment<TransportCarContract.View,TransportCarPresenter,FinaceBean> implements TransportCarContract.View {
     private String type;
 
+    public TransportCarFragment() {
+    }
+
     public TransportCarFragment(String type) {
         this.type = type;
     }
