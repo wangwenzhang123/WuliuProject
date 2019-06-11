@@ -3,7 +3,6 @@ package com.tongdada.library_login.presenter;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
-import com.example.library_commen.model.RequestRegisterBean;
 
 /**
  * @name Base

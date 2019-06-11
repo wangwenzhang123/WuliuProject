@@ -2,9 +2,9 @@ package com.tongdada.library_main.net;
 
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.DriverBean;
+import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.PagenationBase;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.model.UserBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
@@ -75,6 +75,15 @@ public interface MainApi {
                                                         @Field("page") String pageNumber,
                                                         @Field("psTotalOrders.orderName") String orderName,
                                                         @Field("psTotalOrders.orderStatus") String orderStatus);
+    /**
+     * 获取物流总订单
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("interface/findLogiOrders.action")
+    Observable<PagenationBase<OrderListBean>> findLogiOrders(@Field("psDetailOrders.driverId") String driverId,
+                                                        @Field("psDetailOrders.companyId") String companyId, @Field("page") String pageNumber);
     /**
      * 修改订单
      * @param
@@ -167,13 +176,6 @@ public interface MainApi {
     @FormUrlEncoded
     @POST("/interface/getLogiById.action")
     Observable<BaseAppEntity<LogisticsRequestBean>> getLogiById(@Field("psLogisticsCompanys.id") String id);
-    /**
-     * 更新搅拌站信息
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("/interface/updateMixStation.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> updateMixStation(@FieldMap Map<String,Object> params);
 
     /**
      * 上传图片
@@ -205,21 +207,21 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/deleteDriver.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> deleteDriver(@Field("psDrivers.id") String id);
+    Observable<BaseAppEntity<DriverRequest>> deleteDriver(@Field("psDrivers.id") String id);
     /**
      * 添加司机
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/addDriver.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> addDriver(@FieldMap Map<String,Object> params);
+    Observable<BaseAppEntity<DriverRequest>> addDriver(@FieldMap Map<String,Object> params);
     /**
      * 更新司机信息
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/updateDriver.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> updateDriver(@FieldMap Map<String,Object> params);
+    Observable<BaseAppEntity<DriverRequest>> updateDriver(@FieldMap Map<String,Object> params);
     /**
      * 获取车辆列表
      * @return
@@ -233,20 +235,33 @@ public interface MainApi {
      */
     @FormUrlEncoded
     @POST("/interface/deleteCar.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> deleteCar(@Field("psCars.id") String id);
+    Observable<BaseAppEntity<CarRequestBean>> deleteCar(@Field("psCars.id") String id);
     /**
      * 添加车辆
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/addCar.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> addCar(@FieldMap Map<String,Object> params);
+    Observable<BaseAppEntity<CarRequestBean>> addCar(@FieldMap Map<String,Object> params);
     /**
      * 更新车辆信息
      * @return
      */
     @FormUrlEncoded
     @POST("/interface/updateCar.action")
-    Observable<BaseAppEntity<RequestRegisterBean>> updateCar(@FieldMap Map<String,Object> params);
-
+    Observable<BaseAppEntity<CarRequestBean>> updateCar(@FieldMap Map<String,Object> params);
+    /**
+     * 获取司机信息
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/getDriverById.action")
+    Observable<BaseAppEntity<DriverRequest>> getDriverById(@Field("psDrivers.id") String id);
+    /**
+     * 获取司机信息
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/getCarById.action")
+    Observable<BaseAppEntity<CarRequestBean>> getCarById(@Field("psCars.id") String id);
 }

@@ -309,7 +309,6 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         orderAmount.setText(orderDetail.getOrderAmount() + "方");
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
-        orderPublish.setText(CommenUtils.getIncetance().getRequestRegisterBean().getStationName());
         carType2.setText(orderDetail.getCarType());
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");

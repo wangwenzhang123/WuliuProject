@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.OrderBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.config.BaseUrl;
@@ -86,7 +87,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     @Override
     public void initView() {
         presenter.shuffling();
-        presenter.getMixStationById();
+        presenter.initData();
     }
 
     @Override

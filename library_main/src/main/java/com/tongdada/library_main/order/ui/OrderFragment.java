@@ -88,7 +88,7 @@ public class OrderFragment extends BaseMvpFragment{
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
-                fragments.add(new OrderListFragment("F"));
+                fragments.add(new LogicOrderListFragment());
                 fragments.add(new TransportCarFragment("A"));
                 fragments.add(new TransportCarFragment("Z"));
                 fragments.add(new TransportCarFragment("S"));

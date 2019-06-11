@@ -2,7 +2,6 @@ package com.tongdada.library_main.user.presenter;
 
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.DriverRequest;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.utils.UserMapUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
@@ -35,10 +34,10 @@ public class AddDriverPresenter extends BasePresenter<AddDriverContract.View> im
     @Override
     public void addDriver(DriverRequest request) {
         MainApiUtils.getMainApi().addDriver(UserMapUtils.getDriverRegisterMap(request))
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                .compose(this.<BaseAppEntity<DriverRequest>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<DriverRequest>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<DriverRequest> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
                         getView().addSuccess();
                     }
@@ -93,10 +92,10 @@ public class AddDriverPresenter extends BasePresenter<AddDriverContract.View> im
     @Override
     public void updateDriver(DriverRequest request) {
         MainApiUtils.getMainApi().updateDriver(UserMapUtils.getDriverRegisterMap(request))
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                .compose(this.<BaseAppEntity<DriverRequest>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<DriverRequest>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<DriverRequest> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
                         getView().addSuccess();
                     }

@@ -2,7 +2,6 @@ package com.tongdada.library_main.user.presenter;
 
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.CarRequestBean;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.utils.UserMapUtils;
 import com.tongdada.base.net.bean.BaseAppEntity;
@@ -35,10 +34,10 @@ public class AddCarPresenter extends BasePresenter<AddCarContract.View> implemen
     @Override
     public void addCar(CarRequestBean carRequestBean) {
         MainApiUtils.getMainApi().addCar(UserMapUtils.getCarRequestMap(carRequestBean))
-             .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+             .compose(this.<BaseAppEntity<CarRequestBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<CarRequestBean>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
                         getView().finishActivity();
                     }
@@ -93,10 +92,10 @@ public class AddCarPresenter extends BasePresenter<AddCarContract.View> implemen
     @Override
     public void updateCar(CarRequestBean carRequestBean) {
         MainApiUtils.getMainApi().updateCar(UserMapUtils.getCarRequestMap(carRequestBean))
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                .compose(this.<BaseAppEntity<CarRequestBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<CarRequestBean>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> requestRegisterBeanBaseAppEntity) throws Exception {
+                    public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
                         getView().finishActivity();
                     }

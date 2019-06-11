@@ -1,8 +1,8 @@
 package com.example.library_commen.utils;
 
 import com.example.library_commen.appkey.ShareKey;
+import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.LogisticsRequestBean;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UserBean;
 import com.google.gson.Gson;
 import com.tongdada.base.util.SharedPreferencesUtil;
@@ -17,7 +17,7 @@ import com.tongdada.base.util.SharedPreferencesUtil;
 public class CommenUtils {
     private static CommenUtils commenUtils;
     private UserBean userBean;
-    private RequestRegisterBean requestRegisterBean;
+    private CarRequestBean carRequestBean;
     private LogisticsRequestBean requestBean;
     private CommenUtils() {
     }
@@ -32,20 +32,20 @@ public class CommenUtils {
         return commenUtils;
     }
 
+    public CarRequestBean getCarRequestBean() {
+        return (carRequestBean==null)? new CarRequestBean():carRequestBean;
+    }
+
+    public void setCarRequestBean(CarRequestBean carRequestBean) {
+        this.carRequestBean = carRequestBean;
+    }
+
     public LogisticsRequestBean getRequestBean() {
         return (requestBean==null)? new LogisticsRequestBean():requestBean;
     }
 
     public void setRequestBean(LogisticsRequestBean requestBean) {
         this.requestBean = requestBean;
-    }
-
-    public RequestRegisterBean getRequestRegisterBean() {
-        return (requestRegisterBean==null)? new RequestRegisterBean():requestRegisterBean;
-    }
-
-    public void setRequestRegisterBean(RequestRegisterBean requestRegisterBean) {
-        this.requestRegisterBean = requestRegisterBean;
     }
 
     public UserBean getUserBean() {

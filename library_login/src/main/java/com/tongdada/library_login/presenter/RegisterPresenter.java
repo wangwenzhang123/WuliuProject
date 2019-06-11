@@ -10,7 +10,6 @@ import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_login.net.LoginApi;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
 
 import java.io.File;

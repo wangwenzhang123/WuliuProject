@@ -3,7 +3,6 @@ package com.tongdada.library_login.net;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.UserBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.example.library_commen.model.UploadBean;
 
 

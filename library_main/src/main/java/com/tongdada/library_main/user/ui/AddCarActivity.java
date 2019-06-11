@@ -95,7 +95,9 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     TextView addCarTitle;
     @BindView(R2.id.driver_name)
     TextView driverName;
-    private boolean isAdd=true;
+    @BindView(R2.id.select_driver_ll)
+    LinearLayout selectDriverLl;
+    private boolean isAdd = true;
     private CarRequestBean requestBean = new CarRequestBean();
     private static final int DRIVINGLICENSE_CODE = 3;
     private CustomDatePicker mTimerPicker;
@@ -113,13 +115,17 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
 
     @Override
     public void getData() {
+        if (TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getCompanyId())) {
+            selectDriverLl.setVisibility(View.GONE);
+            requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
+        }
         requestBean.setCarType("T16");
         if (getIntent().getSerializableExtra(IntentKey.CAR_BEAN) != null) {
             requestBean = (CarRequestBean) getIntent().getSerializableExtra(IntentKey.CAR_BEAN);
             addCarTitle.setText("修改车辆");
             registerRegisterBt.setText("确认修改");
             upDateUi();
-            isAdd=false;
+            isAdd = false;
         }
 
     }
@@ -187,8 +193,8 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         String carNo = etCarNo.getText().toString().trim();
         String mileages = etTravlledDistance.getText().toString().trim();
         String carLoad = etCarLoad.getText().toString().trim();
-        String shopTime=etShopTime.getText().toString().trim();
-        String cartime=carTime.getText().toString().trim();
+        String shopTime = etShopTime.getText().toString().trim();
+        String cartime = carTime.getText().toString().trim();
         requestBean.setBuyTime(shopTime);
         requestBean.setInsuranceDate(cartime);
         requestBean.setCarLoad(carLoad);
@@ -196,9 +202,9 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         requestBean.setCarName(carName);
         requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         requestBean.setMileages(mileages);
-        if (isAdd){
+        if (isAdd) {
             presenter.addCar(requestBean);
-        }else {
+        } else {
             requestBean.setDelFlag("0");
             presenter.updateCar(requestBean);
         }
@@ -239,6 +245,10 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
 
     @Override
     public void upDateUi() {
+        if (TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getCompanyId())) {
+            selectDriverLl.setVisibility(View.GONE);
+            requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
+        }
         etCarBrand.setText(requestBean.getCarName());
         etCarLoad.setText(requestBean.getCarLoad());
         etCarNo.setText(requestBean.getCarNo());
@@ -246,11 +256,11 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         carTime.setText(requestBean.getInsuranceDate());
         etShopTime.setText(requestBean.getBuyTime());
         driverName.setText(requestBean.getDriverName());
-        RequestOptions requestOptions=new RequestOptions().centerCrop()
+        RequestOptions requestOptions = new RequestOptions().centerCrop()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult);
-        if (!TextUtils.isEmpty(requestBean.getDriveLicense())){
-            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+requestBean.getDriveLicense()).into(ivBusinessLicense);
+        if (!TextUtils.isEmpty(requestBean.getDriveLicense())) {
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestBean.getDriveLicense()).into(ivBusinessLicense);
         }
         if (requestBean.getCarType().equals("B")) {
             rbBeng.setChecked(true);
@@ -317,12 +327,12 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     @OnClick(R2.id.et_shop_time)
     public void onEtShopTimeClicked() {
         mTimerPicker.show(etShopTime.getText().toString());
-        isShopTime=true;
+        isShopTime = true;
     }
 
     @OnClick(R2.id.car_time)
     public void onCarTimeClicked() {
         mTimerPicker.show(carTime.getText().toString());
-        isShopTime=false;
+        isShopTime = false;
     }
 }

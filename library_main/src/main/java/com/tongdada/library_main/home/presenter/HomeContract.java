@@ -17,7 +17,10 @@ public class HomeContract {
         void setBannerData(List<BannerBean.RowsBean> bannerData);
     }
     public interface Presenter{
+        void initData();
         void shuffling();
         void getMixStationById();
+        void getDriverById();
+        void getCarById(String carid);
     }
 }

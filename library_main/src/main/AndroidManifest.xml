@@ -6,7 +6,6 @@
         <activity
             android:launchMode="singleTask"
             android:name=".MainActivity" />
-        <activity android:name="com.tongdada.library_main.home.ui.IssueOrderActivity"></activity>
         <activity android:name="com.tongdada.library_main.home.ui.SearchCarActivity"></activity>
         <activity android:name="com.tongdada.library_main.order.ui.OrderDetailActivity"></activity>
         <activity android:name="com.tongdada.library_main.home.ui.TransportCarActivity"></activity>
@@ -30,12 +29,6 @@
 
         </activity>
         <activity android:name="com.tongdada.library_main.web.WebAcitivity">
-
-        </activity>
-        <activity android:name="com.tongdada.library_main.user.ui.OrderSettingActivity">
-
-        </activity>
-        <activity android:name="com.tongdada.library_main.user.ui.MaintenancePlantActivity">
 
         </activity>
         <activity android:name="com.tongdada.library_main.user.ui.AddUserActivity">

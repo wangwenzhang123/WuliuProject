@@ -116,7 +116,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_44"
-
+                android:id="@+id/select_driver_ll"
                 android:orientation="horizontal">
                 <TextView
 

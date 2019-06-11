@@ -1,6 +1,7 @@
 package com.tongdada.library_main.user.ui;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,12 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     LinearLayout carManager;
     @BindView(R2.id.driver_manager)
     LinearLayout driverManager;
+    @BindView(R2.id.driver_view)
+    View driverView;
+    @BindView(R2.id.user_view)
+    View userView;
+    @BindView(R2.id.wuliu_view)
+    View wuliuView;
 
     @Override
     public BasePresenter getPresenter() {
@@ -150,11 +157,6 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
         routerIntent(ArouterKey.USER_INFORMATIONACTIVITY, null);
     }
 
-    @OnClick(R2.id.setting)
-    public void onSettingClicked() {
-        routerIntent(ArouterKey.USER_SETORDER, null);
-    }
-
     @OnClick(R2.id.plant_maintenace)
     public void onViewClicked() {
         routerIntent(ArouterKey.USER_MAINTENANCELOGICACTIVITY, null);
@@ -171,6 +173,14 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
                 .apply(requestOptions).into(userIco);
         userName.setText(CommenUtils.getIncetance().getUserBean().getUserName());
         userPhone.setText(CommenUtils.getIncetance().getUserBean().getUserContacts());
+        if (TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getCompanyId())) {
+            driverManager.setVisibility(View.GONE);
+            plantMaintenace.setVisibility(View.GONE);
+            userManager.setVisibility(View.GONE);
+            driverView.setVisibility(View.GONE);
+            userView.setVisibility(View.GONE);
+            wuliuView.setVisibility(View.GONE);
+        }
     }
 
     @OnClick(R2.id.about_app)
@@ -188,11 +198,11 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.car_manager)
     public void onCarManagerClicked() {
-        routerIntent(ArouterKey.USER_CARMANAGERACTIVITY,null);
+        routerIntent(ArouterKey.USER_CARMANAGERACTIVITY, null);
     }
 
     @OnClick(R2.id.driver_manager)
     public void onDriverManagerClicked() {
-        routerIntent(ArouterKey.USER_DRIVERMANAGERACTIVITY,null);
+        routerIntent(ArouterKey.USER_DRIVERMANAGERACTIVITY, null);
     }
 }

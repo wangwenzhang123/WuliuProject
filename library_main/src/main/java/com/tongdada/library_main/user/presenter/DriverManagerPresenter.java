@@ -1,9 +1,9 @@
 package com.tongdada.library_main.user.presenter;
 
 import com.example.library_commen.model.DriverBean;
+import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.PagenationBase;
 import com.example.library_commen.utils.CommenUtils;
-import com.example.library_commen.model.RequestRegisterBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_main.net.MainApiUtils;
@@ -39,10 +39,10 @@ public class DriverManagerPresenter extends BasePresenter<DriverManagerContract.
     @Override
     public void deleteDriver(String id) {
         MainApiUtils.getMainApi().deleteDriver(id)
-                .compose(this.<BaseAppEntity<RequestRegisterBean>>handleEverythingResult())
-                .subscribe(new Consumer<BaseAppEntity<RequestRegisterBean>>() {
+                .compose(this.<BaseAppEntity<DriverRequest>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<DriverRequest>>() {
                     @Override
-                    public void accept(BaseAppEntity<RequestRegisterBean> carOrderBeanPagenationBase) throws Exception {
+                    public void accept(BaseAppEntity<DriverRequest> carOrderBeanPagenationBase) throws Exception {
                         driverList();
                     }
                 }, new Consumer<Throwable>() {
