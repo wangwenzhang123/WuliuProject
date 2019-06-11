@@ -85,6 +85,7 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     private boolean isAdd=true;
     @Override
     public int getView() {
+
         return R.layout.activity_add_driver;
     }
 
