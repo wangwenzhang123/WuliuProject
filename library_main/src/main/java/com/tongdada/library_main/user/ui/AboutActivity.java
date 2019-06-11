@@ -38,6 +38,7 @@ public class AboutActivity extends BaseActivity {
     @Override
     public void initView() {
 
+
     }
 
     @Override
