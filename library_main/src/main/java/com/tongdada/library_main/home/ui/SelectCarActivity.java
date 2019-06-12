@@ -93,7 +93,14 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
     }
 
     private void updateUi(){
-        amountTv.setText("剩余"+total+"，当前可以运输总量"+accept+"方");
+        int amuont=0;
+        for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
+            CarRequestBean carRequestBean=selectCarAdapter.getData().get(i);
+            if (carRequestBean.isCheck()){
+                amuont= Integer.parseInt(carRequestBean.getCarLoad())+amuont;
+            }
+        }
+        amountTv.setText("剩余"+total+"，当前可以运输总量"+amuont+"方");
     }
     @Override
     public void initLinsenterner() {
@@ -107,6 +114,7 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
                     finaceBean.setCheck(true);
                 }
                 adapter.notifyDataSetChanged();
+                updateUi();
             }
         });
     }
@@ -138,6 +146,7 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
             isCheckAll = true;
         }
         selectCarAdapter.notifyDataSetChanged();
+        updateUi();
     }
 
     @OnClick(R2.id.settlement_bt)
@@ -156,5 +165,6 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
     @Override
     public void setCarList(List<CarRequestBean> list) {
         selectCarAdapter.setNewData(list);
+        updateUi();
     }
 }
