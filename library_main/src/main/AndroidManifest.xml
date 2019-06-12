@@ -76,6 +76,9 @@
         <activity android:name="com.tongdada.library_main.home.ui.MoreOrderActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.order.ui.LogicOrderDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>

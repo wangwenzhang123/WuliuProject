@@ -11,12 +11,13 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.CarRequestBean;
+import com.example.library_commen.model.SelectCarBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.home.adapter.SelectCarAdapter;
-import com.example.library_commen.model.SelectCarBean;
 import com.tongdada.library_main.user.presenter.CarManagerContract;
 import com.tongdada.library_main.user.presenter.CarManagerPresenter;
 import com.tongdada.library_main.widget.SpaceItemDecoration;
@@ -51,7 +52,10 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
     TextView checkAll;
     @BindView(R2.id.settlement_bt)
     Button settlementBt;
+    @BindView(R2.id.amount_tv)
+    TextView amountTv;
     private SelectCarAdapter selectCarAdapter;
+    private String total,accept="0";
     @Override
     public int getView() {
         return R.layout.activity_select_car;
@@ -71,24 +75,35 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
 
     @Override
     public void initView() {
-        List<CarRequestBean> list=new ArrayList<>();
-        selectCarAdapter=new SelectCarAdapter(R.layout.item_select_car,list);
-        carRecycle.setLayoutManager(new GridLayoutManager(mContext,2));
+        List<CarRequestBean> list = new ArrayList<>();
+        selectCarAdapter = new SelectCarAdapter(R.layout.item_select_car, list);
+        carRecycle.setLayoutManager(new GridLayoutManager(mContext, 2));
         carRecycle.setAdapter(selectCarAdapter);
-        SpaceItemDecoration spaceItemDecoration=new SpaceItemDecoration(10,20);
+        SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10, 20);
         carRecycle.addItemDecoration(spaceItemDecoration);
         presenter.getCarList();
+
     }
 
+    @Override
+    public void getData() {
+        Bundle bundle=getIntent().getExtras();
+        assert bundle != null;
+        total=bundle.getString(IntentKey.ORDER_AMOUNT);
+    }
+
+    private void updateUi(){
+        amountTv.setText("剩余"+total+"，当前可以运输总量"+accept+"方");
+    }
     @Override
     public void initLinsenterner() {
         selectCarAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                CarRequestBean finaceBean=selectCarAdapter.getData().get(position);
-                if (finaceBean.isCheck()){
+                CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
+                if (finaceBean.isCheck()) {
                     finaceBean.setCheck(false);
-                }else {
+                } else {
                     finaceBean.setCheck(true);
                 }
                 adapter.notifyDataSetChanged();
@@ -105,31 +120,33 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
     public void onBackTvClicked() {
         finish();
     }
-    private boolean isCheckAll=false;
+
+    private boolean isCheckAll = false;
+
     @OnClick(R2.id.check_all)
     public void onCheckAllClicked() {
         for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
-            if (!isCheckAll){
+            if (!isCheckAll) {
                 selectCarAdapter.getData().get(i).setCheck(true);
-            }else {
+            } else {
                 selectCarAdapter.getData().get(i).setCheck(false);
             }
         }
-        if (isCheckAll){
-            isCheckAll=false;
-        }else {
-            isCheckAll=true;
+        if (isCheckAll) {
+            isCheckAll = false;
+        } else {
+            isCheckAll = true;
         }
         selectCarAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R2.id.settlement_bt)
     public void onSettlementBtClicked() {
-        List<SelectCarBean> list=new ArrayList<>();
+        List<SelectCarBean> list = new ArrayList<>();
         for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
-            CarRequestBean requestBean=selectCarAdapter.getData().get(i);
-            if (requestBean.isCheck()){
-                list.add(new SelectCarBean(requestBean.getId(),requestBean.getCarNo()));
+            CarRequestBean requestBean = selectCarAdapter.getData().get(i);
+            if (requestBean.isCheck()) {
+                list.add(new SelectCarBean(requestBean.getId(), requestBean.getCarNo()));
             }
         }
         EventBus.getDefault().post(list);

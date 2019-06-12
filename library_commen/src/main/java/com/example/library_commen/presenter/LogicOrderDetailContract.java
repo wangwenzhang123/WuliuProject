@@ -1,5 +1,6 @@
 package com.example.library_commen.presenter;
 
+import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.model.OrderBean;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
 
@@ -13,9 +14,10 @@ import com.tongdada.base.ui.mvp.base.view.BaseView;
 public class LogicOrderDetailContract {
     public interface View extends BaseView{
         void cancelOrderSuccess();
-        void setOrderDetail(OrderBean orderDetail);
+        void setOrderDetail(DriverOrderDetailBean orderDetail);
     }
     public interface Presenter{
         void getOrderDetail(String id);
+        void batchUpdateDetailOrders(String id,String state);
     }
 }

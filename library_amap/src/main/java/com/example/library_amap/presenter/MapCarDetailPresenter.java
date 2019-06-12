@@ -1,5 +1,7 @@
 package com.example.library_amap.presenter;
 
+import android.text.TextUtils;
+
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.TransportCarBean;
@@ -113,6 +115,65 @@ public class MapCarDetailPresenter extends BasePresenter<MapCarDetailContract.Vi
     @Override
     public void batchUpdateDetailOrders(String id, String state) {
         commenApi.batchUpdateDetailOrders(id,state)
+                .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<OrderBean> orderBeanBaseAppEntity) throws Exception {
+                        getView().updateSuccess();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void loadOrder(String orderid, String path) {
+        if (TextUtils.isEmpty(path)){
+            getView().showToast("请先上传装货凭据！");
+            return;
+        }
+        commenApi.loadOrder(orderid,path)
+                .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<OrderBean> orderBeanBaseAppEntity) throws Exception {
+                        getView().updateSuccess();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void unloadOrder(String orderid, String path) {
+        if (TextUtils.isEmpty(path)){
+            getView().showToast("请先上传卸货凭据！");
+            return;
+        }
+        commenApi.unloadOrder(orderid,path)
+                .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<OrderBean> orderBeanBaseAppEntity) throws Exception {
+                        getView().updateSuccess();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void cancel(String id) {
+        commenApi.cancelDetailOrder(id)
                 .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
                     @Override

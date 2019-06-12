@@ -6,14 +6,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.presenter.LogicOrderDetailContract;
 import com.example.library_commen.presenter.LogicOrderDetailPresenter;
 import com.example.library_main.R;
 import com.example.library_main.R2;
+import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 
@@ -120,20 +125,27 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
     }
 
     @Override
-    public void setOrderDetail(OrderBean orderDetail) {
-        orderStart.setText(orderDetail.getStartPlace());
-        orderEnd.setText(orderDetail.getDestinationPlace());
+    public void setOrderDetail(DriverOrderDetailBean orderDetail) {
+        orderStart.setText(orderDetail.getPsTotalOrder().getStartPlace());
+        orderEnd.setText(orderDetail.getPsTotalOrder().getDestinationPlace());
         orderAmount.setText(orderDetail.getOrderAmount() + "方");
-        orderName.setText(orderDetail.getOrderName());
-        orderPublishTime.setText(orderDetail.getPublishTime());
-        carType2.setText(orderDetail.getCarType());
-        orderPrice.setText(orderDetail.getOrderPic());
-        if (orderDetail.getCarType().equals("B")) {
+        orderName.setText(orderDetail.getPsTotalOrder().getOrderName());
+        orderPublishTime.setText(orderDetail.getAcceptTime());
+        carType2.setText(orderDetail.getPsTotalOrder().getCarType());
+        orderPrice.setText(orderDetail.getPsTotalOrder().getPerPrice());
+        if (orderDetail.getPsTotalOrder().getCarType().equals("B")) {
             carType1.setText("泵车");
         } else {
             carType1.setText("砼车");
         }
         orderremark.setText(orderDetail.getOrderRemark());
+        RequestOptions requestOptions = new RequestOptions()
+                .error(R.mipmap.defult)
+                .placeholder(R.mipmap.defult)
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getLoadLicense()).apply(requestOptions).into(ivLoadingEvidence);
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getUnloadLicense()).apply(requestOptions).into(ivBusinessLicense);
+
     }
 
 
@@ -142,18 +154,9 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
 
     }
 
-    @OnClick(R2.id.ll_loading_evidence)
-    public void onLlLoadingEvidenceClicked() {
-
-    }
-
-    @OnClick(R2.id.ll_business_license)
-    public void onLlBusinessLicenseClicked() {
-
-    }
-
     @OnClick(R2.id.confirm_submit)
     public void onConfirmSubmitClicked() {
+        presenter.batchUpdateDetailOrders(id,"H");
     }
 
 }

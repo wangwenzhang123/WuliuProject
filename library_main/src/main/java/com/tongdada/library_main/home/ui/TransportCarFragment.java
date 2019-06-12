@@ -60,7 +60,11 @@ public class TransportCarFragment extends BaseRecyclerRefreshFragment<TransportC
         getRecyclerAdapter().setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ARouter.getInstance().build(ArouterKey.MAP_MAPCARDETAILACTIVITY).withString(IntentKey.MAP_ORDERID,getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
+                if (type.equals("X") || type.equals("S")){
+                    ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
+                }else {
+                    ARouter.getInstance().build(ArouterKey.MAP_MAPCARDETAILACTIVITY).withString(IntentKey.MAP_ORDERID,getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
+                }
             }
         });
     }

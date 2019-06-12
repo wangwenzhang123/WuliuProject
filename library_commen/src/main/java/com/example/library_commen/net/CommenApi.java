@@ -71,4 +71,34 @@ public interface CommenApi {
                                                            @Field("psDetailOrders.orderPrice") String orderPrice
 
                                                            );
+
+    /**
+     * 上传装货凭据
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/loadOrder.action")
+    Observable<BaseAppEntity<OrderBean>> loadOrder(@Field("psDetailOrders.id") String id,@Field("psDetailOrders.loadLicense") String loadLicense);
+
+    /**
+     * 上传卸货凭据
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/unloadOrder.action")
+    Observable<BaseAppEntity<OrderBean>> unloadOrder(@Field("psDetailOrders.id") String id,@Field("psDetailOrders.unloadLicense") String unloadLicense);
+    /**
+     * 取消订单
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/cancelDetailOrder.action")
+    Observable<BaseAppEntity<OrderBean>> cancelDetailOrder(@Field("psDetailOrders.id") String id);
+
 }

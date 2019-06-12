@@ -91,8 +91,8 @@ public class OrderFragment extends BaseMvpFragment{
                 fragments.add(new LogicOrderListFragment());
                 fragments.add(new TransportCarFragment("A"));
                 fragments.add(new TransportCarFragment("Z"));
+                fragments.add(new TransportCarFragment("X"));
                 fragments.add(new TransportCarFragment("S"));
-                fragments.add(new TransportCarFragment("E"));
                 e.onNext(fragments);
             }
         }).subscribeOn(Schedulers.io())

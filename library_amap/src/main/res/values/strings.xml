@@ -5,4 +5,5 @@
     <string name="cancle_order">取消订单</string>
     <string name="accept_car">接单车辆</string>
     <string name="confirm_accept_order">确认接单</string>
+    <string name="load_accomplish">装货完成</string>
 </resources>

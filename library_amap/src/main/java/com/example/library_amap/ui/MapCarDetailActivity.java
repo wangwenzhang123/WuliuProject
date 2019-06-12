@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -94,10 +95,18 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     LinearLayout llLoadingPic;
     @BindView(R2.id.ll_unload_pic)
     LinearLayout llUnloadPic;
+    @BindView(R2.id.unload_tv)
+    TextView unloadTv;
+    @BindView(R2.id.unload_fl)
+    FrameLayout unloadFl;
+    @BindView(R2.id.cancel_tv)
+    TextView cancelTv;
     private AMap aMap;
     private String id;
     private static final int LOADING_CODE = 1;
     private static final int UNLOADING_CODE = 2;
+    private int state = 0;
+
     @Override
     public int getView() {
         return R.layout.activity_map_cardetail;
@@ -214,7 +223,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     }
 
     @OnClick(R2.id.back_iv)
-    public void onViewClicked() {
+    public void onViewBackClicked() {
         finish();
     }
 
@@ -258,17 +267,26 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        if (!TextUtils.isEmpty(detailOrder.getLoadLicense())){
+        if (!TextUtils.isEmpty(detailOrder.getLoadLicense())) {
             Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
-        }
-        if (!TextUtils.isEmpty(detailOrder.getUnloadLicense())){
-            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getUnloadLicense()).apply(requestOptions).into(unloadPic);
-        }
-        if (detailOrder.getOrderStatus().equals("R")) {
-            bottomLl.setVisibility(View.VISIBLE);
+            unloadTv.setVisibility(View.VISIBLE);
+            unloadFl.setVisibility(View.VISIBLE);
+            llLoadingPic.setFocusable(false);
+            cancelTv.setVisibility(View.GONE);
+            unloadAccomplishTv.setText("卸货完成");
+            state=2;
         } else {
-            bottomLl.setVisibility(View.GONE);
+            state = 1;
+            unloadTv.setVisibility(View.GONE);
+            unloadFl.setVisibility(View.GONE);
+            unloadAccomplishTv.setText("装货完成");
         }
+        if (!TextUtils.isEmpty(detailOrder.getUnloadLicense())) {
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getUnloadLicense()).apply(requestOptions).into(unloadPic);
+            bottomLl.setVisibility(View.GONE);
+            llUnloadPic.setFocusable(false);
+        }
+
     }
 
     @Override
@@ -283,6 +301,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 .setSingle(true)
                 .start(this, code);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -304,16 +323,18 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         }
     }
 
+    private String loadLicense, unloadLicense;
+
     @Override
     public void uploadSuccess(String path, String url, int dex) {
         switch (dex) {
             case LOADING_CODE:
                 Glide.with(mContext).load(path).into(loadingPic);
-                //requestRegisterBean.setBackPic(url);
+                loadLicense = url;
                 break;
             case UNLOADING_CODE:
                 Glide.with(mContext).load(path).into(unloadPic);
-                //requestRegisterBean.setFrontPic(url);
+                unloadLicense = url;
                 break;
         }
     }
@@ -354,16 +375,28 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
 
     @OnClick(R2.id.unload_accomplish_tv)
     public void onUnloadAccomplishTvClicked() {
-        presenter.batchUpdateDetailOrders(id, "X");
+        switch (state) {
+            case 1:
+                presenter.loadOrder(id,loadLicense);
+                break;
+            case 2:
+                presenter.unloadOrder(id,unloadLicense);
+                break;
+        }
     }
 
     @OnClick(R2.id.ll_loading_pic)
     public void onLlLoadingPicClicked() {
-
+        selectPic(LOADING_CODE);
     }
 
     @OnClick(R2.id.ll_unload_pic)
     public void onLlUnloadPicClicked() {
+        selectPic(UNLOADING_CODE);
+    }
 
+    @OnClick(R2.id.cancel_tv)
+    public void onViewClicked() {
+        presenter.cancel(id);
     }
 }

@@ -399,6 +399,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
 
     @OnClick(R2.id.accpet_detail)
     public void onViewAcceptClicked() {
-        routerIntent(ArouterKey.HONE_SELECTCARACTIVITY,null);
+        Bundle bundle=new Bundle();
+        bundle.putString(IntentKey.ORDER_AMOUNT,orderBean.getOrderAmount());
+        routerIntent(ArouterKey.HONE_SELECTCARACTIVITY,bundle);
     }
 }

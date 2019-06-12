@@ -22,6 +22,8 @@ public class MapCarDetailContract  {
         void getDetailOrderById(String orderid);
         void updateDetailOrders(String id,String state);
         void batchUpdateDetailOrders(String id, String state);
-
+        void loadOrder(String orderid,String path);
+        void unloadOrder(String orderid,String path);
+        void cancel(String id);
     }
 }
