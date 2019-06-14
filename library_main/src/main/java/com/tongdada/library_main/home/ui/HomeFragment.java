@@ -1,6 +1,8 @@
 package com.tongdada.library_main.home.ui;
 
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,6 +90,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     public void initView() {
         presenter.shuffling();
         presenter.initData();
+
     }
 
     @Override
@@ -124,6 +127,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     public void onResume() {
         super.onResume();
         banner.start();//开始轮播
+
     }
 
     @Override

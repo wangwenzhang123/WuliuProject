@@ -8,6 +8,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventSuccessBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_main.R;
 import com.tongdada.base.ui.mvp.base.adapter.BaseAdapter;
@@ -73,7 +74,7 @@ public class LogicOrderListFragment extends BaseRecyclerRefreshFragment<OrderLis
 
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void eventOrder(OrderBean orderBean){
+    public void eventOrder(EventSuccessBean orderBean){
         getRefreshLayout().autoRefresh();
     }
     @Override

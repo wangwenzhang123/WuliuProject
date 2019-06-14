@@ -79,6 +79,9 @@
         <activity android:name="com.tongdada.library_main.order.ui.LogicOrderDetailActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.user.ui.CarDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>

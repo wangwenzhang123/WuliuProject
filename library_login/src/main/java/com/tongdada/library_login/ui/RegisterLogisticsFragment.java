@@ -104,6 +104,7 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         RequestOptions requestOptions = new RequestOptions()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
+                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
         if (!TextUtils.isEmpty(requestRegisterBean.getLicensePath())){
             Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestRegisterBean.getLicensePath()).apply(requestOptions).into(ivLegalPositive1);

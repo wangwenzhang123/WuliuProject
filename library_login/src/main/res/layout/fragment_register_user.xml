@@ -271,7 +271,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@drawable/shape_dotted_line"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
             </FrameLayout>
             <FrameLayout
                 android:layout_marginLeft="@dimen/dp_16"
@@ -301,7 +301,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <ImageView
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:id="@+id/iv_legal_reverse"
                     android:layout_gravity="center"
                     android:layout_width="@dimen/dp_118"
@@ -350,7 +350,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@drawable/shape_dotted_line"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
             </FrameLayout>
             <FrameLayout
                 android:visibility="gone"

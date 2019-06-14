@@ -39,6 +39,7 @@ public class ArouterKey {
     public static final String ORDER_ACCEPTDETAILACTIVITY="/order/AcceptDetailActivity";
     public static final String MESSAGE_MESSAGEDETAILACTIVITY="/message/MessageDetailActivity";
     public static final String ORDER_SEARCHFINACEACTIVITY="/finace/SearchFinaceActivity";
+    public static final String USER_CARDRYAILACTIVITY="/user/CarDetailActivity";
     public static final String USER_ADDCARACTIVITY="/user/AddCarActivity";
     public static final String USER_ADDDRIVERACTIVITY="/user/AddDriverActivity";
     public static final String USER_CARMANAGERACTIVITY="/user/CarManagerActivity";
@@ -50,4 +51,5 @@ public class ArouterKey {
     public static final String USER_MAINTENANCELOGICACTIVITY="/user/MaintenanceLogicActivity";
     public static final String USER_SELECTDRIVER="/user/SelectDriverActivity";
     public static final String HOME_MOREORDERACTIVITY="/home/MoreOrderActivity";
+    public static final String MAP_LOCATIONSERVICE="/map/LocationService";
 }

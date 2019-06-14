@@ -173,7 +173,7 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
                 .apply(requestOptions).into(userIco);
         userName.setText(CommenUtils.getIncetance().getUserBean().getUserName());
         userPhone.setText(CommenUtils.getIncetance().getUserBean().getUserContacts());
-        if (TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getCompanyId())) {
+        if (CommenUtils.LOGIN_TYPE != 0) {
             driverManager.setVisibility(View.GONE);
             plantMaintenace.setVisibility(View.GONE);
             userManager.setVisibility(View.GONE);

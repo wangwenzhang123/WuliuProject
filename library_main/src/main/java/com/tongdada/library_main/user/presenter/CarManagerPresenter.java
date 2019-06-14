@@ -10,6 +10,9 @@ import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_main.net.MainApiUtils;
 import com.tongdada.library_main.user.respose.CarListBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.functions.Consumer;
 
 /**
@@ -22,37 +25,31 @@ import io.reactivex.functions.Consumer;
 public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> implements CarManagerContract.Presenter {
 
     @Override
-    public void getCarList() {
-        if (!TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getCompanyId())){
-            MainApiUtils.getMainApi().listCars(CommenUtils.getIncetance().getRequestBean().getId(),"")
+    public void getCarList(final boolean isSelect) {
+            MainApiUtils.getMainApi().listCars(CommenUtils.getIncetance().getUserBean().getCompanyId(),CommenUtils.getIncetance().getUserBean().getDriverId())
                     .compose(this.<PagenationBase<CarListBean>>handleEverythingResult())
                     .subscribe(new Consumer<PagenationBase<CarListBean>>() {
                         @Override
                         public void accept(PagenationBase<CarListBean> driverBeanPagenationBase) throws Exception {
-                            getView().setCarList(driverBeanPagenationBase.getPagenation().getList());
+                            List <CarRequestBean> list=new ArrayList<>();
+                            for (int i = 0; i < driverBeanPagenationBase.getPagenation().getList().size(); i++) {
+                                CarRequestBean carRequestBean=driverBeanPagenationBase.getPagenation().getList().get(i);
+                                if (isSelect){
+                                    if (carRequestBean.getCarStatus().equals("K")){
+                                        list.add(carRequestBean);
+                                    }
+                                }else {
+                                    list.add(carRequestBean);
+                                }
+                            }
+                            getView().setCarList(list);
                         }
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-
+                            getView().showToast(throwable.getMessage());
                         }
                     });
-        }else {
-            MainApiUtils.getMainApi().listCars("",CommenUtils.getIncetance().getUserBean().getDriverId())
-                    .compose(this.<PagenationBase<CarListBean>>handleEverythingResult())
-                    .subscribe(new Consumer<PagenationBase<CarListBean>>() {
-                        @Override
-                        public void accept(PagenationBase<CarListBean> driverBeanPagenationBase) throws Exception {
-                            getView().setCarList(driverBeanPagenationBase.getPagenation().getList());
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-
-                        }
-                    });
-        }
-
     }
 
     @Override
@@ -62,7 +59,7 @@ public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> 
                 .subscribe(new Consumer<BaseAppEntity<CarRequestBean>>() {
                     @Override
                     public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
-                        getCarList();
+                        getCarList(false);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

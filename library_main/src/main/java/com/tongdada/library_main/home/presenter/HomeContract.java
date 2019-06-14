@@ -21,6 +21,7 @@ public class HomeContract {
         void shuffling();
         void getMixStationById();
         void getDriverById();
+        void getCarList();
         void getCarById(String carid);
     }
 }

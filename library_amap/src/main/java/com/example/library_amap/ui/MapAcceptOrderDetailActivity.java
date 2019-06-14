@@ -19,10 +19,8 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
@@ -129,6 +127,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     RecyclerView recycleCar;
     @BindView(R2.id.accpet_detail)
     TextView accpetDetail;
+    @BindView(R2.id.leftAmount)
+    TextView leftAmount;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private AcceptCarAdapter adapter;
@@ -213,14 +213,21 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventCar(List<SelectCarBean> list) {
         String car = "";
+        String amount = "";
+        int accept = 0;
         for (int i = 0; i < list.size(); i++) {
+            accept += Integer.parseInt(list.get(i).getAmount());
             if (i == list.size() - 1) {
-                car = car+list.get(i).getId();
+                car = car + list.get(i).getId();
+                amount = amount + list.get(i).getAmount();
             } else {
-                car =car+ list.get(i).getId() + ",";
+                car = car + list.get(i).getId() + ",";
+                amount = amount + list.get(i).getAmount() + ",";
             }
         }
+        requestBean.setOrderPrice(String.valueOf(accept * (Integer.parseInt(orderBean.getPerPrice()))));
         requestBean.setCarIds(car);
+        requestBean.setOrderAmount(amount);
         adapter.setNewData(list);
     }
 
@@ -322,6 +329,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
         carType2.setText(orderDetail.getCarType());
+        leftAmount.setText(orderDetail.getLeftAmount() + "方");
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");
         } else {
@@ -356,8 +364,6 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     public void onViewCommitClicked() {
         requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         requestBean.setStationId(orderBean.getStationId());
-        requestBean.setOrderAmount(orderBean.getOrderAmount());
-        requestBean.setOrderPrice("11000");
         requestBean.setOrderId(orderBean.getId());
         requestBean.setTotalDistance(orderBean.getTotalDistance());
         requestBean.setOrderRemark(orderBean.getOrderRemark());
@@ -399,8 +405,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
 
     @OnClick(R2.id.accpet_detail)
     public void onViewAcceptClicked() {
-        Bundle bundle=new Bundle();
-        bundle.putString(IntentKey.ORDER_AMOUNT,orderBean.getOrderAmount());
-        routerIntent(ArouterKey.HONE_SELECTCARACTIVITY,bundle);
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentKey.ORDER_AMOUNT, orderBean.getLeftAmount());
+        routerIntent(ArouterKey.HONE_SELECTCARACTIVITY, bundle);
     }
 }

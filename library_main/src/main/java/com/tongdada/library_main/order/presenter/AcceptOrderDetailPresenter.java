@@ -24,7 +24,7 @@ public class AcceptOrderDetailPresenter extends BasePresenter<AcceptOrderDetailC
 
     @Override
     public void detailOrderList(String id) {
-        MainApiUtils.getMainApi().detailOrderList(CommenUtils.getIncetance().getUserBean().getCompanyId(),"",null,"1", id)
+        MainApiUtils.getMainApi().detailOrderList(CommenUtils.getIncetance().getUserBean().getCompanyId(),"",null,"1", id,CommenUtils.getIncetance().getUserBean().getDriverId())
                 .compose(this.<PagenationBase<CarOrderBean>>handleEverythingResult())
                 .map(new Function<PagenationBase<CarOrderBean>, List<FinaceBean>>() {
                     @Override

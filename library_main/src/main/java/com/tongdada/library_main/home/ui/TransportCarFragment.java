@@ -9,6 +9,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventSuccessBean;
+import com.example.library_commen.event.EventUpdateOrderList;
 import com.example.library_main.R;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.adapter.BaseAdapter;
@@ -18,6 +20,10 @@ import com.tongdada.library_main.home.adapter.TransportCarrAdapter;
 import com.tongdada.library_main.home.presenter.TransportCarContract;
 import com.tongdada.library_main.home.presenter.TransportCarPresenter;
 import com.example.library_commen.model.TransportCarBean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -53,10 +59,18 @@ public class TransportCarFragment extends BaseRecyclerRefreshFragment<TransportC
     public void initLinsenterner() {
 
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUpdate(EventSuccessBean eventSuccessBean) {
+        getRefreshLayout().autoRefresh();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void event(EventUpdateOrderList EventUpdateOrderList) {
+        getRefreshLayout().autoRefresh();
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         getRecyclerAdapter().setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

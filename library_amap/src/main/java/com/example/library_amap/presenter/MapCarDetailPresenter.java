@@ -2,6 +2,7 @@ package com.example.library_amap.presenter;
 
 import android.text.TextUtils;
 
+import com.example.library_commen.event.EventSuccessBean;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.TransportCarBean;
@@ -11,6 +12,8 @@ import com.example.library_commen.net.CommenApi;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 

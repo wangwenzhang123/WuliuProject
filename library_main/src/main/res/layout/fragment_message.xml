@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:background="@color/FFFFFF"
     android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
+    <com.tongdada.library_main.widget.SlideRecyclerView
         android:layout_marginTop="@dimen/dp_15"
         android:id="@+id/message_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </com.tongdada.library_main.widget.SlideRecyclerView>
 </android.support.constraint.ConstraintLayout>

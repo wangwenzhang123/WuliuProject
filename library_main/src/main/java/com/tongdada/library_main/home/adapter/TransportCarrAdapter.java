@@ -32,7 +32,7 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
         helper.setText(R.id.transport_carnumber,item.getCarNo());
         helper.setText(R.id.driver_name,item.getDriverName());
         helper.setText(R.id.order_accept_time,item.getAcceptTime());
-        helper.setText(R.id.distance_text,item.getTotalDistance()+"km");
+        helper.setText(R.id.distance_text,item.getTotalDistance());
         helper.setText(R.id.car_title,item.getOrderName());
         ImageView imageView=helper.getView(R.id.user_pic_iv);
         RequestOptions requestOptions=new RequestOptions()

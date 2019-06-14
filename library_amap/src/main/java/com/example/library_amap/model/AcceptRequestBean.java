@@ -18,7 +18,6 @@ public class AcceptRequestBean {
     private String carId;
     private String driverName;
     private String carNo;
-
     public String getDriverId() {
         return driverId;
     }

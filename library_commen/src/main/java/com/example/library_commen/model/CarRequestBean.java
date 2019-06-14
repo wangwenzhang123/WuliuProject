@@ -27,6 +27,15 @@ public class CarRequestBean implements Serializable{
     private String driverName="";
     private boolean isCheck=false;
     private String delFlag="";
+    private String carStatus="";
+
+    public String getCarStatus() {
+        return carStatus;
+    }
+
+    public void setCarStatus(String carStatus) {
+        this.carStatus = carStatus;
+    }
 
     public String getDelFlag() {
         return delFlag;

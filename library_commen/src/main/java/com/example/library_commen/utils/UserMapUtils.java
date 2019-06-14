@@ -133,6 +133,7 @@ public class UserMapUtils {
         map.put("psCars.mileages",requestRegisterBean.getMileages());
         map.put("psCars.driverName",requestRegisterBean.getDriverName());
         map.put("psCars.delFlag",requestRegisterBean.getDelFlag());
+        map.put("psCars.carStatus",requestRegisterBean.getCarStatus());
         return map;
     }
 }

@@ -38,7 +38,7 @@ public interface CommenApi {
     Observable<BaseAppEntity<OrderBean>> getOrderById(@Field("psTotalOrders.id") String id);
     @FormUrlEncoded
     @POST("/interface/orderCarsList.action")
-    Observable<PagenationBase<DetailCarBean>> orderCarsList(@Field("psDetailOrders.orderId") String id);
+    Observable<PagenationBase<DetailCarBean>> orderCarsList(@Field("psDetailOrders.orderId") String id,@Field("psDetailOrders.driverId") String driverId);
     @FormUrlEncoded
     @POST("/interface/cancelOrder.action")
     Observable<BaseAppEntity<OrderBean>> cancelOrder(@Field("psTotalOrders.id") String id);
@@ -100,5 +100,14 @@ public interface CommenApi {
     @FormUrlEncoded
     @POST("/interface/cancelDetailOrder.action")
     Observable<BaseAppEntity<OrderBean>> cancelDetailOrder(@Field("psDetailOrders.id") String id);
+    /**
+     * 取消订单
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("interface/updateDriverLocation.action")
+    Observable<BaseAppEntity<OrderBean>> updateDriverLocation(@Field("psDrivers.id") String id,@Field("psDrivers.driverLatitude") String carLatitude,@Field("psDrivers.driverLongitude") String carLongitude);
 
 }

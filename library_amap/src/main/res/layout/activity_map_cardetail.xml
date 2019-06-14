@@ -291,7 +291,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:background="@drawable/shape_dotted_line"
-                        android:scaleType="fitXY" />
+                        android:scaleType="centerCrop" />
                 </FrameLayout>
                 <TextView
                     android:id="@+id/unload_tv"
@@ -336,7 +336,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:background="@drawable/shape_dotted_line"
-                        android:scaleType="fitXY" />
+                        android:scaleType="centerCrop" />
                 </FrameLayout>
 
                 <LinearLayout

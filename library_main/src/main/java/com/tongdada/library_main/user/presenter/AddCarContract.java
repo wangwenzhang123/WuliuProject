@@ -15,6 +15,7 @@ public class AddCarContract {
         void selectPic(int  code);
         void uploadSuccess(String path,String url,int dex);
         void upDateUi();
+        void operationSuccess();
     }
     public interface Presenter{
         void addCar(CarRequestBean carRequestBean);

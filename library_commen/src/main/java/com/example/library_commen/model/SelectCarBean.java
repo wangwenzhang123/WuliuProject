@@ -10,10 +10,19 @@ package com.example.library_commen.model;
 public class SelectCarBean {
     private String id;
     private String carNo;
-
-    public SelectCarBean(String id, String carNo) {
+    private String amount;
+    public SelectCarBean(String id, String carNo,String amount) {
         this.id = id;
         this.carNo = carNo;
+        this.amount=amount;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
     public String getId() {

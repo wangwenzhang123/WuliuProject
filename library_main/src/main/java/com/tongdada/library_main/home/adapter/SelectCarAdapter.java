@@ -27,6 +27,8 @@ public class SelectCarAdapter extends BaseQuickAdapter<CarRequestBean,BaseViewHo
     protected void convert(BaseViewHolder helper, CarRequestBean item) {
         ConstraintLayout ll=helper.getView(R.id.item_select_ll);
         ImageView imageView=helper.getView(R.id.car_pic);
+        helper.setText(R.id.car_no,item.getCarNo());
+        helper.setText(R.id.car_loading,"最多装载"+item.getCarLoad()+"方");
         if (item.isCheck()){
             imageView.setImageResource(R.mipmap.select_car_true);
             ll.setBackgroundResource(R.drawable.shape_select_car_bg_true);

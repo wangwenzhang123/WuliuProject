@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventAddBean;
+import com.example.library_commen.event.EventSuccessBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
@@ -96,9 +97,10 @@ public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListCont
 
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void eventOrder(OrderBean orderBean){
+    public void eventOrder(EventSuccessBean orderBean){
         getRefreshLayout().autoRefresh();
     }
+
     @Override
     public OrderListPresenter getPresenter() {
         return new OrderListPresenter();

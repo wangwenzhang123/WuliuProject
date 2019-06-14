@@ -14,6 +14,7 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.CarRequestBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -68,14 +69,17 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventAdd(EventAddBean eventAddBean){
-        presenter.getCarList();
+        presenter.getCarList(false);
     }
     @Override
     public void initView() {
         carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<CarRequestBean>());
         carManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         carManagerRecycle.setAdapter(carManagerAdapter);
-        presenter.getCarList();
+        presenter.getCarList(false);
+        if (CommenUtils.LOGIN_TYPE ==1){
+            addCarTv.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -93,9 +97,19 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 carManagerRecycle.closeMenu();
-                ARouter.getInstance().build(ArouterKey.USER_ADDCARACTIVITY).withSerializable(IntentKey.CAR_BEAN,carManagerAdapter.getData().get(position)).navigation(mContext);
+                if (CommenUtils.LOGIN_TYPE == 1){
+                    ARouter.getInstance().build(ArouterKey.USER_CARDRYAILACTIVITY).withSerializable(IntentKey.CAR_BEAN,carManagerAdapter.getData().get(position)).navigation(mContext);
+                }else {
+                    ARouter.getInstance().build(ArouterKey.USER_ADDCARACTIVITY).withSerializable(IntentKey.CAR_BEAN,carManagerAdapter.getData().get(position)).navigation(mContext);
+                }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R2.id.register_back)

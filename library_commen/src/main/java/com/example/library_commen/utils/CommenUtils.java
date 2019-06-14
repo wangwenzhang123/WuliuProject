@@ -1,5 +1,7 @@
 package com.example.library_commen.utils;
 
+import android.text.TextUtils;
+
 import com.example.library_commen.appkey.ShareKey;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.LogisticsRequestBean;
@@ -15,6 +17,7 @@ import com.tongdada.base.util.SharedPreferencesUtil;
  * @change
  */
 public class CommenUtils {
+    public static int LOGIN_TYPE=0;//0物流公司，1物流公司司机，2个体户司机
     private static CommenUtils commenUtils;
     private UserBean userBean;
     private CarRequestBean carRequestBean;
@@ -54,6 +57,15 @@ public class CommenUtils {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
+        if (TextUtils.isEmpty(userBean.getCompanyId())){
+            LOGIN_TYPE=2;
+        }else {
+            if (TextUtils.isEmpty(userBean.getDriverId())){
+                LOGIN_TYPE=0;
+            }else {
+                LOGIN_TYPE=1;
+            }
+        }
         SharedPreferencesUtil.getInstance().putString(ShareKey.USER_BEAN,new Gson().toJson(userBean));
     }
 }

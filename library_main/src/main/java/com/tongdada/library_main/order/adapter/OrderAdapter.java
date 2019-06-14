@@ -33,6 +33,7 @@ public class OrderAdapter extends BaseAdapter<OrderBean> {
         helper.setText(R.id.order_start_tv,item.getStartPlace());
         helper.setText(R.id.order_end_tv,item.getDestinationPlace());
         helper.setText(R.id.order_time,item.getPublishTime());
+        helper.setText(R.id.order_accept_number,item.getAcceptNumber()+"人已接单");
         ImageView imageView=helper.getView(R.id.order_iv);
         ImageView state=helper.getView(R.id.order_state_iv);
         if (item.getCarType().equals("B")){

@@ -55,7 +55,9 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
     @BindView(R2.id.amount_tv)
     TextView amountTv;
     private SelectCarAdapter selectCarAdapter;
-    private String total,accept="0";
+    private int total,accept,acceptCar;
+    private int accpetTotal;
+    private boolean isSelect=true;
     @Override
     public int getView() {
         return R.layout.activity_select_car;
@@ -81,40 +83,67 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         carRecycle.setAdapter(selectCarAdapter);
         SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10, 20);
         carRecycle.addItemDecoration(spaceItemDecoration);
-        presenter.getCarList();
-
+        presenter.getCarList(true);
     }
 
     @Override
     public void getData() {
         Bundle bundle=getIntent().getExtras();
         assert bundle != null;
-        total=bundle.getString(IntentKey.ORDER_AMOUNT);
+        total= Integer.parseInt(bundle.getString(IntentKey.ORDER_AMOUNT));
+        accpetTotal=total;
     }
 
     private void updateUi(){
         int amuont=0;
+        accept=0;
+        acceptCar=0;
         for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
             CarRequestBean carRequestBean=selectCarAdapter.getData().get(i);
-            if (carRequestBean.isCheck()){
+            accept+=Integer.parseInt(carRequestBean.getCarLoad());
+            if (!carRequestBean.isCheck()){
                 amuont= Integer.parseInt(carRequestBean.getCarLoad())+amuont;
+            }else {
+                acceptCar+=Integer.parseInt(carRequestBean.getCarLoad());
             }
         }
-        amountTv.setText("剩余"+total+"，当前可以运输总量"+amuont+"方");
+        if (isCheckAll){
+            amountTv.setText("剩余"+(total-accept)+"，当前可以运输总量"+0+"方");
+        }else {
+            if (total == 0){
+                isSelect=false;
+            }
+            amountTv.setText("剩余"+total+"，当前可以运输总量"+amuont+"方");
+            if (total < accept){
+                checkAll.setFocusable(false);
+                checkAll.setClickable(false);
+            }
+        }
+
     }
     @Override
     public void initLinsenterner() {
         selectCarAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
-                if (finaceBean.isCheck()) {
-                    finaceBean.setCheck(false);
-                } else {
-                    finaceBean.setCheck(true);
+                if (isSelect){
+                    CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
+                    if (finaceBean.isCheck()) {
+                        finaceBean.setCheck(false);
+                        total=total+Integer.parseInt(finaceBean.getCarLoad());
+                    } else {
+                        finaceBean.setCheck(true);
+                        total=total-Integer.parseInt(finaceBean.getCarLoad());
+                        if (total <= 0){
+                            total=0;
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    updateUi();
+                }else {
+                    showToast("装货量已满！");
                 }
-                adapter.notifyDataSetChanged();
-                updateUi();
+
             }
         });
     }
@@ -143,6 +172,7 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         if (isCheckAll) {
             isCheckAll = false;
         } else {
+            total=accpetTotal;
             isCheckAll = true;
         }
         selectCarAdapter.notifyDataSetChanged();
@@ -155,7 +185,12 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
             CarRequestBean requestBean = selectCarAdapter.getData().get(i);
             if (requestBean.isCheck()) {
-                list.add(new SelectCarBean(requestBean.getId(), requestBean.getCarNo()));
+                if (accpetTotal - Integer.parseInt(requestBean.getCarLoad()) > 0){
+                    list.add(new SelectCarBean(requestBean.getId(), requestBean.getCarNo(),requestBean.getCarLoad()));
+                    accpetTotal=accpetTotal-Integer.parseInt(requestBean.getCarLoad());
+                }else {
+                    list.add(new SelectCarBean(requestBean.getId(), requestBean.getCarNo(),accpetTotal+""));
+                }
             }
         }
         EventBus.getDefault().post(list);

@@ -61,6 +61,8 @@ public class OrderBean implements Serializable{
     private String totalDistance="";
     private CreateTimeBean updateTime=new CreateTimeBean();
     private String updateUserID="";
+    private String acceptNumber="";
+    private String leftAmount;
     /**
      * orderPic :
      * updateTime : null
@@ -68,6 +70,21 @@ public class OrderBean implements Serializable{
 
     private String orderPic="";
 
+    public String getLeftAmount() {
+        return leftAmount;
+    }
+
+    public void setLeftAmount(String leftAmount) {
+        this.leftAmount = leftAmount;
+    }
+
+    public String getAcceptNumber() {
+        return acceptNumber;
+    }
+
+    public void setAcceptNumber(String acceptNumber) {
+        this.acceptNumber = acceptNumber;
+    }
 
     public String getCarType() {
         return carType;

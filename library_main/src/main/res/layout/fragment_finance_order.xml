@@ -4,13 +4,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/finance_order_recycle"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/finace_smart"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/finance_order_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <TextView
         android:id="@+id/check_all"
         android:layout_marginTop="@dimen/dp_20"
@@ -28,7 +37,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_42"
         android:background="@drawable/shape_login"
-        android:text="@string/submit_settlement"
+        android:text="@string/apply_settlement"
         android:textColor="@color/FFFFFF"
         android:textSize="@dimen/sp_14" />
 </LinearLayout>

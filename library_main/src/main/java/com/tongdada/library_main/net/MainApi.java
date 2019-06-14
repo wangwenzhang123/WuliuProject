@@ -192,7 +192,7 @@ public interface MainApi {
     @POST("/interface/findDetailList.action")
     Observable<PagenationBase<CarOrderBean>> detailOrderList(@Field("psDetailOrders.companyId") String id, @Field("psDetailOrders.orderStatus") String orderStatus
             , @Field("psDetailOrders.orderRemark") String orderRemark,
-                                                             @Field("page") String pageNumber, @Field("psDetailOrders.orderId") String orderId
+                                                             @Field("page") String pageNumber, @Field("psDetailOrders.orderId") String orderId, @Field("psDetailOrders.driverId") String driverId
     );
     /**
      * 获取司机列表

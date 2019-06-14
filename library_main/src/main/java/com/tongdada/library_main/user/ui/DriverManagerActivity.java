@@ -99,7 +99,11 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     @OnClick(R2.id.register_back)
     public void onRegisterBackClicked() {
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
     @OnClick(R2.id.add_driver_tv)
     public void onAddDriverTvClicked() {
         routerIntent(ArouterKey.USER_ADDDRIVERACTIVITY,null);

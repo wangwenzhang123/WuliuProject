@@ -39,7 +39,7 @@ public class AddCarPresenter extends BasePresenter<AddCarContract.View> implemen
                     @Override
                     public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
-                        getView().finishActivity();
+                        getView().operationSuccess();
                     }
                 }, new Consumer<Throwable>() {
                     @Override

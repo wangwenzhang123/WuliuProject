@@ -1,11 +1,15 @@
 package com.example.library_amap.presenter;
 
 import com.example.library_amap.model.AcceptRequestBean;
+import com.example.library_commen.event.EventAddBean;
+import com.example.library_commen.event.EventSuccessBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.net.CommenApi;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.reactivex.functions.Consumer;
 
@@ -46,6 +50,7 @@ public class AcceptOrderPresenter extends BasePresenter<AcceptOrderContract.View
                 .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
                     @Override
                     public void accept(BaseAppEntity<OrderBean> orderBeanBaseAppEntity) throws Exception {
+                        EventBus.getDefault().post(new EventSuccessBean());
                         getView().showToast("接单成功");
                         getView().finishActivity();
                     }
