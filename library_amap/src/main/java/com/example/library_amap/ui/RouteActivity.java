@@ -1,10 +1,13 @@
 package com.example.library_amap.ui;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -180,6 +183,11 @@ public class RouteActivity extends BaseActivity implements LocationSource, AMap.
         routeMap.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//因为不是所有的系统都可以设置颜色的，在4.4以下就不可以。。有的说4.1，所以在设置的时候要检查一下系统版本是否是4.1以上
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.FFFFFF));
+        }
     }
 
     @Override

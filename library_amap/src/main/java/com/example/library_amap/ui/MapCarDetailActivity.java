@@ -3,11 +3,14 @@ package com.example.library_amap.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -152,6 +155,11 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         orderDetailMap.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//因为不是所有的系统都可以设置颜色的，在4.4以下就不可以。。有的说4.1，所以在设置的时候要检查一下系统版本是否是4.1以上
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.FFFFFF));
+        }
     }
 
     @Override
@@ -232,12 +240,12 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         driverName.setText(detailOrder.getDriverName());
         driverPhone.setText(detailOrder.getPsDriver().getDriverMobile());
         transportCarnumber.setText(detailOrder.getCarNo());
-        unitPrice.setText(detailOrder.getPsTotalOrder().getPerPrice());
+        unitPrice.setText(detailOrder.getPsTotalOrder().getPerPrice()+"元（单位 方/公里）");
         nowLoading.setText(detailOrder.getOrderAmount() + "方");
-        aMap.addMarker(new MarkerOptions().position(new LatLng(31.985562554090762, 118.82025068383825))
+        aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getStartLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getStartLongitude())))
                 .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
                 .anchor(0.5f, 0.5f));
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(31.985562554090762, 118.82025068383825), 13));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getStartLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getStartLongitude())), 13));
         Observable.create(new ObservableOnSubscribe<MarkerBean>() {
             @Override
             public void subscribe(ObservableEmitter<MarkerBean> e) throws Exception {

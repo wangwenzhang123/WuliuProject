@@ -10,13 +10,16 @@
         android:background="@color/_ffe06e38">
 
         <ImageView
+            android:padding="@dimen/dp_10"
+            android:layout_centerVertical="true"
             android:id="@+id/register_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_45"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/back" />
+            android:src="@mipmap/white_back" />
+
 
         <TextView
             android:id="@+id/back_tv"
@@ -340,23 +343,12 @@
 
             </View>
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_44"
                 android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/et_travlled_distance"
-                    android:layout_width="@dimen/dp_290"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_gravity="right|center"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="@null"
-                    android:gravity="right|center"
-                    android:hint="请输入车辆行驶里程"
-                    android:textSize="@dimen/sp_14" />
-
                 <TextView
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -364,7 +356,26 @@
                     android:text="@string/travlled_distance"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/sp_14" />
-            </FrameLayout>
+                <EditText
+                    android:textColor="@color/_333333"
+                    android:layout_weight="1"
+                    android:id="@+id/et_travlled_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@null"
+                    android:gravity="right|center"
+                    android:hint="请输入车辆行驶里程"
+                    android:textSize="@dimen/sp_14" />
+                <TextView
+
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_gravity="center"
+                    android:text="公里"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -388,15 +399,23 @@
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/sp_14" />
                 <EditText
+                    android:textColor="@color/_333333"
                     android:id="@+id/et_car_load"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_30"
                     android:layout_gravity="right|center"
-                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:background="@null"
                     android:gravity="right|center"
                     android:hint="请输入车辆载重"
                     android:textSize="@dimen/sp_14" />
+                <TextView
+
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_gravity="center"
+                    android:text="方"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -476,9 +495,8 @@
                     android:scaleType="fitXY"
                     android:id="@+id/iv_business_license"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/shape_dotted_line"
                     />
             </FrameLayout>
             <Button

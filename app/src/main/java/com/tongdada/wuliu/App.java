@@ -3,6 +3,7 @@ package com.tongdada.wuliu;
 import android.content.Intent;
 
 import com.example.service.LocationService;
+import com.tencent.bugly.Bugly;
 import com.tongdada.base.appContext.AppContext;
 
 /**
@@ -14,5 +15,6 @@ public class App extends AppContext {
     public void onCreate() {
         super.onCreate();
         startService(new Intent(this, LocationService.class));
+        Bugly.init(getApplicationContext(), "d31305cafe", false);
     }
 }

@@ -34,10 +34,12 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
         helper.setText(R.id.order_accept_time,item.getAcceptTime());
         helper.setText(R.id.distance_text,item.getTotalDistance());
         helper.setText(R.id.car_title,item.getOrderName());
+        helper.setText(R.id.address_start,item.getStartPlace());
+        helper.setText(R.id.address_end,item.getDestinationPlace());
         ImageView imageView=helper.getView(R.id.user_pic_iv);
         RequestOptions requestOptions=new RequestOptions()
-                .error(R.mipmap.user_sample)
-                .placeholder(R.mipmap.user_sample)
+                .error(R.mipmap.user_defut)
+                .placeholder(R.mipmap.user_defut)
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;
@@ -49,20 +51,17 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
         }
         ImageView state=helper.getView(R.id.car_state_iv);
         switch (item.getOrderStatus()){
-            case "F":
-                state.setImageResource(R.mipmap.ongoing);
-                break;
-            case "E":
-                state.setImageResource(R.mipmap.yiwancheng);
-                break;
-            case "A":
-                state.setImageResource(R.mipmap.yijiedan);
-                break;
-            case "X":
-                state.setImageResource(R.mipmap.daiqueren);
-                break;
             case "Z":
                 state.setImageResource(R.mipmap.ongoing);
+                break;
+            case "A":
+                state.setImageResource(R.mipmap.car_accept);
+                break;
+            case "X":
+                state.setImageResource(R.mipmap.daihesuan);
+                break;
+            case "S":
+                state.setImageResource(R.mipmap.accounting);
                 break;
         }
     }

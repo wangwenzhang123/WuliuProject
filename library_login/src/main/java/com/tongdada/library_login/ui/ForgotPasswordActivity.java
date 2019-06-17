@@ -23,7 +23,7 @@ import butterknife.OnClick;
 @Route(path = ArouterKey.LOGIN_FORGOTPASSWORDACTIVITY)
 public class ForgotPasswordActivity extends BaseMvpActivity<ForgotPresenter> implements ForgotContract.View {
 
-    @BindView(R2.id.resetpassword_back)
+    @BindView(R2.id.register_back)
     ImageView resetpasswordBack;
     @BindView(R2.id.top_rl)
     RelativeLayout topRl;
@@ -47,7 +47,7 @@ public class ForgotPasswordActivity extends BaseMvpActivity<ForgotPresenter> imp
         return R.layout.activity_forgot_password;
     }
 
-    @OnClick(R2.id.resetpassword_back)
+    @OnClick(R2.id.register_back)
     public void onResetpasswordBackClicked() {
         finish();
     }

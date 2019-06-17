@@ -1,4 +1,4 @@
-package com.tongdada.library_main.widget;
+package com.example.library_commen.weight;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/user_tv"
@@ -12,450 +13,459 @@
         android:background="@color/_ffe06e38"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_44" />
-    <TextView
-        android:background="@color/_ffe06e38"
-        app:layout_constraintTop_toBottomOf="@id/user_tv"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_78" />
-
-    <LinearLayout
-        android:id="@+id/user_ll"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="@dimen/dp_24"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="@dimen/dp_24"
-        android:layout_marginTop="@dimen/dp_56"
-        app:layout_constraintTop_toBottomOf="@id/user_tv"
-        android:background="@drawable/shape_user"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_72">
-        <TextView
-            android:id="@+id/user_name"
-            android:textColor="@color/_333333"
-            android:layout_marginTop="@dimen/dp_17"
-            android:text="我市好人"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/user_phone"
-            android:layout_marginTop="@dimen/dp_5"
-            android:gravity="center"
-            android:text="1234566+"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <ImageView
-        android:id="@+id/user_ico"
-        android:src="@mipmap/user_hpyfy"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="@dimen/dp_48"
-        android:layout_marginTop="@dimen/dp_14"
-        app:layout_constraintTop_toBottomOf="@id/user_tv"
-        android:layout_width="@dimen/dp_80"
-        android:layout_height="@dimen/dp_82" />
     <android.support.v4.widget.NestedScrollView
-        android:layout_marginTop="@dimen/dp_20"
-        app:layout_constraintTop_toBottomOf="@id/user_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-
-            android:orientation="vertical"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/user_info"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <TextView
+                android:background="@color/_ffe06e38"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/user_info"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_78" />
+
+            <LinearLayout
+                android:id="@+id/user_ll"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/dp_24"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_56"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/shape_user"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_72">
+                <TextView
+                    android:id="@+id/user_name"
+                    android:textColor="@color/_333333"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:text="我市好人"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/user_info"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_phone"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="1234566+"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
+            <ImageView
+                android:id="@+id/user_ico"
+                android:src="@mipmap/user_hpyfy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/dp_48"
+                android:layout_marginTop="@dimen/dp_14"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_82" />
+            <android.support.v4.widget.NestedScrollView
+                android:layout_marginTop="@dimen/dp_20"
+                app:layout_constraintTop_toBottomOf="@id/user_ll"
                 android:layout_width="match_parent"
-                android:layout_height="1dp">
-
-            </View>
+                android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/change_password"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/change_password"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/change_password"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/car_manager"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/car_manager"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/car_manager"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/user_info"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/user_info"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/user_info"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/driver_manager"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/driver_manager"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/driver_manager"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:id="@+id/driver_view"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/change_password"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/change_password"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/change_password"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/user_manager"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/user_manager"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/user_manager"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:id="@+id/user_view"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/car_manager"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/car_manager"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/car_manager"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/message_management"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/messger"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/message_management"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/driver_manager"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/driver_manager"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/driver_manager"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:id="@+id/driver_view"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/messege_m"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/my_task"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/messege_m"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/user_manager"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/user_manager"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/user_manager"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:id="@+id/user_view"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/setting"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/setting"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/price_setting"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:visibility="gone"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/message_management"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/messger"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/message_management"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/plant_maintenace"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/plant"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/logistics_maintenance"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:id="@+id/wuliu_view"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/messege_m"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/my_task"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/messege_m"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/about_app"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/about"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/about_app"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/setting"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/setting"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/price_setting"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-            <LinearLayout
-                android:id="@+id/out_login"
-                android:layout_marginRight="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44">
-                <ImageView
-                    android:src="@mipmap/about"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/_333333"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_weight="1"
-                    android:text="@string/out_login"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/go"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <View
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/_E0E0E0"
-                android:layout_width="match_parent"
-                android:layout_height="1dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/plant_maintenace"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/plant"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/logistics_maintenance"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:id="@+id/wuliu_view"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
 
-            </View>
-        </LinearLayout>
+                </View>
+                <LinearLayout
+                    android:id="@+id/about_app"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/about"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/about_app"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:id="@+id/out_login"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <ImageView
+                        android:src="@mipmap/login_out"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_weight="1"
+                        android:text="@string/out_login"
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/go"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+            </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

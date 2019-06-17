@@ -56,7 +56,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
     @BindView(R2.id.finace_smart)
     SmartRefreshLayout finaceSmart;
     private String state = "";
-    private String type = "S";
+    private String type = "H";
     private FinaceOrderAdapter adapter;
     private List<FinaceBean> list = new ArrayList<>();
     private boolean isCheckAll = false;
@@ -106,12 +106,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
                 //routerIntent(ArouterKey.FINANCE_FINACEORDERACTIVITY,null);
-                if (adapter.getData().get(position).getOrderStatus().equals("H")) {
-                    ARouter.getInstance().build(ArouterKey.FINANCE_FINACEORDERACTIVITY).withString(IntentKey.MAP_ORDERID, adapter.getData().get(position).getRowId()).navigation(mContext);
-                } else {
-                    ARouter.getInstance().build(ArouterKey.MAP_MAPCARDETAILACTIVITY).withString(IntentKey.MAP_ORDERID, adapter.getData().get(position).getRowId()).navigation(mContext);
-                }
-
+                ARouter.getInstance().build(ArouterKey.FINANCE_FINACEORDERACTIVITY).withString(IntentKey.MAP_ORDERID, adapter.getData().get(position).getRowId()).navigation(mContext);
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

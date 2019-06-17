@@ -2,6 +2,7 @@ package com.example.library_amap.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -11,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +45,7 @@ import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.SelectCarBean;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.utils.PhoneCallUtils;
+import com.example.library_commen.weight.SpaceItemDecoration;
 import com.example.overlay.DrivingRouteOverlay;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -176,6 +180,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         adapter = new AcceptCarAdapter(R.layout.item_order_car, new ArrayList<SelectCarBean>());
         recycleCar.setLayoutManager(new GridLayoutManager(mContext, 4));
         recycleCar.setAdapter(adapter);
+        SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10, 20);
+        recycleCar.addItemDecoration(spaceItemDecoration);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             id = bundle.getString(IntentKey.ORDER_ID);
@@ -216,6 +222,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         String amount = "";
         int accept = 0;
         for (int i = 0; i < list.size(); i++) {
+            requestBean.setCarNo(list.get(i).getCarNo());
+            requestBean.setCarId(list.get(i).getId());
             accept += Integer.parseInt(list.get(i).getAmount());
             if (i == list.size() - 1) {
                 car = car + list.get(i).getId();
@@ -251,6 +259,11 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         orderDetailMap.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//因为不是所有的系统都可以设置颜色的，在4.4以下就不可以。。有的说4.1，所以在设置的时候要检查一下系统版本是否是4.1以上
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.FFFFFF));
+        }
     }
 
     @Override
@@ -362,12 +375,19 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
 
     @OnClick(R2.id.order_change)
     public void onViewCommitClicked() {
-        requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
+        requestBean.setCompanyId(CommenUtils.getIncetance().getUserBean().getCompanyId());
         requestBean.setStationId(orderBean.getStationId());
         requestBean.setOrderId(orderBean.getId());
         requestBean.setTotalDistance(orderBean.getTotalDistance());
         requestBean.setOrderRemark(orderBean.getOrderRemark());
-        presenter.acceptOrderOfLogi(requestBean);
+        requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
+        requestBean.setDriverName(CommenUtils.getIncetance().getUserBean().getUserName());
+        if (CommenUtils.LOGIN_TYPE != 0){
+            presenter.acceptOrderOfDriver(requestBean);
+        }else {
+            presenter.acceptOrderOfLogi(requestBean);
+        }
+
     }
 
     @Override

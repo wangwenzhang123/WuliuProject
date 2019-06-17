@@ -25,12 +25,11 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.example.library_amap.R;
 import com.example.library_amap.R2;
-import com.example.library_commen.adapter.OrderDetailCarAdapter;
-import com.example.library_commen.model.CarBean;
 import com.example.library_amap.model.MarkerBean;
+import com.example.library_commen.adapter.OrderDetailCarAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
-import com.example.library_commen.utils.CommenUtils;
+import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.DetailCarListBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.presenter.OrderDetailContract;
@@ -123,6 +122,8 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     RecyclerView recycleCar;
     @BindView(R2.id.accpet_detail)
     TextView accpetDetail;
+    @BindView(R2.id.leftAmount)
+    TextView leftAmount;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private OrderDetailCarAdapter adapter;
@@ -310,6 +311,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
         carType2.setText(orderDetail.getCarType());
+        leftAmount.setText(orderDetail.getLeftAmount() + "方");
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");
         } else {
@@ -342,7 +344,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         adapter.setNewData(carList);
         for (int i = 0; i < carList.size(); i++) {
             DetailCarListBean driverOrderDetailBean = carList.get(i);
-            CarBean carBean = new CarBean(driverOrderDetailBean.getCarName(), driverOrderDetailBean.getCarNo(),
+            CarBean carBean = new CarBean(driverOrderDetailBean.getDriveName(), driverOrderDetailBean.getCarNo(),
                     driverOrderDetailBean.getDriveLicense(),
                     Double.valueOf(driverOrderDetailBean.getCarLatitude())
                     , Double.valueOf(driverOrderDetailBean.getCarLongitude()));

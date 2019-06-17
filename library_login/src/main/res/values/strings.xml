@@ -7,4 +7,5 @@
     <string name="load">载重</string>
     <string name="car_no">车牌号</string>
     <string name="driver_age">驾龄</string>
+    <string name="input_user_address">请输入住址</string>
 </resources>

@@ -31,10 +31,12 @@ public class FinaceOrderAdapter  extends BaseQuickAdapter<FinaceBean,BaseViewHol
         helper.setText(R.id.driver_name,item.getDriverName());
         helper.setText(R.id.order_accept_time,item.getAcceptTime());
         helper.setText(R.id.car_title,item.getOrderName());
-        helper.setText(R.id.distance_text,item.getTotalDistance()+"km");
+        helper.setText(R.id.distance_text,item.getTotalDistance());
+        helper.setText(R.id.address_start,item.getStartPlace());
+        helper.setText(R.id.address_end,item.getDestinationPlace());
         CheckBox checkBox=helper.getView(R.id.btn_select);
         helper.addOnClickListener(R.id.btn_select);
-        helper.setText(R.id.order_price,item.getOrderPrice());
+        helper.setText(R.id.order_price,"￥"+item.getOrderPrice());
         ImageView state=helper.getView(R.id.car_state_iv);
         if (item.getCarType().equals("B")){
             helper.setText(R.id.car_type,"泵车");

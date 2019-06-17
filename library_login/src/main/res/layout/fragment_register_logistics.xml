@@ -203,6 +203,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/et_registered_capital"
                 android:layout_width="@dimen/dp_290"
                 android:layout_height="@dimen/dp_30"
@@ -276,10 +277,9 @@
 
                 <ImageView
                     android:id="@+id/iv_legal_positive1"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/shape_dotted_line"
                     android:scaleType="centerCrop" />
             </FrameLayout>
             <FrameLayout
@@ -313,9 +313,9 @@
                     android:scaleType="centerCrop"
                     android:id="@+id/iv_legal_reverse1"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/shape_dotted_line"
+
                     />
 
 

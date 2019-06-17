@@ -58,7 +58,7 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
     TextView backTv;
     private UserBean userBean;
     private static final int USERICON_CODE = 0;
-
+    RequestOptions requestOptions;
     @Override
     public int getView() {
         return R.layout.activity_userinfo;
@@ -71,7 +71,7 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
 
     @Override
     public void initView() {
-        RequestOptions requestOptions = new RequestOptions()
+        requestOptions = new RequestOptions()
                 .error(R.mipmap.user_hpyfy)
                 .placeholder(R.mipmap.user_hpyfy)
                 .circleCrop()
@@ -125,7 +125,7 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
             switch (requestCode) {
                 case USERICON_CODE:
                     List<String> images3 = data.getStringArrayListExtra(PhotoSelector.SELECT_RESULT);
-                    Glide.with(mContext).load(images3.get(0)).into(userIco);
+                    Glide.with(mContext).load(images3.get(0)).apply(requestOptions).into(userIco);
                     presenter.upload(images3.get(0), USERICON_CODE);
                     Log.e(TGA, "3=" + images3.get(0));
                     break;
@@ -169,7 +169,7 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
     public void uploadSuccess(String path, String url, int dex) {
         switch (dex) {
             case USERICON_CODE:
-                Glide.with(mContext).load(path).into(userIco);
+                Glide.with(mContext).load(path).apply(requestOptions).into(userIco);
                 userBean.setIconPic(url);
                 break;
         }

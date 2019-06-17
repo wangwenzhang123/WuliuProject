@@ -74,7 +74,13 @@ public class AddUserDetailActivity extends BaseMvpActivity<AddUserPresenter> {
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;
-        Glide.with(mContext).load(BaseUrl.BASEURL+"/"+userBean.getIconPic()).apply(requestOptions.circleCrop()).into(userIco);
+        RequestOptions requestOptions1=new RequestOptions()
+                .circleCrop()
+                .error(R.mipmap.user_hpyfy)
+                .placeholder(R.mipmap.user_hpyfy)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                ;
+        Glide.with(mContext).load(BaseUrl.BASEURL+"/"+userBean.getIconPic()).apply(requestOptions1).into(userIco);
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+userBean.getBackPic()).apply(requestOptions.centerCrop()).into(ivLegalReverse);
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+userBean.getFrontPic()).apply(requestOptions.centerCrop()).into(ivLegalPositive);
     }

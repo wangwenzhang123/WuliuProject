@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.TransportCarBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
@@ -62,7 +66,13 @@ public class FinanceCompleteFragment extends BaseMvpFragment<FinancePresenter> i
 
     @Override
     public void initLinsenterner() {
-
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+                //routerIntent(ArouterKey.FINANCE_FINACEORDERACTIVITY,null);
+                ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,adapter.getData().get(position).getRowId()).navigation(mContext);
+            }
+        });
     }
 
     @Override

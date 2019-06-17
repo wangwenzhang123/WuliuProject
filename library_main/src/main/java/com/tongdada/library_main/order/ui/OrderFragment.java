@@ -82,8 +82,7 @@ public class OrderFragment extends BaseMvpFragment{
         list.add("总订单");
         list.add("已接单");
         list.add("已装货");
-        list.add("已卸货");
-        list.add("已核算");
+       /* list.add("已核算");*/
         pager.setOffscreenPageLimit(3);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
@@ -91,8 +90,7 @@ public class OrderFragment extends BaseMvpFragment{
                 fragments.add(new LogicOrderListFragment());
                 fragments.add(new TransportCarFragment("A"));
                 fragments.add(new TransportCarFragment("Z"));
-                fragments.add(new TransportCarFragment("X"));
-                fragments.add(new TransportCarFragment("S"));
+                //fragments.add(new TransportCarFragment("S"));
                 e.onNext(fragments);
             }
         }).subscribeOn(Schedulers.io())

@@ -5,12 +5,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventUpdateOrderList;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_main.R;
 import com.example.library_main.R2;
+import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.finance.presenter.FinaceOrderDetailContract;
@@ -71,8 +75,15 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
     TextView orderEnd;
     @BindView(R2.id.reject_tv)
     TextView rejectTv;
+    @BindView(R2.id.loading_pic)
+    ImageView loadingPic;
+    @BindView(R2.id.unload_pic)
+    ImageView unloadPic;
+    @BindView(R2.id.order_state)
+    TextView orderState;
     private DriverOrderDetailBean transportCarBean;
     private String id;
+
     @Override
     public int getView() {
         return R.layout.activity_finance_order;
@@ -117,6 +128,12 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
             carType.setText("砼车");
             carXinghao.setText(transportCarBean.getPsCar().getCarType());
         }
+        RequestOptions requestOptions = new RequestOptions()
+                .error(R.mipmap.defult)
+                .placeholder(R.mipmap.defult)
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + transportCarBean.getLoadLicense()).apply(requestOptions).into(loadingPic);
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + transportCarBean.getUnloadLicense()).apply(requestOptions).into(unloadPic);
     }
 
     @Override
@@ -139,11 +156,6 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
 
     @OnClick(R2.id.confirm_the_settlement)
     public void onConfirmTheSettlementClicked() {
-        presenter.updateDetailOrders(id,"S");
-    }
-
-    @OnClick(R2.id.reject_tv)
-    public void onViewClicked() {
-        presenter.batchUpdateDetailOrders(id,"S");
+        presenter.updateDetailOrders(id, "H");
     }
 }

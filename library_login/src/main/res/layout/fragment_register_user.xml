@@ -100,7 +100,7 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="@null"
                 android:gravity="right|center"
-                android:hint="@string/input_address"
+                android:hint="@string/input_user_address"
                 android:textSize="@dimen/sp_14" />
 
             <TextView
@@ -127,6 +127,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/et_driver_age"
                 android:layout_width="@dimen/dp_290"
                 android:layout_height="@dimen/dp_30"
@@ -184,6 +185,7 @@
         </FrameLayout>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginLeft="@dimen/dp_16"
@@ -192,12 +194,14 @@
 
         </View>
         <FrameLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"
 
             android:orientation="horizontal">
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/et_enterprise_number"
                 android:layout_width="@dimen/dp_290"
                 android:layout_height="@dimen/dp_30"
@@ -267,10 +271,9 @@
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/iv_legal_positive"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/shape_dotted_line"
                     android:scaleType="centerCrop" />
             </FrameLayout>
             <FrameLayout
@@ -304,9 +307,8 @@
                     android:scaleType="centerCrop"
                     android:id="@+id/iv_legal_reverse"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/shape_dotted_line"
                     />
 
 
@@ -384,7 +386,7 @@
                     android:scaleType="fitXY"
                     android:id="@+id/iv_legal_reverse1"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/dp_118"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_dotted_line"
                     />

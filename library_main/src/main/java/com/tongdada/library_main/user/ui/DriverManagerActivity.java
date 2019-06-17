@@ -14,6 +14,7 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -74,6 +75,8 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view .getId() == R.id.item_slide){
                     presenter.deleteDriver(driverManagerAdapter.getData().get(position).getId());
+                }else if (view .getId() == R.id.user_call){
+                    PhoneCallUtils.call(driverManagerAdapter.getData().get(position).getDriverMobile(),mContext);
                 }
             }
         });

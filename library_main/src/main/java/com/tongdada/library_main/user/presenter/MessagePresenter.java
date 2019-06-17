@@ -18,7 +18,7 @@ import io.reactivex.functions.Consumer;
 public class MessagePresenter extends BasePresenter<MessageContract.View> implements MessageContract.Presenter {
     @Override
     public void getMessageList() {
-        MainApiUtils.getMainApi().messageList(CommenUtils.getIncetance().getUserBean().getId(),"")
+        MainApiUtils.getMainApi().messageList(CommenUtils.getIncetance().getUserBean().getId(),null)
                 .compose(this.<MessageBean>handleEverythingResult())
                 .subscribe(new Consumer<MessageBean>() {
                     @Override

@@ -29,6 +29,7 @@
             android:id="@+id/rt_phone_login" />
 
         <EditText
+            android:inputType="numberDecimal"
             android:text="999999"
             android:drawablePadding="@dimen/dp_17"
             android:paddingLeft="@dimen/dp_17"

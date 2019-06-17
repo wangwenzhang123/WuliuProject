@@ -29,9 +29,9 @@ public class DetailCarListBean {
      */
 
     private String buyTime;
-    private String carLatitude;
+    private String carLatitude="0";
     private String carLoad;
-    private String carLongitude;
+    private String carLongitude="0";
     private String carName;
     private String carNo;
     private String carRemarks;
@@ -47,6 +47,15 @@ public class DetailCarListBean {
     private String id;
     private Object updateTime;
     private String updateUserID;
+    private String driverName;
+
+    public String getDriveName() {
+        return driverName;
+    }
+
+    public void setDriveName(String driveName) {
+        this.driverName = driveName;
+    }
 
     public String getBuyTime() {
         return buyTime;

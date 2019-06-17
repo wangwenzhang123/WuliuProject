@@ -61,4 +61,33 @@ public class AcceptOrderPresenter extends BasePresenter<AcceptOrderContract.View
                     }
                 });
     }
+    @Override
+    public void acceptOrderOfDriver(AcceptRequestBean acceptRequestBean) {
+        commenApi.acceptOrderOfDriver(acceptRequestBean.getOrderAmount(),
+                acceptRequestBean.getOrderId(),
+                acceptRequestBean.getTotalDistance(),
+                acceptRequestBean.getOrderRemark(),
+                acceptRequestBean.getStationId(),
+                acceptRequestBean.getStationName(),
+                acceptRequestBean.getCompanyId(),
+                acceptRequestBean.getDriverId(),
+                acceptRequestBean.getDriverName(),
+                acceptRequestBean.getCarNo(),
+                acceptRequestBean.getCarId(),
+                acceptRequestBean.getOrderPrice())
+                .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
+                .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
+                    @Override
+                    public void accept(BaseAppEntity<OrderBean> orderBeanBaseAppEntity) throws Exception {
+                        EventBus.getDefault().post(new EventSuccessBean());
+                        getView().showToast("接单成功");
+                        getView().finishActivity();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
 }

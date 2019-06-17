@@ -189,7 +189,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
             return;
         }
         if (TextUtils.isEmpty(registeredCapital)) {
-            showToast("请输入车牌号1");
+            showToast("请输入车牌号");
             return;
         }
         if (!CheckUtils.isChinaPhoneLegal(contactPhone)) {

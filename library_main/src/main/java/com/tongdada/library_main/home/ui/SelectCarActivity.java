@@ -14,13 +14,14 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.SelectCarBean;
+import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_main.home.adapter.SelectCarAdapter;
 import com.tongdada.library_main.user.presenter.CarManagerContract;
 import com.tongdada.library_main.user.presenter.CarManagerPresenter;
-import com.tongdada.library_main.widget.SpaceItemDecoration;
+import com.example.library_commen.weight.SpaceItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -84,6 +85,9 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10, 20);
         carRecycle.addItemDecoration(spaceItemDecoration);
         presenter.getCarList(true);
+        if (CommenUtils.LOGIN_TYPE != 0){
+            checkAll.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -112,11 +116,16 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         }else {
             if (total == 0){
                 isSelect=false;
+            }else {
+                isSelect=true;
             }
             amountTv.setText("剩余"+total+"，当前可以运输总量"+amuont+"方");
             if (total < accept){
                 checkAll.setFocusable(false);
                 checkAll.setClickable(false);
+            } else {
+                checkAll.setFocusable(true);
+                checkAll.setClickable(true);
             }
         }
 
@@ -127,9 +136,21 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (isSelect){
+                    if (CommenUtils.LOGIN_TYPE != 0){
+                        for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
+                            CarRequestBean finaceBean = selectCarAdapter.getData().get(i);
+                            if (i != position){
+                                if (finaceBean.isCheck()){
+                                    total=total+Integer.parseInt(finaceBean.getCarLoad());
+                                    finaceBean.setCheck(false);
+                                }
+                            }
+                        }
+                    }
                     CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
                     if (finaceBean.isCheck()) {
                         finaceBean.setCheck(false);
+                        isCheckAll=false;
                         total=total+Integer.parseInt(finaceBean.getCarLoad());
                     } else {
                         finaceBean.setCheck(true);
@@ -141,7 +162,16 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
                     adapter.notifyDataSetChanged();
                     updateUi();
                 }else {
-                    showToast("装货量已满！");
+                    CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
+                    if (finaceBean.isCheck()){
+                        finaceBean.setCheck(false);
+                        isCheckAll=false;
+                        total=total+Integer.parseInt(finaceBean.getCarLoad());
+                        adapter.notifyDataSetChanged();
+                        updateUi();
+                    }else {
+                        showToast("装货量已满！");
+                    }
                 }
 
             }

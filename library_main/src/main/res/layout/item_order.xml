@@ -8,7 +8,7 @@
         android:id="@+id/order_v"
         android:background="@color/_eaeaea"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10">
+        android:layout_height="@dimen/dp_1">
 
     </View>
     <ImageView
@@ -63,6 +63,8 @@
         android:layout_width="@dimen/dp_20"
         android:layout_height="@dimen/dp_20" />
     <TextView
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/_333333"
         android:textSize="@dimen/sp_14"
         android:id="@+id/order_start_tv"
@@ -70,8 +72,8 @@
         app:layout_constraintTop_toTopOf="@id/order_start_iv"
         app:layout_constraintTop_toBottomOf="@id/order_name"
         app:layout_constraintLeft_toRightOf="@id/order_start_iv"
-        android:text="南京市玄武区"
-        android:layout_width="wrap_content"
+        android:text="南京市玄武区无是"
+        android:layout_width="@dimen/dp_100"
         android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/order_end_iv"
@@ -82,6 +84,8 @@
         android:layout_width="@dimen/dp_20"
         android:layout_height="@dimen/dp_20" />
     <TextView
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/_333333"
         android:textSize="@dimen/sp_14"
         android:id="@+id/order_end_tv"
@@ -90,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@id/order_name"
         app:layout_constraintLeft_toRightOf="@id/order_end_iv"
         android:text="南京市玄武区"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_100"
         android:layout_height="wrap_content" />
     <TextView
         android:textColor="@color/_999999"
@@ -119,6 +123,14 @@
         app:layout_constraintTop_toBottomOf="@id/order_iv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_6">
+
+    </View>
+    <View
+        android:layout_marginTop="@dimen/dp_6"
+        app:layout_constraintTop_toBottomOf="@+id/order_time"
+        android:background="@color/_eaeaea"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10">
 
     </View>
 </android.support.constraint.ConstraintLayout>

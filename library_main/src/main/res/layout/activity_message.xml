@@ -10,10 +10,16 @@
         android:background="@color/_ffe06e38">
 
         <ImageView
+            android:padding="@dimen/dp_10"
+            android:layout_centerVertical="true"
             android:id="@+id/register_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back" />
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@mipmap/white_back" />
+
 
         <TextView
             android:id="@+id/back_tv"

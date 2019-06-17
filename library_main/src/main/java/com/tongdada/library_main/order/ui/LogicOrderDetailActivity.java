@@ -1,6 +1,7 @@
 package com.tongdada.library_main.order.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -72,7 +73,8 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
     TextView confirmSubmit;
     @BindView(R2.id.order_price)
     TextView orderPrice;
-
+    @BindView(R2.id.order_state)
+    TextView orderState;
     @Override
     public int getView() {
         return R.layout.activity_logic_orderdetail;
@@ -145,7 +147,13 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getLoadLicense()).apply(requestOptions).into(ivLoadingEvidence);
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getUnloadLicense()).apply(requestOptions).into(ivBusinessLicense);
-
+        if (orderDetail.getOrderStatus().equals("H")){
+            confirmSubmit.setVisibility(View.GONE);
+            orderState.setText("待核算");
+        }else if (orderDetail.getOrderStatus().equals("S")){
+            orderState.setText("已核算");
+            confirmSubmit.setVisibility(View.GONE);
+        }
     }
 
 

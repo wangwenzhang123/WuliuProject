@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.tongdada.library_login.ui.SplashActivity">
     <ImageView
+        android:scaleType="fitXY"
         android:src="@mipmap/splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

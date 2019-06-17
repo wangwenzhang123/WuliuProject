@@ -15,5 +15,6 @@ public class AcceptOrderContract {
     public interface Presenter{
         void getOrderById(String id);
         void acceptOrderOfLogi(AcceptRequestBean acceptRequestBean);
+        void acceptOrderOfDriver(AcceptRequestBean acceptRequestBean);
     }
 }

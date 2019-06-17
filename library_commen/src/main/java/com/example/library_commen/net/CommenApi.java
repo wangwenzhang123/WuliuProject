@@ -71,7 +71,27 @@ public interface CommenApi {
                                                            @Field("psDetailOrders.orderPrice") String orderPrice
 
                                                            );
+    /**
+     * 物流端接单
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/interface/acceptOrderOfDriver.action")
+    Observable<BaseAppEntity<OrderBean>> acceptOrderOfDriver(@Field("psDetailOrders.orderAmount") String orderAmount,
+                                                           @Field("psDetailOrders.orderId") String orderId,
+                                                           @Field("psDetailOrders.totalDistance") String totalDistance,
+                                                           @Field("psDetailOrders.orderRemark") String orderRemark,
+                                                           @Field("psDetailOrders.stationId") String stationId,
+                                                           @Field("psDetailOrders.stationName") String stationName,
+                                                           @Field("psDetailOrders.companyId") String companyId,
+                                                             @Field("psDetailOrders.driverId") String driverId,
+                                                             @Field("psDetailOrders.driverName") String driverName,
+                                                             @Field("psDetailOrders.carNo") String carNo,
+                                                           @Field("psDetailOrders.carId") String carIds,
+                                                           @Field("psDetailOrders.orderPrice") String orderPrice
 
+    );
     /**
      * 上传装货凭据
      * @param id

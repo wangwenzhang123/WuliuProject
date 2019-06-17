@@ -20,24 +20,32 @@
         </android.support.v7.widget.RecyclerView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <TextView
-        android:id="@+id/check_all"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:text="全选"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/settlement_bt"
-        android:layout_width="@dimen/dp_302"
-        android:layout_height="@dimen/dp_42"
-        android:layout_below="@+id/view4"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
+    <FrameLayout
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_42"
-        android:background="@drawable/shape_login"
-        android:text="@string/apply_settlement"
-        android:textColor="@color/FFFFFF"
-        android:textSize="@dimen/sp_14" />
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:button="@null"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableLeft="@drawable/selector_order_home"
+            android:layout_gravity="center|left"
+            android:id="@+id/check_all"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:text="全选"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/settlement_bt"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_42"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/shape_login"
+            android:text="@string/apply_settlement"
+            android:textColor="@color/FFFFFF"
+            android:textSize="@dimen/sp_14" />
+    </FrameLayout>
+
 </LinearLayout>

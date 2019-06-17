@@ -14,20 +14,20 @@
         android:layout_height="@dimen/dp_64" />
     <TextView
         android:id="@+id/information_conten"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="@dimen/dp_15"
         android:maxEms="15"
-        android:text="可接收电视宽带数据卡角度思考角度看四季度开始时代就开始"
+        android:gravity="left"
+        android:text="可接收电视宽带数据卡角度思始时代就开始"
         android:layout_marginLeft="@dimen/dp_13"
         app:layout_constraintLeft_toRightOf="@id/information_pic"
         app:layout_constraintTop_toTopOf="@id/information_pic"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_56" />
+        android:layout_height="@dimen/dp_48" />
     <TextView
+        android:layout_marginLeft="@dimen/dp_13"
         android:id="@+id/information_time"
         android:text="2019-05-18"
-        app:layout_constraintBottom_toBottomOf="@id/information_conten"
-        app:layout_constraintLeft_toLeftOf="@id/information_conten"
+        app:layout_constraintLeft_toRightOf="@+id/information_pic"
         app:layout_constraintTop_toBottomOf="@id/information_conten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -7,7 +7,7 @@
         android:id="@+id/order_v"
         android:background="@color/_eaeaea"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10">
+        android:layout_height="@dimen/dp_1">
 
     </View>
     <TextView
@@ -74,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
+        android:visibility="gone"
         android:layout_marginRight="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_19"
         app:layout_constraintRight_toRightOf="parent"
@@ -88,11 +89,13 @@
         android:layout_marginTop="@dimen/dp_9"
         app:layout_constraintTop_toBottomOf="@id/driver_name"
         app:layout_constraintLeft_toLeftOf="@id/driver_name"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="南京市"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_width="@dimen/dp_100"
         android:layout_height="wrap_content" />
     <TextView
         android:textSize="@dimen/sp_12"
@@ -116,9 +119,13 @@
         app:layout_constraintTop_toBottomOf="@id/driver_name"
         android:layout_marginTop="@dimen/dp_9"
         android:layout_marginRight="@dimen/dp_28"
+        app:layout_constraintLeft_toRightOf="@+id/distance_text"
         android:text="南京市"
-        android:gravity="center"
-        android:layout_width="wrap_content"
+        android:gravity="center|right"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_width="@dimen/dp_100"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/order_accept_time"
@@ -130,4 +137,11 @@
         app:layout_constraintLeft_toLeftOf="@id/driver_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/order_accept_time"
+        android:background="@color/_eaeaea"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10">
+
+    </View>
 </android.support.constraint.ConstraintLayout>

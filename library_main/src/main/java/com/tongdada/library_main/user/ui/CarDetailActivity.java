@@ -60,15 +60,15 @@ public class CarDetailActivity extends BaseMvpActivity<AddCarPresenter> implemen
     @BindView(R2.id.user_logo)
     ImageView userLogo;
     @BindView(R2.id.et_car_no)
-    EditText etCarNo;
+    TextView etCarNo;
     @BindView(R2.id.issue_vehicle_type_tv)
     TextView issueVehicleTypeTv;
     @BindView(R2.id.et_car_brand)
-    EditText etCarBrand;
+    TextView etCarBrand;
     @BindView(R2.id.et_travlled_distance)
-    EditText etTravlledDistance;
+    TextView etTravlledDistance;
     @BindView(R2.id.et_car_load)
-    EditText etCarLoad;
+    TextView etCarLoad;
     @BindView(R2.id.car_time)
     TextView carTime;
     @BindView(R2.id.ll_business_license)
@@ -186,9 +186,7 @@ public class CarDetailActivity extends BaseMvpActivity<AddCarPresenter> implemen
         RequestOptions requestOptions = new RequestOptions().centerCrop()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult);
-        if (!TextUtils.isEmpty(requestBean.getDriveLicense())) {
-            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestBean.getDriveLicense()).apply(requestOptions).into(ivBusinessLicense);
-        }
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestBean.getDriveLicense()).apply(requestOptions).into(ivBusinessLicense);
         if (requestBean.getCarType().equals("B")) {
             rbBeng.setChecked(true);
         } else {

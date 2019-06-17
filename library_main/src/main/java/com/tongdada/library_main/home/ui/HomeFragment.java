@@ -113,8 +113,8 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
                         .navigation(mContext);
             }
         });
-
-
+        banner.setIndicatorVisible(false);
+        //banner.setIndicatorRes(R.color.transparency,R.color.transparency);
     }
 
     @Override
