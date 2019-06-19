@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.DriverRequest;
+import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
@@ -145,6 +146,50 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         String phone = etDriverPhone.getText().toString().trim();
         String driverYear = etDrivingYears.getText().toString();
         String card = etIdentityCard.getText().toString().trim();
+        if (TextUtils.isEmpty(name)){
+            showToast("请输入司机名称！");
+            return;
+        }
+        if (TextUtils.isEmpty(address)){
+            showToast("请输入地址！");
+            return;
+        }
+        if (TextUtils.isEmpty(age)){
+            showToast("请输入年龄！");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)){
+            showToast("请输入手机号！");
+            return;
+        }
+        if (TextUtils.isEmpty(driverYear)){
+            showToast("请输入驾龄！");
+            return;
+        }
+        if (TextUtils.isEmpty(card)){
+            showToast("请输入身份证号！");
+            return;
+        }
+        if (TextUtils.isEmpty(name)){
+            showToast("请输入车辆品牌！");
+            return;
+        }
+        if (!CheckUtils.isChinaPhoneLegal(phone)){
+            showToast("请输入正确的手机号！");
+            return;
+        }
+        if (TextUtils.isEmpty(request.getIdFront())) {
+            showToast("请先上传身份证正面照片");
+            return;
+        }
+        if (TextUtils.isEmpty(request.getIdBack())) {
+            showToast("请先上传身份证反面照片");
+            return;
+        }
+        if (TextUtils.isEmpty(request.getDriverLicense())) {
+            showToast("请先上传驾照");
+            return;
+        }
         request.setDriveringAge(driverYear);
         request.setDriverName(name);
         request.setDriverMobile(phone);

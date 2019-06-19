@@ -20,6 +20,7 @@ public class HomeContract {
         void initData();
         void shuffling();
         void getMixStationById();
+        void getMessageList();
         void getDriverById();
         void getCarList();
         void getCarById(String carid);

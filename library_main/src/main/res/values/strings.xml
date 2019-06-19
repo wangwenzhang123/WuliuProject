@@ -21,7 +21,7 @@
     <string name="user_position">职务</string>
     <string name="historical_record">历史纪录</string>
     <string name="order_setting">订单设置</string>
-    <string name="out_login">退出登录</string>
+    <string name="out_login">注销登录</string>
     <string name="mixing_plant_maintenance">搅拌站维护</string>
 
     <string name="cancel">取消</string>

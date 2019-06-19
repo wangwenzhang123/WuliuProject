@@ -97,7 +97,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(EventUpdateOrderList EventUpdateOrderList) {
-        presenter.detailOrderList();
+        finaceSmart.autoRefresh();
     }
 
     @Override

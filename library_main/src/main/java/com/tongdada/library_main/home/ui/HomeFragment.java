@@ -1,8 +1,6 @@
 package com.tongdada.library_main.home.ui;
 
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +16,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventMessageBran;
 import com.example.library_commen.model.OrderBean;
-import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.config.BaseUrl;
@@ -34,6 +32,10 @@ import com.tongdada.library_main.order.ui.OrderListFragment;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,8 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     FrameLayout homeOrderRv;
     @BindView(R2.id.more_order)
     TextView moreOrder;
+    @BindView(R2.id.weidu)
+    TextView weidu;
     private OrderAdapter orderAdapter;
     private List<OrderBean> orderBeanList = new ArrayList<>();
 
@@ -90,7 +94,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     public void initView() {
         presenter.shuffling();
         presenter.initData();
-
+        presenter.getMessageList();
     }
 
     @Override
@@ -109,7 +113,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
             public void onPageClick(View view, int position) {
                 BannerBean.RowsBean rowsBean = rowsBeanList.get(position);
                 MessageIntentBean messageIntentBean = new MessageIntentBean(rowsBean.getNewsTitle(), rowsBean.getPriviewPic(), rowsBean.getNewsContent(), String.valueOf(rowsBean.getCreateTime().getTime()));
-                ARouter.getInstance().build(ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN, messageIntentBean)
+                ARouter.getInstance().build(ArouterKey.MESSAGE_INFORMDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN, messageIntentBean)
                         .navigation(mContext);
             }
         });
@@ -135,13 +139,23 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
         return rootView;
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventMessage(EventMessageBran a){
+        if (a.getNum() == 0){
+            weidu.setVisibility(View.GONE);
+        }else {
+            weidu.setVisibility(View.VISIBLE);
+        }
+        weidu.setText(a.getNum()+"");
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R2.id.iv_home_search)
@@ -174,7 +188,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.more_order)
     public void onViewClicked() {
-        routerIntent(ArouterKey.HOME_MOREORDERACTIVITY,null);
+        routerIntent(ArouterKey.HOME_MOREORDERACTIVITY, null);
     }
 
     public static class BannerViewHolder implements MZViewHolder<String> {

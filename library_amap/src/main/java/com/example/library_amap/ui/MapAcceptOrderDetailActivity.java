@@ -378,7 +378,11 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         requestBean.setCompanyId(CommenUtils.getIncetance().getUserBean().getCompanyId());
         requestBean.setStationId(orderBean.getStationId());
         requestBean.setOrderId(orderBean.getId());
-        requestBean.setTotalDistance(orderBean.getTotalDistance());
+        if (orderBean.getCarType().equals("B")){
+            requestBean.setTotalDistance("1km");
+        }else {
+            requestBean.setTotalDistance(orderBean.getTotalDistance());
+        }
         requestBean.setOrderRemark(orderBean.getOrderRemark());
         requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
         requestBean.setDriverName(CommenUtils.getIncetance().getUserBean().getUserName());
@@ -427,6 +431,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     public void onViewAcceptClicked() {
         Bundle bundle = new Bundle();
         bundle.putString(IntentKey.ORDER_AMOUNT, orderBean.getLeftAmount());
+        bundle.putString(IntentKey.CAR_TYPE,orderBean.getCarType());
         routerIntent(ArouterKey.HONE_SELECTCARACTIVITY, bundle);
     }
 }

@@ -17,7 +17,7 @@ public class CarManagerContract {
         void setCarList(List<CarRequestBean> list);
     }
     public interface Presenter{
-        void getCarList(boolean isSelect);
+        void getCarList(boolean isSelect,String  type);
         void deleteCar(String id);
     }
 }

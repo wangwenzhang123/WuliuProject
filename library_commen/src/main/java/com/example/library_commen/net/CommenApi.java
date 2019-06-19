@@ -28,29 +28,29 @@ import retrofit2.http.POST;
  */
 public interface CommenApi {
     @FormUrlEncoded
-    @POST("/interface/getDetailOrderById.action")
+    @POST("/tonghe/getDetailOrderById.action")
     Observable<BaseAppEntity<DriverOrderDetailBean>> getDetailOrderById(@Field("psDetailOrders.id") String id);
     @FormUrlEncoded
-    @POST("/interface/updateDetailOrders.action")
+    @POST("/tonghe/updateDetailOrders.action")
     Observable<BaseAppEntity<DriverOrderDetailBean>> updateDetailOrders(@Field("psDetailOrders.id") String id,@Field("psDetailOrders.orderStatus") String orderStatus);
     @FormUrlEncoded
-    @POST("/interface/getOrderById.action")
+    @POST("/tonghe/getOrderById.action")
     Observable<BaseAppEntity<OrderBean>> getOrderById(@Field("psTotalOrders.id") String id);
     @FormUrlEncoded
-    @POST("/interface/orderCarsList.action")
+    @POST("/tonghe/orderCarsList.action")
     Observable<PagenationBase<DetailCarBean>> orderCarsList(@Field("psDetailOrders.orderId") String id,@Field("psDetailOrders.driverId") String driverId);
     @FormUrlEncoded
-    @POST("/interface/cancelOrder.action")
+    @POST("/tonghe/cancelOrder.action")
     Observable<BaseAppEntity<OrderBean>> cancelOrder(@Field("psTotalOrders.id") String id);
     @FormUrlEncoded
-    @POST("/interface/batchUpdateDetailOrders.action")
+    @POST("/tonghe/batchUpdateDetailOrders.action")
     Observable<BaseAppEntity<OrderBean>> batchUpdateDetailOrders(@Field("detailOrderIds") String id,@Field("orderStatus") String orderStatus);
     /**
      * 上传图片
      * @param requestBody
      * @return
      */
-    @POST("/interface/uploadAttach.action")
+    @POST("/tonghe/uploadAttach.action")
     Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
 
     /**
@@ -59,7 +59,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/acceptOrderOfLogi.action")
+    @POST("/tonghe/acceptOrderOfLogi.action")
     Observable<BaseAppEntity<OrderBean>> acceptOrderOfLogi(@Field("psDetailOrders.orderAmount") String orderAmount,
                                                            @Field("psDetailOrders.orderId") String orderId,
                                                            @Field("psDetailOrders.totalDistance") String totalDistance,
@@ -77,7 +77,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/acceptOrderOfDriver.action")
+    @POST("/tonghe/acceptOrderOfDriver.action")
     Observable<BaseAppEntity<OrderBean>> acceptOrderOfDriver(@Field("psDetailOrders.orderAmount") String orderAmount,
                                                            @Field("psDetailOrders.orderId") String orderId,
                                                            @Field("psDetailOrders.totalDistance") String totalDistance,
@@ -99,7 +99,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/loadOrder.action")
+    @POST("/tonghe/loadOrder.action")
     Observable<BaseAppEntity<OrderBean>> loadOrder(@Field("psDetailOrders.id") String id,@Field("psDetailOrders.loadLicense") String loadLicense);
 
     /**
@@ -109,7 +109,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/unloadOrder.action")
+    @POST("/tonghe/unloadOrder.action")
     Observable<BaseAppEntity<OrderBean>> unloadOrder(@Field("psDetailOrders.id") String id,@Field("psDetailOrders.unloadLicense") String unloadLicense);
     /**
      * 取消订单
@@ -118,7 +118,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/cancelDetailOrder.action")
+    @POST("/tonghe/cancelDetailOrder.action")
     Observable<BaseAppEntity<OrderBean>> cancelDetailOrder(@Field("psDetailOrders.id") String id);
     /**
      * 取消订单
@@ -127,7 +127,7 @@ public interface CommenApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("interface/updateDriverLocation.action")
+    @POST("/tonghe/updateDriverLocation.action")
     Observable<BaseAppEntity<OrderBean>> updateDriverLocation(@Field("psDrivers.id") String id,@Field("psDrivers.driverLatitude") String carLatitude,@Field("psDrivers.driverLongitude") String carLongitude);
 
 }

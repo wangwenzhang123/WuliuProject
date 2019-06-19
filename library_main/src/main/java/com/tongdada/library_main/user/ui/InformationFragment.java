@@ -62,7 +62,7 @@ public class InformationFragment extends BaseMvpFragment<HomePresenter> implemen
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
                 BannerBean.RowsBean rowsBean=adapter.getData().get(position);
                 MessageIntentBean messageIntentBean=new MessageIntentBean(rowsBean.getNewsTitle(),rowsBean.getPriviewPic(),rowsBean.getNewsContent(),String.valueOf(rowsBean.getCreateTime().getTime()));
-                ARouter.getInstance().build(ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN,messageIntentBean)
+                ARouter.getInstance().build(ArouterKey.MESSAGE_INFORMDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN,messageIntentBean)
                         .navigation(mContext);
             }
         });
@@ -70,7 +70,7 @@ public class InformationFragment extends BaseMvpFragment<HomePresenter> implemen
 
     @Override
     public void getData() {
-
+        presenter.shuffling();
     }
 
 

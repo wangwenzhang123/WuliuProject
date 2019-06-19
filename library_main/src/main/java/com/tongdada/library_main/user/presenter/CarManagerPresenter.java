@@ -25,7 +25,7 @@ import io.reactivex.functions.Consumer;
 public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> implements CarManagerContract.Presenter {
 
     @Override
-    public void getCarList(final boolean isSelect) {
+    public void getCarList(final boolean isSelect, final String type) {
             MainApiUtils.getMainApi().listCars(CommenUtils.getIncetance().getUserBean().getCompanyId(),CommenUtils.getIncetance().getUserBean().getDriverId())
                     .compose(this.<PagenationBase<CarListBean>>handleEverythingResult())
                     .subscribe(new Consumer<PagenationBase<CarListBean>>() {
@@ -35,7 +35,7 @@ public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> 
                             for (int i = 0; i < driverBeanPagenationBase.getPagenation().getList().size(); i++) {
                                 CarRequestBean carRequestBean=driverBeanPagenationBase.getPagenation().getList().get(i);
                                 if (isSelect){
-                                    if (carRequestBean.getCarStatus().equals("K")){
+                                    if (carRequestBean.getCarStatus().equals("K") && carRequestBean.getCarType().equals(type)){
                                         list.add(carRequestBean);
                                     }
                                 }else {
@@ -59,7 +59,7 @@ public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> 
                 .subscribe(new Consumer<BaseAppEntity<CarRequestBean>>() {
                     @Override
                     public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
-                        getCarList(false);
+                        getCarList(false,null);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

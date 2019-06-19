@@ -28,7 +28,7 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/userLogin.action")
+    @POST("/tonghe/userLogin.action")
     Observable<BaseAppEntity<UserBean>> login(@Field("phoneNo") String phone, @Field("password") String password);
 
     /**
@@ -36,7 +36,7 @@ public interface LoginApi {
      * @param requestBody
      * @return
      */
-    @POST("/interface/uploadAttach.action")
+    @POST("/tonghe/uploadAttach.action")
     Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
 
     /**
@@ -45,7 +45,7 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/driverRegister.action")
+    @POST("/tonghe/driverRegister.action")
     Observable<BaseAppEntity<UserBean>> driverRegister(@FieldMap Map<String,Object> params);
 
     /**
@@ -54,7 +54,7 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/logiUserRegister.action")
+    @POST("/tonghe/logiUserRegister.action")
     Observable<BaseAppEntity<UserBean>> logiUserRegister(@FieldMap Map<String,Object> params);
     /**
      * 物流公司更新
@@ -62,7 +62,7 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/updateLogi.action")
+    @POST("/tonghe/updateLogi.action")
     Observable<BaseAppEntity<LogisticsRequestBean>> updateLogi(@FieldMap Map<String,Object> params);
     /**
      * 忘记密码
@@ -70,7 +70,7 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/forgetPassword.action")
+    @POST("/tonghe/forgetPassword.action")
     Observable<BaseAppEntity<UserBean>> forgetPassword(@Field("psAppUsers.userContacts") String phone);
 
     /**
@@ -79,6 +79,6 @@ public interface LoginApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/logiUserRegister.action")
+    @POST("/tonghe/logiUserRegister.action")
     Observable<BaseAppEntity<UserBean>> upDatelogiUserRegister(@FieldMap Map<String,Object> params);
 }

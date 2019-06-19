@@ -34,6 +34,7 @@ public class InformationAdapter extends BaseQuickAdapter<BannerBean.RowsBean,Bas
         ImageView pic=helper.getView(R.id.information_pic);
         RequestOptions requestOptions=new RequestOptions()
                 .error(R.mipmap.defult)
+                .centerCrop()
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;

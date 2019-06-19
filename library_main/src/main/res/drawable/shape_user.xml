@@ -4,6 +4,9 @@
     <item android:name="android:shadowColor">#1f000000</item>
     <item android:name="android:shadowDx">0</item>
     <item android:name="android:shadowDy">3</item>
+    <stroke android:color="@color/_D3D3D3" android:width="@dimen/px_1">
+
+    </stroke>
     <corners android:topLeftRadius="8dp" android:topRightRadius="8dp"
         android:bottomLeftRadius="8dp" android:bottomRightRadius="8dp" />
 </shape>

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.event.EventMessageBran;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
@@ -15,6 +16,9 @@ import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.net.MainApiUtils;
 import com.tongdada.library_main.user.respose.CarListBean;
+import com.tongdada.library_main.user.respose.MessageBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -37,6 +41,32 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
                     public void accept(BaseAppEntity<LogisticsRequestBean> objectBaseAppEntity) throws Exception {
                         if (objectBaseAppEntity != null && objectBaseAppEntity.getContent() != null){
                             CommenUtils.getIncetance().setRequestBean(objectBaseAppEntity.getContent());
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void getMessageList() {
+        MainApiUtils.getMainApi().messageList(CommenUtils.getIncetance().getUserBean().getId(),null)
+                .compose(this.<MessageBean>handleEverythingResult(false))
+                .subscribe(new Consumer<MessageBean>() {
+                    @Override
+                    public void accept(MessageBean objectBaseAppEntity) throws Exception {
+                        if (objectBaseAppEntity.getPagenation() != null && objectBaseAppEntity.getPagenation().getList().size() >0){
+                            int a=0;
+                            for (int i = 0; i < objectBaseAppEntity.getPagenation().getList().size() ; i++) {
+                                MessageBean.PagenationBean.ListBean listBean=objectBaseAppEntity.getPagenation().getList().get(i);
+                                if (listBean.getReadStatus().equals("N")){
+                                    a++;
+                                }
+                            }
+                            EventBus.getDefault().post(new EventMessageBran(a));
                         }
                     }
                 }, new Consumer<Throwable>() {

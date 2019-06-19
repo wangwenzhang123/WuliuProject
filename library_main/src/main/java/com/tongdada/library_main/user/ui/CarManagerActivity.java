@@ -70,14 +70,14 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventAdd(EventAddBean eventAddBean){
-        presenter.getCarList(false);
+        presenter.getCarList(false,null);
     }
     @Override
     public void initView() {
         carManagerAdapter=new CarManagerAdapter(R.layout.item_car,new ArrayList<CarRequestBean>());
         carManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         carManagerRecycle.setAdapter(carManagerAdapter);
-        presenter.getCarList(false);
+        presenter.getCarList(false,null);
         if (CommenUtils.LOGIN_TYPE ==1){
             addCarTv.setVisibility(View.GONE);
         }
@@ -126,5 +126,8 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
     @Override
     public void setCarList(List<CarRequestBean> list) {
         carManagerAdapter.setNewData(list);
+        if (CommenUtils.LOGIN_TYPE == 2 && list.size() > 0){
+            addCarTv.setVisibility(View.GONE);
+        }
     }
 }

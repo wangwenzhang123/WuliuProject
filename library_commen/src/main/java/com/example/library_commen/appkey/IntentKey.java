@@ -15,4 +15,5 @@ public class IntentKey {
     public static final String DRIVER_BEAN="DRIVER_BEAN";
     public static final String CAR_BEAN="CAR_BEAN";
     public static final String ORDER_AMOUNT="ORDER_AMOUNT";
+    public static final String CAR_TYPE="CAR_TYPE";
 }

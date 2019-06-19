@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -344,6 +345,9 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         adapter.setNewData(carList);
         for (int i = 0; i < carList.size(); i++) {
             DetailCarListBean driverOrderDetailBean = carList.get(i);
+            if (TextUtils.isEmpty(driverOrderDetailBean.getCarLatitude()) || TextUtils.isEmpty(driverOrderDetailBean.getCarLongitude())){
+                continue;
+            }
             CarBean carBean = new CarBean(driverOrderDetailBean.getDriveName(), driverOrderDetailBean.getCarNo(),
                     driverOrderDetailBean.getDriveLicense(),
                     Double.valueOf(driverOrderDetailBean.getCarLatitude())

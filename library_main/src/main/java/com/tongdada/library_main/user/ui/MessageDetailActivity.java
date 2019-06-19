@@ -1,4 +1,4 @@
-package com.tongdada.library_main.home.ui;
+package com.tongdada.library_main.user.ui;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by wangshen on 2019/6/1.
+ * Created by Administrator on 2019/6/19.
  */
 @Route(path = ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY)
 public class MessageDetailActivity extends BaseActivity {
@@ -56,23 +56,6 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        MessageIntentBean messageIntentBean= (MessageIntentBean) getIntent().getSerializableExtra(IntentKey.MESSAGE_BEAN);
-        if (messageIntentBean != null){
-            messageTitle.setText(messageIntentBean.getTitle());
-            messageConten.setText(messageIntentBean.getConten());
-            RequestOptions requestOptions = new RequestOptions()
-                    .error(R.mipmap.banner_place)
-                    .placeholder(R.mipmap.banner_place)
-                    .diskCacheStrategy(DiskCacheStrategy.DATA);
-            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + messageIntentBean.getPic())
-                    .apply(requestOptions).into(messagePic);
-            if (!TextUtils.isEmpty(messageIntentBean.getTime())){
-                Date currentTime = new Date(Long.valueOf(messageIntentBean.getTime()));
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                String dateString = formatter.format(currentTime);
-                messageTime.setText(dateString);
-            }
-        }
 
     }
 
@@ -83,7 +66,18 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void getData() {
-
+        MessageIntentBean messageIntentBean= (MessageIntentBean) getIntent().getSerializableExtra(IntentKey.MESSAGE_BEAN);
+        if (messageIntentBean != null){
+            messageTitle.setText(messageIntentBean.getTitle());
+            messageConten.setText(messageIntentBean.getConten());
+            RequestOptions requestOptions = new RequestOptions()
+                    .error(R.mipmap.banner_place)
+                    .placeholder(R.mipmap.banner_place)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA);
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + messageIntentBean.getPic())
+                    .apply(requestOptions).into(messagePic);
+            messageTime.setText(messageIntentBean.getTime());
+        }
     }
 
     @Override

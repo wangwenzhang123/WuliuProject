@@ -200,6 +200,14 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
             showToast("请输入公司注册资金！");
             return;
         }
+        if (TextUtils.isEmpty(requestRegisterBean.getLicensePath())){
+            showToast("请先上传营业执照");
+            return;
+        }
+        if (TextUtils.isEmpty(requestRegisterBean.getRoadLicensePath())){
+            showToast("请先上传道路营运许可证");
+            return;
+        }
         if (!CheckUtils.isChinaPhoneLegal(contactPhone)){
             showToast("请输入正确的手机号！");
             return;

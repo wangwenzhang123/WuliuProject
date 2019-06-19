@@ -121,6 +121,14 @@ public class AddUserActivity extends BaseMvpActivity<AddUserPresenter> implement
             showToast("请输入正确的手机号！");
             return;
         }
+        if (TextUtils.isEmpty(requestBean.getFrontPic())){
+            showToast("请先上传身份证正面照片！");
+            return;
+        }
+        if (TextUtils.isEmpty(requestBean.getBackPic())){
+            showToast("请先上传身份证反面照片！");
+            return;
+        }
         requestBean.setUserName(userName.getText().toString().trim());
         requestBean.setUserContacts(userPhone.getText().toString().trim());
         requestBean.setUserDuty(userPosition.getText().toString().trim());

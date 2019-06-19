@@ -30,24 +30,24 @@ public class MessagePresenter extends BasePresenter<MessageContract.View> implem
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }
 
     @Override
-    public void readMessage(String id) {
+    public void readMessage(String id, final int postion) {
         MainApiUtils.getMainApi().readMessage(id)
                 .compose(this.<BaseAppEntity<Object>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<Object>>() {
                     @Override
                     public void accept(BaseAppEntity<Object> objectBaseAppEntity) throws Exception {
-
+                        getView().readSuccess(postion);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }
@@ -64,7 +64,7 @@ public class MessagePresenter extends BasePresenter<MessageContract.View> implem
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }

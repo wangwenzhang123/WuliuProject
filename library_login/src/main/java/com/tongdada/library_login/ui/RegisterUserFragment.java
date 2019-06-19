@@ -192,6 +192,18 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
             showToast("请输入车牌号");
             return;
         }
+        if (TextUtils.isEmpty(requestRegisterBean.getIdFront())) {
+            showToast("请先上传身份证正面照片");
+            return;
+        }
+        if (TextUtils.isEmpty(requestRegisterBean.getIdBack())) {
+            showToast("请先上传身份证反面照片");
+            return;
+        }
+        if (TextUtils.isEmpty(requestRegisterBean.getDriverLicense())) {
+            showToast("请先上传驾照");
+            return;
+        }
         if (!CheckUtils.isChinaPhoneLegal(contactPhone)) {
             showToast("请输入正确的手机号！");
             return;

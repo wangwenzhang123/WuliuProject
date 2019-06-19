@@ -48,7 +48,7 @@ public class DriverManagerPresenter extends BasePresenter<DriverManagerContract.
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
     }

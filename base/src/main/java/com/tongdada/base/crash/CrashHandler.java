@@ -76,7 +76,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(BuildConfig.DEBUG) {
+           /* if(BuildConfig.DEBUG) {
                 int maxStackTraceSize = 131071;
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
@@ -97,7 +97,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 }
                 //关闭所有页面并杀掉进程
                 activityLifecycle.finishActivities();
-            }
+            }*/
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(10);
         }

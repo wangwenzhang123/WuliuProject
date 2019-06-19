@@ -25,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -37,7 +38,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 @Route(path = ArouterKey.HOME_INFORMMANAGEMENTACTIVITY)
 public class InformManagementActivity extends BaseActivity {
-    @BindView(R2.id.iv_order_search)
+    @BindView(R2.id.register_back)
     ImageView ivOrderSearch;
     @BindView(R2.id.iv_home_message)
     ImageView ivHomeMessage;
@@ -47,8 +48,9 @@ public class InformManagementActivity extends BaseActivity {
     TabLayout noticeTab;
     @BindView(R2.id.notice_pager)
     ViewPager noticePager;
-    List<String> list=new ArrayList<>();
-    private List<Fragment> fragments=new ArrayList<>();
+    List<String> list = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
+
     @Override
     public int getView() {
         return R.layout.activity_inform_management;
@@ -98,14 +100,14 @@ public class InformManagementActivity extends BaseActivity {
                         noticeTab.post(new Runnable() {
                             @Override
                             public void run() {
-                                TalUtils.setIndicator(noticeTab,15,15);
+                                TalUtils.setIndicator(noticeTab, 15, 15);
                             }
                         });
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ToastUtils.showToast(mContext,throwable.getMessage());
+                        ToastUtils.showToast(mContext, throwable.getMessage());
                     }
                 });
     }
@@ -125,5 +127,10 @@ public class InformManagementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R2.id.register_back)
+    public void onViewClicked() {
+        finish();
     }
 }

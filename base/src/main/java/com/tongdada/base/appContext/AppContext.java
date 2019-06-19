@@ -36,10 +36,9 @@ public class AppContext extends Application {
                 .setReadTimeout(40)
                 .setWriteTimeout(40)
                 .addInterceptor(new ExCookieInterceptor())
-
                 .build();
         KRetrofitFactory.init(config);
-        CrashHandler.getInstance().init(this);
+        //CrashHandler.getInstance().init(this);
         SharedPreferencesUtil.init(this, Context.MODE_PRIVATE);
         AppContextWrapper.getInstance().init(this);
     }

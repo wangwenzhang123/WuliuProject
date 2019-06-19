@@ -12,10 +12,11 @@ import java.util.List;
 public class MessageContract {
     public interface View extends BaseView{
         void setMessgeList(List<MessageBean.PagenationBean.ListBean> list);
+        void readSuccess(int postion);
     }
     public interface Presenter{
         void getMessageList();
-        void readMessage(String  id);
+        void readMessage(String  id,int postion);
         void deleteMessage(String id);
     }
 }

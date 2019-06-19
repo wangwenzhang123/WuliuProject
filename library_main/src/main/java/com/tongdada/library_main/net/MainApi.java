@@ -34,13 +34,13 @@ public interface MainApi {
      * 获取轮播页数据
      * @return
      */
-    @POST("/interface/newsList.action")
+    @POST("/tonghe/newsList.action")
     Observable<BannerBean> shuffling();
     /**
      * 发布订单
      */
     @FormUrlEncoded
-    @POST("/interface/publishOrder.action")
+    @POST("/tonghe/publishOrder.action")
     Observable<BaseAppEntity<Object>> publishOrder(@FieldMap Map<String,Object> map
             /*@Field("psTotalOrders.stationId") String stationId,
                                                    @Field("psTotalOrders.orderAmount") String orderAmount,
@@ -69,7 +69,7 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/orderList.action")
+    @POST("/tonghe/orderList.action")
     Observable<PagenationBase<OrderListBean>> orderList(@Field("psTotalOrders.stationId") String stationId,
                                                         @Field("psTotalOrders.companyId") String companyId,
                                                         @Field("page") String pageNumber,
@@ -81,7 +81,7 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("interface/findLogiOrders.action")
+    @POST("/tonghe/findLogiOrders.action")
     Observable<PagenationBase<OrderListBean>> findLogiOrders(@Field("psDetailOrders.driverId") String driverId,
                                                         @Field("psDetailOrders.companyId") String companyId, @Field("page") String pageNumber);
     /**
@@ -90,7 +90,7 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/editOrder.action")
+    @POST("/tonghe/editOrder.action")
     Observable<BaseAppEntity<Object>> editOrder(@FieldMap Map<String,Object> stationId);
     /**
      * 取消订单
@@ -98,14 +98,14 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/cancelOrder.action")
+    @POST("/tonghe/cancelOrder.action")
     Observable<BaseAppEntity<Object>> cancelOrder(@Field("orderId") String stationId);
     /**
      * 修改密码
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/editPassword.action")
+    @POST("/tonghe/editPassword.action")
     Observable<BaseAppEntity<UserBean>> editPassword(@Field("psAppUsers.id") String id,
                                                 @Field("oldPassword") String oldPassword,
                                                 @Field("newPassword") String newPassword);
@@ -114,14 +114,14 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/userList.action")
+    @POST("/tonghe/userList.action")
     Observable<UserListBean> userList(@Field("psAppUsers.companyId") String id);
     /**
      * 删除人员
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/deleteUser.action")
+    @POST("/tonghe/deleteUser.action")
     Observable<UserListBean> deleteUser(@Field("psAppUsers.id") String id);
 
     /**
@@ -129,7 +129,7 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/editUser.action")
+    @POST("/tonghe/editUser.action")
     Observable<BaseAppEntity<UserBean>> editUser(@FieldMap Map<String,Object> requestBody/*@Field("psAppUsers.stationId") String id,@Field("psAppUsers.userName") String userName
             ,@Field("psAppUsers.userAddress") String userAddress
             ,@Field("psAppUsers.userContacts") String userContacts
@@ -139,42 +139,42 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/addLogiUser.action")
+    @POST("/tonghe/addLogiUser.action")
     Observable<BaseAppEntity<UserBean>> addStationUser(@FieldMap Map<String,Object> requestBody);
     /**
      * 获取消息列表
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/messageList.action")
+    @POST("/tonghe/messageList.action")
     Observable<MessageBean> messageList(@Field("psMessages.appUserId") String id, @Field("psMessages.messageContent") String messageContent);
     /**
      * 阅读消息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/readMessage.action")
+    @POST("/tonghe/readMessage.action")
     Observable<BaseAppEntity<Object>> readMessage(@Field("psMessages.id") String id);
     /**
      * 删除消息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/deleteMessage.action")
+    @POST("/tonghe/deleteMessage.action")
     Observable<BaseAppEntity<Object>> deleteMessage(@Field("psMessages.id") String id);
     /**
      * 系统设置
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/sysSet.action")
+    @POST("/tonghe/sysSet.action")
     Observable<BaseAppEntity<Object>> sysSet(@Field("psMixingStations.id") String id,@Field("psMixingStations.tongPrice") String tongPrice,@Field("psMixingStations.bengPrice") String bengPrice);
     /**
      * 获取物流公司信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/getLogiById.action")
+    @POST("/tonghe/getLogiById.action")
     Observable<BaseAppEntity<LogisticsRequestBean>> getLogiById(@Field("psLogisticsCompanys.id") String id);
 
     /**
@@ -182,14 +182,14 @@ public interface MainApi {
      * @param requestBody
      * @return
      */
-    @POST("/interface/uploadAttach.action")
+    @POST("/tonghe/uploadAttach.action")
     Observable<BaseAppEntity<UploadBean>> upload(@Body RequestBody requestBody);
     /**
      * 获取子订单列表
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/findDetailList.action")
+    @POST("/tonghe/findDetailList.action")
     Observable<PagenationBase<CarOrderBean>> detailOrderList(@Field("psDetailOrders.companyId") String id, @Field("psDetailOrders.orderStatus") String orderStatus
             , @Field("psDetailOrders.orderRemark") String orderRemark,
                                                              @Field("page") String pageNumber, @Field("psDetailOrders.orderId") String orderId, @Field("psDetailOrders.driverId") String driverId
@@ -199,69 +199,69 @@ public interface MainApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/driverList.action")
+    @POST("/tonghe/driverList.action")
     Observable<PagenationBase<DriverBean>> driverList(@Field("psDrivers.companyId") String id);
     /**
      * 删除司机
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/deleteDriver.action")
+    @POST("/tonghe/deleteDriver.action")
     Observable<BaseAppEntity<DriverRequest>> deleteDriver(@Field("psDrivers.id") String id);
     /**
      * 添加司机
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/addDriver.action")
+    @POST("/tonghe/addDriver.action")
     Observable<BaseAppEntity<DriverRequest>> addDriver(@FieldMap Map<String,Object> params);
     /**
      * 更新司机信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/updateDriver.action")
+    @POST("/tonghe/updateDriver.action")
     Observable<BaseAppEntity<DriverRequest>> updateDriver(@FieldMap Map<String,Object> params);
     /**
      * 获取车辆列表
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/listCars.action")
+    @POST("/tonghe/listCars.action")
     Observable<PagenationBase<CarListBean>> listCars(@Field("psCars.companyId") String companyId, @Field("psCars.driverId") String driverId);
     /**
      * 删除车辆
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/deleteCar.action")
+    @POST("/tonghe/deleteCar.action")
     Observable<BaseAppEntity<CarRequestBean>> deleteCar(@Field("psCars.id") String id);
     /**
      * 添加车辆
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/addCar.action")
+    @POST("/tonghe/addCar.action")
     Observable<BaseAppEntity<CarRequestBean>> addCar(@FieldMap Map<String,Object> params);
     /**
      * 更新车辆信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/updateCar.action")
+    @POST("/tonghe/updateCar.action")
     Observable<BaseAppEntity<CarRequestBean>> updateCar(@FieldMap Map<String,Object> params);
     /**
      * 获取司机信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/getDriverById.action")
+    @POST("/tonghe/getDriverById.action")
     Observable<BaseAppEntity<DriverRequest>> getDriverById(@Field("psDrivers.id") String id);
     /**
      * 获取司机信息
      * @return
      */
     @FormUrlEncoded
-    @POST("/interface/getCarById.action")
+    @POST("/tonghe/getCarById.action")
     Observable<BaseAppEntity<CarRequestBean>> getCarById(@Field("psCars.id") String id);
 }

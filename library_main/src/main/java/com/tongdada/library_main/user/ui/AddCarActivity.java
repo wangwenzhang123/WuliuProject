@@ -121,6 +121,7 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
             requestBean.setDriverName(CommenUtils.getIncetance().getUserBean().getUserName());
         }
         requestBean.setCarType("T16");
+        etCarLoad.setText("16");
         if (getIntent().getSerializableExtra(IntentKey.CAR_BEAN) != null) {
             requestBean = (CarRequestBean) getIntent().getSerializableExtra(IntentKey.CAR_BEAN);
             addCarTitle.setText("修改车辆");
@@ -203,6 +204,33 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         requestBean.setCarName(carName);
         requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         requestBean.setMileages(mileages);
+        if (TextUtils.isEmpty(carName)){
+            showToast("请输入车辆品牌！");
+            return;
+        }
+        if (TextUtils.isEmpty(carLoad)){
+            showToast("请输入车辆载重！");
+            return;
+        }
+        if (TextUtils.isEmpty(carNo)){
+            showToast("请输入车牌号！");
+            return;
+        }
+        if (TextUtils.isEmpty(mileages)){
+            showToast("请上传车辆行驶证！");
+            return;
+        }
+        if (TextUtils.isEmpty(requestBean.getDriverId())){
+            showToast("请选择司机！");
+            return;
+        }
+        if (!requestBean.getCarType().equals("B")){
+            int max= Integer.parseInt(requestBean.getCarType().substring(requestBean.getCarType().length()-2,requestBean.getCarType().length()));
+            if (Integer.parseInt(carLoad) > max){
+                showToast("车辆载重不能超过型号最大值！");
+                return;
+            }
+        }
         if (isAdd) {
             presenter.addCar(requestBean);
         } else {
@@ -264,6 +292,7 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         }
         if (requestBean.getCarType().equals("B")) {
             rbBeng.setChecked(true);
+            rgType.setVisibility(View.INVISIBLE);
         } else {
             rbTong.setChecked(true);
             switch (requestBean.getCarType()) {
@@ -307,16 +336,19 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     @OnClick(R2.id.rg_16)
     public void onRg16Clicked() {
         requestBean.setCarType("T16");
+        etCarLoad.setText("16");
     }
 
     @OnClick(R2.id.rg_18)
     public void onRg18Clicked() {
         requestBean.setCarType("T18");
+        etCarLoad.setText("18");
     }
 
     @OnClick(R2.id.rg_20)
     public void onRg20Clicked() {
         requestBean.setCarType("T20");
+        etCarLoad.setText("20");
     }
 
     @OnClick(R2.id.et_shop_time)

@@ -7,13 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.event.EventMessageBran;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
+import com.tongdada.library_main.home.request.MessageIntentBean;
+import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.user.adapter.MessageAdapter;
 import com.tongdada.library_main.user.presenter.MessageContract;
 import com.tongdada.library_main.user.presenter.MessagePresenter;
@@ -21,6 +27,8 @@ import com.tongdada.library_main.user.respose.MessageBean;
 import com.tongdada.library_main.widget.SlideRecyclerView;
 import com.tongdada.library_main.widget.slideswaphelper.PlusItemSlideCallback;
 import com.tongdada.library_main.widget.slideswaphelper.WItemTouchHelperPlus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +78,7 @@ public class MessageFragment extends BaseMvpFragment<MessagePresenter> implement
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter1, View view, int position) {
                 if (view.getId() == R.id.ll_conten){
-                    presenter.readMessage(adapter.getData().get(position).getId());
+                    presenter.readMessage(adapter.getData().get(position).getId(),position);
                 }else if (view.getId() == R.id.item_slide){
                     presenter.deleteMessage(adapter.getData().get(position).getId());
                 }
@@ -105,5 +113,21 @@ public class MessageFragment extends BaseMvpFragment<MessagePresenter> implement
     @Override
     public void setMessgeList(List<MessageBean.PagenationBean.ListBean> list) {
         adapter.setNewData(list);
+    }
+
+    @Override
+    public void readSuccess(int postion) {
+        int a=0;
+        for (int i = 0; i < adapter.getData().size() ; i++) {
+            MessageBean.PagenationBean.ListBean listBean=adapter.getData().get(i);
+            if (listBean.getReadStatus().equals("N")){
+                a++;
+            }
+        }
+        EventBus.getDefault().post(new EventMessageBran(a));
+        MessageBean.PagenationBean.ListBean rowsBean=adapter.getData().get(postion);
+        MessageIntentBean messageIntentBean=new MessageIntentBean(rowsBean.getMessageContent(),null,null,rowsBean.getSendTime());
+        ARouter.getInstance().build(ArouterKey.MESSAGE_MESSAGEDETAILACTIVITY).withSerializable(IntentKey.MESSAGE_BEAN,messageIntentBean)
+                .navigation(mContext);
     }
 }

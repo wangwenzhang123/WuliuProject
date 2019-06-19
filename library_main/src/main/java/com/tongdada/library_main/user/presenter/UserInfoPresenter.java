@@ -84,7 +84,7 @@ public class UserInfoPresenter extends BasePresenter<UserInfoContract.View>imple
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getView().showToast(throwable.getMessage());
                     }
                 });
 

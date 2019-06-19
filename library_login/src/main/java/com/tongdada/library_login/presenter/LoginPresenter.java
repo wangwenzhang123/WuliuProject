@@ -43,6 +43,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.View> implements 
                     public void accept(BaseAppEntity<UserBean> objectBaseAppEntity) throws Exception {
                         CommenUtils.getIncetance().setUserBean(objectBaseAppEntity.getContent());
                         getView().routerIntent(ArouterKey.MAIN_MAINACTIVITY,null);
+                        getView().finishActivity();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
