@@ -126,6 +126,7 @@
 
     </View>
     <View
+        android:visibility="invisible"
         android:layout_marginTop="@dimen/dp_6"
         app:layout_constraintTop_toBottomOf="@+id/order_time"
         android:background="@color/_eaeaea"

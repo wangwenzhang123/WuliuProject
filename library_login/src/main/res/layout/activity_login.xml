@@ -15,7 +15,6 @@
         android:id="@+id/imageView" />
 
         <EditText
-            android:text="18932341238"
             android:layout_marginTop="@dimen/dp_20"
             android:inputType="numberDecimal"
             android:drawablePadding="@dimen/dp_17"
@@ -29,8 +28,7 @@
             android:id="@+id/rt_phone_login" />
 
         <EditText
-            android:inputType="numberDecimal"
-            android:text="999999"
+            android:inputType="numberPassword"
             android:drawablePadding="@dimen/dp_17"
             android:paddingLeft="@dimen/dp_17"
             android:drawableLeft="@drawable/select_login_password"

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.utils.CommenUtils;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
 import com.tongdada.library_login.R;
@@ -56,7 +57,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void initView() {
-
+        rtPhoneLogin.setText(CommenUtils.getIncetance().getUserBean().getUserContacts());
+        etPasswordLogin.setText(CommenUtils.getIncetance().getUserBean().getUserPassword());
     }
 
     @Override

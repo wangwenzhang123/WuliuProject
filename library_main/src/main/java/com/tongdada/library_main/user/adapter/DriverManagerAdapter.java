@@ -29,8 +29,9 @@ public class DriverManagerAdapter extends BaseQuickAdapter<DriverRequest,BaseVie
     protected void convert(BaseViewHolder helper, DriverRequest item) {
         helper.addOnClickListener(R.id.item_slide);
         helper.setText(R.id.user_name,item.getDriverName());
-        helper.setText(R.id.user_position,"年龄 "+item.getDriAge());
-        helper.setText(R.id.user_position1,"驾龄 "+item.getDriveringAge());
+        helper.setText(R.id.user_position,"年龄:"+item.getDriAge());
+        helper.setText(R.id.user_position1,"驾龄:"+item.getDriveringAge());
+        helper.setText(R.id.user_phone,item.getDriverMobile());
         RequestOptions requestOptions=new RequestOptions().centerCrop()
                 .error(R.mipmap.user_defut)
                 .placeholder(R.mipmap.user_defut);

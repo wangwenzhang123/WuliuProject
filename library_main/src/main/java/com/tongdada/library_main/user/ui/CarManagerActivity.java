@@ -90,6 +90,10 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 carManagerRecycle.closeMenu();
                 if (view .getId() == R.id.item_slide){
+                    if (CommenUtils.LOGIN_TYPE == 1){
+                        showToast("无删除车辆权限");
+                        return;
+                    }
                     presenter.deleteCar(carManagerAdapter.getData().get(position).getId());
                 }
             }
