@@ -72,8 +72,8 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
     @Override
     public void initView() {
         requestOptions = new RequestOptions()
-                .error(R.mipmap.user_hpyfy)
-                .placeholder(R.mipmap.user_hpyfy)
+                .error(R.mipmap.user_defut)
+                .placeholder(R.mipmap.user_defut)
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
         Glide.with(this).load(BaseUrl.BASEURL + "/" + CommenUtils.getIncetance().getUserBean().getIconPic())

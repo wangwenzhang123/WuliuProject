@@ -76,8 +76,8 @@ public class AddUserDetailActivity extends BaseMvpActivity<AddUserPresenter> {
                 ;
         RequestOptions requestOptions1=new RequestOptions()
                 .circleCrop()
-                .error(R.mipmap.user_hpyfy)
-                .placeholder(R.mipmap.user_hpyfy)
+                .error(R.mipmap.user_defut)
+                .placeholder(R.mipmap.user_defut)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+userBean.getIconPic()).apply(requestOptions1).into(userIco);

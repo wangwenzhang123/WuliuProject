@@ -366,13 +366,13 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     private void getCheckTong() {
         String caType = null;
         if (rg16.isChecked()) {
-            caType = "T16,";
+            caType = "T16";
         }
         if (rg18.isChecked()) {
-            caType = caType + "T18,";
+            caType ="T18";
         }
         if (rg20.isChecked()) {
-            caType = caType + "T20";
+            caType = "T20";
         }
         requestBean.setCarType(caType);
     }
@@ -439,12 +439,14 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
 
     @OnClick(R2.id.rb_beng_qi)
     public void onRbBengQiClicked() {
-
+        bengQiLl.setVisibility(View.VISIBLE);
+        bengGuLl.setVisibility(View.GONE);
     }
 
     @OnClick(R2.id.rb_beng_gu)
     public void onRbBengGuClicked() {
-
+        bengQiLl.setVisibility(View.GONE);
+        bengGuLl.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R2.id.beng_1)

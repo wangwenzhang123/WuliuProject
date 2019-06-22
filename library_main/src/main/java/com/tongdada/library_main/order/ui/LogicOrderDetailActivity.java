@@ -136,7 +136,7 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
         orderPublishTime.setText(orderDetail.getAcceptTime());
         carType2.setText(orderDetail.getPsTotalOrder().getCarType());
         orderPrice.setText(orderDetail.getPsTotalOrder().getPerPrice());
-        if (orderDetail.getPsTotalOrder().getCarType().equals("B")) {
+        if (orderDetail.getPsTotalOrder().getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getPsTotalOrder().getCarType()));
         } else {

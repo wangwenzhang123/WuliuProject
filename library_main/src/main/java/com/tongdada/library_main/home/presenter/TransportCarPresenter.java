@@ -69,7 +69,8 @@ public class TransportCarPresenter extends BaseRecyclerRefreshPresenter<Transpor
                                     stringList.get(12),
                                     stringList.get(13),
                                     stringList.get(14),
-                                    stringList.get(15)
+                                    stringList.get(15),
+                                    stringList.get(16)
                             );
                             list.add(finaceBean);
                         }
@@ -118,7 +119,8 @@ public class TransportCarPresenter extends BaseRecyclerRefreshPresenter<Transpor
                                     stringList.get(12),
                                     stringList.get(13),
                                     stringList.get(14),
-                                    stringList.get(15)
+                                    stringList.get(15),
+                                    stringList.get(16)
                             );
                             list.add(finaceBean);
                         }

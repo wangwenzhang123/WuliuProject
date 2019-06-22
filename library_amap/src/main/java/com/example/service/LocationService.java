@@ -73,12 +73,7 @@ public class LocationService extends Service implements AMapLocationListener ,Ba
                 Log.e("AmapError","location Error, ErrCode:"
                         + amapLocation.getLatitude() + ", errInfo:"
                         + amapLocation.getLongitude());
-                LatLng latLng1=new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());
-                LatLng latLng2=new LatLng(0,0);
-                float distance = AMapUtils.calculateLineDistance(latLng1,latLng2);
-                if (distance <= 500){
-
-                }
+                presenter.getSignInfo(amapLocation.getLatitude(),amapLocation.getLongitude());
                 presenter.updateCarLocation(String.valueOf(amapLocation.getLatitude()),String.valueOf(amapLocation.getLongitude()));
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。

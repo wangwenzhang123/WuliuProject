@@ -1,6 +1,7 @@
 package com.tongdada.library_main.user.presenter;
 
 import com.example.library_commen.event.EventAddBean;
+import com.example.library_commen.event.EventSelectCarBean;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.utils.UserMapUtils;
@@ -39,6 +40,7 @@ public class AddCarPresenter extends BasePresenter<AddCarContract.View> implemen
                     @Override
                     public void accept(BaseAppEntity<CarRequestBean> requestRegisterBeanBaseAppEntity) throws Exception {
                         EventBus.getDefault().post(new EventAddBean());
+                        EventBus.getDefault().post(new EventSelectCarBean());
                         getView().operationSuccess();
                     }
                 }, new Consumer<Throwable>() {

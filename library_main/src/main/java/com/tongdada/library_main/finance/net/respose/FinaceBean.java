@@ -24,8 +24,8 @@ public class FinaceBean implements Serializable{
     private String orderPrice;
     private String driverMobile;
     private String companyName;
-
-    public FinaceBean(String driverName, String iconPic, String carNo, String acceptTime, String totalDistance, String startPlace, String destinationPlace, String carType, String orderAmount, String orderName, String publishTime, String orderStatus, String rowId, String orderPrice, String driverMobile, String companyName) {
+    private String signTime;
+    public FinaceBean(String driverName, String iconPic, String carNo, String acceptTime, String totalDistance, String startPlace, String destinationPlace, String carType, String orderAmount, String orderName, String publishTime, String orderStatus, String rowId, String orderPrice, String driverMobile, String companyName,String signTime) {
         this.driverName = driverName;
         this.iconPic = iconPic;
         this.carNo = carNo;
@@ -42,6 +42,15 @@ public class FinaceBean implements Serializable{
         this.orderPrice = orderPrice;
         this.driverMobile = driverMobile;
         this.companyName = companyName;
+        this.signTime=signTime;
+    }
+
+    public String getSignTime() {
+        return signTime;
+    }
+
+    public void setSignTime(String signTime) {
+        this.signTime = signTime;
     }
 
     public String getDriverMobile() {

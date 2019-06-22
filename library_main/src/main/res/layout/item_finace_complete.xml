@@ -156,9 +156,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <View
-        android:visibility="invisible"
+
         app:layout_constraintTop_toBottomOf="@+id/order_accept_time"
-        android:background="@color/_eaeaea"
+        android:background="@color/_EDEDED"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10">
 

@@ -1,7 +1,5 @@
 package com.example.library_commen.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 /**
@@ -61,21 +59,22 @@ public class OrderBean implements Serializable{
     private String totalDistance="";
     private CreateTimeBean updateTime=new CreateTimeBean();
     private String updateUserID="";
-    private String acceptNumber="";
-    private String leftAmount;
     /**
      * orderPic :
      * updateTime : null
      */
 
     private String orderPic="";
+    private String acceptNumber="";
+    private String leftAmount="";
+    private String orderPhone="";
 
-    public String getLeftAmount() {
-        return leftAmount;
+    public String getOrderPhone() {
+        return orderPhone;
     }
 
-    public void setLeftAmount(String leftAmount) {
-        this.leftAmount = leftAmount;
+    public void setOrderPhone(String orderPhone) {
+        this.orderPhone = orderPhone;
     }
 
     public String getAcceptNumber() {
@@ -84,6 +83,14 @@ public class OrderBean implements Serializable{
 
     public void setAcceptNumber(String acceptNumber) {
         this.acceptNumber = acceptNumber;
+    }
+
+    public String getLeftAmount() {
+        return leftAmount;
+    }
+
+    public void setLeftAmount(String leftAmount) {
+        this.leftAmount = leftAmount;
     }
 
     public String getCarType() {

@@ -10,5 +10,7 @@ public class LocationContract {
 
     public interface Presenter{
         void updateCarLocation(String carLatitude,String carLongitude);
+        void getSignInfo(double la,double lo);
+        void driverSign(String id);
     }
 }

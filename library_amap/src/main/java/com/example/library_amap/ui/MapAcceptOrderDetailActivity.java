@@ -41,6 +41,7 @@ import com.example.library_amap.presenter.AcceptOrderContract;
 import com.example.library_amap.presenter.AcceptOrderPresenter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.appkey.SettingString;
 import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.SelectCarBean;
@@ -135,6 +136,10 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     TextView accpetDetail;
     @BindView(R2.id.leftAmount)
     TextView leftAmount;
+    @BindView(R2.id.platform_phone_tv)
+    TextView platformPhoneTv;
+    @BindView(R2.id.order_phone_tv)
+    TextView orderPhoneTv;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private AcceptCarAdapter adapter;
@@ -345,7 +350,9 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         orderPublishTime.setText(orderDetail.getPublishTime());
         carType2.setText(orderDetail.getCarType());
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
-        if (orderDetail.getCarType().equals("B")) {
+        platformPhoneTv.setText(SettingString.PHONE);
+        orderPhoneTv.setText(orderDetail.getOrderPhone());
+        if (orderDetail.getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
@@ -382,22 +389,22 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         requestBean.setCompanyId(CommenUtils.getIncetance().getUserBean().getCompanyId());
         requestBean.setStationId(orderBean.getStationId());
         requestBean.setOrderId(orderBean.getId());
-        if (orderBean.getCarType().equals("B")){
+        if (orderBean.getCarType().equals("B")) {
             requestBean.setTotalDistance("1km");
-        }else {
+        } else {
             requestBean.setTotalDistance(orderBean.getTotalDistance());
         }
         requestBean.setOrderRemark(orderBean.getOrderRemark());
         requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
         requestBean.setDriverName(CommenUtils.getIncetance().getUserBean().getUserName());
-        if (CommenUtils.LOGIN_TYPE != 0){
-            if (TextUtils.isEmpty(requestBean.getCarId())){
+        if (CommenUtils.LOGIN_TYPE != 0) {
+            if (TextUtils.isEmpty(requestBean.getCarId())) {
                 showToast("请选择接单车辆！");
                 return;
             }
             presenter.acceptOrderOfDriver(requestBean);
-        }else {
-            if (TextUtils.isEmpty(requestBean.getCarIds())){
+        } else {
+            if (TextUtils.isEmpty(requestBean.getCarIds())) {
                 showToast("请选择接单车辆！");
                 return;
             }
@@ -443,7 +450,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     public void onViewAcceptClicked() {
         Bundle bundle = new Bundle();
         bundle.putString(IntentKey.ORDER_AMOUNT, orderBean.getLeftAmount());
-        bundle.putString(IntentKey.CAR_TYPE,orderBean.getCarType());
+        bundle.putString(IntentKey.CAR_TYPE, orderBean.getCarType());
         routerIntent(ArouterKey.HONE_SELECTCARACTIVITY, bundle);
     }
 }

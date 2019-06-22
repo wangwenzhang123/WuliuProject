@@ -4,6 +4,7 @@ import com.example.library_commen.model.DetailCarBean;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.PagenationBase;
+import com.example.library_commen.model.SignBean;
 import com.example.library_commen.model.TransportCarBean;
 import com.example.library_commen.model.UploadBean;
 import com.example.library_commen.model.UserBean;
@@ -129,5 +130,23 @@ public interface CommenApi {
     @FormUrlEncoded
     @POST("/tonghe/updateDriverLocation.action")
     Observable<BaseAppEntity<OrderBean>> updateDriverLocation(@Field("psDrivers.id") String id,@Field("psDrivers.driverLatitude") String carLatitude,@Field("psDrivers.driverLongitude") String carLongitude);
+    /**
+     * 获取司机签到
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/getSignInfo.action")
+    Observable<PagenationBase<SignBean>> getSignInfo(@Field("psDetailOrders.driverId") String id);
+    /**
+     * 签到
+     * @param id
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/driverSign.action")
+    Observable<BaseAppEntity<OrderBean>> driverSign(@Field("psDetailOrders.id") String id);
 
 }

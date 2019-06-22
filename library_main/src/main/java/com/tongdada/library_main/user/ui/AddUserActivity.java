@@ -186,8 +186,8 @@ public class AddUserActivity extends BaseMvpActivity<AddUserPresenter> implement
                 break;
             case USERICON_CODE:
                 RequestOptions requestOptions = new RequestOptions()
-                        .error(R.mipmap.user_hpyfy)
-                        .placeholder(R.mipmap.user_hpyfy)
+                        .error(R.mipmap.defult)
+                        .placeholder(R.mipmap.defult)
                         .circleCrop()
                         .diskCacheStrategy(DiskCacheStrategy.DATA);
                 Glide.with(mContext).load(path).apply(requestOptions).into(userIco);

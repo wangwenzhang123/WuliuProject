@@ -1,6 +1,7 @@
 package com.tongdada.library_main.home.adapter;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -44,10 +45,15 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+item.getIconPic()).apply(requestOptions).into(imageView);
-        if (item.getCarType().equals("B")){
+        if (item.getCarType().contains("B")){
             helper.setText(R.id.car_type,"泵车");
         }else {
-            helper.setText(R.id.car_type,"砼车| 装载"+item.getCarType().substring(item.getCarType().length()-2,item.getCarType().length())+"方");
+            helper.setText(R.id.car_type,"砼车| 总货物量"+item.getOrderAmount()+"方");
+        }
+        if (TextUtils.isEmpty(item.getSignTime())){
+            helper.setText(R.id.sign_tv,"未签到");
+        }else {
+            helper.setText(R.id.sign_tv,"签到时间: "+item.getSignTime());
         }
         ImageView state=helper.getView(R.id.car_state_iv);
         switch (item.getOrderStatus()){

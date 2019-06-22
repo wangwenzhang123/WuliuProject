@@ -91,7 +91,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_startPlace"
-
+                        android:maxLines="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_start_iv"
                         app:layout_constraintTop_toTopOf="parent"
@@ -143,7 +143,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_destinationPlace"
-
+                        android:maxLines="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_end_iv"
                         app:layout_constraintTop_toBottomOf="@id/start_view"
@@ -195,7 +195,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_totalDistance"
-
+                        android:maxLines="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_distance_iv"
                         app:layout_constraintTop_toBottomOf="@id/end_view"
@@ -257,6 +257,64 @@
                         <TextView
                             android:textColor="@color/_333333"
                             android:id="@+id/orderName"
+                            android:text=""
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:background="@color/_E0E0E0"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp">
+
+                    </View>
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44">
+                        <TextView
+                            android:text="@string/platform_phone"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@color/_333333"
+                            android:id="@+id/platform_phone_tv"
+                            android:text=""
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:background="@color/_E0E0E0"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp">
+
+                    </View>
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44">
+                        <TextView
+                            android:text="@string/order_phone"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@color/_333333"
+                            android:id="@+id/order_phone_tv"
                             android:text=""
                             android:gravity="right"
                             android:layout_weight="1"

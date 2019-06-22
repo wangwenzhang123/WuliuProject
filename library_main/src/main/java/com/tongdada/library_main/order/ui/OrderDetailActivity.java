@@ -129,7 +129,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderPresenter> impleme
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
         carType2.setText(orderDetail.getCarType());
-        if (orderDetail.getCarType().equals("B")) {
+        if (orderDetail.getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {

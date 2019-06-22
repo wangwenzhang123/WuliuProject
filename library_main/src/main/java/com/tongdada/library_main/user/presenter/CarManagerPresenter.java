@@ -35,8 +35,17 @@ public class CarManagerPresenter extends BasePresenter<CarManagerContract.View> 
                             for (int i = 0; i < driverBeanPagenationBase.getPagenation().getList().size(); i++) {
                                 CarRequestBean carRequestBean=driverBeanPagenationBase.getPagenation().getList().get(i);
                                 if (isSelect){
-                                    if (carRequestBean.getCarStatus().equals("K") && carRequestBean.getCarType().equals(type)){
-                                        list.add(carRequestBean);
+                                    if (carRequestBean.getCarStatus().equals("K") ){
+                                        if (type.contains("B")){
+                                            if (type.equals(carRequestBean.getCarType())){
+                                                list.add(carRequestBean);
+                                            }
+                                        }else {
+                                            if (type.contains(carRequestBean.getCarType())){
+                                                list.add(carRequestBean);
+                                            }
+                                        }
+
                                     }
                                 }else {
                                     list.add(carRequestBean);

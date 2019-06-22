@@ -30,6 +30,7 @@ import com.example.library_amap.model.MarkerBean;
 import com.example.library_commen.adapter.OrderDetailCarAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.appkey.SettingString;
 import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.DetailCarListBean;
 import com.example.library_commen.model.OrderBean;
@@ -126,6 +127,10 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     TextView accpetDetail;
     @BindView(R2.id.leftAmount)
     TextView leftAmount;
+    @BindView(R2.id.platform_phone_tv)
+    TextView platformPhoneTv;
+    @BindView(R2.id.order_phone_tv)
+    TextView orderPhoneTv;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private OrderDetailCarAdapter adapter;
@@ -312,9 +317,10 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         orderAmount.setText(orderDetail.getOrderAmount() + "方");
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
-
+        platformPhoneTv.setText(SettingString.PHONE);
+        orderPhoneTv.setText(orderDetail.getOrderPhone());
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
-        if (orderDetail.getCarType().equals("B")) {
+        if (orderDetail.getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
@@ -348,7 +354,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         adapter.setNewData(carList);
         for (int i = 0; i < carList.size(); i++) {
             DetailCarListBean driverOrderDetailBean = carList.get(i);
-            if (TextUtils.isEmpty(driverOrderDetailBean.getCarLatitude()) || TextUtils.isEmpty(driverOrderDetailBean.getCarLongitude())){
+            if (TextUtils.isEmpty(driverOrderDetailBean.getCarLatitude()) || TextUtils.isEmpty(driverOrderDetailBean.getCarLongitude())) {
                 continue;
             }
             CarBean carBean = new CarBean(driverOrderDetailBean.getDriveName(), driverOrderDetailBean.getCarNo(),

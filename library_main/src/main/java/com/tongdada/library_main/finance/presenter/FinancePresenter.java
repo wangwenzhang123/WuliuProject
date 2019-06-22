@@ -61,7 +61,8 @@ public class FinancePresenter extends BasePresenter<FinanceContract.View> implem
                                     stringList.get(12),
                                     stringList.get(13),
                                     stringList.get(14),
-                                    stringList.get(15)
+                                    stringList.get(15),
+                                    stringList.get(16)
                                     );
                             list.add(finaceBean);
                         }
