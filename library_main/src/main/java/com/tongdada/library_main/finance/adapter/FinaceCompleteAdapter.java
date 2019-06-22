@@ -47,8 +47,8 @@ public class FinaceCompleteAdapter extends BaseQuickAdapter<FinaceBean,BaseViewH
         }
         ImageView imageView=helper.getView(R.id.user_pic_iv);
         RequestOptions requestOptions=new RequestOptions()
-                .error(R.mipmap.user_sample)
-                .placeholder(R.mipmap.user_sample)
+                .error(R.mipmap.user_defut)
+                .placeholder(R.mipmap.user_defut)
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;

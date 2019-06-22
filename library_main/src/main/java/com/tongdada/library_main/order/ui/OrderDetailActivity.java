@@ -11,6 +11,7 @@ import com.example.library_commen.adapter.OrderDetailCarAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.CarBean;
+import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.DetailCarListBean;
 import com.example.library_commen.model.OrderBean;
@@ -130,8 +131,10 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderPresenter> impleme
         carType2.setText(orderDetail.getCarType());
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");
+            carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
             carType1.setText("砼车");
+            carType2.setText(orderDetail.getCarType());
         }
         orderremark.setText(orderDetail.getOrderRemark());
     }

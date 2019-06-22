@@ -36,21 +36,21 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.amap.api.maps.MapView
-            android:id="@+id/order_detail_map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.amap.api.maps.MapView>
         <android.support.v4.widget.NestedScrollView
             android:background="@color/FFFFFF"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_351">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <com.amap.api.maps.MapView
+                    android:id="@+id/order_detail_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="253dp">
+
+                </com.amap.api.maps.MapView>
                 <LinearLayout
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginRight="@dimen/dp_16"
@@ -353,10 +353,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_42"
                         android:layout_gravity="center"
-                        android:background="@drawable/shape_login"
+                        android:background="@drawable/shape_login_hollow"
                         android:gravity="center"
                         android:text="@string/cancel"
-                        android:textColor="@color/FFFFFF" />
+                        android:textColor="@color/_ffe06e38" />
                     <TextView
                         android:id="@+id/unload_accomplish_tv"
                         android:layout_weight="1"

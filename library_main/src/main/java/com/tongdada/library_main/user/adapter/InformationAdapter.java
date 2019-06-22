@@ -40,7 +40,7 @@ public class InformationAdapter extends BaseQuickAdapter<BannerBean.RowsBean,Bas
                 ;
         TextView time=helper.getView(R.id.information_time);
         Glide.with(mContext).load(BaseUrl.BASEURL+"/"+item.getPriviewPic()).apply(requestOptions).into(pic);
-        helper.setText(R.id.information_conten,item.getNewsContent());
+        helper.setText(R.id.information_conten,item.getNewsTitle());
         if (item.getCreateTime() == null){
             Date currentTime = new Date(item.getCreateTime().getTime());
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");

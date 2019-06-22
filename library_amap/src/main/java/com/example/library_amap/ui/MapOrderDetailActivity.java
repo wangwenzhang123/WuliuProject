@@ -35,6 +35,7 @@ import com.example.library_commen.model.DetailCarListBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.presenter.OrderDetailContract;
 import com.example.library_commen.presenter.OrderPresenter;
+import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.util.PopwindowUtils;
 import com.tongdada.base.dialog.base.BaseDialog;
@@ -162,7 +163,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         aMap.getUiSettings().setTiltGesturesEnabled(false);
         aMap.setOnInfoWindowClickListener(this);
         PopwindowUtils.getIncetance().initOrderPop(mContext, new OrderBean());
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(32.025216333904694, 118.7622009762265), 15));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(32.025216333904694, 118.7622009762265), 10));
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -311,15 +312,17 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         orderAmount.setText(orderDetail.getOrderAmount() + "方");
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
-        carType2.setText(orderDetail.getCarType());
+
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");
+            carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
             carType1.setText("砼车");
+            carType2.setText(orderDetail.getCarType());
         }
         orderremark.setText(orderDetail.getOrderRemark());
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())), 15));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())), 10));
         aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())))
                 .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
                 .anchor(0.5f, 0.5f));

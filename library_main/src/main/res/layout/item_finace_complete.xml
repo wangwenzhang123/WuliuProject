@@ -2,8 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <View
+        android:visibility="gone"
         android:id="@+id/order_v"
         android:background="@color/_eaeaea"
         android:layout_width="match_parent"

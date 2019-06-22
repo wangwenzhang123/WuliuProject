@@ -39,6 +39,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <com.tongdada.library_main.widget.SlideRecyclerView
+        android:background="@color/_EDEDED"
         android:id="@+id/driver_manager_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

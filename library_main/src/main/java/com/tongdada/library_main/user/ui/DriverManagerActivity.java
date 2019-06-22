@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.dialog.DeleteDialog;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.utils.PhoneCallUtils;
@@ -42,7 +43,7 @@ import butterknife.OnClick;
  * @change
  */
 @Route(path = ArouterKey.USER_DRIVERMANAGERACTIVITY)
-public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresenter> implements DriverManagerContract.View {
+public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresenter> implements DriverManagerContract.View, DeleteDialog.OnClick {
     @BindView(R2.id.register_back)
     ImageView registerBack;
     @BindView(R2.id.add_driver_tv)
@@ -50,6 +51,7 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     @BindView(R2.id.driver_manager_recycle)
     SlideRecyclerView driverManagerRecycle;
     DriverManagerAdapter driverManagerAdapter;
+    private DeleteDialog deleteDialog;
     @Override
     public int getView() {
         return R.layout.activity_driver_manager;
@@ -66,6 +68,8 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
         driverManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         driverManagerRecycle.setAdapter(driverManagerAdapter);
         presenter.driverList();
+        deleteDialog=new DeleteDialog(this);
+        deleteDialog.setOnClick(this);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view .getId() == R.id.item_slide){
-                    presenter.deleteDriver(driverManagerAdapter.getData().get(position).getId());
+                    deleteDialog.show(position);
                 }else if (view .getId() == R.id.user_call){
                     PhoneCallUtils.call(driverManagerAdapter.getData().get(position).getDriverMobile(),mContext);
                 }
@@ -115,5 +119,10 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
     @Override
     public void setDriverList(List<DriverRequest> list) {
         driverManagerAdapter.setNewData(list);
+    }
+
+    @Override
+    public void onClick(int position) {
+        presenter.deleteDriver(driverManagerAdapter.getData().get(position).getId());
     }
 }

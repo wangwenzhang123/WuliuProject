@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.dialog.DeleteDialog;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.utils.CommenUtils;
@@ -43,7 +44,7 @@ import butterknife.OnClick;
  * @change
  */
 @Route(path = ArouterKey.USER_CARMANAGERACTIVITY)
-public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> implements CarManagerContract.View {
+public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> implements CarManagerContract.View, DeleteDialog.OnClick {
     @BindView(R2.id.register_back)
     ImageView registerBack;
     @BindView(R2.id.add_car_tv)
@@ -51,6 +52,7 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
     @BindView(R2.id.car_manager_recycle)
     SlideRecyclerView carManagerRecycle;
     private CarManagerAdapter carManagerAdapter;
+    private DeleteDialog deleteDialog;
     @Override
     public int getView() {
         return R.layout.activity_carmanager;
@@ -81,6 +83,8 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
         if (CommenUtils.LOGIN_TYPE ==1){
             addCarTv.setVisibility(View.GONE);
         }
+        deleteDialog=new DeleteDialog(this);
+        deleteDialog.setOnClick(this);
     }
 
     @Override
@@ -94,7 +98,7 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
                         showToast("无删除车辆权限");
                         return;
                     }
-                    presenter.deleteCar(carManagerAdapter.getData().get(position).getId());
+                    deleteDialog.show(position);
                 }
             }
         });
@@ -133,5 +137,10 @@ public class CarManagerActivity extends BaseMvpActivity<CarManagerPresenter> imp
         if (CommenUtils.LOGIN_TYPE == 2 && list.size() > 0){
             addCarTv.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onClick(int position) {
+        presenter.deleteCar(carManagerAdapter.getData().get(position).getId());
     }
 }

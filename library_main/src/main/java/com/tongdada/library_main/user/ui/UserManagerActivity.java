@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
+import com.example.library_commen.dialog.DeleteDialog;
 import com.example.library_commen.event.EventAddBean;
 import com.example.library_commen.model.UserBean;
 import com.example.library_main.R;
@@ -42,7 +43,7 @@ import butterknife.OnClick;
  * @change
  */
 @Route(path = ArouterKey.USER_USERMANAGERACTIVITY)
-public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> implements UserManagerContract.View{
+public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> implements UserManagerContract.View, DeleteDialog.OnClick {
     @BindView(R2.id.register_back)
     ImageView registerBack;
     @BindView(R2.id.user_manager_recycle)
@@ -51,6 +52,7 @@ public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> i
     TextView addUserTv;
     private List<UserBean> userManagerBeanList = new ArrayList<>();
     private UserManagerAdapter adapter;
+    private DeleteDialog deleteDialog;
 
     @Override
     public int getView() {
@@ -67,6 +69,8 @@ public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> i
         userManagerRecycle.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserManagerAdapter(R.layout.item_usermanager, userManagerBeanList);
         userManagerRecycle.setAdapter(adapter);
+        deleteDialog=new DeleteDialog(this);
+        deleteDialog.setOnClick(this);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> i
                 if (id == R.id.cl_conten) {
                     ARouter.getInstance().build(ArouterKey.USER_ADDUSERDETAILACTIVITY).withSerializable(IntentKey.USER_DETAIL,adapter.getData().get(position)).navigation(mContext);
                 } else if (id == R.id.item_slide) {
-                    presenter.deleteUser(adapter.getData().get(position).getId());
+                   deleteDialog.show(position);
                 }
             }
         });
@@ -124,5 +128,10 @@ public class UserManagerActivity extends BaseMvpActivity<UserManagerPresenter> i
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(int position) {
+        presenter.deleteUser(adapter.getData().get(position).getId());
     }
 }

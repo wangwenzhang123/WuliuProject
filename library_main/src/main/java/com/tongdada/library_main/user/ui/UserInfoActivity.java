@@ -47,7 +47,7 @@ public class UserInfoActivity extends BaseMvpActivity<UserInfoPresenter> impleme
     @BindView(R2.id.user_name)
     EditText userName;
     @BindView(R2.id.user_phone)
-    EditText userPhone;
+    TextView userPhone;
     @BindView(R2.id.user_age)
     EditText userAge;
     @BindView(R2.id.user_address)

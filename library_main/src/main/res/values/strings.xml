@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="update_head">上传头像</string>
+    <string name="update_head">头像</string>
     <string name="user_name">姓名</string>
     <string name="user_phone">手机号</string>
     <string name="user_age">年龄</string>
@@ -21,7 +21,7 @@
     <string name="user_position">职务</string>
     <string name="historical_record">历史纪录</string>
     <string name="order_setting">订单设置</string>
-    <string name="out_login">注销登录</string>
+    <string name="out_login">注销</string>
     <string name="mixing_plant_maintenance">搅拌站维护</string>
 
     <string name="cancel">取消</string>
@@ -32,7 +32,7 @@
     <string name="day">日</string>
     <string name="hour">时</string>
     <string name="minute">分</string>
-    <string name="about_app">关于砼哒哒</string>
+    <string name="about_app">关于</string>
     <string name="accept_list">接单列表</string>
     <string name="order_pic">订单图片</string>
     <string name="price_setting">单价设置</string>

@@ -13,6 +13,7 @@
 
         </com.scwang.smartrefresh.layout.header.ClassicsHeader>
         <android.support.v7.widget.RecyclerView
+            android:background="@color/_EDEDED"
             android:id="@+id/finance_complete_recycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

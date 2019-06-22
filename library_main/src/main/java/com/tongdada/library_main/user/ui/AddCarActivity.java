@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -87,8 +88,7 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     RadioButton rg18;
     @BindView(R2.id.rg_20)
     RadioButton rg20;
-    @BindView(R2.id.rg_type)
-    RadioGroup rgType;
+
     @BindView(R2.id.et_shop_time)
     TextView etShopTime;
     @BindView(R2.id.add_car_title)
@@ -97,6 +97,36 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     TextView driverName;
     @BindView(R2.id.select_driver_ll)
     LinearLayout selectDriverLl;
+    @BindView(R2.id.rb_beng_qi)
+    RadioButton rbBengQi;
+    @BindView(R2.id.rb_beng_gu)
+    RadioButton rbBengGu;
+    @BindView(R2.id.beng_carType_ll)
+    LinearLayout bengCarTypeLl;
+    @BindView(R2.id.beng_1)
+    RadioButton beng1;
+    @BindView(R2.id.beng_2)
+    RadioButton beng2;
+    @BindView(R2.id.beng_3)
+    RadioButton beng3;
+    @BindView(R2.id.beng_type)
+    RadioGroup bengType;
+    @BindView(R2.id.beng_qi_ll)
+    LinearLayout bengQiLl;
+    @BindView(R2.id.gu_1)
+    RadioButton gu1;
+    @BindView(R2.id.gu_2)
+    RadioButton gu2;
+    @BindView(R2.id.beng_gu_type)
+    RadioGroup bengGuType;
+    @BindView(R2.id.beng_gu_ll)
+    LinearLayout bengGuLl;
+    @BindView(R2.id.bang_ll)
+    LinearLayout bangLl;
+    @BindView(R2.id.tong_ll)
+    FrameLayout tongLl;
+    @BindView(R2.id.rg_type)
+    RadioGroup rgType;
     private boolean isAdd = true;
     private CarRequestBean requestBean = new CarRequestBean();
     private static final int DRIVINGLICENSE_CODE = 3;
@@ -204,32 +234,37 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         requestBean.setCarName(carName);
         requestBean.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         requestBean.setMileages(mileages);
-        if (TextUtils.isEmpty(carName)){
+        if (TextUtils.isEmpty(carName)) {
             showToast("请输入车辆品牌！");
             return;
         }
-        if (TextUtils.isEmpty(carLoad)){
+        if (TextUtils.isEmpty(carLoad)) {
             showToast("请输入车辆载重！");
             return;
         }
-        if (TextUtils.isEmpty(carNo)){
+        if (TextUtils.isEmpty(carNo)) {
             showToast("请输入车牌号！");
             return;
         }
-        if (TextUtils.isEmpty(mileages)){
+        if (TextUtils.isEmpty(mileages)) {
             showToast("请上传车辆行驶证！");
             return;
         }
-        if (TextUtils.isEmpty(requestBean.getDriverId())){
+        if (TextUtils.isEmpty(requestBean.getDriverId())) {
             showToast("请选择司机！");
             return;
         }
-        if (!requestBean.getCarType().equals("B")){
-            int max= Integer.parseInt(requestBean.getCarType().substring(requestBean.getCarType().length()-2,requestBean.getCarType().length()));
-            if (Integer.parseInt(carLoad) > max){
+        if (!requestBean.getCarType().contains("B")) {
+            int max = Integer.parseInt(requestBean.getCarType().substring(requestBean.getCarType().length() - 2, requestBean.getCarType().length()));
+            if (Integer.parseInt(carLoad) > max) {
                 showToast("车辆载重不能超过型号最大值！");
                 return;
             }
+        }
+        if (rbTong.isChecked()) {
+            getCheckTong();
+        } else {
+            getCheckBang();
         }
         if (isAdd) {
             presenter.addCar(requestBean);
@@ -290,11 +325,14 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
         if (!TextUtils.isEmpty(requestBean.getDriveLicense())) {
             Glide.with(mContext).load(BaseUrl.BASEURL + "/" + requestBean.getDriveLicense()).apply(requestOptions).into(ivBusinessLicense);
         }
-        if (requestBean.getCarType().equals("B")) {
+        if (requestBean.getCarType().contains("B")) {
             rbBeng.setChecked(true);
-            rgType.setVisibility(View.INVISIBLE);
+            tongLl.setVisibility(View.GONE);
+            bangLl.setVisibility(View.VISIBLE);
         } else {
             rbTong.setChecked(true);
+            tongLl.setVisibility(View.VISIBLE);
+            bangLl.setVisibility(View.GONE);
             switch (requestBean.getCarType()) {
                 case "T16":
                     rg16.setChecked(true);
@@ -316,21 +354,47 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
 
     @OnClick(R2.id.rb_tong)
     public void onRbTongClicked() {
-        rgType.setVisibility(View.VISIBLE);
-        int id = rgType.getCheckedRadioButtonId();
-        if (id == R.id.rg_16) {
-            requestBean.setCarType("T16");
-        } else if (id == R.id.rg_18) {
-            requestBean.setCarType("T18");
-        } else if (id == R.id.rg_20) {
-            requestBean.setCarType("T20");
-        }
+        tongLl.setVisibility(View.VISIBLE);
+        bangLl.setVisibility(View.GONE);
     }
 
     @OnClick(R2.id.rb_beng)
     public void onRbBengClicked() {
-        rgType.setVisibility(View.INVISIBLE);
-        requestBean.setCarType("B");
+        tongLl.setVisibility(View.GONE);
+        bangLl.setVisibility(View.VISIBLE);
+    }
+    private void getCheckTong() {
+        String caType = null;
+        if (rg16.isChecked()) {
+            caType = "T16,";
+        }
+        if (rg18.isChecked()) {
+            caType = caType + "T18,";
+        }
+        if (rg20.isChecked()) {
+            caType = caType + "T20";
+        }
+        requestBean.setCarType(caType);
+    }
+
+    private void getCheckBang() {
+        if (rbBengQi.isChecked()) {
+            int id = bengType.getCheckedRadioButtonId();
+            if (id == R.id.beng_1) {
+                requestBean.setCarType("B1");
+            } else if (id == R.id.beng_2) {
+                requestBean.setCarType("B2");
+            } else {
+                requestBean.setCarType("B3");
+            }
+        } else {
+            int id = bengGuType.getCheckedRadioButtonId();
+            if (id == R.id.gu_1) {
+                requestBean.setCarType("B4");
+            } else {
+                requestBean.setCarType("B5");
+            }
+        }
     }
 
     @OnClick(R2.id.rg_16)
@@ -371,5 +435,45 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
     public void onCarTimeClicked() {
         mTimerPicker.show(carTime.getText().toString());
         isShopTime = false;
+    }
+
+    @OnClick(R2.id.rb_beng_qi)
+    public void onRbBengQiClicked() {
+
+    }
+
+    @OnClick(R2.id.rb_beng_gu)
+    public void onRbBengGuClicked() {
+
+    }
+
+    @OnClick(R2.id.beng_1)
+    public void onBeng1Clicked() {
+
+    }
+
+    @OnClick(R2.id.beng_2)
+    public void onBeng2Clicked() {
+
+    }
+
+    @OnClick(R2.id.beng_3)
+    public void onBeng3Clicked() {
+
+    }
+
+    @OnClick(R2.id.beng_type)
+    public void onBengTypeClicked() {
+
+    }
+
+    @OnClick(R2.id.gu_1)
+    public void onGu1Clicked() {
+
+    }
+
+    @OnClick(R2.id.gu_2)
+    public void onGu2Clicked() {
+
     }
 }

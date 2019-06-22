@@ -280,6 +280,7 @@
             </View>
 
             <FrameLayout
+                android:id="@+id/tong_ll"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_44"
 
@@ -333,7 +334,152 @@
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/sp_14" />
             </FrameLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:id="@+id/bang_ll"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
 
+                    android:id="@+id/beng_carType_ll"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/_333333"
+                        android:text="泵车（单位 方）"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_44">
+
+                        <RadioButton
+                            android:id="@+id/rb_beng_qi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/dp_24"
+                            android:button="@null"
+                            android:checked="true"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:text="@string/beng_car" />
+                        <RadioButton
+                            android:id="@+id/rb_beng_gu"
+                            android:layout_marginRight="@dimen/dp_22"
+                            android:layout_gravity="center"
+                            android:text="@string/beng_gu"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/beng_qi_ll"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/_333333"
+                        android:text="车辆型号"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioGroup
+                        android:layout_gravity="center"
+                        android:id="@+id/beng_type"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_44">
+                        <RadioButton
+                            android:id="@+id/beng_1"
+                            android:checked="true"
+                            android:layout_marginRight="@dimen/dp_24"
+                            android:layout_gravity="center"
+                            android:text="@string/beng_1"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+
+                            android:id="@+id/beng_2"
+                            android:layout_marginRight="@dimen/dp_22"
+                            android:layout_gravity="center"
+                            android:text="@string/beng_2"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+
+                            android:id="@+id/beng_3"
+                            android:layout_marginRight="@dimen/dp_22"
+                            android:layout_gravity="center"
+                            android:text="@string/beng_3"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/beng_gu_ll"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/_333333"
+                        android:text="车辆型号"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioGroup
+                        android:id="@+id/beng_gu_type"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_44">
+                        <RadioButton
+                            android:id="@+id/gu_1"
+                            android:checked="true"
+                            android:layout_marginRight="@dimen/dp_24"
+                            android:layout_gravity="center"
+                            android:text="@string/putong"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/gu_2"
+                            android:layout_marginRight="@dimen/dp_22"
+                            android:layout_gravity="center"
+                            android:text="@string/gaoya"
+                            android:button="@null"
+                            android:drawablePadding="@dimen/dp_8"
+                            android:drawableLeft="@drawable/selector_order_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+                </LinearLayout>
+
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -83,7 +84,8 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     ImageView ivDrivingLicense;
     @BindView(R2.id.add_driver_title)
     TextView addDriverTitle;
-    private boolean isAdd=true;
+    private boolean isAdd = true;
+
     @Override
     public int getView() {
 
@@ -102,7 +104,7 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
             addDriverTitle.setText("修改司机");
             registerRegisterBt.setText("确认修改");
             upDateUi();
-            isAdd=false;
+            isAdd = false;
         }
     }
 
@@ -146,35 +148,35 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         String phone = etDriverPhone.getText().toString().trim();
         String driverYear = etDrivingYears.getText().toString();
         String card = etIdentityCard.getText().toString().trim();
-        if (TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             showToast("请输入司机名称！");
             return;
         }
-        if (TextUtils.isEmpty(address)){
+        if (TextUtils.isEmpty(address)) {
             showToast("请输入地址！");
             return;
         }
-        if (TextUtils.isEmpty(age)){
+        if (TextUtils.isEmpty(age)) {
             showToast("请输入年龄！");
             return;
         }
-        if (TextUtils.isEmpty(phone)){
+        if (TextUtils.isEmpty(phone)) {
             showToast("请输入手机号！");
             return;
         }
-        if (TextUtils.isEmpty(driverYear)){
+        if (TextUtils.isEmpty(driverYear)) {
             showToast("请输入驾龄！");
             return;
         }
-        if (TextUtils.isEmpty(card)){
+        if (TextUtils.isEmpty(card)) {
             showToast("请输入身份证号！");
             return;
         }
-        if (TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             showToast("请输入车辆品牌！");
             return;
         }
-        if (!CheckUtils.isChinaPhoneLegal(phone)){
+        if (!CheckUtils.isChinaPhoneLegal(phone)) {
             showToast("请输入正确的手机号！");
             return;
         }
@@ -198,9 +200,9 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         request.setDriAge(age);
         request.setCompanyId(CommenUtils.getIncetance().getRequestBean().getId());
         request.setCompanyName(CommenUtils.getIncetance().getRequestBean().getCompanyName());
-        if (isAdd){
+        if (isAdd) {
             presenter.addDriver(request);
-        }else {
+        } else {
             presenter.updateDriver(request);
         }
 
@@ -269,19 +271,18 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
         driverAddress.setText(request.getDriverAddress());
         etUserName.setText(request.getDriverName());
         etIdentityCard.setText(request.getDriverIdNo());
-        RequestOptions requestOptions=new RequestOptions()
+        RequestOptions requestOptions = new RequestOptions()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                ;
-        if (!TextUtils.isEmpty(request.getIdBack())){
-            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getIdBack()).apply(requestOptions).into(ivLegalReverse);
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        if (!TextUtils.isEmpty(request.getIdBack())) {
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + request.getIdBack()).apply(requestOptions).into(ivLegalReverse);
         }
-        if (!TextUtils.isEmpty(request.getIdFront())){
-            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getIdFront()).apply(requestOptions).into(ivLegalPositive);
+        if (!TextUtils.isEmpty(request.getIdFront())) {
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + request.getIdFront()).apply(requestOptions).into(ivLegalPositive);
         }
-        if (!TextUtils.isEmpty(request.getDriverIdNo())){
-            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+request.getDriverIdNo()).apply(requestOptions).into(ivDrivingLicense);
+        if (!TextUtils.isEmpty(request.getDriverLicense())) {
+            Glide.with(mContext).load(BaseUrl.BASEURL + "/" + request.getDriverLicense()).apply(requestOptions).into(ivDrivingLicense);
         }
     }
 
@@ -293,5 +294,10 @@ public class AddDriverActivity extends BaseMvpActivity<AddDriverPresenter> imple
     @OnClick(R2.id.ll_driving_license)
     public void onViewClicked() {
         selectPic(DRIVINGLICENSE_CODE);
+    }
+
+    @OnClick({R2.id.register_back, R2.id.back_tv})
+    public void onViewClicked(View view) {
+       finish();
     }
 }

@@ -101,4 +101,16 @@
     <string name="modify_order">修改订单</string>
     <string name="reject">驳回</string>
     <string name="unload_accomplish">卸货完成</string>
+    <string name="bang_1">汽车泵37米</string>
+    <string name="bang_2">汽车泵42-53米</string>
+    <string name="bang_3">汽车泵56-62米</string>
+    <string name="bang_4">普通固定泵</string>
+    <string name="bang_5">高压固定泵</string>
+    <string name="beng_car">汽车泵</string>
+    <string name="beng_gu">固定泵</string>
+    <string name="putong">普通</string>
+    <string name="gaoya">高压</string>
+    <string name="beng_3">56-62米</string>
+    <string name="beng_2">42-53米</string>
+    <string name="beng_1">37米</string>
 </resources>

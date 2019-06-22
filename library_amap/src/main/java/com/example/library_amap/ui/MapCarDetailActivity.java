@@ -245,7 +245,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude())))
                 .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
                 .anchor(0.5f, 0.5f));
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude())), 13));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude())), 10));
         Observable.create(new ObservableOnSubscribe<MarkerBean>() {
             @Override
             public void subscribe(ObservableEmitter<MarkerBean> e) throws Exception {

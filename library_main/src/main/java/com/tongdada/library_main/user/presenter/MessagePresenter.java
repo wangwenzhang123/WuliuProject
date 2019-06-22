@@ -23,7 +23,7 @@ public class MessagePresenter extends BasePresenter<MessageContract.View> implem
                 .subscribe(new Consumer<MessageBean>() {
                     @Override
                     public void accept(MessageBean objectBaseAppEntity) throws Exception {
-                        if (objectBaseAppEntity.getPagenation() != null && objectBaseAppEntity.getPagenation().getList().size() >0){
+                        if (objectBaseAppEntity.getPagenation() != null){
                             getView().setMessgeList(objectBaseAppEntity.getPagenation().getList());
                         }
                     }
@@ -42,6 +42,7 @@ public class MessagePresenter extends BasePresenter<MessageContract.View> implem
                 .subscribe(new Consumer<BaseAppEntity<Object>>() {
                     @Override
                     public void accept(BaseAppEntity<Object> objectBaseAppEntity) throws Exception {
+                        getMessageList();
                         getView().readSuccess(postion);
                     }
                 }, new Consumer<Throwable>() {

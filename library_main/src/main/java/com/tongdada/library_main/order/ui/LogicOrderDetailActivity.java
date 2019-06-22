@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.DriverOrderDetailBean;
+import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.presenter.LogicOrderDetailContract;
@@ -137,8 +138,10 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
         orderPrice.setText(orderDetail.getPsTotalOrder().getPerPrice());
         if (orderDetail.getPsTotalOrder().getCarType().equals("B")) {
             carType1.setText("泵车");
+            carType2.setText(CheckUtils.getBangName(orderDetail.getPsTotalOrder().getCarType()));
         } else {
             carType1.setText("砼车");
+            carType2.setText(orderDetail.getPsTotalOrder().getCarType());
         }
         orderremark.setText(orderDetail.getOrderRemark());
         RequestOptions requestOptions = new RequestOptions()

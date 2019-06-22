@@ -98,6 +98,8 @@ public class RegisterLogisticsFragment extends BaseMvpFragment<RegisterPresenter
         etAddress.setText(requestRegisterBean.getCompanyAddress());
         etContact.setText(requestRegisterBean.getCompanyContacts());
         etContactPhone.setText(requestRegisterBean.getContactsPhone());
+        etContactPhone.setFocusable(false);
+        etContactPhone.setClickable(false);
         etLegalPerson.setText(requestRegisterBean.getLegalPersion());
         etUnitName.setText(requestRegisterBean.getCompanyName());
         etRegisteredCapital.setText(requestRegisterBean.getRegisterCapital());

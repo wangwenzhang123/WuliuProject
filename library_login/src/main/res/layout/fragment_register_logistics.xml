@@ -196,25 +196,13 @@
 
         </View>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"
 
             android:orientation="horizontal">
-
-            <EditText
-                android:inputType="numberDecimal"
-                android:id="@+id/et_registered_capital"
-                android:layout_width="@dimen/dp_290"
-                android:layout_height="@dimen/dp_30"
-                android:layout_gravity="right|center"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@null"
-                android:gravity="right|center"
-                android:hint="@string/input_registered_capital"
-                android:textSize="@dimen/sp_14" />
-
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
@@ -222,7 +210,25 @@
                 android:text="@string/registered_capital"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/sp_14" />
-        </FrameLayout>
+            <EditText
+                android:layout_marginRight="@dimen/dp_3"
+                android:id="@+id/et_registered_capital"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="right|center"
+                android:background="@null"
+                android:gravity="right|center"
+                android:hint="@string/input_registered_capital"
+                android:textSize="@dimen/sp_14" />
+            <TextView
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="@color/_333333"
+                android:text="万元"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

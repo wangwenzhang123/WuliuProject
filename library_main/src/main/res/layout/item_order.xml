@@ -4,13 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <View
-        android:id="@+id/order_v"
-        android:background="@color/_eaeaea"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1">
 
-    </View>
     <ImageView
         android:id="@+id/order_state_iv"
         android:layout_marginTop="@dimen/dp_2"
@@ -126,10 +120,10 @@
 
     </View>
     <View
-        android:visibility="invisible"
+
         android:layout_marginTop="@dimen/dp_6"
         app:layout_constraintTop_toBottomOf="@+id/order_time"
-        android:background="@color/_eaeaea"
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10">
 

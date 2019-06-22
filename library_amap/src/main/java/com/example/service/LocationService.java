@@ -13,6 +13,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerBase;
+import com.amap.api.maps.AMapUtils;
+import com.amap.api.maps.model.LatLng;
 import com.example.library_amap.presenter.LocationPresenter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
@@ -71,6 +73,12 @@ public class LocationService extends Service implements AMapLocationListener ,Ba
                 Log.e("AmapError","location Error, ErrCode:"
                         + amapLocation.getLatitude() + ", errInfo:"
                         + amapLocation.getLongitude());
+                LatLng latLng1=new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());
+                LatLng latLng2=new LatLng(0,0);
+                float distance = AMapUtils.calculateLineDistance(latLng1,latLng2);
+                if (distance <= 500){
+
+                }
                 presenter.updateCarLocation(String.valueOf(amapLocation.getLatitude()),String.valueOf(amapLocation.getLongitude()));
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。

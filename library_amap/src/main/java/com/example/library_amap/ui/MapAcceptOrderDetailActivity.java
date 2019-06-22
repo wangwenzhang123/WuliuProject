@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,6 +44,7 @@ import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.OrderBean;
 import com.example.library_commen.model.SelectCarBean;
+import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.library_commen.weight.SpaceItemDecoration;
@@ -345,8 +347,10 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
         if (orderDetail.getCarType().equals("B")) {
             carType1.setText("泵车");
+            carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
             carType1.setText("砼车");
+            carType2.setText(orderDetail.getCarType());
         }
         orderremark.setText(orderDetail.getOrderRemark());
        /* aMap.addMarker(new MarkerOptions().position(new LatLng(31.985562554090762, 118.82025068383825))
@@ -354,7 +358,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
                 .anchor(0.5f, 0.5f));*/
         start = new LatLonPoint(Double.valueOf(orderBean.getStartLatitude()), Double.valueOf(orderBean.getStartLongitude()));
         end = new LatLonPoint(Double.valueOf(orderBean.getDstLatitude()), Double.valueOf(orderBean.getDstLongitude()));
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(end.getLatitude(), end.getLongitude()), 15));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(end.getLatitude(), end.getLongitude()), 10));
         queryRoute();
     }
 
@@ -387,8 +391,16 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         requestBean.setDriverId(CommenUtils.getIncetance().getUserBean().getDriverId());
         requestBean.setDriverName(CommenUtils.getIncetance().getUserBean().getUserName());
         if (CommenUtils.LOGIN_TYPE != 0){
+            if (TextUtils.isEmpty(requestBean.getCarId())){
+                showToast("请选择接单车辆！");
+                return;
+            }
             presenter.acceptOrderOfDriver(requestBean);
         }else {
+            if (TextUtils.isEmpty(requestBean.getCarIds())){
+                showToast("请选择接单车辆！");
+                return;
+            }
             presenter.acceptOrderOfLogi(requestBean);
         }
 

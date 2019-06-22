@@ -165,8 +165,8 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     @Override
     public void updateUi() {
         RequestOptions requestOptions = new RequestOptions()
-                .error(R.mipmap.user_hpyfy)
-                .placeholder(R.mipmap.user_hpyfy)
+                .error(R.mipmap.user_defut)
+                .placeholder(R.mipmap.user_defut)
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
         Glide.with(this).load(BaseUrl.BASEURL + "/" + CommenUtils.getIncetance().getUserBean().getIconPic())

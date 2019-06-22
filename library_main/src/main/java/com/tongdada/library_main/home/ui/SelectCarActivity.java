@@ -147,7 +147,7 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
                 }else {
                     isSelect=true;
                 }
-                amountTv.setText("剩余"+(total-accept)+"方，当前可以运输总量"+amuont+"方");
+                amountTv.setText("剩余"+(total-accept)+"方，当前可以运输总量"+acceptCar+"方");
                 if (total < accept){
                     checkAll.setFocusable(false);
                     checkAll.setClickable(false);

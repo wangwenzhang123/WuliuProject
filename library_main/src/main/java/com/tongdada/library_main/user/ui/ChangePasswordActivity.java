@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
+
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
@@ -89,7 +91,7 @@ public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresen
 
     @OnClick(R2.id.sure_tv)
     public void onSureTvClicked() {
-        if (userOldpassword.getText().toString().equals(CommenUtils.getIncetance().getUserBean().getUserPassword())){
+        if (!userOldpassword.getText().toString().equals(CommenUtils.getIncetance().getUserBean().getUserPassword())){
             showToast("旧密码输入不对!");
             return;
         }
@@ -103,6 +105,7 @@ public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresen
 
     @Override
     public void editPasswordSueecss() {
+        ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
         finish();
     }
 

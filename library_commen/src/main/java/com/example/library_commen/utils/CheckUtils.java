@@ -20,4 +20,25 @@ public class CheckUtils {
         }
         return m.matches();
     }
+    public static String getBangName(String type){
+        String name="";
+        switch (type){
+            case "B1":
+                name="汽车泵37米";
+                break;
+            case "B2":
+                name="汽车泵42-53米";
+                break;
+            case "B3":
+                name="汽车泵56-62米";
+                break;
+            case "B4":
+                name="普通固定泵";
+                break;
+            case "B5":
+                name="高压固定泵";
+                break;
+        }
+        return name;
+    }
 }
