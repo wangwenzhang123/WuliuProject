@@ -51,7 +51,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:textColor="@color/_ffe06e38"
         android:layout_gravity="center"
-        android:text="版本 v 0.0.1"
+        android:text="版本 v 1.0.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

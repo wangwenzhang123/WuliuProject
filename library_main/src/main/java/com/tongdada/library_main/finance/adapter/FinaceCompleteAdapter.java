@@ -1,6 +1,7 @@
 package com.tongdada.library_main.finance.adapter;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
@@ -28,7 +29,7 @@ public class FinaceCompleteAdapter extends BaseQuickAdapter<FinaceBean,BaseViewH
     @Override
     protected void convert(BaseViewHolder helper, FinaceBean item) {
         helper.setText(R.id.driver_name,item.getDriverName());
-        helper.setText(R.id.order_accept_time,item.getAcceptTime());
+        //helper.setText(R.id.order_accept_time,item.getAcceptTime());
         helper.setText(R.id.car_title,item.getOrderName());
         helper.setText(R.id.distance_text,item.getTotalDistance());
         helper.setText(R.id.order_price,"￥"+item.getOrderPrice());
@@ -44,6 +45,11 @@ public class FinaceCompleteAdapter extends BaseQuickAdapter<FinaceBean,BaseViewH
             state.setImageResource(R.mipmap.accounting);
         }else if (item.getOrderStatus().equals("H")){
             state.setImageResource(R.mipmap.weihesuan);
+        }
+        if (TextUtils.isEmpty(item.getSignTime())){
+            helper.setText(R.id.order_accept_time,"未签到");
+        }else {
+            helper.setText(R.id.order_accept_time,"签到时间: "+item.getSignTime());
         }
         ImageView imageView=helper.getView(R.id.user_pic_iv);
         RequestOptions requestOptions=new RequestOptions()

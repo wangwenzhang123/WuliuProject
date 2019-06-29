@@ -57,15 +57,19 @@ public class CommenUtils {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
-        if (TextUtils.isEmpty(userBean.getCompanyId())){
-            LOGIN_TYPE=2;
-        }else {
-            if (TextUtils.isEmpty(userBean.getDriverId())){
-                LOGIN_TYPE=0;
+        if (userBean != null){
+            if (TextUtils.isEmpty(userBean.getCompanyId())){
+                LOGIN_TYPE=2;
             }else {
-                LOGIN_TYPE=1;
+                if (TextUtils.isEmpty(userBean.getDriverId())){
+                    LOGIN_TYPE=0;
+                }else {
+                    LOGIN_TYPE=1;
+                }
             }
+            SharedPreferencesUtil.getInstance().putString(ShareKey.USER_BEAN,new Gson().toJson(userBean));
+        }else {
+            SharedPreferencesUtil.getInstance().putString(ShareKey.USER_BEAN,null);
         }
-        SharedPreferencesUtil.getInstance().putString(ShareKey.USER_BEAN,new Gson().toJson(userBean));
     }
 }

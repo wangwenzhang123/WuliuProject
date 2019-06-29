@@ -14,7 +14,7 @@ import com.tongdada.base.dialog.base.BaseDialog;
 
 public class DeleteDialog extends BaseDialog {
     TextView cancel;
-    TextView commit;
+    TextView commit,title;
     private int postion;
     private OnClick onClick;
     public DeleteDialog(@NonNull Context context) {
@@ -38,10 +38,17 @@ public class DeleteDialog extends BaseDialog {
                 dismiss();
             }
         });
+        title=findViewById(R.id.dialog_titla);
     }
     public void show(int postion){
         super.show();
         this.postion=postion;
+    }
+    public void show(String titleSt){
+        super.show();
+        if (title != null){
+            title.setText(titleSt);
+        }
     }
     @Override
     public void initData() {

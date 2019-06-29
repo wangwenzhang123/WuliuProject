@@ -329,6 +329,40 @@ public class AddCarActivity extends BaseMvpActivity<AddCarPresenter> implements 
             rbBeng.setChecked(true);
             tongLl.setVisibility(View.GONE);
             bangLl.setVisibility(View.VISIBLE);
+            switch (requestBean.getCarType()) {
+                case "B1":
+                    bengQiLl.setVisibility(View.VISIBLE);
+                    bengGuLl.setVisibility(View.GONE);
+                    beng1.setChecked(true);
+                    rbBengQi.setChecked(true);
+                    break;
+                case "B2":
+                    bengQiLl.setVisibility(View.VISIBLE);
+                    bengGuLl.setVisibility(View.GONE);
+                    beng2.setChecked(true);
+                    rbBengQi.setChecked(true);
+                    break;
+                case "B3":
+                    bengQiLl.setVisibility(View.VISIBLE);
+                    bengGuLl.setVisibility(View.GONE);
+                    beng3.setChecked(true);
+                    rbBengQi.setChecked(true);
+                    break;
+                case "B4":
+                    rbBengGu.setChecked(true);
+                    bengQiLl.setVisibility(View.GONE);
+                    bengGuLl.setVisibility(View.VISIBLE);
+                    gu1.setChecked(true);
+
+                    break;
+                case "B5":
+                    rbBengGu.setChecked(true);
+                    bengQiLl.setVisibility(View.GONE);
+                    bengGuLl.setVisibility(View.VISIBLE);
+                    gu2.setChecked(true);
+
+                    break;
+            }
         } else {
             rbTong.setChecked(true);
             tongLl.setVisibility(View.VISIBLE);

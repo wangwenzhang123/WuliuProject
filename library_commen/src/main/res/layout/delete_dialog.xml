@@ -6,6 +6,7 @@
     android:background="@drawable/shape_wihte_8"
     android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/dialog_titla"
         android:textSize="@dimen/dp_15"
         android:textColor="@color/_333333"
         android:text="确认删除吗？"

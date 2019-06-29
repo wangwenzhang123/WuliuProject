@@ -32,7 +32,7 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
     protected void convert(BaseViewHolder helper, FinaceBean item) {
         helper.setText(R.id.transport_carnumber,item.getCarNo());
         helper.setText(R.id.driver_name,item.getDriverName());
-        helper.setText(R.id.order_accept_time,item.getAcceptTime());
+        //helper.setText(R.id.order_accept_time,item.getAcceptTime());
         helper.setText(R.id.distance_text,item.getTotalDistance());
         helper.setText(R.id.car_title,item.getOrderName());
         helper.setText(R.id.address_start,item.getStartPlace());
@@ -51,10 +51,15 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
             helper.setText(R.id.car_type,"砼车| 总货物量"+item.getOrderAmount()+"方");
         }
         if (TextUtils.isEmpty(item.getSignTime())){
+            helper.setText(R.id.order_accept_time,"未签到");
+        }else {
+            helper.setText(R.id.order_accept_time,"签到时间: "+item.getSignTime());
+        }
+        /*if (TextUtils.isEmpty(item.getSignTime())){
             helper.setText(R.id.sign_tv,"未签到");
         }else {
             helper.setText(R.id.sign_tv,"签到时间: "+item.getSignTime());
-        }
+        }*/
         ImageView state=helper.getView(R.id.car_state_iv);
         switch (item.getOrderStatus()){
             case "Z":

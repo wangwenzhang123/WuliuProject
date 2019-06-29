@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -49,7 +50,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
     @BindView(R2.id.finance_order_recycle)
     RecyclerView financeOrderRecycle;
     @BindView(R2.id.check_all)
-    TextView checkAll;
+    RadioButton checkAll;
     @BindView(R2.id.settlement_bt)
     Button settlementBt;
     Unbinder unbinder;
@@ -160,8 +161,10 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
             }
         }
         if (isCheckAll) {
+            checkAll.setChecked(false);
             isCheckAll = false;
         } else {
+            checkAll.setChecked(true);
             isCheckAll = true;
         }
         adapter.notifyDataSetChanged();
