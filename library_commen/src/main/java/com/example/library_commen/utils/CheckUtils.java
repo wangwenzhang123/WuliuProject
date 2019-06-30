@@ -20,6 +20,19 @@ public class CheckUtils {
         }
         return m.matches();
     }
+    public static String getTongName(String type){
+        String name="";
+        if (type.contains("T16")){
+            name="砼车装载16方";
+        }
+        if (type.contains("T18")){
+            name=name+"|砼车装载18方";
+        }
+        if (type.contains("T20")){
+            name=name+"|砼车装载20方";
+        }
+        return name;
+    }
     public static String getBangName(String type){
         String name="";
         switch (type){

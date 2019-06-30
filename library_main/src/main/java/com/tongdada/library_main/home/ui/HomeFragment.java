@@ -29,6 +29,7 @@ import com.tongdada.library_main.home.request.MessageIntentBean;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.order.adapter.OrderAdapter;
 import com.tongdada.library_main.order.ui.OrderListFragment;
+import com.tongdada.library_main.utils.LoginUtils;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -160,12 +161,22 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.iv_home_search)
     public void onIvHomeSearchClicked() {
-        routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY, null);
+        if (LoginUtils.isLogin()){
+            routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY, null);
+        }else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.iv_home_message)
     public void onIvHomeMessageClicked() {
-        routerIntent(ArouterKey.HOME_INFORMMANAGEMENTACTIVITY, null);
+        if (LoginUtils.isLogin()){
+            routerIntent(ArouterKey.HOME_INFORMMANAGEMENTACTIVITY, null);
+        }else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     private List<BannerBean.RowsBean> rowsBeanList = new ArrayList<>();
@@ -188,7 +199,12 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.more_order)
     public void onViewClicked() {
-        routerIntent(ArouterKey.HOME_MOREORDERACTIVITY, null);
+        if (LoginUtils.isLogin()){
+            routerIntent(ArouterKey.HOME_MOREORDERACTIVITY, null);
+        }else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     public static class BannerViewHolder implements MZViewHolder<String> {

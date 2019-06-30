@@ -97,6 +97,8 @@ public class CarDetailActivity extends BaseMvpActivity<AddCarPresenter> implemen
     TextView driverName;
     @BindView(R2.id.select_driver_ll)
     LinearLayout selectDriverLl;
+    private CustomDatePicker mTimerPicker;
+    private boolean isShopTime = false;
     private CarRequestBean requestBean = new CarRequestBean();
     private static final int DRIVINGLICENSE_CODE = 3;
     @Override
@@ -118,7 +120,25 @@ public class CarDetailActivity extends BaseMvpActivity<AddCarPresenter> implemen
             registerRegisterBt.setVisibility(View.GONE);
             upDateUi();
         }
-
+        initTimerPicker();
+    }
+    private void initTimerPicker() {
+        String beginTime = DateFormatUtils.long2Str(System.currentTimeMillis() - 315360000000L, true);
+        String endTime = DateFormatUtils.long2Str(System.currentTimeMillis() + 315360000000L, true);
+        mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
+            @Override
+            public void onTimeSelected(long timestamp) {
+                if (isShopTime) {
+                    etShopTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                } else {
+                    carTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                }
+            }
+        }, beginTime, endTime);
+        mTimerPicker.setCancelable(true);
+        mTimerPicker.setCanShowPreciseTime(true);
+        mTimerPicker.setScrollLoop(true);
+        mTimerPicker.setCanShowAnim(true);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +156,17 @@ public class CarDetailActivity extends BaseMvpActivity<AddCarPresenter> implemen
         finish();
     }
 
+    @OnClick(R2.id.et_shop_time)
+    public void onEtShopTimeClicked() {
+        mTimerPicker.show(etShopTime.getText().toString());
+        isShopTime = true;
+    }
 
+    @OnClick(R2.id.car_time)
+    public void onCarTimeClicked() {
+        mTimerPicker.show(carTime.getText().toString());
+        isShopTime = false;
+    }
     @Override
     public void selectPic(int code) {
         PhotoSelector.builder()

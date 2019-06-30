@@ -24,6 +24,7 @@ import com.tongdada.library_main.finance.adapter.FinaceCompleteAdapter;
 import com.tongdada.library_main.finance.net.respose.FinaceBean;
 import com.tongdada.library_main.finance.presenter.FinanceContract;
 import com.tongdada.library_main.finance.presenter.FinancePresenter;
+import com.tongdada.library_main.utils.LoginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,12 @@ public class FinanceCompleteFragment extends BaseMvpFragment<FinancePresenter> i
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+                if (LoginUtils.isLogin()){
+                    ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,adapter.getData().get(position).getRowId()).navigation(mContext);
+                }else {
+                    ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+                }
                 //routerIntent(ArouterKey.FINANCE_FINACEORDERACTIVITY,null);
-                ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,adapter.getData().get(position).getRowId()).navigation(mContext);
             }
         });
     }

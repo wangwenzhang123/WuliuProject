@@ -1,6 +1,7 @@
 package com.tongdada.library_main.finance.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventUpdateOrderList;
 import com.example.library_commen.model.DriverOrderDetailBean;
+import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.config.BaseUrl;
@@ -113,6 +115,12 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
         distanceText.setText(transportCarBean.getTotalDistance() + "km");
         driverName.setText(transportCarBean.getDriverName());
         driverPhone.setText(transportCarBean.getPsDriver().getDriverMobile());
+        driverPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PhoneCallUtils.call(driverPhone.getText().toString(),mContext);
+            }
+        });
         nowLoading.setText(transportCarBean.getOrderAmount() + "方");
         transportCarnumber.setText(transportCarBean.getCarNo());
         orderRemark.setText(transportCarBean.getOrderRemark());

@@ -6,35 +6,40 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
     <android.support.constraint.ConstraintLayout
-        android:background="@drawable/callqw"
+        android:background="@drawable/car_bg"
         android:layout_width="wrap_content"
         android:paddingTop="@dimen/dp_10"
         android:paddingRight="@dimen/dp_20"
-        android:paddingBottom="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_70"
+
         android:paddingLeft="@dimen/dp_20"
         android:layout_height="wrap_content">
         <TextView
             android:textColor="@color/FFFFFF"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_gravity="left"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
             android:id="@+id/info_title"
             android:text="王神"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:textColor="@color/FFFFFF"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/dp_16"
             app:layout_constraintTop_toBottomOf="@id/info_title"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_10"
             android:id="@+id/info_contan"
             android:text="12345665k"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </android.support.constraint.ConstraintLayout>
    <ImageView
+       android:visibility="gone"
        android:src="@mipmap/car_pic"
        android:layout_gravity="center"
        android:layout_width="@dimen/dp_63"

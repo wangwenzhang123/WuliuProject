@@ -34,6 +34,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.tongdada.library_main.utils.LoginUtils.isLogin;
+
 /**
  * @name JiaobanProject
  * @class describe
@@ -81,7 +83,10 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     View userView;
     @BindView(R2.id.wuliu_view)
     View wuliuView;
+    @BindView(R2.id.denglutai)
+    TextView denglutai;
     private DeleteDialog deleteDialog;
+
     @Override
     public BasePresenter getPresenter() {
         return new BasePresenter();
@@ -100,7 +105,7 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
     @Override
     public void initView() {
         updateUi();
-        deleteDialog=new DeleteDialog(mContext);
+        deleteDialog = new DeleteDialog(mContext);
         deleteDialog.setOnClick(new DeleteDialog.OnClick() {
             @Override
             public void onClick(int position) {
@@ -145,32 +150,61 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.user_info)
     public void onUserInfoClicked() {
-        routerIntent(ArouterKey.USER_USERINFOACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_USERINFOACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
     }
 
     @OnClick(R2.id.change_password)
     public void onChangePasswordClicked() {
-        routerIntent(ArouterKey.USER_CHANGEPASSWORDACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_CHANGEPASSWORDACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.user_manager)
     public void onUserManagerClicked() {
-        routerIntent(ArouterKey.USER_USERMANAGERACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_USERMANAGERACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.message_management)
     public void onMessageManagementClicked() {
-        routerIntent(ArouterKey.USER_MESSAGEACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_MESSAGEACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.messege_m)
     public void onMessegeMClicked() {
-        routerIntent(ArouterKey.USER_INFORMATIONACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_INFORMATIONACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.plant_maintenace)
     public void onViewClicked() {
-        routerIntent(ArouterKey.USER_MAINTENANCELOGICACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_MAINTENANCELOGICACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @Override
@@ -184,6 +218,9 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
                 .apply(requestOptions).into(userIco);
         userName.setText(CommenUtils.getIncetance().getUserBean().getUserName());
         userPhone.setText(CommenUtils.getIncetance().getUserBean().getUserContacts());
+        if (TextUtils.isEmpty(CommenUtils.getIncetance().getUserBean().getId())) {
+            denglutai.setText("登录");
+        }
         if (CommenUtils.LOGIN_TYPE != 0) {
             driverManager.setVisibility(View.GONE);
             plantMaintenace.setVisibility(View.GONE);
@@ -201,18 +238,42 @@ public class UserFragment extends BaseMvpFragment implements UserContract.View {
 
     @OnClick(R2.id.out_login)
     public void onViewOutClicked() {
-       if (deleteDialog != null){
-           deleteDialog.show("确定要退出登录吗?");
-       }
+        if (isLogin()) {
+            if (deleteDialog != null) {
+                deleteDialog.show("确定要退出登录吗?");
+            }
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.car_manager)
     public void onCarManagerClicked() {
-        routerIntent(ArouterKey.USER_CARMANAGERACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_CARMANAGERACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
     @OnClick(R2.id.driver_manager)
     public void onDriverManagerClicked() {
-        routerIntent(ArouterKey.USER_DRIVERMANAGERACTIVITY, null);
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_DRIVERMANAGERACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
+    }
+
+    @OnClick(R2.id.user_ico)
+    public void onViewIconClicked() {
+        if (isLogin()) {
+            routerIntent(ArouterKey.USER_USERINFOACTIVITY, null);
+        } else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_main.MyViewPagerAdapter;
 import com.example.library_main.R;
@@ -22,6 +23,7 @@ import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.finance.presenter.FinancePresenter;
 import com.tongdada.library_main.home.ui.TransportCarFragment;
 import com.tongdada.library_main.order.ui.OrderListFragment;
+import com.tongdada.library_main.utils.LoginUtils;
 import com.tongdada.library_main.utils.TalUtils;
 
 import java.util.ArrayList;
@@ -78,8 +80,8 @@ public class FinanceFragment extends BaseMvpFragment<FinancePresenter> {
 
     @Override
     public void initView() {
-        list.add("已卸货");
-        list.add("已申请核算");
+        list.add("未核算");
+        list.add("核算中");
         list.add("已核算");
         pager.setOffscreenPageLimit(2);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
@@ -163,6 +165,10 @@ public class FinanceFragment extends BaseMvpFragment<FinancePresenter> {
 
     @OnClick(R2.id.iv_order_search)
     public void onViewClicked() {
-        routerIntent(ArouterKey.ORDER_SEARCHFINACEACTIVITY,null);
+        if (LoginUtils.isLogin()){
+            routerIntent(ArouterKey.ORDER_SEARCHFINACEACTIVITY,null);
+        }else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
     }
 }

@@ -37,6 +37,8 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
         helper.setText(R.id.car_title,item.getOrderName());
         helper.setText(R.id.address_start,item.getStartPlace());
         helper.setText(R.id.address_end,item.getDestinationPlace());
+        helper.setText(R.id.order_price,"￥"+item.getOrderPrice());
+        helper.addOnClickListener(R.id.call_phone);
         ImageView imageView=helper.getView(R.id.user_pic_iv);
         RequestOptions requestOptions=new RequestOptions()
                 .error(R.mipmap.user_defut)
@@ -63,16 +65,22 @@ public class TransportCarrAdapter extends BaseAdapter<FinaceBean> {
         ImageView state=helper.getView(R.id.car_state_iv);
         switch (item.getOrderStatus()){
             case "Z":
-                state.setImageResource(R.mipmap.ongoing);
+                state.setImageResource(R.mipmap.yizhuanghuo);
                 break;
             case "A":
-                state.setImageResource(R.mipmap.car_accept);
+                state.setImageResource(R.mipmap.yijiedan);
                 break;
             case "X":
+                state.setImageResource(R.mipmap.yixiehuo);
+                break;
+            case "R":
+                state.setImageResource(R.mipmap.daiqueren);
+                break;
+            case "H":
                 state.setImageResource(R.mipmap.daihesuan);
                 break;
             case "S":
-                state.setImageResource(R.mipmap.accounting);
+                state.setImageResource(R.mipmap.yihesuan);
                 break;
         }
     }

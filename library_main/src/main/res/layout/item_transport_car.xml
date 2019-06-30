@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/FFFFFF"
@@ -55,6 +56,17 @@
         app:layout_constraintTop_toBottomOf="@id/car_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/order_price"
+        android:textColor="@color/_DE3030"
+        app:layout_constraintTop_toBottomOf="@+id/car_state_iv"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/dp_80"
+        android:text="￥1200"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:textSize="@dimen/dp_12"
         android:id="@+id/sign_tv"
@@ -85,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
-        android:visibility="gone"
+        android:id="@+id/call_phone"
         android:layout_marginRight="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_19"
         app:layout_constraintRight_toRightOf="parent"

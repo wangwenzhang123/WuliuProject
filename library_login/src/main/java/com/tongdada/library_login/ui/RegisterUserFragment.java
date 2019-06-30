@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.library_commen.model.DriverRequest;
@@ -72,6 +75,46 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
     private static final int IVBUSINESSLICENSE_CODE = 3;
     @BindView(R2.id.et_driver_age)
     EditText etDriverAge;
+    @BindView(R2.id.rb_tong)
+    RadioButton rbTong;
+    @BindView(R2.id.rb_beng)
+    RadioButton rbBeng;
+    @BindView(R2.id.rg_16)
+    RadioButton rg16;
+    @BindView(R2.id.rg_18)
+    RadioButton rg18;
+    @BindView(R2.id.rg_20)
+    RadioButton rg20;
+    @BindView(R2.id.rg_type)
+    RadioGroup rgType;
+    @BindView(R2.id.tong_ll)
+    FrameLayout tongLl;
+    @BindView(R2.id.rb_beng_qi)
+    RadioButton rbBengQi;
+    @BindView(R2.id.rb_beng_gu)
+    RadioButton rbBengGu;
+    @BindView(R2.id.beng_carType_ll)
+    LinearLayout bengCarTypeLl;
+    @BindView(R2.id.beng_1)
+    RadioButton beng1;
+    @BindView(R2.id.beng_2)
+    RadioButton beng2;
+    @BindView(R2.id.beng_3)
+    RadioButton beng3;
+    @BindView(R2.id.beng_type)
+    RadioGroup bengType;
+    @BindView(R2.id.beng_qi_ll)
+    LinearLayout bengQiLl;
+    @BindView(R2.id.gu_1)
+    RadioButton gu1;
+    @BindView(R2.id.gu_2)
+    RadioButton gu2;
+    @BindView(R2.id.beng_gu_type)
+    RadioGroup bengGuType;
+    @BindView(R2.id.beng_gu_ll)
+    LinearLayout bengGuLl;
+    @BindView(R2.id.bang_ll)
+    LinearLayout bangLl;
     private DriverRequest requestRegisterBean = new DriverRequest();
 
     @Override
@@ -175,7 +218,7 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
         String contactPhone = etContactPhone.getText().toString().trim();
         String address = etAddress.getText().toString().trim();
         String registeredCapital = etRegisteredCapital.getText().toString().trim();
-        String age=etDriverAge.getText().toString().trim();
+        String age = etDriverAge.getText().toString().trim();
         if (TextUtils.isEmpty(contact)) {
             showToast("请输入联系人！");
             return;
@@ -208,11 +251,142 @@ public class RegisterUserFragment extends BaseMvpFragment<RegisterPresenter> imp
             showToast("请输入正确的手机号！");
             return;
         }
+        if (rbTong.isChecked()) {
+            getCheckTong();
+        } else {
+            getCheckBang();
+        }
         requestRegisterBean.setDriverName(contact);
         requestRegisterBean.setDriverMobile(contactPhone);
-        requestRegisterBean.setDriverIdNo(registeredCapital);
+        requestRegisterBean.setCarNo(registeredCapital);
         requestRegisterBean.setDriverAddress(address);
         requestRegisterBean.setDriveringAge(age);
         presenter.registerUser(requestRegisterBean);
+    }
+
+    @OnClick(R2.id.rb_tong)
+    public void onRbTongClicked() {
+        tongLl.setVisibility(View.VISIBLE);
+        bangLl.setVisibility(View.GONE);
+    }
+
+    @OnClick(R2.id.rb_beng)
+    public void onRbBengClicked() {
+        tongLl.setVisibility(View.GONE);
+        bangLl.setVisibility(View.VISIBLE);
+    }
+    private void getCheckTong() {
+        String caType = null;
+        String load=null;
+        if (rg16.isChecked()) {
+            caType = "T16";
+            load="16";
+        }
+        if (rg18.isChecked()) {
+            caType ="T18";
+            load="18";
+        }
+        if (rg20.isChecked()) {
+            caType = "T20";
+            load="20";
+        }
+        requestRegisterBean.setCarLoad(load);
+        requestRegisterBean.setCarType(caType);
+    }
+    private void getCheckBang() {
+        if (rbBengQi.isChecked()) {
+            int id = bengType.getCheckedRadioButtonId();
+            if (id == R.id.beng_1) {
+                requestRegisterBean.setCarType("B1");
+            } else if (id == R.id.beng_2) {
+                requestRegisterBean.setCarType("B2");
+            } else {
+                requestRegisterBean.setCarType("B3");
+            }
+        } else {
+            int id = bengGuType.getCheckedRadioButtonId();
+            if (id == R.id.gu_1) {
+                requestRegisterBean.setCarType("B4");
+            } else {
+                requestRegisterBean.setCarType("B5");
+            }
+        }
+        requestRegisterBean.setCarType("");
+    }
+    @OnClick(R2.id.rg_16)
+    public void onRg16Clicked() {
+
+    }
+
+    @OnClick(R2.id.rg_18)
+    public void onRg18Clicked() {
+    }
+
+    @OnClick(R2.id.rg_20)
+    public void onRg20Clicked() {
+    }
+
+    @OnClick(R2.id.rg_type)
+    public void onRgTypeClicked() {
+    }
+
+    @OnClick(R2.id.tong_ll)
+    public void onTongLlClicked() {
+    }
+    @OnClick(R2.id.rb_beng_qi)
+    public void onRbBengQiClicked() {
+        bengQiLl.setVisibility(View.VISIBLE);
+        bengGuLl.setVisibility(View.GONE);
+    }
+
+    @OnClick(R2.id.rb_beng_gu)
+    public void onRbBengGuClicked() {
+        bengQiLl.setVisibility(View.GONE);
+        bengGuLl.setVisibility(View.VISIBLE);
+    }
+
+
+    @OnClick(R2.id.beng_carType_ll)
+    public void onBengCarTypeLlClicked() {
+    }
+
+    @OnClick(R2.id.beng_1)
+    public void onBeng1Clicked() {
+    }
+
+    @OnClick(R2.id.beng_2)
+    public void onBeng2Clicked() {
+    }
+
+    @OnClick(R2.id.beng_3)
+    public void onBeng3Clicked() {
+    }
+
+    @OnClick(R2.id.beng_type)
+    public void onBengTypeClicked() {
+    }
+
+    @OnClick(R2.id.beng_qi_ll)
+    public void onBengQiLlClicked() {
+    }
+
+    @OnClick(R2.id.gu_1)
+    public void onGu1Clicked() {
+    }
+
+    @OnClick(R2.id.gu_2)
+    public void onGu2Clicked() {
+    }
+
+    @OnClick(R2.id.beng_gu_type)
+    public void onBengGuTypeClicked() {
+    }
+
+    @OnClick(R2.id.beng_gu_ll)
+    public void onBengGuLlClicked() {
+    }
+
+    @OnClick(R2.id.bang_ll)
+    public void onBangLlClicked() {
     }
 }

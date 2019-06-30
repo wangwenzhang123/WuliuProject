@@ -105,6 +105,7 @@ public class DriverManagerActivity extends BaseMvpActivity<DriverManagerPresente
 
     @OnClick(R2.id.register_back)
     public void onRegisterBackClicked() {
+        finish();
     }
     @Override
     protected void onDestroy() {

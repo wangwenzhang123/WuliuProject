@@ -66,7 +66,8 @@ public class SplashActivity extends BaseActivity {
                 }
                 String user=SharedPreferencesUtil.getInstance().getString(ShareKey.USER_BEAN,null);
                 if (TextUtils.isEmpty(user)){
-                    ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+                    CommenUtils.getIncetance().setUserBean(new UserBean());
+                    ARouter.getInstance().build(ArouterKey.MAIN_MAINACTIVITY).navigation(mContext);
                 }else {
                     UserBean userBean=new Gson().fromJson(user,UserBean.class);
                     CommenUtils.getIncetance().setUserBean(userBean);

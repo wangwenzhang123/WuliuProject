@@ -532,6 +532,7 @@
 
             </View>
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_44">
@@ -564,6 +565,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="@dimen/dp_16"

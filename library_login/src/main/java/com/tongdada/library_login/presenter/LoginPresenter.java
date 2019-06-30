@@ -3,12 +3,15 @@ package com.tongdada.library_login.presenter;
 import android.text.TextUtils;
 
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.event.EventMainFinishBean;
 import com.example.library_commen.utils.CommenUtils;
 import com.example.library_commen.model.UserBean;
 import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.base.net.client.KRetrofitFactory;
 import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.library_login.net.LoginApi;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.reactivex.functions.Consumer;
 
@@ -41,6 +44,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.View> implements 
                 .subscribe(new Consumer<BaseAppEntity<UserBean>>() {
                     @Override
                     public void accept(BaseAppEntity<UserBean> objectBaseAppEntity) throws Exception {
+                        EventBus.getDefault().post(new EventMainFinishBean());
                         CommenUtils.getIncetance().setUserBean(objectBaseAppEntity.getContent());
                         getView().routerIntent(ArouterKey.MAIN_MAINACTIVITY,null);
                         getView().finishActivity();

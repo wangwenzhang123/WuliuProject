@@ -44,7 +44,7 @@ public class OrderAdapter extends BaseAdapter<OrderBean> {
         ImageView imageView=helper.getView(R.id.order_iv);
         ImageView state=helper.getView(R.id.order_state_iv);
         if (item.getCarType().contains("B")){
-            helper.setText(R.id.order_cart,"泵车| 总货物量"+ item.getOrderAmount()+"|剩余"+item.getLeftAmount()+"方");
+            helper.setText(R.id.order_cart,CheckUtils.getBangName(item.getCarType())+"| 总货物量"+ item.getOrderAmount()+"|剩余"+item.getLeftAmount()+"方");
         }else {
             helper.setText(R.id.order_cart,"砼车| 总货物量"+item.getOrderAmount()+"|剩余"+item.getLeftAmount()+"方");
         }

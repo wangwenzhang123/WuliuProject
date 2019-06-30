@@ -62,6 +62,15 @@ public class DriverOrderDetailBean {
     private String updateUserID;
     private String loadLicense;
     private String unloadLicense;
+    private String signTime;
+
+    public String getSignTime() {
+        return signTime;
+    }
+
+    public void setSignTime(String signTime) {
+        this.signTime = signTime;
+    }
 
     public String getLoadLicense() {
         return loadLicense;

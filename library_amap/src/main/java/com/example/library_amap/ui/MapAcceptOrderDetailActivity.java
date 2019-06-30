@@ -140,6 +140,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     TextView platformPhoneTv;
     @BindView(R2.id.order_phone_tv)
     TextView orderPhoneTv;
+    @BindView(R2.id.order_price)
+    TextView orderPrice;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private AcceptCarAdapter adapter;
@@ -351,18 +353,16 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         carType2.setText(orderDetail.getCarType());
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
         platformPhoneTv.setText(SettingString.PHONE);
+        orderPrice.setText(orderDetail.getPerPrice());
         orderPhoneTv.setText(orderDetail.getOrderPhone());
         if (orderDetail.getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
             carType1.setText("砼车");
-            carType2.setText(orderDetail.getCarType());
+            carType2.setText(CheckUtils.getTongName(orderDetail.getCarType()));
         }
         orderremark.setText(orderDetail.getOrderRemark());
-       /* aMap.addMarker(new MarkerOptions().position(new LatLng(31.985562554090762, 118.82025068383825))
-                .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
-                .anchor(0.5f, 0.5f));*/
         start = new LatLonPoint(Double.valueOf(orderBean.getStartLatitude()), Double.valueOf(orderBean.getStartLongitude()));
         end = new LatLonPoint(Double.valueOf(orderBean.getDstLatitude()), Double.valueOf(orderBean.getDstLongitude()));
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(end.getLatitude(), end.getLongitude()), 10));
@@ -452,5 +452,14 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         bundle.putString(IntentKey.ORDER_AMOUNT, orderBean.getLeftAmount());
         bundle.putString(IntentKey.CAR_TYPE, orderBean.getCarType());
         routerIntent(ArouterKey.HONE_SELECTCARACTIVITY, bundle);
+    }
+    @OnClick(R2.id.platform_phone_tv)
+    public void onPlatformPhoneTvClicked() {
+        PhoneCallUtils.call(platformPhoneTv.getText().toString(),this);
+    }
+
+    @OnClick(R2.id.order_phone_tv)
+    public void onOrderPhoneTvClicked() {
+        PhoneCallUtils.call(orderPhoneTv.getText().toString(),this);
     }
 }

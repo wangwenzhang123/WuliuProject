@@ -19,6 +19,34 @@ public class DriverRequest implements Serializable{
     private String companyId="";
     private String companyName="";
     private String driAge="";
+    private String carNo="";
+    private String carType="";
+    private String carLoad="";
+
+    public String getCarNo() {
+        return carNo;
+    }
+
+    public void setCarNo(String carNo) {
+        this.carNo = carNo;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public String getCarLoad() {
+        return carLoad;
+    }
+
+    public void setCarLoad(String carLoad) {
+        this.carLoad = carLoad;
+    }
+
     /**
      * createTime : {"date":3,"day":1,"hours":21,"minutes":59,"month":5,"nanos":0,"seconds":34,"time":1559570374000,"timezoneOffset":-480,"year":119}
      * createUserID :

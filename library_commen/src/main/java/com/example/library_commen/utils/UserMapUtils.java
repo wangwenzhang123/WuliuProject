@@ -109,6 +109,9 @@ public class UserMapUtils {
         map.put("psDrivers.delFlag",requestRegisterBean.getDelFlag());
         map.put("psDrivers.deptId",requestRegisterBean.getDeptId());
         map.put("psDrivers.id",requestRegisterBean.getId());
+        map.put("psCars.carNo",requestRegisterBean.getCarNo());
+        map.put("psCars.carType",requestRegisterBean.getCarType());
+        map.put("psCars.carLoad",requestRegisterBean.getCarLoad());
         map.put("psDrivers.updateTime",new Gson().toJson(requestRegisterBean.getUpdateTime()));
         map.put("psDrivers.updateUserID",requestRegisterBean.getUpdateUserID());
         return map;

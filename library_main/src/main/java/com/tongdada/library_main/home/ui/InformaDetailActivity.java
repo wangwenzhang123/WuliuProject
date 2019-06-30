@@ -1,6 +1,7 @@
 package com.tongdada.library_main.home.ui;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -59,7 +60,7 @@ public class InformaDetailActivity extends BaseActivity {
         MessageIntentBean messageIntentBean= (MessageIntentBean) getIntent().getSerializableExtra(IntentKey.MESSAGE_BEAN);
         if (messageIntentBean != null){
             messageTitle.setText(messageIntentBean.getTitle());
-            messageConten.setText(messageIntentBean.getConten());
+            messageConten.setText(Html.fromHtml(messageIntentBean.getConten()));
             RequestOptions requestOptions = new RequestOptions()
                     .error(R.mipmap.banner_place)
                     .centerCrop()

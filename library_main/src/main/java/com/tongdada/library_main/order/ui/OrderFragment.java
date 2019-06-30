@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_main.MyViewPagerAdapter;
 import com.example.library_main.R;
@@ -21,6 +22,7 @@ import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
 import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.home.ui.TransportCarFragment;
+import com.tongdada.library_main.utils.LoginUtils;
 import com.tongdada.library_main.utils.TalUtils;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.jessyan.autosize.utils.LogUtils;
 
 /**
  * @name JiaobanProject
@@ -81,15 +84,15 @@ public class OrderFragment extends BaseMvpFragment{
     public void initView() {
         list.add("总订单");
         list.add("已接单");
-        list.add("已装货");
+        //list.add("已装货");
        /* list.add("已核算");*/
         pager.setOffscreenPageLimit(3);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
                 fragments.add(new LogicOrderListFragment());
-                fragments.add(new TransportCarFragment("A"));
-                fragments.add(new TransportCarFragment("Z"));
+                fragments.add(new TransportCarFragment(""));
+                //fragments.add(new TransportCarFragment("Z"));
                 //fragments.add(new TransportCarFragment("S"));
                 e.onNext(fragments);
             }
@@ -165,7 +168,12 @@ public class OrderFragment extends BaseMvpFragment{
 
     @OnClick(R2.id.iv_order_search)
     public void onViewClicked() {
-        routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY,null);
+        if (LoginUtils.isLogin()){
+            routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY,null);
+        }else {
+            ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
+        }
+
     }
 
 }

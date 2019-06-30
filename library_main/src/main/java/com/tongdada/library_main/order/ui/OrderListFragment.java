@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
@@ -26,6 +27,7 @@ import com.tongdada.library_main.order.adapter.OrderAdapter;
 import com.tongdada.library_main.order.presenter.OrderListContract;
 import com.tongdada.library_main.order.presenter.OrderListPresenter;
 import com.example.library_commen.model.OrderBean;
+import com.tongdada.library_main.utils.LoginUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,13 +82,18 @@ public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListCont
         getRecyclerAdapter().setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
-                Bundle bundle=new Bundle();
-                bundle.putString(IntentKey.ORDER_ID,getRecyclerAdapter().getData().get(position).getId());
-                if (type .equals("F")){
-                    routerIntent(ArouterKey.MAP_MAPACCEPTORDERDETAILACTIVITY,bundle);
+                if (LoginUtils.isLogin()){
+                    Bundle bundle=new Bundle();
+                    bundle.putString(IntentKey.ORDER_ID,getRecyclerAdapter().getData().get(position).getId());
+                    if (type .equals("F")){
+                        routerIntent(ArouterKey.MAP_MAPACCEPTORDERDETAILACTIVITY,bundle);
+                    }else {
+                        routerIntent(ArouterKey.ORDER_ORDERDETAILACTIVITY,bundle);
+                    }
                 }else {
-                    routerIntent(ArouterKey.ORDER_ORDERDETAILACTIVITY,bundle);
+                    ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
                 }
+
 
             }
         });

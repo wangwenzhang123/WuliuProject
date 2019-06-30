@@ -33,24 +33,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.amap.api.maps.MapView
+            android:id="@+id/order_detail_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.amap.api.maps.MapView>
         <android.support.v4.widget.NestedScrollView
+            app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="200dp"
+            android:minHeight="@dimen/dp_50"
             android:background="@color/FFFFFF"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <com.amap.api.maps.MapView
-                    android:id="@+id/order_detail_map"
-                    android:layout_width="match_parent"
-                    android:layout_height="253dp">
 
-                </com.amap.api.maps.MapView>
                 <LinearLayout
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginRight="@dimen/dp_16"
@@ -166,6 +171,7 @@
 
                 </View>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginRight="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_8"
@@ -186,6 +192,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <View
+                    android:visibility="gone"
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginRight="@dimen/dp_16"
                     android:background="@color/_E0E0E0"
@@ -235,6 +242,63 @@
                     <TextView
                         android:id="@+id/unit_price"
                         android:text="100元（单位 方/公里）"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/total_price"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/_DE3030"
+                        android:id="@+id/total_price"
+                        android:text="100元（单位 方/公里）"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:background="@color/_E0E0E0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp">
+
+                </View>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44">
+                    <TextView
+                        android:text="@string/qiandao_time"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/qiandao"
+                        android:text=""
                         android:gravity="right"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -303,6 +367,7 @@
                     android:id="@+id/unload_fl"
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_30"
+                    android:layout_marginBottom="@dimen/dp_22"
                     android:orientation="horizontal"
                     android:layout_width="@dimen/dp_168"
                     android:layout_height="@dimen/dp_88">
@@ -340,7 +405,7 @@
                 <LinearLayout
                     android:id="@+id/bottom_ll"
                     android:layout_marginBottom="@dimen/dp_60"
-                    android:layout_marginTop="@dimen/dp_55"
+                    android:layout_marginTop="@dimen/dp_33"
                     android:layout_marginLeft="@dimen/dp_25"
                     android:layout_marginRight="@dimen/dp_25"
                     android:orientation="horizontal"
@@ -370,5 +435,5 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

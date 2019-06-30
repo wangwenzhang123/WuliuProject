@@ -12,11 +12,16 @@ import android.widget.RadioGroup;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.event.EventMainFinishBean;
 import com.tongdada.library_main.finance.ui.FinanceFragment;
 import com.tongdada.library_main.home.ui.HomeFragment;
 import com.tongdada.library_main.order.ui.OrderFragment;
 import com.tongdada.library_main.statistics.ui.StatisticsFragment;
 import com.tongdada.library_main.user.ui.UserFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getView());
+        EventBus.getDefault().register(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//因为不是所有的系统都可以设置颜色的，在4.4以下就不可以。。有的说4.1，所以在设置的时候要检查一下系统版本是否是4.1以上
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -64,7 +70,10 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     public void initLinsenterner() {
 
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventFinish(EventMainFinishBean eventMainFinishBean){
+        finish();
+    }
 
     public void getData() {
         fragments.add(new OrderFragment());

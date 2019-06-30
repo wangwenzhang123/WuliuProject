@@ -1,6 +1,7 @@
 package com.example.library_amap.ui;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -24,6 +25,14 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DrivePath;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 import com.example.library_amap.R;
 import com.example.library_amap.R2;
 import com.example.library_amap.model.MarkerBean;
@@ -38,6 +47,7 @@ import com.example.library_commen.presenter.OrderDetailContract;
 import com.example.library_commen.presenter.OrderPresenter;
 import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.PhoneCallUtils;
+import com.example.overlay.DrivingRouteOverlay;
 import com.example.util.PopwindowUtils;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -62,7 +72,7 @@ import static android.support.design.widget.BottomSheetBehavior.STATE_EXPANDED;
  * Created by wangshen on 2019/5/19.
  */
 @Route(path = ArouterKey.MAP_MAPORDERDETAILACTIVITY)
-public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> implements OrderDetailContract.View, LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener {
+public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> implements OrderDetailContract.View, LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, RouteSearch.OnRouteSearchListener {
 
     @BindView(R2.id.search_et)
     TextView searchEt;
@@ -131,12 +141,15 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     TextView platformPhoneTv;
     @BindView(R2.id.order_phone_tv)
     TextView orderPhoneTv;
+    @BindView(R2.id.order_price)
+    TextView orderPrice;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private OrderDetailCarAdapter adapter;
     private String id;
     private OrderBean orderBean;
-
+    private RouteSearch routeSearch;
+    private LatLonPoint start, end;
     @Override
     public int getView() {
         return R.layout.activity_map_orderdetail;
@@ -181,7 +194,8 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         adapter = new OrderDetailCarAdapter(R.layout.item_order_car, new ArrayList<DetailCarListBean>());
         recycleCar.setLayoutManager(new GridLayoutManager(mContext, 4));
         recycleCar.setAdapter(adapter);
-
+        routeSearch = new RouteSearch(this);
+        routeSearch.setRouteSearchListener(this);
     }
 
     @Override
@@ -318,6 +332,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         orderName.setText(orderDetail.getOrderName());
         orderPublishTime.setText(orderDetail.getPublishTime());
         platformPhoneTv.setText(SettingString.PHONE);
+        orderPrice.setText(orderDetail.getPerPrice());
         orderPhoneTv.setText(orderDetail.getOrderPhone());
         leftAmount.setText(orderDetail.getLeftAmount() + "方");
         if (orderDetail.getCarType().contains("B")) {
@@ -325,13 +340,16 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
         } else {
             carType1.setText("砼车");
-            carType2.setText(orderDetail.getCarType());
+            carType2.setText(CheckUtils.getTongName(orderDetail.getCarType()));
         }
+        start = new LatLonPoint(Double.valueOf(orderBean.getStartLatitude()), Double.valueOf(orderBean.getStartLongitude()));
+        end = new LatLonPoint(Double.valueOf(orderBean.getDstLatitude()), Double.valueOf(orderBean.getDstLongitude()));
         orderremark.setText(orderDetail.getOrderRemark());
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())), 10));
         aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())))
                 .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
                 .anchor(0.5f, 0.5f));
+        queryRoute();
     }
 
     private Bitmap getDestination() {
@@ -410,5 +428,52 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @OnClick(R2.id.accpet_detail)
     public void onViewAcceptClicked() {
         ARouter.getInstance().build(ArouterKey.ORDER_ACCEPTORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID, orderBean.getId()).navigation(mContext);
+    }
+    public void queryRoute() {
+        if (start != null && end != null) {
+            RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(start, end);
+            RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DRIVING_MULTI_STRATEGY_FASTEST_SHORTEST_AVOID_CONGESTION, null, null, "");
+            routeSearch.calculateDriveRouteAsyn(query);
+        }
+    }
+    @Override
+    public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int errorCode) {
+        if (errorCode == AMapException.CODE_AMAP_SUCCESS) {
+            DrivePath drivePath = driveRouteResult.getPaths().get(0);
+            DrivingRouteOverlay drivingRouteOverlay = new DrivingRouteOverlay(
+                    mContext, aMap, drivePath,
+                    driveRouteResult.getStartPos(),
+                    driveRouteResult.getTargetPos(), null);
+            drivingRouteOverlay.setNodeIconVisibility(false);//设置节点marker是否显示
+            drivingRouteOverlay.setIsColorfulline(true);//是否用颜色展示交通拥堵情况，默认true
+            drivingRouteOverlay.setoneColor(Color.parseColor("#80CAB5"));
+            drivingRouteOverlay.removeFromMap();
+            drivingRouteOverlay.addToMap();
+            drivingRouteOverlay.zoomToSpan();
+        }
+    }
+
+    @Override
+    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
+    }
+    @OnClick(R2.id.platform_phone_tv)
+    public void onPlatformPhoneTvClicked() {
+        PhoneCallUtils.call(platformPhoneTv.getText().toString(),this);
+    }
+
+    @OnClick(R2.id.order_phone_tv)
+    public void onOrderPhoneTvClicked() {
+        PhoneCallUtils.call(orderPhoneTv.getText().toString(),this);
     }
 }

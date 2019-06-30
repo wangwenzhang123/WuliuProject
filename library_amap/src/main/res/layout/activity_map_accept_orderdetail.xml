@@ -178,7 +178,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="@dimen/dp_12"
                         android:layout_marginLeft="@dimen/dp_8"
-                        android:src="@mipmap/distance"
+                        android:src="@mipmap/time"
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20" />
                     <TextView
@@ -189,12 +189,12 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         app:layout_constraintTop_toBottomOf="@id/end_view"
                         app:layout_constraintLeft_toRightOf="@id/issueorder_end_iv"
-                        android:text="@string/route"
+                        android:text="@string/order_start_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:textColor="@color/_333333"
-                        android:id="@+id/order_totalDistance"
+                        android:id="@+id/order_publishTime"
 
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_distance_iv"
@@ -368,13 +368,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44">
                         <TextView
-                            android:text="@string/order_start_time"
+                            android:text="@string/zuiduan_juli"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:textColor="@color/_333333"
-                            android:id="@+id/order_publishTime"
+                            android:id="@+id/order_totalDistance"
                             android:text=""
                             android:gravity="right"
                             android:layout_weight="1"
@@ -494,6 +494,40 @@
                             android:text=""
                             android:gravity="right"
                             android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:background="@color/_E0E0E0"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp">
+
+                    </View>
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44">
+                        <TextView
+                            android:text="订单单价"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@color/_333333"
+                            android:id="@+id/order_price"
+                            android:text=""
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="元/方/公里"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />

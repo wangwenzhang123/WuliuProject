@@ -3,6 +3,7 @@ package com.example.library_amap.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,14 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DrivePath;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -39,6 +48,7 @@ import com.example.library_commen.event.EventUpdateOrderList;
 import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.utils.PhoneCallUtils;
+import com.example.overlay.DrivingRouteOverlay;
 import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -62,7 +72,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by wangshen on 2019/5/19.
  */
 @Route(path = ArouterKey.MAP_MAPCARDETAILACTIVITY)
-public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter> implements LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, MapCarDetailContract.View {
+public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter> implements LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, MapCarDetailContract.View, RouteSearch.OnRouteSearchListener {
 
 
     @BindView(R2.id.search_et)
@@ -104,11 +114,17 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     FrameLayout unloadFl;
     @BindView(R2.id.cancel_tv)
     TextView cancelTv;
+    @BindView(R2.id.total_price)
+    TextView totalPrice;
+    @BindView(R2.id.qiandao)
+    TextView qiandao;
     private AMap aMap;
     private String id;
     private static final int LOADING_CODE = 1;
     private static final int UNLOADING_CODE = 2;
     private int state = 0;
+    private RouteSearch routeSearch;
+    private LatLonPoint start, end;
 
     @Override
     public int getView() {
@@ -142,6 +158,8 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         });
         id = getIntent().getStringExtra(IntentKey.MAP_ORDERID);
         presenter.getDetailOrderById(id);
+        routeSearch = new RouteSearch(this);
+        routeSearch.setRouteSearchListener(this);
     }
 
     @Override
@@ -234,18 +252,24 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     public void onViewBackClicked() {
         finish();
     }
-
+    private DriverOrderDetailBean driverOrderDetailBean;
     @Override
     public void setDetailOrder(final DriverOrderDetailBean detailOrder) {
+        this.driverOrderDetailBean=detailOrder;
         driverName.setText(detailOrder.getDriverName());
         driverPhone.setText(detailOrder.getPsDriver().getDriverMobile());
         transportCarnumber.setText(detailOrder.getCarNo());
-        unitPrice.setText(detailOrder.getPsTotalOrder().getPerPrice()+"元（单位 方/公里）");
+        totalPrice.setText(detailOrder.getOrderPrice()+"元");
+        if (TextUtils.isEmpty(detailOrder.getSignTime())){
+            qiandao.setText("未签到");
+        }else {
+            qiandao.setText(detailOrder.getSignTime());
+        }
+        unitPrice.setText(detailOrder.getPsTotalOrder().getPerPrice() + "元（单位 方/公里）");
         nowLoading.setText(detailOrder.getOrderAmount() + "方");
-        aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude())))
-                .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
-                .anchor(0.5f, 0.5f));
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude())), 10));
+        start = new LatLonPoint(Double.valueOf(detailOrder.getPsTotalOrder().getStartLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getStartLongitude()));
+        end = new LatLonPoint(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude()));
+        queryRoute();
         Observable.create(new ObservableOnSubscribe<MarkerBean>() {
             @Override
             public void subscribe(ObservableEmitter<MarkerBean> e) throws Exception {
@@ -282,7 +306,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
             llLoadingPic.setFocusable(false);
             cancelTv.setVisibility(View.GONE);
             unloadAccomplishTv.setText("卸货完成");
-            state=2;
+            state = 2;
         } else {
             state = 1;
             unloadTv.setVisibility(View.GONE);
@@ -295,6 +319,14 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
             llUnloadPic.setFocusable(false);
         }
 
+    }
+
+    public void queryRoute() {
+        if (start != null && end != null) {
+            RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(start, end);
+            RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DRIVING_MULTI_STRATEGY_FASTEST_SHORTEST_AVOID_CONGESTION, null, null, "");
+            routeSearch.calculateDriveRouteAsyn(query);
+        }
     }
 
     @Override
@@ -385,18 +417,18 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     public void onUnloadAccomplishTvClicked() {
         switch (state) {
             case 1:
-                if (TextUtils.isEmpty(loadLicense)){
+                if (TextUtils.isEmpty(loadLicense)) {
                     showToast("请先上传装货凭据");
                     return;
                 }
-                presenter.loadOrder(id,loadLicense);
+                presenter.loadOrder(id, loadLicense);
                 break;
             case 2:
-                if (TextUtils.isEmpty(unloadLicense)){
+                if (TextUtils.isEmpty(unloadLicense)) {
                     showToast("请先上传卸货凭据");
                     return;
                 }
-                presenter.unloadOrder(id,unloadLicense);
+                presenter.unloadOrder(id, unloadLicense);
                 break;
         }
     }
@@ -414,5 +446,39 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     @OnClick(R2.id.cancel_tv)
     public void onViewClicked() {
         presenter.cancel(id);
+    }
+
+    @Override
+    public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int errorCode) {
+        if (errorCode == AMapException.CODE_AMAP_SUCCESS) {
+            DrivePath drivePath = driveRouteResult.getPaths().get(0);
+            DrivingRouteOverlay drivingRouteOverlay = new DrivingRouteOverlay(
+                    mContext, aMap, drivePath,
+                    driveRouteResult.getStartPos(),
+                    driveRouteResult.getTargetPos(), null);
+            drivingRouteOverlay.setNodeIconVisibility(false);//设置节点marker是否显示
+            drivingRouteOverlay.setIsColorfulline(true);//是否用颜色展示交通拥堵情况，默认true
+            drivingRouteOverlay.setoneColor(Color.parseColor("#80CAB5"));
+            drivingRouteOverlay.removeFromMap();
+            drivingRouteOverlay.addToMap();
+            drivingRouteOverlay.zoomToSpan();
+        }
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(driverOrderDetailBean.getPsCar().getCarLatitude()), Double.valueOf(driverOrderDetailBean.getPsCar().getCarLongitude())), 10));
+
+    }
+
+    @Override
+    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
     }
 }

@@ -3,6 +3,7 @@ package com.tongdada.library_main.widget;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -11,6 +12,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Scroller;
 
 /**
@@ -159,7 +161,22 @@ public class SlideRecyclerView extends RecyclerView {
         }
         return super.onTouchEvent(e);
     }
+    private boolean interceptTouch=true;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // interceptTouch是自定义属性控制是否拦截事件
+        if (interceptTouch){
+            ViewParent parent =this;
+            // 循环查找ViewPager, 请求ViewPager不拦截触摸事件
+            while(!((parent = parent.getParent()) instanceof ViewPager)){
+                // nop
+            }
+            parent.requestDisallowInterceptTouchEvent(true);
+        }
 
+        return super.dispatchTouchEvent(ev);
+
+    }
     private void releaseVelocity() {
         if (mVelocityTracker != null) {
             mVelocityTracker.clear();
