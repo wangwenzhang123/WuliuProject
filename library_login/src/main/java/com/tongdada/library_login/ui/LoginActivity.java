@@ -75,6 +75,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
+    public void finishActivity() {
+        finish();
+    }
+
+    @Override
     public void getData() {
 
     }

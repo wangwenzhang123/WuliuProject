@@ -28,6 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.tongdada.library_main.utils.LoginUtils.isLogin;
+
 @Route(path = ArouterKey.MAIN_MAINACTIVITY)
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -101,6 +104,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         } else if (i == R.id.main_rb_user) {
             currentFragment = 4;
+        }
+
+        if (!isLogin()) {
+           if (currentFragment == 1 || currentFragment == 0 || currentFragment == 3 || currentFragment == 4){
+               ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(this);
+           }
+           return;
         }
         mainVp.setCurrentItem(currentFragment);
     }
