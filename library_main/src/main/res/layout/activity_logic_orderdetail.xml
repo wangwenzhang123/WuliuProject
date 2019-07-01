@@ -314,10 +314,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:textColor="@android:color/holo_red_light"
                     android:id="@+id/order_price"
                     android:text="1224511054"
                     android:gravity="right"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/unit_price"
+                    android:text="(单位 方/公里)"
+                    android:gravity="right"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

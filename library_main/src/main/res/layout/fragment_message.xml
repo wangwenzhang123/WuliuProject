@@ -5,6 +5,7 @@
     android:background="@color/FFFFFF"
     android:layout_height="match_parent">
     <com.tongdada.library_main.widget.SlideRecyclerView
+        android:background="@color/_EDEDED"
         android:layout_marginTop="@dimen/dp_15"
         android:id="@+id/message_recycle"
         android:layout_width="match_parent"

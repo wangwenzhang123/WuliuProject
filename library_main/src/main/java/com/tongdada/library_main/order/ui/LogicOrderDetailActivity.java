@@ -151,7 +151,7 @@ public class LogicOrderDetailActivity extends BaseMvpActivity<LogicOrderDetailPr
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getLoadLicense()).apply(requestOptions).into(ivLoadingEvidence);
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + orderDetail.getUnloadLicense()).apply(requestOptions).into(ivBusinessLicense);
         if (orderDetail.getOrderStatus().equals("H")){
-            confirmSubmit.setVisibility(View.VISIBLE);
+            confirmSubmit.setVisibility(View.GONE);
             orderState.setText("待核算");
         }else if (orderDetail.getOrderStatus().equals("S")){
             orderState.setText("已核算");

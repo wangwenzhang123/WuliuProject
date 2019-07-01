@@ -161,17 +161,26 @@ public class SlideRecyclerView extends RecyclerView {
         }
         return super.onTouchEvent(e);
     }
-    private boolean interceptTouch=true;
+    private boolean interceptTouch=false;
+
+    public boolean isInterceptTouch() {
+        return interceptTouch;
+    }
+
+    public void setInterceptTouch(boolean interceptTouch) {
+        this.interceptTouch = interceptTouch;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         // interceptTouch是自定义属性控制是否拦截事件
         if (interceptTouch){
             ViewParent parent =this;
             // 循环查找ViewPager, 请求ViewPager不拦截触摸事件
-            while(!((parent = parent.getParent()) instanceof ViewPager)){
-                // nop
-            }
-            parent.requestDisallowInterceptTouchEvent(true);
+                while(!((parent = parent.getParent()) instanceof ViewPager)){
+                    // nop
+                }
+                parent.requestDisallowInterceptTouchEvent(true);
         }
 
         return super.dispatchTouchEvent(ev);

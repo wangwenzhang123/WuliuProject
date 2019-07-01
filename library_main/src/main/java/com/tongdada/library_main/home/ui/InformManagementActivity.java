@@ -68,7 +68,7 @@ public class InformManagementActivity extends BaseActivity {
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
-                fragments.add(new MessageFragment());
+                fragments.add(new MessageFragment(true));
                 fragments.add(new InformationFragment());
                 e.onNext(fragments);
             }

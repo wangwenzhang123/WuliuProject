@@ -1,8 +1,8 @@
 package com.tongdada.library_main.user.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +15,13 @@ import com.example.library_commen.event.EventMessageBran;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.dialog.base.BaseDialog;
-import com.tongdada.base.ui.mvp.base.presenter.BasePresenter;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
-import com.tongdada.base.ui.mvp.base.view.BaseView;
 import com.tongdada.library_main.home.request.MessageIntentBean;
-import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.user.adapter.MessageAdapter;
 import com.tongdada.library_main.user.presenter.MessageContract;
 import com.tongdada.library_main.user.presenter.MessagePresenter;
 import com.tongdada.library_main.user.respose.MessageBean;
 import com.tongdada.library_main.widget.SlideRecyclerView;
-import com.tongdada.library_main.widget.slideswaphelper.PlusItemSlideCallback;
-import com.tongdada.library_main.widget.slideswaphelper.WItemTouchHelperPlus;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -52,6 +47,13 @@ public class MessageFragment extends BaseMvpFragment<MessagePresenter> implement
         return R.layout.fragment_message;
     }
 
+    public MessageFragment() {
+    }
+    private boolean isPare=false;
+    @SuppressLint("ValidFragment")
+    public MessageFragment(boolean isPare) {
+        this.isPare=isPare;
+    }
     @Override
     public BaseDialog getDialog() {
         return null;
@@ -60,6 +62,7 @@ public class MessageFragment extends BaseMvpFragment<MessagePresenter> implement
     @Override
     public void initView() {
         messageRecycle.setLayoutManager(new LinearLayoutManager(mContext));
+        messageRecycle.setInterceptTouch(isPare);
         adapter=new MessageAdapter(R.layout.item_message,messageBeans);
         messageRecycle.setAdapter(adapter);
     }
