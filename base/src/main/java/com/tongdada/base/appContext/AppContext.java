@@ -2,6 +2,7 @@ package com.tongdada.base.appContext;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.tongdada.base.BuildConfig;
@@ -19,7 +20,7 @@ import com.tongdada.base.util.SharedPreferencesUtil;
  * @time 2018/12/24 14:29
  * @change
  */
-public class AppContext extends Application {
+public class AppContext extends MultiDexApplication {
 
     @Override
     public void onCreate() {

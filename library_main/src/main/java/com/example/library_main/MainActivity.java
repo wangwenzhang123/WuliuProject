@@ -3,6 +3,7 @@ package com.example.library_main;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -13,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.event.EventMainFinishBean;
+import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.finance.ui.FinanceFragment;
 import com.tongdada.library_main.home.ui.HomeFragment;
 import com.tongdada.library_main.order.ui.OrderFragment;
@@ -88,7 +90,24 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         adapter=new MyViewPagerAdapter(getSupportFragmentManager(),fragments);
         mainVp.setOffscreenPageLimit(4);
     }
+    boolean doubleBackToExitPressedOnce = false;
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        ToastUtils.showToast(this,"再点一次退出程序！");
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         int currentFragment=0;

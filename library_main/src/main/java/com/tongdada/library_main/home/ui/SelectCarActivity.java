@@ -3,6 +3,7 @@ package com.tongdada.library_main.home.ui;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.example.library_commen.weight.SpaceItemDecoration;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
+import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.home.adapter.SelectCarAdapter;
 import com.tongdada.library_main.user.presenter.CarManagerContract;
 import com.tongdada.library_main.user.presenter.CarManagerPresenter;
@@ -105,7 +107,10 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         total = Integer.parseInt(bundle.getString(IntentKey.ORDER_AMOUNT));
         accpetTotal = total;
         carType = bundle.getString(IntentKey.CAR_TYPE);
-        if ("B".equals(carType)) {
+        if (TextUtils.isEmpty(carType)){
+            return;
+        }
+        if (carType.contains("B")) {
             checkAll.setVisibility(View.GONE);
             selectCarTv.setText("可选泵车");
         }
@@ -172,42 +177,53 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (isSelect) {
-                    if (CommenUtils.LOGIN_TYPE != 0) {
-                        for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
-                            CarRequestBean finaceBean = selectCarAdapter.getData().get(i);
-                            if (i != position) {
-                                if (finaceBean.isCheck()) {
-                                    total = total + Integer.parseInt(finaceBean.getCarLoad());
-                                    finaceBean.setCheck(false);
+                    try {
+                        if (CommenUtils.LOGIN_TYPE != 0) {
+                            for (int i = 0; i < selectCarAdapter.getData().size(); i++) {
+                                CarRequestBean finaceBean = selectCarAdapter.getData().get(i);
+                                if (i != position) {
+                                    if (finaceBean.isCheck()) {
+                                        total = total + Integer.parseInt(finaceBean.getCarLoad());
+                                        finaceBean.setCheck(false);
+                                    }
                                 }
                             }
                         }
-                    }
-                    CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
-                    if (finaceBean.isCheck()) {
-                        finaceBean.setCheck(false);
-                        isCheckAll = false;
-                        total = total + Integer.parseInt(finaceBean.getCarLoad());
-                    } else {
-                        finaceBean.setCheck(true);
-                        total = total - Integer.parseInt(finaceBean.getCarLoad());
-                        if (total <= 0) {
-                            total = 0;
+                        CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
+                        if (finaceBean.isCheck()) {
+                            finaceBean.setCheck(false);
+                            isCheckAll = false;
+                            total = total + Integer.parseInt(finaceBean.getCarLoad());
+                        } else {
+                            finaceBean.setCheck(true);
+                            total = total - Integer.parseInt(finaceBean.getCarLoad());
+                            if (total <= 0) {
+                                total = 0;
+                            }
                         }
-                    }
-                    adapter.notifyDataSetChanged();
-                    updateUi();
-                } else {
-                    CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
-                    if (finaceBean.isCheck()) {
-                        finaceBean.setCheck(false);
-                        isCheckAll = false;
-                        total = total + Integer.parseInt(finaceBean.getCarLoad());
                         adapter.notifyDataSetChanged();
                         updateUi();
-                    } else {
-                        showToast("装货量已满！");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        ToastUtils.showToast(mContext,"车辆信息不完善");
                     }
+                } else {
+                    try {
+                        CarRequestBean finaceBean = selectCarAdapter.getData().get(position);
+                        if (finaceBean.isCheck()) {
+                            finaceBean.setCheck(false);
+                            isCheckAll = false;
+                            total = total + Integer.parseInt(finaceBean.getCarLoad());
+                            adapter.notifyDataSetChanged();
+                            updateUi();
+                        } else {
+                            showToast("装货量已满！");
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        ToastUtils.showToast(mContext,"车辆信息不完善");
+                    }
+
                 }
 
             }
@@ -277,7 +293,7 @@ public class SelectCarActivity extends BaseMvpActivity<CarManagerPresenter> impl
         }
         for (int i = 0; i < list.size(); i++) {
             CarRequestBean requestBean = list.get(i);
-            if (requestBean.getCarType().equals("B")) {
+            if (requestBean.getCarType().contains("B")) {
                 requestBean.setCarLoad(accpetTotal + "");
             }
         }
