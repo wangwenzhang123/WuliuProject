@@ -142,6 +142,8 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     TextView orderPhoneTv;
     @BindView(R2.id.order_price)
     TextView orderPrice;
+    @BindView(R2.id.end_time_tv)
+    TextView endTimeTv;
     private AMap aMap;
     private List<CarBean> list = new ArrayList<>();
     private AcceptCarAdapter adapter;
@@ -185,7 +187,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         routeSearch = new RouteSearch(this);
         routeSearch.setRouteSearchListener(this);
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.design_bottom_sheet1));
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setState(STATE_COLLAPSED);
         adapter = new AcceptCarAdapter(R.layout.item_order_car, new ArrayList<SelectCarBean>());
         recycleCar.setLayoutManager(new GridLayoutManager(mContext, 4));
         recycleCar.setAdapter(adapter);
@@ -329,10 +331,10 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
 
     @OnClick(R2.id.order_detail_tv)
     public void onViewClicked() {
-        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+        if (bottomSheetBehavior.getState() == STATE_EXPANDED) {
             bottomSheetBehavior.setState(STATE_COLLAPSED);
         } else if (bottomSheetBehavior.getState() == STATE_COLLAPSED) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            bottomSheetBehavior.setState(STATE_EXPANDED);
         }
     }
 
@@ -355,6 +357,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         platformPhoneTv.setText(SettingString.PHONE);
         orderPrice.setText(orderDetail.getPerPrice());
         orderPhoneTv.setText(orderDetail.getOrderPhone());
+        endTimeTv.setText(orderDetail.getEndTime());
         if (orderDetail.getCarType().contains("B")) {
             carType1.setText("泵车");
             carType2.setText(CheckUtils.getBangName(orderDetail.getCarType()));
@@ -453,13 +456,14 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
         bundle.putString(IntentKey.CAR_TYPE, orderBean.getCarType());
         routerIntent(ArouterKey.HONE_SELECTCARACTIVITY, bundle);
     }
+
     @OnClick(R2.id.platform_phone_tv)
     public void onPlatformPhoneTvClicked() {
-        PhoneCallUtils.call(platformPhoneTv.getText().toString(),this);
+        PhoneCallUtils.call(platformPhoneTv.getText().toString(), this);
     }
 
     @OnClick(R2.id.order_phone_tv)
     public void onOrderPhoneTvClicked() {
-        PhoneCallUtils.call(orderPhoneTv.getText().toString(),this);
+        PhoneCallUtils.call(orderPhoneTv.getText().toString(), this);
     }
 }

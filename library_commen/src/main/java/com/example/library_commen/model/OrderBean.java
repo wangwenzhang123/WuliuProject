@@ -68,6 +68,15 @@ public class OrderBean implements Serializable{
     private String acceptNumber="";
     private String leftAmount="";
     private String orderPhone="";
+    private String endTime="";
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public String getOrderPhone() {
         return orderPhone;

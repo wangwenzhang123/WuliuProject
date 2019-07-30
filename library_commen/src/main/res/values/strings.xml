@@ -174,4 +174,5 @@
     <string name="manay_order">更多订单</string>
     <string name="accet_order">接单列表</string>
     <string name="apply_settlement">申请核算</string>
+    <string name="end_time">截止时间</string>
 </resources>
