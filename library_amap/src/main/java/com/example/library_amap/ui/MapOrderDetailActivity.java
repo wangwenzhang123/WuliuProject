@@ -25,6 +25,14 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AmapNaviPage;
+import com.amap.api.navi.AmapNaviParams;
+import com.amap.api.navi.AmapNaviType;
+import com.amap.api.navi.AmapPageType;
+import com.amap.api.navi.INaviInfoCallback;
+import com.amap.api.navi.model.AMapCarInfo;
+import com.amap.api.navi.model.AMapNaviLocation;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
@@ -48,6 +56,7 @@ import com.example.library_commen.presenter.OrderPresenter;
 import com.example.library_commen.utils.CheckUtils;
 import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.overlay.DrivingRouteOverlay;
+import com.example.service.LocationService;
 import com.example.util.PopwindowUtils;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -72,7 +81,7 @@ import static android.support.design.widget.BottomSheetBehavior.STATE_EXPANDED;
  * Created by wangshen on 2019/5/19.
  */
 @Route(path = ArouterKey.MAP_MAPORDERDETAILACTIVITY)
-public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> implements OrderDetailContract.View, LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, RouteSearch.OnRouteSearchListener {
+public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> implements OrderDetailContract.View, LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, RouteSearch.OnRouteSearchListener, INaviInfoCallback {
 
     @BindView(R2.id.search_et)
     TextView searchEt;
@@ -83,7 +92,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @BindView(R2.id.issueorder_start_tv)
     TextView issueorderStartTv;
     @BindView(R2.id.issue_go_start_iv)
-    ImageView issueGoStartIv;
+    TextView issueGoStartIv;
     @BindView(R2.id.start_view)
     View startView;
     @BindView(R2.id.issueorder_end_iv)
@@ -91,7 +100,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @BindView(R2.id.issueorder_end_tv)
     TextView issueorderEndTv;
     @BindView(R2.id.issue_go_end_iv)
-    ImageView issueGoEndIv;
+    TextView issueGoEndIv;
     @BindView(R2.id.end_view)
     View endView;
     @BindView(R2.id.issueorder_issue_iv)
@@ -482,5 +491,115 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @OnClick(R2.id.order_phone_tv)
     public void onOrderPhoneTvClicked() {
         PhoneCallUtils.call(orderPhoneTv.getText().toString(), this);
+    }
+    @OnClick(R2.id.issue_go_start_iv)
+    public void onIssueGoStartIvClicked() {
+        LatLng latLng=new LatLng(Double.valueOf(orderBean.getStartLatitude()),Double.valueOf(orderBean.getStartLongitude()));
+        navigation(orderBean.getStartPlace(),latLng);
+    }
+
+    @OnClick(R2.id.issue_go_end_iv)
+    public void onIssueGoEndIvClicked() {
+        LatLng latLng=new LatLng(Double.valueOf(orderBean.getDstLatitude()),Double.valueOf(orderBean.getDstLongitude()));
+        navigation(orderBean.getDestinationPlace(),latLng);
+    }
+    public void navigation(String endName,LatLng latLng){
+        AMapCarInfo carInfo = new AMapCarInfo();
+        carInfo.setCarType("1");
+        carInfo.setCarNumber("");
+        carInfo.setVehicleSize(String.valueOf(4));
+        /*carInfo.setVehicleLoad(weight);
+        carInfo.setVehicleWeight(totalWeight);
+        carInfo.setVehicleWidth(width);
+        carInfo.setVehicleLength(length);
+        carInfo.setVehicleHeight(height);*/
+        carInfo.setVehicleAxis("");
+        carInfo.setRestriction(true);
+        Poi start = new Poi("我的位置", LocationService.START, "");//起点
+        Poi end = new Poi(endName, latLng, "");//终点
+        AmapNaviParams amapNaviParams = new AmapNaviParams(start, null, end, AmapNaviType.DRIVER, AmapPageType.ROUTE);
+        amapNaviParams.setUseInnerVoice(true);
+        amapNaviParams.setCarInfo(carInfo);
+        AmapNaviPage.getInstance().showRouteActivity(getApplicationContext(), amapNaviParams,this);
+    }
+
+    @Override
+    public void onInitNaviFailure() {
+
+    }
+
+    @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
+    public void onLocationChange(AMapNaviLocation aMapNaviLocation) {
+
+    }
+
+    @Override
+    public void onArriveDestination(boolean b) {
+
+    }
+
+    @Override
+    public void onStartNavi(int i) {
+
+    }
+
+    @Override
+    public void onCalculateRouteSuccess(int[] ints) {
+
+    }
+
+    @Override
+    public void onCalculateRouteFailure(int i) {
+
+    }
+
+    @Override
+    public void onStopSpeaking() {
+
+    }
+
+    @Override
+    public void onReCalculateRoute(int i) {
+
+    }
+
+    @Override
+    public void onExitPage(int i) {
+
+    }
+
+    @Override
+    public void onStrategyChanged(int i) {
+
+    }
+
+    @Override
+    public View getCustomNaviBottomView() {
+        return null;
+    }
+
+    @Override
+    public View getCustomNaviView() {
+        return null;
+    }
+
+    @Override
+    public void onArrivedWayPoint(int i) {
+
+    }
+
+    @Override
+    public void onMapTypeChanged(int i) {
+
+    }
+
+    @Override
+    public View getCustomMiddleView() {
+        return null;
     }
 }

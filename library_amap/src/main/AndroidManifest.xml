@@ -25,6 +25,10 @@
             android:name="com.amap.api.v2.apikey"
             android:value="f28bda79641f056c5f9d5925a4133af0">
         </meta-data>
+        <service android:name="com.amap.api.location.APSService" />
+        <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>

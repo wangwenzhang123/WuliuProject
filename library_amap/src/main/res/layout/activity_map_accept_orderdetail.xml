@@ -99,16 +99,16 @@
                         android:layout_marginRight="@dimen/dp_11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <ImageView
-                        android:visibility="invisible"
+                    <TextView
+                        android:text="去这里"
                         android:id="@+id/issue_go_start_iv"
                         android:layout_marginRight="@dimen/dp_13"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginTop="@dimen/dp_22"
-                        android:src="@mipmap/go"
-                        android:layout_width="@dimen/dp_6"
-                        android:layout_height="@dimen/dp_11" />
+                        android:textColor="@color/blue_45a7ff"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="wrap_content" />
                     <View
                         android:id="@+id/start_view"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -151,16 +151,16 @@
                         android:layout_marginRight="@dimen/dp_11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <ImageView
-                        android:visibility="invisible"
+                    <TextView
+                        android:text="去这里"
                         android:id="@+id/issue_go_end_iv"
                         android:layout_marginRight="@dimen/dp_13"
                         app:layout_constraintTop_toBottomOf="@id/start_view"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginTop="@dimen/dp_15"
-                        android:src="@mipmap/go"
-                        android:layout_width="@dimen/dp_6"
-                        android:layout_height="@dimen/dp_11" />
+                        android:textColor="@color/blue_45a7ff"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="wrap_content" />
                     <View
                         android:id="@+id/end_view"
                         app:layout_constraintLeft_toLeftOf="parent"

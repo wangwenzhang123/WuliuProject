@@ -31,6 +31,7 @@ public class LocationService extends Service implements AMapLocationListener ,Ba
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
     private LocationPresenter presenter;
+    public static LatLng START;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -70,6 +71,7 @@ public class LocationService extends Service implements AMapLocationListener ,Ba
                 amapLocation.getLatitude();//获取纬度
                 amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
+                START=new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());
                 Log.e("AmapError","location Error, ErrCode:"
                         + amapLocation.getLatitude() + ", errInfo:"
                         + amapLocation.getLongitude());
