@@ -34,7 +34,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class ReSumeFragment extends BaseMvpFragment {
+public class ResumeFragment extends BaseMvpFragment {
     @BindView(R2.id.iv_order_search)
     ImageView ivOrderSearch;
     @BindView(R2.id.ll)

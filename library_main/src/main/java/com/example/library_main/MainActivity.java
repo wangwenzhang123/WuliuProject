@@ -15,13 +15,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.event.EventMainFinishBean;
 import com.example.library_commen.utils.CommenUtils;
+import com.tencent.bugly.beta.Beta;
 import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.finance.ui.FinanceFragment;
 import com.tongdada.library_main.home.ui.HomeFragment;
 import com.tongdada.library_main.order.ui.OrderFragment;
 import com.tongdada.library_main.recruit.ui.RecruitFragment;
-import com.tongdada.library_main.resume.ui.ReSumeFragment;
-import com.tongdada.library_main.statistics.ui.StatisticsFragment;
+import com.tongdada.library_main.resume.ui.ResumeFragment;
 import com.tongdada.library_main.user.ui.UserFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getView());
+        Beta.checkUpgrade();
         EventBus.getDefault().register(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//因为不是所有的系统都可以设置颜色的，在4.4以下就不可以。。有的说4.1，所以在设置的时候要检查一下系统版本是否是4.1以上
             Window window = getWindow();
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mainRg.setOnCheckedChangeListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 
     public void initLinsenterner() {
 
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         if (CommenUtils.LOGIN_TYPE == 0){
             fragments.add(new RecruitFragment());
         }else {
-            fragments.add(new ReSumeFragment());
+            fragments.add(new ResumeFragment());
         }
         fragments.add(new UserFragment());
         adapter=new MyViewPagerAdapter(getSupportFragmentManager(),fragments);

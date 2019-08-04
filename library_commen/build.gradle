@@ -36,4 +36,6 @@ dependencies {
     api 'com.github.pinguo-zhouwei:MZBannerView:v2.0.0'
     api 'com.xu.viewpagerflextitle:viewpagerflextitle:1.0.3'
     api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    api 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    api 'com.tencent.bugly:nativecrashreport:latest.release'
 }
