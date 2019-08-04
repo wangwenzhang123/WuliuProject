@@ -11,6 +11,8 @@ import com.tongdada.base.net.bean.BaseAppEntity;
 import com.tongdada.library_main.home.net.CarOrderBean;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.order.respose.OrderListBean;
+import com.tongdada.library_main.recruit.respose.RecruitmentBean;
+import com.tongdada.library_main.recruit.respose.ResumeBean;
 import com.tongdada.library_main.user.respose.CarListBean;
 import com.tongdada.library_main.user.respose.MessageBean;
 import com.tongdada.library_main.user.respose.UserListBean;
@@ -74,7 +76,24 @@ public interface MainApi {
                                                         @Field("psTotalOrders.companyId") String companyId,
                                                         @Field("page") String pageNumber,
                                                         @Field("psTotalOrders.orderName") String orderName,
-                                                        @Field("psTotalOrders.orderStatus") String orderStatus);
+                                                        @Field("psTotalOrders.orderStatus") String orderStatus,
+                                                        @Field("psTotalOrders.carType") String carType);
+    /**
+     * 获取订单列表
+     * @param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/orderListOfRange.action")
+    Observable<PagenationBase<OrderListBean>> orderListOfRange(@Field("psTotalOrders.stationId") String stationId,
+                                                        @Field("psTotalOrders.companyId") String companyId,
+                                                        @Field("page") String pageNumber,
+                                                        @Field("psTotalOrders.orderName") String orderName,
+                                                        @Field("psTotalOrders.orderStatus") String orderStatus,
+                                                        @Field("psTotalOrders.carType") String carType,
+                                                        @Field("latitude") String latitude,
+                                                               @Field("longitude") String longitude
+    );
     /**
      * 获取物流总订单
      * @param
@@ -264,4 +283,102 @@ public interface MainApi {
     @FormUrlEncoded
     @POST("/tonghe/getCarById.action")
     Observable<BaseAppEntity<CarRequestBean>> getCarById(@Field("psCars.id") String id);
+    /**
+     * 发布招聘
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/publishPosition.action")
+    Observable<PagenationBase<CarOrderBean>> publishPosition(/*@Field("psPositions.positionName") String positionName,
+                                                             @Field("psPositions.positionSalary") String positionSalary,
+                                                             @Field("psPositions.companyId") String companyId,
+                                                             @Field("psPositions.positionRemarks") String positionRemarks,
+                                                             @Field("psPositions.stationId") String stationId,
+                                                             @Field("psPositions.companyName") String companyName,
+                                                             @Field("psPositions.companyAddress") String companyAddress,
+                                                             @Field("psPositions.contacts") String contacts,
+                                                             @Field("psPositions.phoneNo") String phoneNo,
+                                                             @Field("psPositions.endTime") String endTime,
+                                                             @Field("psPositions.publishTime") String publishTime*/
+            @FieldMap Map<String,Object> params
+    );
+    /**
+     * 修改招聘
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/editPosition.action")
+    Observable<PagenationBase<CarOrderBean>> editPosition(/*@Field("psPositions.positionName") String positionName,
+                                                             @Field("psPositions.positionSalary") String positionSalary,
+                                                             @Field("psPositions.companyId") String companyId,
+                                                             @Field("psPositions.positionRemarks") String positionRemarks,
+                                                             @Field("psPositions.stationId") String stationId,
+                                                             @Field("psPositions.companyName") String companyName,
+                                                             @Field("psPositions.companyAddress") String companyAddress,
+                                                             @Field("psPositions.contacts") String contacts,
+                                                             @Field("psPositions.phoneNo") String phoneNo,
+                                                             @Field("psPositions.endTime") String endTime,
+                                                             @Field("psPositions.publishTime") String publishTime*/
+            @FieldMap Map<String,Object> params
+    );
+    /**
+     * 获取招聘列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/listPosition.action")
+    Observable<PagenationBase<RecruitmentBean>> listPosition(@Field("psPositions.positionName") String positionName,
+                                                             @Field("psPositions.companyId") String companyId,
+                                                             @Field("psPositions.stationId") String stationId,
+                                                             @Field("page") int page
+    );
+
+    /**
+     * 获取招聘列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/listPostionsOfUser.action")
+    Observable<PagenationBase<RecruitmentBean>> listPostionsOfUser(@Field("psPositionApply.userId") String userId,
+                                                                   @Field("page") int page);
+    /**
+     * 取消招聘
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/cancelPosition.action")
+    Observable<PagenationBase<RecruitmentBean>> cancelPosition(@Field("psPositions.id") String positionName
+    );
+    /**
+     * 获取简历中心列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/listApply.action")
+    Observable<PagenationBase<ResumeBean>> listApply(@Field("psPositions.positionName") String positionName,
+                                                     @Field("psPositions.companyId") String companyId,
+                                                     @Field("psPositions.stationId") String stationId
+    );
+    /**
+     * 申请职位
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/applyPosition.action")
+    Observable<PagenationBase<ResumeBean>> applyPosition(@Field("psPositionApply.positionId") String positionId,
+                                                     @Field("psPositionApply.userId") String companyId
+
+    );
+    /**
+     * 获取简历列表
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/tonghe/listUsersOfPostion.action")
+    Observable<PagenationBase<ResumeBean>> listUsersOfPostion(@Field("psPositionApply.positionId") String positionId,
+                                                             @Field("psPositionApply.stationId") String stationId,
+                                                             @Field("psPositionApply.companyId") String companyId,
+                                                              @Field("page") int page
+
+    );
 }

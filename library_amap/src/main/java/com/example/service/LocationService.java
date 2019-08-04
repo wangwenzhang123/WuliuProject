@@ -17,6 +17,7 @@ import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
 import com.example.library_amap.presenter.LocationPresenter;
 import com.example.library_commen.appkey.ArouterKey;
+import com.example.library_commen.utils.CommenUtils;
 import com.tongdada.base.ui.mvp.base.view.BaseView;
 
 import java.text.SimpleDateFormat;
@@ -71,6 +72,8 @@ public class LocationService extends Service implements AMapLocationListener ,Ba
                 amapLocation.getLatitude();//获取纬度
                 amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
+                CommenUtils.latitude= String.valueOf(amapLocation.getLatitude());
+                CommenUtils.longitude= String.valueOf(amapLocation.getLongitude());
                 START=new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());
                 Log.e("AmapError","location Error, ErrCode:"
                         + amapLocation.getLatitude() + ", errInfo:"

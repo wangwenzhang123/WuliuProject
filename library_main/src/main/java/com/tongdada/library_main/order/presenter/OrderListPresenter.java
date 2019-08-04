@@ -21,6 +21,33 @@ import io.reactivex.functions.Consumer;
  */
 public class OrderListPresenter extends BaseRecyclerRefreshPresenter<OrderListContract.View,OrderBean> implements OrderListContract.Presenter{
     private String type;
+    private String cartype;
+    private String latite;
+    private String longtite;
+
+    public String getCartype() {
+        return cartype;
+    }
+
+    public void setCartype(String cartype) {
+        this.cartype = cartype;
+    }
+
+    public String getLatite() {
+        return latite;
+    }
+
+    public void setLatite(String latite) {
+        this.latite = latite;
+    }
+
+    public String getLongtite() {
+        return longtite;
+    }
+
+    public void setLongtite(String longtite) {
+        this.longtite = longtite;
+    }
 
     public String getType() {
         return type;
@@ -32,7 +59,7 @@ public class OrderListPresenter extends BaseRecyclerRefreshPresenter<OrderListCo
 
     @Override
     public void onRefresh(final RequestCallback<OrderBean> callback) {
-        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getFirstPageIndex()),"",type)
+        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getFirstPageIndex()),"",type,cartype)
                 .compose(this.<PagenationBase<OrderListBean>>handleEverythingResult())
                 .subscribe(new Consumer<PagenationBase<OrderListBean>>() {
                     @Override
@@ -60,7 +87,7 @@ public class OrderListPresenter extends BaseRecyclerRefreshPresenter<OrderListCo
 
     @Override
     public void onLoadMore(final RequestCallback<OrderBean> callback) {
-        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getCurrentPage()),"",type)
+        MainApiUtils.getMainApi().orderList(CommenUtils.getIncetance().getUserBean().getStationId(),CommenUtils.getIncetance().getUserBean().getCompanyId(), String.valueOf(getCurrentPage()),"",type,cartype)
                 .compose(this.<PagenationBase<OrderListBean>>handleEverythingResult())
                 .subscribe(new Consumer<PagenationBase<OrderListBean>>() {
                     @Override

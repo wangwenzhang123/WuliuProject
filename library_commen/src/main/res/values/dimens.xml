@@ -95,4 +95,5 @@
     <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_55">55dp</dimen>
     <dimen name="dp_61">61dp</dimen>
+    <dimen name="dp_74">74dp</dimen>
 </resources>

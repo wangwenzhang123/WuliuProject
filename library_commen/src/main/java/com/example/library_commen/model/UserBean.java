@@ -1,5 +1,9 @@
 package com.example.library_commen.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -9,7 +13,7 @@ import java.io.Serializable;
  * @time 2019/5/23 16:23
  * @change
  */
-public class UserBean implements Serializable{
+public class UserBean implements Serializable,Cloneable {
 
     /**
      * companyId :
@@ -53,6 +57,34 @@ public class UserBean implements Serializable{
     private String frontPic="";
     private String backPic="";
     private String userDuty="";
+    /**
+     * createTime : null
+     * educationInfo :
+     * expectSalary :
+     * marriageInfo :
+     * ploticsInfo :
+     * updateTime : {"date":4,"day":0,"hours":13,"minutes":50,"month":7,"seconds":33,"time":1564897833643,"timezoneOffset":-480,"year":119}
+     * userOrigin :
+     * userSex :
+     * workAge :
+     * workExperience :
+     * workInfo :
+     */
+
+    private String educationInfo="";
+    private String expectSalary="";
+    private String marriageInfo="";
+    private String ploticsInfo="";
+    private String userOrigin="";
+    private String userSex="";
+    private String workAge="";
+    private String workExperience="";
+    private String workInfo="";
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public String getFrontPic() {
         return frontPic;
@@ -245,6 +277,81 @@ public class UserBean implements Serializable{
                 ", psAppUsers.userStatus='" + userStatus + '\'' +
                 '}';
     }
+
+
+
+    public String getEducationInfo() {
+        return educationInfo;
+    }
+
+    public void setEducationInfo(String educationInfo) {
+        this.educationInfo = educationInfo;
+    }
+
+    public String getExpectSalary() {
+        return expectSalary;
+    }
+
+    public void setExpectSalary(String expectSalary) {
+        this.expectSalary = expectSalary;
+    }
+
+    public String getMarriageInfo() {
+        return marriageInfo;
+    }
+
+    public void setMarriageInfo(String marriageInfo) {
+        this.marriageInfo = marriageInfo;
+    }
+
+    public String getPloticsInfo() {
+        return ploticsInfo;
+    }
+
+    public void setPloticsInfo(String ploticsInfo) {
+        this.ploticsInfo = ploticsInfo;
+    }
+
+    public String getUserOrigin() {
+        return userOrigin;
+    }
+
+    public void setUserOrigin(String userOrigin) {
+        this.userOrigin = userOrigin;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getWorkAge() {
+        return workAge;
+    }
+
+    public void setWorkAge(String workAge) {
+        this.workAge = workAge;
+    }
+
+    public String getWorkExperience() {
+        return workExperience;
+    }
+
+    public void setWorkExperience(String workExperience) {
+        this.workExperience = workExperience;
+    }
+
+    public String getWorkInfo() {
+        return workInfo;
+    }
+
+    public void setWorkInfo(String workInfo) {
+        this.workInfo = workInfo;
+    }
+
 
     public static class CreateTimeBean implements Serializable{
         /**

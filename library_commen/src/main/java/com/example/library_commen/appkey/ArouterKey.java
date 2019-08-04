@@ -53,4 +53,10 @@ public class ArouterKey {
     public static final String USER_SELECTDRIVER="/user/SelectDriverActivity";
     public static final String HOME_MOREORDERACTIVITY="/home/MoreOrderActivity";
     public static final String MAP_LOCATIONSERVICE="/map/LocationService";
+    public static final String RECRUIT_PUBLISHJOBACTIVITY="/recruit/PublishJobActivity";
+    public static final String RECRUIT_JOBDETAILSACTIVITY="/recruit/JobDetailsActivity";
+    public static final String RECRUIT_RESUMEJOBDETAILACTIVITY="/recruit/ResumeJobDetailActivity";
+    public static final String  RECUIT_RESUMEACTIVITY="/recruit/ResumeActivity";
+    public static final String RECUIT_RESUMEDETAILACTIVITY="/recruit/ResumeDetailActivity";
+    public static final String RECUIT_SEARCHJOBACTIVITY="/recruit/SearchJobActivity";
 }

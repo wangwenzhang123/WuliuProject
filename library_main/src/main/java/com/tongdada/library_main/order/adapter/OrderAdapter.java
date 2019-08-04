@@ -67,6 +67,14 @@ public class OrderAdapter extends BaseAdapter<OrderBean> {
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 ;
-        Glide.with(mContext).load(BaseUrl.BASEURL+"/"+item.getOrderPic()).apply(requestOptions).into(imageView);
+        if (TextUtils.isEmpty(item.getOrderPic())){
+            if (item.getCarType().contains("T")){
+                imageView.setImageResource(R.mipmap.tong_pic);
+            }else {
+                imageView.setImageResource(R.mipmap.beng_pic);
+            }
+        }else {
+            Glide.with(mContext).load(BaseUrl.BASEURL+"/"+item.getOrderPic()).apply(requestOptions).into(imageView);
+        }
     }
 }

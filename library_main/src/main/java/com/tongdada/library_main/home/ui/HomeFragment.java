@@ -2,6 +2,11 @@ package com.tongdada.library_main.home.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +23,23 @@ import com.example.library_commen.appkey.ArouterKey;
 import com.example.library_commen.appkey.IntentKey;
 import com.example.library_commen.event.EventMessageBran;
 import com.example.library_commen.model.OrderBean;
+import com.example.library_main.MyViewPagerAdapter;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpFragment;
+import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.home.presenter.HomeContract;
 import com.tongdada.library_main.home.presenter.HomePresenter;
 import com.tongdada.library_main.home.request.MessageIntentBean;
 import com.tongdada.library_main.home.respose.BannerBean;
 import com.tongdada.library_main.order.adapter.OrderAdapter;
+import com.tongdada.library_main.order.ui.LogicOrderListFragment;
 import com.tongdada.library_main.order.ui.OrderListFragment;
+import com.tongdada.library_main.order.ui.TenOrderListFragment;
 import com.tongdada.library_main.utils.LoginUtils;
+import com.tongdada.library_main.utils.TalUtils;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -45,6 +55,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @name JiaobanProject
@@ -73,9 +89,14 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     TextView moreOrder;
     @BindView(R2.id.weidu)
     TextView weidu;
+    @BindView(R2.id.horizontal_scrollview)
+    TabLayout horizontalScrollview;
+    @BindView(R2.id.pager)
+    ViewPager pager;
     private OrderAdapter orderAdapter;
     private List<OrderBean> orderBeanList = new ArrayList<>();
-
+    private List<Fragment> fragments=new ArrayList<>();
+    List<String> list=new ArrayList<>();
     @Override
     public HomePresenter getPresenter() {
         return new HomePresenter();
@@ -96,6 +117,61 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         presenter.shuffling();
         presenter.initData();
         presenter.getMessageList();
+        list.add("砼车");
+        list.add("泵车");
+        list.add("10公里");
+        list.add("全部");
+        //list.add("已装货");
+        /* list.add("已核算");*/
+        pager.setOffscreenPageLimit(3);
+        Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
+                fragments.add(new OrderListFragment("F","T","",""));
+                fragments.add(new OrderListFragment("F","B","",""));
+                fragments.add(new TenOrderListFragment());
+                fragments.add(new OrderListFragment("F","","",""));
+                //fragments.add(new TransportCarFragment("Z"));
+                //fragments.add(new TransportCarFragment("S"));
+                e.onNext(fragments);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Fragment>>() {
+                    @Override
+                    public void accept(final List<Fragment> fragments) throws Exception {
+                        pager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
+                            @Override
+                            public Fragment getItem(int position) {
+                                return fragments.get(position);
+                            }
+
+                            @Override
+                            public int getCount() {
+                                return fragments.size();
+                            }
+
+                            @Nullable
+                            @Override
+                            public CharSequence getPageTitle(int position) {
+                                return list.get(position);
+                            }
+                        });
+                        horizontalScrollview.setupWithViewPager(pager);
+                        horizontalScrollview.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                TalUtils.setIndicator(horizontalScrollview,32,32);
+                            }
+                        });
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        ToastUtils.showToast(mContext,throwable.getMessage());
+                    }
+                });
+
     }
 
     @Override
@@ -143,15 +219,17 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         EventBus.getDefault().register(this);
         return rootView;
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void eventMessage(EventMessageBran a){
-        if (a.getNum() == 0){
+    public void eventMessage(EventMessageBran a) {
+        if (a.getNum() == 0) {
             weidu.setVisibility(View.GONE);
-        }else {
+        } else {
             weidu.setVisibility(View.VISIBLE);
         }
-        weidu.setText(a.getNum()+"");
+        weidu.setText(a.getNum() + "");
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -161,9 +239,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.iv_home_search)
     public void onIvHomeSearchClicked() {
-        if (LoginUtils.isLogin()){
+        if (LoginUtils.isLogin()) {
             routerIntent(ArouterKey.ORDER_SEARCHORDERACTIVITY, null);
-        }else {
+        } else {
             ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
         }
 
@@ -171,9 +249,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.iv_home_message)
     public void onIvHomeMessageClicked() {
-        if (LoginUtils.isLogin()){
+        if (LoginUtils.isLogin()) {
             routerIntent(ArouterKey.HOME_INFORMMANAGEMENTACTIVITY, null);
-        }else {
+        } else {
             ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
         }
 
@@ -199,9 +277,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @OnClick(R2.id.more_order)
     public void onViewClicked() {
-        if (LoginUtils.isLogin()){
+        if (LoginUtils.isLogin()) {
             routerIntent(ArouterKey.HOME_MOREORDERACTIVITY, null);
-        }else {
+        } else {
             ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
         }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gongzi">
+        <item>
+            面议
+        </item>
+        <item>
+            1k-3k
+        </item>
+        <item>
+           3k-5k
+        </item>
+        <item>
+            5k-10k
+        </item>
+        <item>
+            10k-15k
+        </item>
+        <item>
+            15k以上
+        </item>
+    </string-array>
+</resources>

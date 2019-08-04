@@ -85,6 +85,24 @@
         <activity android:name="com.tongdada.library_main.user.ui.MessageDetailActivity">
 
         </activity>
+        <activity android:name="com.tongdada.library_main.recruit.ui.PublishJobActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.recruit.ui.ResumeActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.recruit.ui.JobDetailsActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.resume.ui.ResumeJobDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.recruit.ui.ResumeDetailActivity">
+
+        </activity>
+        <activity android:name="com.tongdada.library_main.resume.ui.SearchJobActivity">
+
+        </activity>
     </application>
 
 </manifest>

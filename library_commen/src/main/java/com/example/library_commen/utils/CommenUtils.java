@@ -17,6 +17,8 @@ import com.tongdada.base.util.SharedPreferencesUtil;
  * @change
  */
 public class CommenUtils {
+    public static String latitude="";
+    public static String longitude="";
     public static int LOGIN_TYPE=0;//0物流公司，1物流公司司机，2个体户司机
     private static CommenUtils commenUtils;
     private UserBean userBean;

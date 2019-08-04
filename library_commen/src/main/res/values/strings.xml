@@ -175,4 +175,36 @@
     <string name="accet_order">接单列表</string>
     <string name="apply_settlement">申请核算</string>
     <string name="end_time">截止时间</string>
+    <string name="job_detail">岗位详情</string>
+    <string name="job_name">岗位名称</string>
+    <string name="salary_range">薪资范围</string>
+    <string name="working_place">工作地点</string>
+    <string name="qualifications">任职资格</string>
+    <string name="welfare_treatment">福利待遇</string>
+    <string name="post_requirements">岗位要求</string>
+    <string name="work_units">用人单位</string>
+    <string name="work_name">单位名称</string>
+    <string name="work_address">单位地址</string>
+    <string name="work_contact">联系人</string>
+    <string name="job_end_time">招聘截至日期</string>
+    <string name="release_job">确认发布</string>
+    <string name="people_resume">个人简历</string>
+    <string name="user_gender">性别</string>
+    <string name="native_place">籍贯</string>
+    <string name="level_of_education">文化程度</string>
+    <string name="marriage">婚姻</string>
+    <string name="working_state">工作状态</string>
+    <string name="work_experience">工作经历</string>
+    <string name="political_landscape">政治面貌</string>
+    <string name="religious_beliefs">宗教信仰</string>
+    <string name="working_years">工作年限</string>
+    <string name="expected_salary">期望薪资</string>
+    <string name="release_commit">确定提交</string>
+    <string name="resume_list">简历列表</string>
+
+    <string name="publish_job">发布招聘</string>
+    <string name="publish_job_detail">招聘详情</string>
+    <string name="resume_center">简历中心</string>
+    <string name="contract_phone">联系方式</string>
+    <string name="resume_address">家庭住址</string>
 </resources>

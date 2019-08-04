@@ -4,6 +4,7 @@ import com.example.library_commen.model.CarRequestBean;
 import com.example.library_commen.model.DriverRequest;
 import com.example.library_commen.model.LogisticsRequestBean;
 import com.example.library_commen.model.OrderBean;
+import com.example.library_commen.model.RecuritListBean;
 import com.example.library_commen.model.UserBean;
 import com.google.gson.Gson;
 
@@ -36,6 +37,15 @@ public class UserMapUtils {
         map.put("psAppUsers.frontPic",userBean.getFrontPic());
         map.put("psAppUsers.backPic",userBean.getBackPic());
         map.put("psAppUsers.userDuty",userBean.getUserDuty());
+        map.put("psAppUsers.userSex",userBean.getUserSex());
+        map.put("psAppUsers.educationInfo",userBean.getEducationInfo());
+        map.put("psAppUsers.userOrigin",userBean.getUserOrigin());
+        map.put("psAppUsers.marriageInfo",userBean.getMarriageInfo());
+        map.put("psAppUsers.workInfo",userBean.getWorkInfo());
+        map.put("psAppUsers.ploticsInfo",userBean.getPloticsInfo());
+        map.put("psAppUsers.workAge",userBean.getWorkAge());
+        map.put("psAppUsers.expectSalary",userBean.getExpectSalary());
+        map.put("psAppUsers.workExperience",userBean.getWorkExperience());
         return map;
     }
     public static Map<String,Object> getOrderMap(OrderBean requestRegisterBean){
@@ -137,6 +147,24 @@ public class UserMapUtils {
         map.put("psCars.driverName",requestRegisterBean.getDriverName());
         map.put("psCars.delFlag",requestRegisterBean.getDelFlag());
         map.put("psCars.carStatus",requestRegisterBean.getCarStatus());
+        return map;
+    }
+    public static Map<String,Object> getPublishJobMap(RecuritListBean requestRegisterBean){
+        Map<String,Object> map=new HashMap<>();
+        map.put("psPositions.positionName",requestRegisterBean.getPositionName());
+        map.put("psPositions.positionSalary",requestRegisterBean.getPositionSalary());
+        map.put("psPositions.companyId",requestRegisterBean.getCompanyId());
+        map.put("psPositions.positionRemarks",requestRegisterBean.getPositionRemarks());
+        map.put("psPositions.stationId",requestRegisterBean.getStationId());
+        map.put("psPositions.companyName",requestRegisterBean.getCompanyName());
+        map.put("psPositions.companyAddress",requestRegisterBean.getCompanyAddress());
+        map.put("psPositions.contacts",requestRegisterBean.getContacts());
+        map.put("psPositions.phoneNo",requestRegisterBean.getPhoneNo());
+        map.put("psPositions.endTime",requestRegisterBean.getEndTime());
+        map.put("psPositions.publishTime",requestRegisterBean.getPublishTime());
+        map.put("psPositions.id",requestRegisterBean.getId());
+        map.put("psPositions.applyNumber",requestRegisterBean.getApplyNumber());
+        map.put("psPositions.delFlag",requestRegisterBean.getDelFlag());
         return map;
     }
 }

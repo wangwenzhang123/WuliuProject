@@ -50,9 +50,20 @@ import butterknife.Unbinder;
 @SuppressLint("ValidFragment")
 public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListContract.View,OrderListPresenter,OrderBean> implements OrderListContract.View {
     private String type="";
+    private String cartype;
+    private String latite;
+    private String longtite;
+
     private List<OrderBean> orderBeanList=new ArrayList<>();
 
     public OrderListFragment() {
+    }
+    @SuppressLint("ValidFragment")
+    public OrderListFragment(String type, String cartype, String latite, String longtite) {
+        this.type = type;
+        this.cartype = cartype;
+        this.latite = latite;
+        this.longtite = longtite;
     }
 
     @SuppressLint("ValidFragment")
@@ -62,6 +73,9 @@ public class OrderListFragment extends BaseRecyclerRefreshFragment<OrderListCont
     @Override
     public void initView() {
         presenter.setType(type);
+        presenter.setLatite(latite);
+        presenter.setLongtite(longtite);
+        presenter.setCartype(cartype);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.service.LocationService;
 import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.tongdada.base.appContext.AppContext;
 
 /**
@@ -16,5 +17,9 @@ public class App extends AppContext {
         super.onCreate();
         startService(new Intent(this, LocationService.class));
         Bugly.init(getApplicationContext(), "d31305cafe", false);
+        Beta.checkUpgrade(false,false);
+        Beta.autoInit = true;
+        Beta.autoCheckUpgrade = true;
+        Beta.upgradeCheckPeriod = 60 * 1000;
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/dp_8"
+    android:layout_height="@dimen/dp_74">
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/job_name"
+            android:text="运输专员"
+            android:textSize="@dimen/dp_16"
+            android:textColor="@color/_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/job_people"
+            android:textColor="@color/_DE3030"
+            android:text="已有20人投递"
+            android:textSize="@dimen/dp_14"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/job_money"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_weight="1"
+            android:textColor="@color/_DE3030"
+            android:text="5k-8k"
+            android:textSize="@dimen/dp_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_14"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/job_gongsi"
+            android:text="江苏打野机突然"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@color/_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/job_time"
+            android:text="2019-07-21"
+            android:textColor="@color/_999999"
+            android:gravity="right"
+            android:textSize="@dimen/dp_14"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

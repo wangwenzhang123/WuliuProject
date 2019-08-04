@@ -46,10 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
-            android:drawableTop="@drawable/selector_main_statistics"
+            android:drawableTop="@drawable/selector_main_job"
             android:id="@+id/main_rb_statistics"
             style="@style/main_rg"
-            android:text="@string/statistics"
+            android:text="@string/job"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton

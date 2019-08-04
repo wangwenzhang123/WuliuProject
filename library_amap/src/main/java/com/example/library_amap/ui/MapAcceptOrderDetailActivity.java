@@ -91,7 +91,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     @BindView(R2.id.issueorder_start_tv)
     TextView issueorderStartTv;
     @BindView(R2.id.issue_go_start_iv)
-    TextView issueGoStartIv;
+    ImageView issueGoStartIv;
     @BindView(R2.id.start_view)
     View startView;
     @BindView(R2.id.issueorder_end_iv)
@@ -99,7 +99,7 @@ public class MapAcceptOrderDetailActivity extends BaseMvpActivity<AcceptOrderPre
     @BindView(R2.id.issueorder_end_tv)
     TextView issueorderEndTv;
     @BindView(R2.id.issue_go_end_iv)
-    TextView issueGoEndIv;
+    ImageView issueGoEndIv;
     @BindView(R2.id.end_view)
     View endView;
     @BindView(R2.id.issueorder_issue_iv)
