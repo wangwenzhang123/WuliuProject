@@ -1,6 +1,7 @@
 package com.tongdada.library_main.recruit.ui;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import com.example.library_commen.utils.CommenUtils;
 import com.example.library_main.R;
 import com.example.library_main.R2;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
+import com.tongdada.base.util.ToastUtils;
 import com.tongdada.library_main.recruit.presenter.PublishJobContract;
 import com.tongdada.library_main.recruit.presenter.PublishJobPresenter;
 import com.tongdada.library_main.widget.datepicker.CustomDatePicker;
@@ -181,6 +183,12 @@ public class PublishJobActivity extends BaseMvpActivity<PublishJobPresenter> imp
         String workContactStr = workContact.getText().toString();
         String contactPhoneStr = contactPhone.getText().toString();
         String jobEndTimeStr = jobEndTime.getText().toString();
+        if (TextUtils.isEmpty(jobNameStr) || TextUtils.isEmpty(salaryRangeStr) || TextUtils.isEmpty(qualificationsStr)
+            || TextUtils.isEmpty(workNameStr)|| TextUtils.isEmpty(workAddressStr)|| TextUtils.isEmpty(workContactStr)
+                || TextUtils.isEmpty(contactPhoneStr)){
+            ToastUtils.showToast(mContext,"请将招聘信息完善后再点发布");
+            return;
+        }
         requestBean.setStationId(CommenUtils.getIncetance().getUserBean().getStationId());
         requestBean.setCompanyId(CommenUtils.getIncetance().getUserBean().getCompanyId());
         requestBean.setCompanyAddress(workAddressStr);

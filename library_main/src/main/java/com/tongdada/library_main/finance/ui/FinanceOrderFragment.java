@@ -213,6 +213,7 @@ public class FinanceOrderFragment extends BaseMvpFragment<FinancePresenter> impl
             @Override
             public void run() {
                 adapter.setNewData(list);
+                if (finaceSmart != null)
                 finaceSmart.finishRefresh();
             }
         },1000);

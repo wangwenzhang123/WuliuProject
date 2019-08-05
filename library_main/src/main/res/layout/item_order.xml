@@ -47,8 +47,7 @@
         android:layout_height="wrap_content" />
     <ImageView
 
-        android:scaleType="centerCrop"
-        android:src="@drawable/border"
+        android:src="@mipmap/tong_pic"
         android:id="@+id/order_iv"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintTop_toBottomOf="@id/order_name"
