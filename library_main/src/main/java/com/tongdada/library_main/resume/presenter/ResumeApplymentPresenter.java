@@ -32,14 +32,15 @@ public class ResumeApplymentPresenter extends BasePresenter<RecruitmentContract.
                        new Handler().postDelayed(new Runnable() {
                            @Override
                            public void run() {
-                               if (is){
-                                   getView().getAdapter().setNewData(recruitmentBeanPagenationBase.getPagenation().getList());
-                                   getView().getRefrshView().finishRefresh();
-                               }else {
-                                   getView().getAdapter().addData(recruitmentBeanPagenationBase.getPagenation().getList());
-                                   getView().getRefrshView().finishLoadMore();
+                               if (getView().getRefrshView() != null){
+                                   if (is){
+                                       getView().getAdapter().setNewData(recruitmentBeanPagenationBase.getPagenation().getList());
+                                       getView().getRefrshView().finishRefresh();
+                                   }else {
+                                       getView().getAdapter().addData(recruitmentBeanPagenationBase.getPagenation().getList());
+                                       getView().getRefrshView().finishLoadMore();
+                                   }
                                }
-
                            }
                        },2000);
                    }

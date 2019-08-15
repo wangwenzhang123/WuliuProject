@@ -26,6 +26,14 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AmapNaviPage;
+import com.amap.api.navi.AmapNaviParams;
+import com.amap.api.navi.AmapNaviType;
+import com.amap.api.navi.AmapPageType;
+import com.amap.api.navi.INaviInfoCallback;
+import com.amap.api.navi.model.AMapCarInfo;
+import com.amap.api.navi.model.AMapNaviLocation;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
@@ -49,6 +57,7 @@ import com.example.library_commen.model.CarBean;
 import com.example.library_commen.model.DriverOrderDetailBean;
 import com.example.library_commen.utils.PhoneCallUtils;
 import com.example.overlay.DrivingRouteOverlay;
+import com.example.service.LocationService;
 import com.tongdada.base.config.BaseUrl;
 import com.tongdada.base.dialog.base.BaseDialog;
 import com.tongdada.base.ui.mvp.base.ui.BaseMvpActivity;
@@ -72,7 +81,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by wangshen on 2019/5/19.
  */
 @Route(path = ArouterKey.MAP_MAPCARDETAILACTIVITY)
-public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter> implements LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, MapCarDetailContract.View, RouteSearch.OnRouteSearchListener {
+public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter> implements LocationSource, AMap.InfoWindowAdapter, AMap.OnMapTouchListener, AMap.OnInfoWindowClickListener, MapCarDetailContract.View, RouteSearch.OnRouteSearchListener, INaviInfoCallback {
 
 
     @BindView(R2.id.search_et)
@@ -118,6 +127,14 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     TextView totalPrice;
     @BindView(R2.id.qiandao)
     TextView qiandao;
+    @BindView(R2.id.order_start_tv)
+    TextView orderStartTv;
+    @BindView(R2.id.order_go_start_iv)
+    ImageView orderGoStartIv;
+    @BindView(R2.id.order_end_tv)
+    TextView orderEndTv;
+    @BindView(R2.id.order_go_end_iv)
+    ImageView orderGoEndIv;
     private AMap aMap;
     private String id;
     private static final int LOADING_CODE = 1;
@@ -252,21 +269,25 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     public void onViewBackClicked() {
         finish();
     }
+
     private DriverOrderDetailBean driverOrderDetailBean;
+
     @Override
     public void setDetailOrder(final DriverOrderDetailBean detailOrder) {
-        this.driverOrderDetailBean=detailOrder;
+        this.driverOrderDetailBean = detailOrder;
         driverName.setText(detailOrder.getDriverName());
         driverPhone.setText(detailOrder.getPsDriver().getDriverMobile());
         transportCarnumber.setText(detailOrder.getCarNo());
-        totalPrice.setText(detailOrder.getOrderPrice()+"元");
-        if (TextUtils.isEmpty(detailOrder.getSignTime())){
+        totalPrice.setText(detailOrder.getOrderPrice() + "元");
+        if (TextUtils.isEmpty(detailOrder.getSignTime())) {
             qiandao.setText("未签到");
-        }else {
+        } else {
             qiandao.setText(detailOrder.getSignTime());
         }
         unitPrice.setText(detailOrder.getPsTotalOrder().getPerPrice() + "元（单位 方/公里）");
         nowLoading.setText(detailOrder.getOrderAmount() + "方");
+        orderStartTv.setText(detailOrder.getPsTotalOrder().getStartPlace());
+        orderEndTv.setText(detailOrder.getPsTotalOrder().getDestinationPlace());
         start = new LatLonPoint(Double.valueOf(detailOrder.getPsTotalOrder().getStartLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getStartLongitude()));
         end = new LatLonPoint(Double.valueOf(detailOrder.getPsTotalOrder().getDstLatitude()), Double.valueOf(detailOrder.getPsTotalOrder().getDstLongitude()));
         queryRoute();
@@ -388,8 +409,8 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         conten.setText(carBean.getCarNo());
         view.setDrawingCacheEnabled(true);
         //调用下面这个方法非常重要，如果没有调用这个方法，得到的bitmap为null
-        view.measure(View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.EXACTLY));
+        view.measure(View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.UNSPECIFIED));
         //这个方法也非常重要，设置布局的尺寸和位置
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         //获得绘图缓存中的Bitmap
@@ -480,5 +501,117 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
     @Override
     public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
 
+    }
+
+    @OnClick(R2.id.order_go_start_iv)
+    public void onOrderGoStartIvClicked() {
+        LatLng latLng=new LatLng(start.getLatitude(),start.getLongitude());
+        navigation(driverOrderDetailBean.getPsTotalOrder().getStartPlace(),latLng);
+    }
+
+
+    @OnClick(R2.id.order_go_end_iv)
+    public void onOrderGoEndIvClicked() {
+        LatLng latLng=new LatLng(end.getLatitude(),end.getLongitude());
+        navigation(driverOrderDetailBean.getPsTotalOrder().getDestinationPlace(),latLng);
+    }
+    public void navigation(String endName,LatLng latLng){
+        AMapCarInfo carInfo = new AMapCarInfo();
+        carInfo.setCarType("1");
+        carInfo.setCarNumber("");
+        carInfo.setVehicleSize(String.valueOf(4));
+        /*carInfo.setVehicleLoad(weight);
+        carInfo.setVehicleWeight(totalWeight);
+        carInfo.setVehicleWidth(width);
+        carInfo.setVehicleLength(length);
+        carInfo.setVehicleHeight(height);*/
+        carInfo.setVehicleAxis("");
+        carInfo.setRestriction(true);
+        Poi start = new Poi("我的位置", LocationService.START, "");//起点
+        Poi end = new Poi(endName, latLng, "");//终点
+        AmapNaviParams amapNaviParams = new AmapNaviParams(start, null, end, AmapNaviType.DRIVER, AmapPageType.ROUTE);
+        amapNaviParams.setUseInnerVoice(true);
+        amapNaviParams.setCarInfo(carInfo);
+        AmapNaviPage.getInstance().showRouteActivity(getApplicationContext(), amapNaviParams,this);
+    }
+
+    @Override
+    public void onInitNaviFailure() {
+
+    }
+
+    @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
+    public void onLocationChange(AMapNaviLocation aMapNaviLocation) {
+
+    }
+
+    @Override
+    public void onArriveDestination(boolean b) {
+
+    }
+
+    @Override
+    public void onStartNavi(int i) {
+
+    }
+
+    @Override
+    public void onCalculateRouteSuccess(int[] ints) {
+
+    }
+
+    @Override
+    public void onCalculateRouteFailure(int i) {
+
+    }
+
+    @Override
+    public void onStopSpeaking() {
+
+    }
+
+    @Override
+    public void onReCalculateRoute(int i) {
+
+    }
+
+    @Override
+    public void onExitPage(int i) {
+
+    }
+
+    @Override
+    public void onStrategyChanged(int i) {
+
+    }
+
+    @Override
+    public View getCustomNaviBottomView() {
+        return null;
+    }
+
+    @Override
+    public View getCustomNaviView() {
+        return null;
+    }
+
+    @Override
+    public void onArrivedWayPoint(int i) {
+
+    }
+
+    @Override
+    public void onMapTypeChanged(int i) {
+
+    }
+
+    @Override
+    public View getCustomMiddleView() {
+        return null;
     }
 }

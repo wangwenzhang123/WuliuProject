@@ -92,7 +92,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @BindView(R2.id.issueorder_start_tv)
     TextView issueorderStartTv;
     @BindView(R2.id.issue_go_start_iv)
-    TextView issueGoStartIv;
+    ImageView issueGoStartIv;
     @BindView(R2.id.start_view)
     View startView;
     @BindView(R2.id.issueorder_end_iv)
@@ -100,7 +100,7 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
     @BindView(R2.id.issueorder_end_tv)
     TextView issueorderEndTv;
     @BindView(R2.id.issue_go_end_iv)
-    TextView issueGoEndIv;
+    ImageView issueGoEndIv;
     @BindView(R2.id.end_view)
     View endView;
     @BindView(R2.id.issueorder_issue_iv)
@@ -246,8 +246,8 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         conten.setText(carBean.getCarNo());
         view.setDrawingCacheEnabled(true);
         //调用下面这个方法非常重要，如果没有调用这个方法，得到的bitmap为null
-        view.measure(View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(266, View.MeasureSpec.EXACTLY));
+        view.measure(View.MeasureSpec.makeMeasureSpec(256, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(266, View.MeasureSpec.UNSPECIFIED));
         //这个方法也非常重要，设置布局的尺寸和位置
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         //获得绘图缓存中的Bitmap
@@ -358,10 +358,11 @@ public class MapOrderDetailActivity extends BaseMvpActivity<OrderPresenter> impl
         start = new LatLonPoint(Double.valueOf(orderBean.getStartLatitude()), Double.valueOf(orderBean.getStartLongitude()));
         end = new LatLonPoint(Double.valueOf(orderBean.getDstLatitude()), Double.valueOf(orderBean.getDstLongitude()));
         orderremark.setText(orderDetail.getOrderRemark());
+
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())), 10));
-        aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())))
+        /*aMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(orderDetail.getDstLatitude()), Double.valueOf(orderDetail.getDstLongitude())))
                 .icon(BitmapDescriptorFactory.fromBitmap(getDestination()))
-                .anchor(0.5f, 0.5f));
+                .anchor(0.5f, 0.5f));*/
         queryRoute();
     }
 
