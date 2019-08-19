@@ -82,16 +82,16 @@ public class OrderFragment extends BaseMvpFragment{
 
     @Override
     public void initView() {
-        list.add("总订单");
         list.add("已接单");
+        list.add("总订单");
         //list.add("已装货");
        /* list.add("已核算");*/
         pager.setOffscreenPageLimit(3);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
             @Override
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
-                fragments.add(new LogicOrderListFragment());
                 fragments.add(new TransportCarFragment(""));
+                fragments.add(new LogicOrderListFragment());
                 //fragments.add(new TransportCarFragment("Z"));
                 //fragments.add(new TransportCarFragment("S"));
                 e.onNext(fragments);
