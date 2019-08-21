@@ -91,7 +91,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_startPlace"
-                        android:maxLines="16"
+                        android:maxLength="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_start_iv"
                         app:layout_constraintTop_toTopOf="parent"
@@ -144,7 +144,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_destinationPlace"
-                        android:maxLines="16"
+                        android:maxLength="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_end_iv"
                         app:layout_constraintTop_toBottomOf="@id/start_view"
@@ -197,7 +197,7 @@
                     <TextView
                         android:textColor="@color/_333333"
                         android:id="@+id/order_publishTime"
-                        android:maxLines="16"
+                        android:maxLength="16"
                         android:gravity="right"
                         app:layout_constraintRight_toLeftOf="@id/issue_go_distance_iv"
                         app:layout_constraintTop_toBottomOf="@id/end_view"

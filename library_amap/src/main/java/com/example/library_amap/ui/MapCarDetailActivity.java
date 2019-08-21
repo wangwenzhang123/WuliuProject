@@ -320,7 +320,14 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        if (!TextUtils.isEmpty(detailOrder.getLoadLicense())) {
+        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
+        unloadTv.setVisibility(View.VISIBLE);
+        unloadFl.setVisibility(View.VISIBLE);
+        /*llLoadingPic.setFocusable(false);*/
+        cancelTv.setVisibility(View.GONE);
+        unloadAccomplishTv.setText("卸货完成");
+        state = 2;
+       /* if (!TextUtils.isEmpty(detailOrder.getLoadLicense())) {
             Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
             unloadTv.setVisibility(View.VISIBLE);
             unloadFl.setVisibility(View.VISIBLE);
@@ -333,12 +340,12 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
             unloadTv.setVisibility(View.GONE);
             unloadFl.setVisibility(View.GONE);
             unloadAccomplishTv.setText("装货完成");
-        }
-        if (!TextUtils.isEmpty(detailOrder.getUnloadLicense())) {
+        }*/
+        /*if (!TextUtils.isEmpty(detailOrder.getUnloadLicense())) {
             Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getUnloadLicense()).apply(requestOptions).into(unloadPic);
             bottomLl.setVisibility(View.GONE);
             llUnloadPic.setFocusable(false);
-        }
+        }*/
 
     }
 
@@ -445,11 +452,15 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 presenter.loadOrder(id, loadLicense);
                 break;
             case 2:
+                if (TextUtils.isEmpty(loadLicense)) {
+                    showToast("请先上传装货凭据");
+                    return;
+                }
                 if (TextUtils.isEmpty(unloadLicense)) {
                     showToast("请先上传卸货凭据");
                     return;
                 }
-                presenter.unloadOrder(id, unloadLicense);
+                presenter.unloadOrder(id, unloadLicense,loadLicense);
                 break;
         }
     }

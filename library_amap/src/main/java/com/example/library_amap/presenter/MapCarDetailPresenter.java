@@ -154,12 +154,12 @@ public class MapCarDetailPresenter extends BasePresenter<MapCarDetailContract.Vi
     }
 
     @Override
-    public void unloadOrder(String orderid, String path) {
+    public void unloadOrder(String orderid, String path,String laoding) {
         if (TextUtils.isEmpty(path)){
             getView().showToast("请先上传卸货凭据！");
             return;
         }
-        commenApi.unloadOrder(orderid,path)
+        commenApi.unloadOrder(orderid,path,laoding)
                 .compose(this.<BaseAppEntity<OrderBean>>handleEverythingResult())
                 .subscribe(new Consumer<BaseAppEntity<OrderBean>>() {
                     @Override

@@ -90,6 +90,7 @@
                     android:id="@+id/issueorder_start_tv"
                     android:hint="请选择出发地"
                     android:gravity="right"
+                    android:maxLines="16"
                     app:layout_constraintRight_toLeftOf="@id/issue_go_start_iv"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="@dimen/dp_19"
