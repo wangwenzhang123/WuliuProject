@@ -57,7 +57,7 @@
         android:layout_height="@dimen/dp_66" />
     <ImageView
         android:id="@+id/order_start_iv"
-        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginLeft="@dimen/dp_4"
         android:layout_marginTop="@dimen/dp_12"
         app:layout_constraintTop_toBottomOf="@id/order_name"
         app:layout_constraintLeft_toRightOf="@id/order_iv"
