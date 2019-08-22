@@ -320,7 +320,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
+       // Glide.with(mContext).load(BaseUrl.BASEURL + "/" + detailOrder.getLoadLicense()).apply(requestOptions).into(loadingPic);
         unloadTv.setVisibility(View.VISIBLE);
         unloadFl.setVisibility(View.VISIBLE);
         /*llLoadingPic.setFocusable(false);*/
