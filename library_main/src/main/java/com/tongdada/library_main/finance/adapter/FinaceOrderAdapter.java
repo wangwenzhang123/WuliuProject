@@ -49,7 +49,7 @@ public class FinaceOrderAdapter  extends BaseQuickAdapter<FinaceBean,BaseViewHol
         }else if (item.getOrderStatus().equals("H")){
             state.setImageResource(R.mipmap.weihesuan);
         }else {
-            state.setImageResource(R.mipmap.daiqueren);
+            state.setImageResource(R.mipmap.daihesuan);
         }
         if (TextUtils.isEmpty(item.getSignTime())){
             helper.setText(R.id.order_accept_time,"未签到");
