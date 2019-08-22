@@ -324,7 +324,7 @@ public class MapCarDetailActivity extends BaseMvpActivity<MapCarDetailPresenter>
         unloadTv.setVisibility(View.VISIBLE);
         unloadFl.setVisibility(View.VISIBLE);
         /*llLoadingPic.setFocusable(false);*/
-        cancelTv.setVisibility(View.GONE);
+        cancelTv.setVisibility(View.VISIBLE);
         unloadAccomplishTv.setText("卸货完成");
         state = 2;
        /* if (!TextUtils.isEmpty(detailOrder.getLoadLicense())) {
