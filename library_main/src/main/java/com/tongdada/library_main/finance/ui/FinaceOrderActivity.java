@@ -136,6 +136,10 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
             carType.setText("砼车");
             carXinghao.setText(transportCarBean.getPsCar().getCarType());
         }
+        if (transportCarBean.getOrderStatus().equals("H")){
+            confirmTheSettlement.setVisibility(View.GONE);
+            orderState.setText("核算中");
+        }
         RequestOptions requestOptions = new RequestOptions()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
