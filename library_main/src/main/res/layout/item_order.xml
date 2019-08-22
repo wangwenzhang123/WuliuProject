@@ -51,7 +51,7 @@
         android:id="@+id/order_iv"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintTop_toBottomOf="@id/order_name"
-        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_1"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="@dimen/dp_80"
         android:layout_height="@dimen/dp_66" />
