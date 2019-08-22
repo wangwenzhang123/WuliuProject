@@ -81,7 +81,7 @@ public class FinanceFragment extends BaseMvpFragment<FinancePresenter> {
     @Override
     public void initView() {
         list.add("未核算");
-        //list.add("核算中");
+        list.add("核算中");
         list.add("已核算");
         pager.setOffscreenPageLimit(3);
         Observable.create(new ObservableOnSubscribe<List<Fragment>>() {
@@ -89,7 +89,7 @@ public class FinanceFragment extends BaseMvpFragment<FinancePresenter> {
             public void subscribe(ObservableEmitter<List<Fragment>> e) throws Exception {
                // fragments.add(new FinanceOrderFragment("R"));
                 fragments.add(new FinanceOrderFragment("X"));
-                //fragments.add(new TransportCarFragment("H"));
+                fragments.add(new TransportCarFragment("H"));
                 fragments.add(new FinanceCompleteFragment());
                 e.onNext(fragments);
             }
