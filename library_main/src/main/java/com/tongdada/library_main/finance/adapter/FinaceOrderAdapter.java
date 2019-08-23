@@ -45,11 +45,11 @@ public class FinaceOrderAdapter  extends BaseQuickAdapter<FinaceBean,BaseViewHol
             helper.setText(R.id.car_type,"砼车| 装载"+item.getCarType().substring(item.getCarType().length()-2,item.getCarType().length())+"方");
         }
         if (item.getOrderStatus().equals("S")){
-            state.setImageResource(R.mipmap.accounting);
+            state.setImageResource(R.mipmap.yihesuan);
         }else if (item.getOrderStatus().equals("H")){
             state.setImageResource(R.mipmap.weihesuan);
         }else {
-            state.setImageResource(R.mipmap.daihesuan);
+            state.setImageResource(R.mipmap.yixiehuo);
         }
         if (TextUtils.isEmpty(item.getSignTime())){
             helper.setText(R.id.order_accept_time,"未签到");

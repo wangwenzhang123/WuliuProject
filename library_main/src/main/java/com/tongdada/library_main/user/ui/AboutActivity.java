@@ -1,5 +1,7 @@
 package com.tongdada.library_main.user.ui;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ public class AboutActivity extends BaseActivity {
     ImageView registerBack;
     @BindView(R2.id.back_tv)
     TextView backTv;
+    @BindView(R2.id.versions)
+    TextView versions;
 
     @Override
     public int getView() {
@@ -56,6 +60,17 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getApplicationContext()
+                    .getPackageManager()
+                    .getPackageInfo(getPackageName(), 0);
+            String localVersion = packageInfo.versionName;
+            versions.setText("版本：V"+localVersion);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @OnClick(R2.id.register_back)

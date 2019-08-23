@@ -139,10 +139,14 @@ public class FinaceOrderActivity extends BaseMvpActivity<FinaceOrderDetailPresen
         if (transportCarBean.getOrderStatus().equals("H")){
             confirmTheSettlement.setVisibility(View.GONE);
             orderState.setText("核算中");
+        }else if (transportCarBean.getOrderStatus().equals("S")){
+            confirmTheSettlement.setVisibility(View.GONE);
+            orderState.setText("已核算");
         }
         RequestOptions requestOptions = new RequestOptions()
                 .error(R.mipmap.defult)
                 .placeholder(R.mipmap.defult)
+                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + transportCarBean.getLoadLicense()).apply(requestOptions).into(loadingPic);
         Glide.with(mContext).load(BaseUrl.BASEURL + "/" + transportCarBean.getUnloadLicense()).apply(requestOptions).into(unloadPic);

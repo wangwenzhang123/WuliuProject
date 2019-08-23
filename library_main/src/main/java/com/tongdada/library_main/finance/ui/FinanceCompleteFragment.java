@@ -71,7 +71,7 @@ public class FinanceCompleteFragment extends BaseMvpFragment<FinancePresenter> i
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
                 if (LoginUtils.isLogin()){
-                    ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,adapter.getData().get(position).getRowId()).navigation(mContext);
+                    ARouter.getInstance().build(ArouterKey.FINANCE_FINACEORDERACTIVITY).withString(IntentKey.MAP_ORDERID, adapter.getData().get(position).getRowId()).navigation(mContext);
                 }else {
                     ARouter.getInstance().build(ArouterKey.LOGIN_LOGINACTIVITY).navigation(mContext);
                 }

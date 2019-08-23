@@ -85,9 +85,9 @@ public class TransportCarFragment extends BaseRecyclerRefreshFragment<TransportC
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (LoginUtils.isLogin()){
-                    if (getRecyclerAdapter().getData().get(position).getOrderStatus().equals("S") || getRecyclerAdapter().getData().get(position).getOrderStatus().equals("H")){
-                        ARouter.getInstance().build(ArouterKey.ORDER_LOGICORDERDETAILACTIVITY).withString(IntentKey.ORDER_ID,getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
-                    }else {
+                    if (getRecyclerAdapter().getData().get(position).getOrderStatus().equals("S") || getRecyclerAdapter().getData().get(position).getOrderStatus().equals("H") || getRecyclerAdapter().getData().get(position).getOrderStatus().equals("X")){
+                        ARouter.getInstance().build(ArouterKey.FINANCE_FINACEORDERACTIVITY).withString(IntentKey.MAP_ORDERID, getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
+                    }else{
                         ARouter.getInstance().build(ArouterKey.MAP_MAPCARDETAILACTIVITY).withString(IntentKey.MAP_ORDERID,getRecyclerAdapter().getData().get(position).getRowId()).navigation(mContext);
                     }
                 }else {
